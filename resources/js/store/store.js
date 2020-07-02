@@ -17,6 +17,7 @@ import {conts} from "./conts.module"
 import {action} from "./action.module"
 import {permission} from "./permission.module"
 import {dashboard} from "./dashboard.module"
+import {country} from "./country.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -39,6 +40,7 @@ const store = new Vuex.Store(
 			employee,
 			conts,
 			action,
+			country,
 			permission,
 			dashboard,
 		},

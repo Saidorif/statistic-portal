@@ -32,10 +32,13 @@ import Conts from './components/admin/conts/Conts'
 import AddConts from './components/admin/conts/AddConts'
 import EditConts from './components/admin/conts/EditConts'
 
-// controller
+// action
 import Action from './components/admin/action/Action'
 import AddAction from './components/admin/action/AddAction'
 import EditAction from './components/admin/action/EditAction'
+
+// country
+import Country from './components/admin/country/Country'
 
 
 // NotFound
@@ -130,6 +133,10 @@ const router = new Router({
 				{
 					path:'action/edit/:actionId',
 					component:EditAction,
+				},
+				{
+					path:'country',
+					component:Country,
 				},
 			]
 		},
