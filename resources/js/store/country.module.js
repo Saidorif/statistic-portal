@@ -6,7 +6,7 @@ const state = {
 };
 
 const getters = {
-	getActions(state){
+	getCountries(state){
 		return state.countries
 	},
 	getMassage(state){
@@ -18,7 +18,7 @@ const getters = {
 const actions = {
 	async actionCountries({commit},payload){
 		try {
-			const countries =  await CountryService.countries(payload);
+			const countries =  await CountryService.country(payload);
 			await commit('setCountries',countries.data.result)
 			return true
 		} catch (error) {
