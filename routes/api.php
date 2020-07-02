@@ -29,6 +29,9 @@ Route::group([
             Route::get('profile', 'UserController@profile');
             Route::post('change-password', 'UserController@changePasword');
 
+            //Country CRUD
+            Route::post('country', 'CountryController@index');
+
             //Employee CRUD
             Route::post('employee', 'EmployeeController@index');
             Route::post('checkemail', 'EmployeeController@checkemail');

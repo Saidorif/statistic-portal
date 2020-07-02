@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(JavoxirSeeder::class);
         $this->call(RoleSeeder::class);
+        $this->call(CountrySeeder::class);
     }
 }
