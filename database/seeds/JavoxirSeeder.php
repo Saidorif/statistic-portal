@@ -16,7 +16,6 @@ class JavoxirSeeder extends Seeder
             'email' => 'java@mail.ru',
             'password' => Hash::make('java328'),
             'role_id' => 1,
-            'inn' => '201500601',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
