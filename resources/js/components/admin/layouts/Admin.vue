@@ -24,7 +24,7 @@
     <!-- Brand Logo -->
     <router-link class="brand-link" to="/crm">
       <span class="brand-text font-weight-light">
-        <img src="/img/train.png">
+        <img src="/img/logoRu.png">
       </span>
     </router-link>
 
@@ -33,14 +33,14 @@
       <!-- Sidebar user panel (optional) -->
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav>
         <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu treeview" data-widget="treeview" role="menu" data-accordion="false" >
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
              <!-- v-if="$can('profile', 'UserController')" -->
             <router-link to="/crm/dashboard" class="nav-link">
-              <span class="peIcon pe-7s-rocket" style="font-size: 20px;"></span>
+              <i class="sidebar_icon fas fa-desktop"></i>
               <p>
                 Админ панель
               </p>
@@ -48,7 +48,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/profile">
-              <i class="peIcon pe-7s-user"></i>
+              <i class="sidebar_icon fas fa-user"></i>
               <p>
                 Мои данные
               </p>
@@ -56,7 +56,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/country">
-              <i class="peIcon pe-7s-country"></i>
+              <i class="sidebar_icon fas fa-city"></i>
               <p>
                 Страны
               </p>
@@ -64,7 +64,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/employee">
-              <i class="peIcon pe-7s-users"></i>
+              <i class="sidebar_icon fas fa-users"></i>
               <p>
                 Пользователи
               </p>
@@ -72,7 +72,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/position">
-              <i class="peIcon pe-7s-graph1"></i>
+              <i class="sidebar_icon fas fa-user"></i>
               <p>
                 Должность
               </p>
@@ -80,7 +80,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <span class="peIcon pe-7s-settings" style="font-size: 20px;"></span>
+              <span class="sidebar_icon fas fa-users-cog" style="font-size: 20px;"></span>
               <p>
                 Setting users
                 <i class="right fas fa-angle-left"></i>
@@ -172,7 +172,35 @@ export default {
 </script>
 
 <style scoped>
+  .brand-link.active{
+    border-bottom: 1px solid #3e6174;
+  }
   .brand-text img{
-    width: 52px;
+    width: 100%;
+  }
+  .sidebar{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .sidebar_icon{
+    font-size: 18px;
+    color: #3e6174;
+    margin-right: 5px;
+  }
+  .content-wrapper{
+    background: #ebf2f6;
+    padding-top: 30px;
+  }
+  .nav-sidebar .nav-item>.nav-link{
+    color: #3e6174;
+  }
+  .nav-sidebar .nav-item>.nav-link:hover,
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link{
+    background-color: #e6e6e6;
+    font-weight: bold;
+  }
+  .nav-pills .nav-link{
+    border-radius: 0px;
   }
 </style>
