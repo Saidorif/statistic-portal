@@ -4,7 +4,7 @@
 			<div class="login_alert" v-if="errorMsg"><i class="fas fa-exclamation-circle mr-2"></i> Неверный логин  или пароль </div>
 			<div class="form_content">
 				<div class="login_logo">
-					<img src="/img/train.png">
+					<img src="/img/loginLogo.svg" width="100">
 				</div>
 				<p class="login_title"> Вход в персональный кабинет</p>
 				<form @submit.enter.prevent="onSubmit">
