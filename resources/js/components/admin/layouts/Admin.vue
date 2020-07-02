@@ -55,6 +55,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/country">
+              <i class="peIcon pe-7s-country"></i>
+              <p>
+                Страны
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/employee">
               <i class="peIcon pe-7s-users"></i>
               <p>
