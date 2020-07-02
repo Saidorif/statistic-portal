@@ -253,7 +253,14 @@ class CountrySeeder extends Seeder
             "ZW" => array("ZIMBABWE", "ZW", "ZWE", "716"),
         );
         foreach ($countries as $key => $value) {
-            DB::table('countries')->insert($value);
+            DB::table('countries')->insert([
+                'name' => $value[0],
+                'alfa2' => $value[1],
+                'alfa3' => $value[2],
+                'code' => $value[3],
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
         }
     }
 }

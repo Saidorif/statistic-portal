@@ -31,6 +31,10 @@ Route::group([
 
             //Country CRUD
             Route::post('country', 'CountryController@index');
+            Route::get('country/edit/{id}', 'CountryController@edit');
+            Route::post('country/update/{id}', 'CountryController@update');
+            Route::post('country/store', 'CountryController@store');
+            Route::delete('country/destroy/{id}', 'CountryController@destroy');
 
             //Employee CRUD
             Route::post('employee', 'EmployeeController@index');
