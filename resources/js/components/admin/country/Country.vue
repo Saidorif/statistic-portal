@@ -56,7 +56,7 @@
 				<table class="table table-bordered text-center table-hover table-striped">
 					<thead>
 						<tr>
-							<th scope="col">№</th>
+							<th scope="col" width="100">№</th>
 							<th scope="col">Название</th>
 							<th scope="col">Alfa 2</th>
 							<th scope="col">Alfa 3</th>
