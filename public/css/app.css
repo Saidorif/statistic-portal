@@ -26263,6 +26263,10 @@ svg:not(:root).svg-inline--fa {
   justify-content: center;
 }
 
+.brand-link {
+  padding: 0.28rem 0.5rem !important;
+}
+
 .nav.nav-pills.nav-sidebar.flex-column {
   font-size: 18px;
 }
