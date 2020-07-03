@@ -6,14 +6,14 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="pe-7s-menu" style="font-size: 30px;line-height: 21px;"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="sidebar_icon fas fa-bars" style="font-size: 30px;line-height: 21px;"></i></a>
       </li>
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="pe-7s-next-2"></i> Выйти</a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="fas fa-logout"></i> Выйти</a>
       </li>
     </ul>
   </nav>
@@ -64,9 +64,17 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/position">
-              <i class="sidebar_icon fas fa-user"></i>
+              <i class="sidebar_icon fas fa-star"></i>
               <p>
                 Должность
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/vedgroup">
+              <i class="sidebar_icon fas fa-file"></i>
+              <p>
+                ВЭД группы
               </p>
             </router-link>
           </li>

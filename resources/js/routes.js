@@ -41,6 +41,12 @@ import EditAction from './components/admin/action/EditAction'
 import Country from './components/admin/country/Country'
 
 
+// VedGroup
+import VedGroup from './components/admin/vedgroup/VedGroup'
+import EditVedGroup from './components/admin/vedgroup/EditVedGroup'
+import AddVedGroup from './components/admin/vedgroup/AddVedGroup'
+
+
 // NotFound
 import NotFound from './components/NotFound/NotFound'
 const router = new Router({
@@ -137,6 +143,18 @@ const router = new Router({
 				{
 					path:'country',
 					component:Country,
+				},
+				{
+					path:'vedgroup',
+					component:VedGroup,
+				},
+				{
+					path:'vedgroup/edit/:vedgroupId',
+					component:EditVedGroup,
+				},
+				{
+					path:'vedgroup/add',
+					component:AddVedGroup,
 				},
 			]
 		},

@@ -4,7 +4,7 @@
 		  	<div class="card-header header_filter">
 		  		<div class="header_title">
 				    <h4 class="title_user">
-				    	<i  class="peIcon pe-7s-users"></i>
+				    	<i  class="sidebar_icon fas fa-users"></i>
 					     Пользователи 
 					</h4>
 					<div class="add_user_btn">
@@ -81,11 +81,11 @@
 							<td>{{item.email}}</td>
 							<td>{{item.phone}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/employee/edit/${item.id}`'>
-									<i class="pe_icon pe-7s-edit editColor"></i>
+								<router-link tag="button" class="btn_transparent mr-1" :to='`/crm/employee/edit/${item.id}`'>
+									<i class="fas fa-pen"></i>
 								</router-link>
 								<button class="btn_transparent" @click="deleteEmployee(item.id)">
-									<i class="pe_icon pe-7s-trash trashColor"></i>
+									<i class="fas fa-trash"></i>
 								</button>
 							</td>
 						</tr>

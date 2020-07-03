@@ -36,3 +36,64 @@
     right: 0px;
     top: -50px;
 }
+.btn-info{
+    background-color: #182938;
+    border:  2px solid #182938;
+    color: #fff;
+}
+.btn-primary{
+    background-color: #3e6174;
+    border:  2px solid #3e6174;
+}
+.btn-primary:hover{
+    color: #3e6174;
+    background: transparent;
+    border:  2px solid #3e6174;
+}
+.btn-info:hover{
+    color: #182938;
+    background: transparent;
+    border:  2px solid #182938;
+}
+.header_title{
+    align-items: center;
+}
+.title_user{
+    margin-bottom: 0;
+    color: #3e6174;
+}
+.btn_transparent{
+    border: 2px solid #3e6174;
+    border-radius: 4px;
+    height: 28px;
+    width: 30px;
+    color: #3e6174;
+}
+.btn_transparent:hover{
+    background-color: #3e6174;
+    color: #fff;
+}
+.card{
+    box-shadow: 0 0 1px rgb(62, 97, 116), 0 1px 3px rgb(62, 97, 116);
+}
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: rgba(62, 97, 116, .1);
+}
+.table-hover tbody tr:hover{
+    background-color: rgba(62, 97, 116, .2);
+}
+.logout_btn{
+    border: 2px solid #3e6174;
+    border-radius: 4px;
+    color: #3e6174; 
+    padding: .4rem 1.5rem;
+    font-weight: bold;
+}
+.logout_btn:hover{
+    background-color: #3e6174;
+    color: #fff;
+    text-decoration: none;
+}
+.card-header{
+    background-color: rgba(62, 97, 116, .1);
+}
