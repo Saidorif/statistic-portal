@@ -36,6 +36,13 @@ Route::group([
             Route::post('country/store', 'CountryController@store');
             Route::delete('country/destroy/{id}', 'CountryController@destroy');
 
+            //Code Group CRUD
+            Route::post('codegroup', 'CodeGroupController@index');
+            Route::get('codegroup/edit/{id}', 'CodeGroupController@edit');
+            Route::post('codegroup/update/{id}', 'CodeGroupController@update');
+            Route::post('codegroup/store', 'CodeGroupController@store');
+            Route::delete('codegroup/destroy/{id}', 'CodeGroupController@destroy');
+
             //Employee CRUD
             Route::post('employee', 'EmployeeController@index');
             Route::post('checkemail', 'EmployeeController@checkemail');
