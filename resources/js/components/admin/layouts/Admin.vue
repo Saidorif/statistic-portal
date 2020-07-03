@@ -55,6 +55,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/country">
+              <i class="sidebar_icon fas fa-city"></i>
+              <p>
+                Страны
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/employee">
               <i class="sidebar_icon fas fa-users"></i>
               <p>
