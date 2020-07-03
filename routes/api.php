@@ -43,6 +43,13 @@ Route::group([
             Route::post('codegroup/store', 'CodeGroupController@store');
             Route::delete('codegroup/destroy/{id}', 'CodeGroupController@destroy');
 
+            //ImpExpTamoj CRUD
+            Route::post('impexp', 'ImpExpTamojController@index');
+            Route::get('impexp/edit/{id}', 'ImpExpTamojController@edit');
+            Route::post('impexp/update/{id}', 'ImpExpTamojController@update');
+            Route::post('impexp/store', 'ImpExpTamojController@store');
+            Route::delete('impexp/destroy/{id}', 'ImpExpTamojController@destroy');
+
             //Employee CRUD
             Route::post('employee', 'EmployeeController@index');
             Route::post('checkemail', 'EmployeeController@checkemail');
