@@ -16,6 +16,7 @@
         <div id="app">
             <Master/>
         </div>
+        <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/print.js') }}"></script>
 

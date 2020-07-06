@@ -1,5 +1,6 @@
 <template>
 	<div class="employee">
+		<Loader v-if="loading" />
 		<div class="card">
 		  	<div class="card-header header_filter">
 		  		<div class="header_title">
@@ -63,7 +64,7 @@
 			  	</transition>
 		  	</div>
 		  	<div class="card-body">
-			  <div class="table-responsive">
+			  <div class="table-responsive" v-if="form.length">
 				<table class="table table-bordered text-center table-hover table-striped">
 					<thead>
 						<tr>
@@ -117,11 +118,10 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="file" @change="previewFiles($event)" >
+							<input type="file" @change="previewFiles($event)"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
+							<button type="button" class="btn btn-primary" @click="sendExelData()">Импортировать</button>
 						</div>
 						</div>
 					</div>
@@ -132,9 +132,11 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
-	// import { XlsxRead, XlsxTable, XlsxSheets, XlsxJson, XlsxWorkbook, XlsxSheet, XlsxDownload } from "vue-xlsx/dist/vue-xlsx.es.js"
+	import XLSX from 'xlsx';
+	import Loader from '../../Loader'
+
 	export default{
-		// components:{XlsxRead, XlsxTable, XlsxSheets, XlsxJson, XlsxWorkbook, XlsxSheet, XlsxDownload},
+		components:{Loader},
 		data(){
 			return{
 				filter:{
@@ -150,29 +152,18 @@
 					cost:'',
 				},
 				filterShow:false,
-				form:[
-					{
-						id: '1',
-						mode:'ИМ',
-						date:'1/1/2020',
-						vedcode:'9015201000',
-						product:'ТЕОДОЛИТЫ И ТАХЕОМЕТРЫ ЭЛЕКТРОННЫЕ',
-						country_code:'756',
-						country_name:'ШВЕЙЦАРИЯ',
-						transport_type:'40',
-						transport_country_code:'276',
-						weight:'0.08256',
-						cost:'23.24',
-					}
-				],
+				form:[],
+				loading: false
 			}
 		},
 		async mounted(){
 			let page = 1;
 		},
 		computed:{
+			...mapGetters("customs", ["getMassage"]),
 		},
 		methods:{
+			...mapActions("customs", ["actionImportExcel"]),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
@@ -196,37 +187,29 @@
 					toast.fire({type: 'success',icon: 'success',title: 'Пользователь удалено!', })
 				}
 			},
-			// previewFiles(event) {
-			// 	// const jsonData = this.$xlsx.toJson(data, options)
-			// 	console.log(this.$xlsx)
-			// },
+			async sendExelData() {
+				if(this.form.length){
+					await this.actionImportExcel(this.form)
+				}
+				console.log(this.getMassage)
+			},
 			previewFiles(e) {
+				this.loading = true
 				var files = e.target.files, f = files[0];
 				var reader = new FileReader();
 				let xlsxReader = this.$xlsx;
-				let myFunc = this.workbook_to_json()
+				let parentThis = this;
 				reader.onload = function(e) {
 					var data = new Uint8Array(e.target.result);
-					var workbook = xlsxReader.read_(data, {type: 'array'});
+					var workbook = XLSX.read(data, {type: 'array'});
 					let sheetName = workbook.SheetNames[0]
 					/* DO SOMETHING WITH workbook HERE */
 					let worksheet = workbook.Sheets[sheetName];
-					myFunc(workbook)
-
+					parentThis.form = XLSX.utils.sheet_to_json(worksheet)
+					parentThis.loading = false
 				};
 				reader.readAsArrayBuffer(f);
 			},
-			workbook_to_json(workbook) {
-				var result = {};
-				console.log(workbook)
-				// workbook.SheetNames[0].forEach(function(sheetName) {
-				// 	var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-				// 	if(roa.length > 0){
-				// 		result[sheetName] = roa;
-				// 	}
-				// });
-				// return result;
-			}
 		}
 	}
 </script>

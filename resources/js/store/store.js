@@ -11,6 +11,7 @@ import {UserService} from "../services/user.service";
 // modules
 import {user} from "./user.module"
 import {role} from "./role.module"
+import {customs} from "./customs.module"
 import {position} from "./position.module"
 import {employee} from "./employee.module"
 import {conts} from "./conts.module"
@@ -37,6 +38,7 @@ const store = new Vuex.Store(
 		modules:{
 			user,
 			role,
+			customs,
 			position,
 			employee,
 			conts,

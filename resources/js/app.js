@@ -19,9 +19,6 @@ import {ability} from "./store/store";
 Vue.use(abilitiesPlugin, ability);
 /* FOR MANAGING USER PERMISSIONS */
 
-// excel
-import VueXlsx from 'vue-js-xlsx'
-Vue.use(VueXlsx)
 
 // Vuesax
 import Vuesax from 'vuesax'
@@ -57,6 +54,7 @@ window.toast = toast;
 
 import Master from './components/layouts/Master'
 
+
 // Some services
 import {TokenService} from './services/storage.service'
 import ApiService from './services/api.service'
@@ -76,7 +74,7 @@ const app = new Vue({
     el: '#app',
     router,
     components:{
-      Master,
+      Master
     },
   store,
 });
