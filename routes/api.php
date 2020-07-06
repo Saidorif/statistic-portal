@@ -45,6 +45,7 @@ Route::group([
 
             //ImpExpTamoj CRUD
             Route::post('impexp', 'ImpExpTamojController@index');
+            Route::post('impexp/upload', 'ImpExpTamojController@upload');
             Route::get('impexp/edit/{id}', 'ImpExpTamojController@edit');
             Route::post('impexp/update/{id}', 'ImpExpTamojController@update');
             Route::post('impexp/store', 'ImpExpTamojController@store');
