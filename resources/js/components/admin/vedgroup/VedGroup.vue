@@ -20,20 +20,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(item,index) in form">
+						<tr v-for="(item,index) in getVedList.data">
 							<td scope="row">{{index+1}}</td>
-							<td>{{item.code}}</td>
+							<td>группа {{item.code}}</td>
 							<td>{{item.name}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent mr-1" :to='`/crm/vedgroup/edit/${item.id}`'>
 									<i class="fas fa-pen"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteEmployee(item.id)">
+								<button class="btn_transparent" @click="deleteVed(item.id)">
 									<i class="fas fa-trash"></i>
 								</button>
 							</td>
 						</tr>
 					</tbody>
+          <pagination :limit="4" :data="getVedList" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
     </div>
@@ -44,19 +45,37 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      form: [{
-        id: 1,
-        name: 'Живые животные; продукты животного происхождения',
-        code: 'группа 01-05'
-      }],
+      form: {
+        name: '',
+        code: ''
+      },
       requiredInput: false,
     };
   },
   computed: {
+    ...mapGetters('vedgroup',['getVedList'])
   },
   async mounted() {
+    let page = 1;
+    await this.actionVedList({page:page})
   },
   methods: {
+    ...mapActions('vedgroup',['actionVedList','actionDeleteVed']),
+    async deleteVed(id){
+      if(confirm("Вы действительно хотите удалить?")){
+        let page = 1
+        await this.actionDeleteVed(id)
+        await this.actionVedList({page: page})
+        toast.fire({
+            type: 'success',
+            icon: 'success',
+          title: 'ВЭД группа удалена!',
+          })
+      }
+    },
+    async getResults(page = 1){ 
+      await this.actionVedList({page:page})
+    },
   }
 };
 </script>

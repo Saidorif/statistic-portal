@@ -11,6 +11,7 @@ import {UserService} from "../services/user.service";
 // modules
 import {user} from "./user.module"
 import {role} from "./role.module"
+import {customs} from "./customs.module"
 import {position} from "./position.module"
 import {employee} from "./employee.module"
 import {conts} from "./conts.module"
@@ -18,6 +19,7 @@ import {action} from "./action.module"
 import {permission} from "./permission.module"
 import {dashboard} from "./dashboard.module"
 import {country} from "./country.module"
+import {vedgroup} from "./vedgroup.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -36,6 +38,7 @@ const store = new Vuex.Store(
 		modules:{
 			user,
 			role,
+			customs,
 			position,
 			employee,
 			conts,
@@ -43,6 +46,7 @@ const store = new Vuex.Store(
 			country,
 			permission,
 			dashboard,
+			vedgroup,
 		},
 		state:{
 			rules:[],

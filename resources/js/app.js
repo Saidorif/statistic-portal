@@ -54,6 +54,7 @@ window.toast = toast;
 
 import Master from './components/layouts/Master'
 
+
 // Some services
 import {TokenService} from './services/storage.service'
 import ApiService from './services/api.service'
@@ -73,7 +74,7 @@ const app = new Vue({
     el: '#app',
     router,
     components:{
-      Master,
+      Master
     },
   store,
 });
