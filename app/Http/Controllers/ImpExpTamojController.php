@@ -24,6 +24,52 @@ class ImpExpTamojController extends Controller
         return response()->json(['success' => true, 'result' => $result]);
     }
 
+    public function upload(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            '*.mode'  => 'required|string',
+            '*.date' => 'required',
+            '*.vedcode' => 'required|string',
+            '*.product' => 'required|string',
+            '*.country_code' => 'required|integer',
+            '*.country_name' => 'required|string',
+            '*.transport_type' => 'required|integer',
+            '*.transport_country_code' => 'required|integer',
+            '*.weight' => 'required',
+            '*.cost' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        foreach ($request->all()as $key => $inputs) {
+            $country_id = 999;
+            $inputs['country_code'] = (int)$inputs['country_code'];
+            $country = Country::where(['code' => $inputs['country_code']])->first();
+            if($country){
+                $country_id = $country->id;
+            }
+            $time = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($inputs['date'])->format('Y-m-d');
+
+            $result = ImpExpTamoj::create([
+                'mode'  => $inputs['mode'],
+                'date' => $time,
+                'vedcode' => $inputs['vedcode'],
+                'product' => $inputs['product'],
+                'country_code' => $inputs['country_code'],
+                'code_group_id' => substr($inputs['vedcode'], 0,2),
+                'country_id' => $country_id,
+                'country_name' => $inputs['country_name'],
+                'transport_type' => $inputs['transport_type'],
+                'transport_country_code' => $inputs['transport_country_code'],
+                'weight' => floatval($inputs['weight']) * 1000,
+                'cost' => floatval($inputs['cost']) * 1000,
+            ]);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Содержимое успешно создан']);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
