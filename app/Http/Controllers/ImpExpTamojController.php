@@ -68,6 +68,50 @@ class ImpExpTamojController extends Controller
         return response()->json(['success' => true, 'message' => 'Содержимое успешно создан']);
     }
 
+    public function upload(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'mode'  => 'required|string',
+            'date' => 'required|date',
+            'vedcode' => 'required|string',
+            'product' => 'required|string',
+            'country_code' => 'required|integer',
+            'country_name' => 'required|string',
+            'transport_type' => 'required|integer',
+            'transport_country_code' => 'required|integer',
+            'weight' => 'required|string',
+            'cost' => 'required|string',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $inputs = $request->all();
+        $country_id = 999;
+        $inputs['country_code'] = (int)$inputs['country_code'];
+        $country = Country::where(['code' => $inputs['country_code']])->first();
+        if($country){
+            $country_id = $country->id;
+        }
+
+        $result = ImpExpTamoj::create([
+            'mode'  => $inputs['mode'],
+            'date' => $inputs['date'],
+            'vedcode' => $inputs['vedcode'],
+            'product' => $inputs['product'],
+            'country_code' => $inputs['country_code'],
+            'code_group_id' => substr($inputs['vedcode'], 0,2),
+            'country_id' => $country_id,
+            'country_name' => $inputs['country_name'],
+            'transport_type' => $inputs['transport_type'],
+            'transport_country_code' => $inputs['transport_country_code'],
+            'weight' => floatval($inputs['weight']) * 1000,
+            'cost' => floatval($inputs['cost']) * 1000,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Содержимое успешно создан']);
+    }
+
     public function update(Request $request, $id)
     {
         $result = ImpExpTamoj::find($id);
