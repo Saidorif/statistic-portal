@@ -27,19 +27,29 @@ class CodeGroupController extends Controller
     {
         $validator = Validator::make($request->all(), [            
             'name'  => 'required|string',
-            'codes'  => 'required|array',
-            'codes.*.code'  => 'required|string'
+            'code_from'  => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
-        $inputs = $request->only('name','codes');
+        $inputs = $request->only('name','code_from');
 
-        foreach ($inputs['codes'] as $key => $code) {
+        if ($request->code_to) {
+            $start = $request->code_from;
+            $end = (int)$request->code_to;
+            $length = strlen($start);
+            $result = [];
+            for ($i = (int)$start; $i <= $end; $i++) { 
+                $result = CodeGroup::create([
+                    'name' => $inputs['name'],
+                    'code' => str_pad($i,$length,"0",STR_PAD_LEFT),
+                ]);
+            }
+        }else{
             $result = CodeGroup::create([
                 'name' => $inputs['name'],
-                'code' => $code['code'],
+                'code' => $request->code_from,
             ]);
         }
 
