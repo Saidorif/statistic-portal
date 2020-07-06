@@ -86,6 +86,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/customs-import-export">
+              <i class="sidebar_icon fas fa-file-excel"></i>
+              <p>
+                Таможня  (Excel)
+              </p>
+            </router-link>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <span class="sidebar_icon fas fa-users-cog" style="font-size: 20px;"></span>

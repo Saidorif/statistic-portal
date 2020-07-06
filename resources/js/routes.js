@@ -46,6 +46,10 @@ import VedGroup from './components/admin/vedgroup/VedGroup'
 import EditVedGroup from './components/admin/vedgroup/EditVedGroup'
 import AddVedGroup from './components/admin/vedgroup/AddVedGroup'
 
+// Customs
+import Customs from './components/admin/customs/Customs'
+import EditCustoms from './components/admin/customs/EditCustoms'
+import AddCustoms from './components/admin/customs/AddCustoms'
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -155,6 +159,18 @@ const router = new Router({
 				{
 					path:'vedgroup/add',
 					component:AddVedGroup,
+				},
+				{
+					path:'customs-import-export',
+					component:Customs,
+				},
+				{
+					path:'customs-import-export/edit/:customsId',
+					component:EditCustoms,
+				},
+				{
+					path:'customs-import-export/add',
+					component:AddCustoms,
 				},
 			]
 		},
