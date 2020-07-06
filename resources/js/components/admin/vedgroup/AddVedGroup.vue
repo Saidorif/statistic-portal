@@ -24,18 +24,34 @@
               />
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="name">Код ТН ВЭД</label>
-              <input
-                type="text"
-                class="form-control input_style"
-                id="name"
-                :class="isRequired(form.name) ? 'isRequired' : ''"
-                placeholder="Основная номенклатура экспортных грузов"
-                v-model="form.code"
-              />
+          <div class="col-md-6 d-flex">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Код ТН ВЭД</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="name"
+                  :class="isRequired(form.name) ? 'isRequired' : ''"
+                  placeholder="с"
+                  v-model="form.code_from"
+                />
+              </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Код ТН ВЭД</label>
+                <input
+                  type="text"
+                  class="form-control input_style"
+                  id="name"
+                  :class="isRequired(form.name) ? 'isRequired' : ''"
+                  placeholder="до"
+                  v-model="form.code_to"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </form>
@@ -53,24 +69,8 @@ export default {
     return {
       form: {
         name: "",
-        email: "",
-        password: "",
-        confirm_password: "",
-        category_id: "",
-        address: "",
-        role_id: "",
-        position_id: "",
-        phone: "",
-        image: "",
-        file: "",
-        text: "",
-        birthday: "",
-        order_date: "",
-        leave_date: "",
-        status: "active",
-        gender: "",
-        working: false,
-        experience: []
+        code_to:'',
+        code_from: ''
       },
       fileFormat: "нет-файла",
       requiredInput: false,

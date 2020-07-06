@@ -22,7 +22,7 @@
 					<tbody>
 						<tr v-for="(item,index) in form">
 							<td scope="row">{{index+1}}</td>
-							<td>{{item.code}}</td>
+							<td>группа {{item.code}}</td>
 							<td>{{item.name}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent mr-1" :to='`/crm/vedgroup/edit/${item.id}`'>
@@ -47,7 +47,7 @@ export default {
       form: [{
         id: 1,
         name: 'Живые животные; продукты животного происхождения',
-        code: 'группа 01-05'
+        code: '01-05'
       }],
       requiredInput: false,
     };
@@ -55,6 +55,7 @@ export default {
   computed: {
   },
   async mounted() {
+
   },
   methods: {
   }
