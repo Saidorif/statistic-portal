@@ -117,7 +117,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="file" @input="previewFiles($event)" >
+							<input type="file" @change="previewFiles($event)" >
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -132,7 +132,9 @@
 </template>
 <script>
 	import {mapActions, mapGetters} from 'vuex'
+	// import { XlsxRead, XlsxTable, XlsxSheets, XlsxJson, XlsxWorkbook, XlsxSheet, XlsxDownload } from "vue-xlsx/dist/vue-xlsx.es.js"
 	export default{
+		// components:{XlsxRead, XlsxTable, XlsxSheets, XlsxJson, XlsxWorkbook, XlsxSheet, XlsxDownload},
 		data(){
 			return{
 				filter:{
@@ -162,7 +164,7 @@
 						weight:'0.08256',
 						cost:'23.24',
 					}
-				]
+				],
 			}
 		},
 		async mounted(){
@@ -191,26 +193,39 @@
 			async deleteEmployee(id){
 				if(confirm("Вы действительно хотите удалить?")){
 					let page = 1
-					toast.fire({
-				    	type: 'success',
-				    	icon: 'success',
-						title: 'Пользователь удалено!',
-				    })
+					toast.fire({type: 'success',icon: 'success',title: 'Пользователь удалено!', })
 				}
 			},
+			// previewFiles(event) {
+			// 	// const jsonData = this.$xlsx.toJson(data, options)
+			// 	console.log(this.$xlsx)
+			// },
 			previewFiles(e) {
 				var files = e.target.files, f = files[0];
 				var reader = new FileReader();
+				let xlsxReader = this.$xlsx;
+				let myFunc = this.workbook_to_json()
 				reader.onload = function(e) {
 					var data = new Uint8Array(e.target.result);
-					var workbook = XLSX.read(data, {type: 'array'});
+					var workbook = xlsxReader.read_(data, {type: 'array'});
 					let sheetName = workbook.SheetNames[0]
 					/* DO SOMETHING WITH workbook HERE */
-					console.log(workbook);
 					let worksheet = workbook.Sheets[sheetName];
-					console.log(XLSX.utils.sheet_to_json(worksheet));
+					myFunc(workbook)
+
 				};
 				reader.readAsArrayBuffer(f);
+			},
+			workbook_to_json(workbook) {
+				var result = {};
+				console.log(workbook)
+				// workbook.SheetNames[0].forEach(function(sheetName) {
+				// 	var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+				// 	if(roa.length > 0){
+				// 		result[sheetName] = roa;
+				// 	}
+				// });
+				// return result;
 			}
 		}
 	}

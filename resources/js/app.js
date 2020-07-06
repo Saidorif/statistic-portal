@@ -19,6 +19,9 @@ import {ability} from "./store/store";
 Vue.use(abilitiesPlugin, ability);
 /* FOR MANAGING USER PERMISSIONS */
 
+// excel
+import VueXlsx from 'vue-js-xlsx'
+Vue.use(VueXlsx)
 
 // Vuesax
 import Vuesax from 'vuesax'
