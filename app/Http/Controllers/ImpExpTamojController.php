@@ -171,4 +171,62 @@ class ImpExpTamojController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Содержимое удален']);
     }
+
+    public function excel(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file'  => 'required|file',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet = $reader->load($request->file);
+
+        // $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile("Xlsx");
+        // $reader->open($request->file);
+
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = [];
+        foreach ($worksheet->getRowIterator() AS $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
+            $cells = [];
+            foreach ($cellIterator as $cell) {
+                $cells[] = $cell->getValue();
+            }
+            $rows[] = $cells;
+        }
+
+        array_shift($rows);
+
+        foreach ($rows as $key => $inputs) {
+            $country_id = 999;
+            $inputs[4] = (int)$inputs[4];
+            $country = Country::where(['code' => $inputs[4]])->first();
+            if($country){
+                $country_id = $country->id;
+            }
+            $time = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($inputs[1])->format('Y-m-d');
+
+            $result = ImpExpTamoj::create([
+                'mode'  => $inputs[0],
+                'date' => $time,
+                'vedcode' => $inputs[2],
+                'product' => $inputs[3],
+                'country_code' => $inputs[4],
+                'code_group_id' => substr($inputs[2], 0,2),
+                'country_id' => $country_id,
+                'country_name' => $inputs[5],
+                'transport_type' => $inputs[6],
+                'transport_country_code' => $inputs[7],
+                'weight' => floatval($inputs[8]) * 1000,
+                'cost' => floatval($inputs[9]) * 1000,
+            ]);
+        }
+
+        return response()->json(['success' => true, 'rows' => $rows]);
+    }
 }
