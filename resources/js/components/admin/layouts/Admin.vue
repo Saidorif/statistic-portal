@@ -13,7 +13,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="#" class="logout_btn" @click.prevent="logoutProfile"> <i class="fas fa-logout"></i> Выйти</a>
+        <a href="#" class="logout_btn" @click.prevent="logoutProfile">Выйти <i class="fas fa-sign-out-alt"></i></a>
       </li>
     </ul>
   </nav>

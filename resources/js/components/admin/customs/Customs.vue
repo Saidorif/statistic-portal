@@ -23,24 +23,18 @@
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
-  					  		<div class="form-group col-lg-3">
-	  							<label for="name">Ф.И.О</label>
-	  							<input 
-	  								type="text" 
-	  								class="form-control" 
-	  								id="name" 
-	  								placeholder="Ф.И.О..."
-	  								v-model="filter.name"
-  								>
+  					  		<div class="form-group col-lg-2">
+	  							<label for="name">Режим</label>
+								  <select v-model="filter.mode" class="form-control">
+									  <option value="">Все</option>
+									  <option value="ИМ">Импорт</option>
+									  <option value="ЭХ">Экспорт</option>
+									  <option value="ТР">Транзит</option>
+								  </select>
 				  			</div>
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Должность</label>
-  								<select name="" v-model="filter.position_id" class="form-control" >
-  									<option value="">Выберите должность!</option>
-  									<option :value="position.id" v-for="(position,index) in getPositionList" :key="position.id">	
-  										{{position.name}}
-  									</option>
-  								</select>
+  								<date-picker v-model="filter.date" range></date-picker>
 				  			</div>	
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Направления</label>
@@ -64,27 +58,27 @@
 			  	</transition>
 		  	</div>
 		  	<div class="card-body">
-			  <div class="table-responsive" v-if="form.length">
+			  <div class="table-responsive" >
 				<table class="table table-bordered text-center table-hover table-striped">
 					<thead>
-						<tr>
-							<th scope="col">№</th>
-							<th scope="col">Режим</th>
-							<th scope="col">Дата</th>
-							<th scope="col">Код ТН ВЭД</th>
-							<th scope="col">Товар</th>
-							<th scope="col">Код страна</th>
-							<th scope="col">Страна <br> грузотпровитель / грузополучателя</th>
-							<th scope="col">Вид транспорта</th>
-							<th scope="col" >Страна <br> регстрация <br> транспорта</th>
-							<th scope="col">Вес (тн)</th>
-							<th scope="col">Стоимость <br> (тыс.долл.)</th>
-							<th scope="col">Действия</th>
+						<tr class="table_tr">
+							<th class="table_number">№</th>
+							<th>Режим</th>
+							<th width="100px"> Дата</th>
+							<th>Код ТН ВЭД</th>
+							<th>Товар</th>
+							<th>Код страна</th>
+							<th width="150px">Страна <br> грузотпровитель / грузополучателя</th>
+							<th>Вид транспорта</th>
+							<th >Страна <br> регстрация <br> транспорта</th>
+							<th>Вес (тн)</th>
+							<th>Стоимость <br> (тыс.долл.)</th>
+							<th width="100px">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(item,index) in form">
-							<td scope="row">{{index+1}}</td>
+						<tr v-for="(item,index) in getExcelList.data">
+							<td>{{item.id}}</td>
 							<td>{{item.mode}}</td>
 							<td>{{item.date}}</td>
 							<td>{{item.vedcode}}</td>
@@ -105,8 +99,9 @@
 							</td>
 						</tr>
 					</tbody>
-					<!-- <pagination :limit="4" :data="getEmployees" @pagination-change-page="getResults"></pagination> -->
 				</table>
+					<pagination :limit="4" :data="getExcelList" @pagination-change-page="getResults"></pagination>
+
 			  </div>
 			  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -134,9 +129,9 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import XLSX from 'xlsx';
 	import Loader from '../../Loader'
-
+ 	import DatePicker from 'vue2-datepicker';
 	export default{
-		components:{Loader},
+		components:{Loader, DatePicker},
 		data(){
 			return{
 				filter:{
@@ -158,12 +153,13 @@
 		},
 		async mounted(){
 			let page = 1;
+			await this.actionImportExcelList({page: page});
 		},
 		computed:{
-			...mapGetters("customs", ["getMassage"]),
+			...mapGetters("customs", ["getMassage", "getExcelList"]),
 		},
 		methods:{
-			...mapActions("customs", ["actionImportExcel"]),
+			...mapActions("customs", ["actionImportExcel", "actionImportExcelList"]),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
@@ -187,11 +183,47 @@
 					toast.fire({type: 'success',icon: 'success',title: 'Пользователь удалено!', })
 				}
 			},
+			async getResults(page = 1){ 
+				await this.actionImportExcelList({page:page})
+			},
+			ExcelDateToJSDate(serial) {
+				var utc_days  = Math.floor(serial - 25569);
+				var utc_value = utc_days * 86400;                                        
+				var date_info = new Date(utc_value * 1000);
+
+				var fractional_day = serial - Math.floor(serial) + 0.0000001;
+
+				var total_seconds = Math.floor(86400 * fractional_day);
+
+				var seconds = total_seconds % 60;
+
+				total_seconds -= seconds;
+
+				var hours = Math.floor(total_seconds / (60 * 60));
+				var minutes = Math.floor(total_seconds / 60) % 60;
+
+				return new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
+			},
 			async sendExelData() {
 				if(this.form.length){
+					$('#exampleModalLong').modal('hide')
+					this.loading = true
 					await this.actionImportExcel(this.form)
+					this.loading = false
+					if(this.getMassage.success){
+						toast.fire({
+							type: "success",
+							icon: "success",
+							title: this.getMassage.message
+						});
+					}else{
+						toast.fire({
+							type: "error",
+							icon: "error",
+							title: this.getMassage.message
+						});
+					}
 				}
-				console.log(this.getMassage)
 			},
 			previewFiles(e) {
 				this.loading = true
@@ -214,5 +246,6 @@
 	}
 </script>
 <style scoped>
-	
+	.table_number{
+	}
 </style>
