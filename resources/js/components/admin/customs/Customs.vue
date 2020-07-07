@@ -206,7 +206,23 @@
 			},
 			async sendExelData() {
 				if(this.form.length){
+					$('#exampleModalLong').modal('hide')
+					this.loading = true
 					await this.actionImportExcel(this.form)
+					this.loading = false
+					if(this.getMassage.success){
+						toast.fire({
+							type: "success",
+							icon: "success",
+							title: this.getMassage.message
+						});
+					}else{
+						toast.fire({
+							type: "error",
+							icon: "error",
+							title: this.getMassage.message
+						});
+					}
 				}
 			},
 			previewFiles(e) {
