@@ -64,27 +64,27 @@
 			  	</transition>
 		  	</div>
 		  	<div class="card-body">
-			  <div class="table-responsive" v-if="form.length">
+			  <div class="table-responsive" >
 				<table class="table table-bordered text-center table-hover table-striped">
 					<thead>
-						<tr>
-							<th scope="col">№</th>
-							<th scope="col">Режим</th>
-							<th scope="col">Дата</th>
-							<th scope="col">Код ТН ВЭД</th>
-							<th scope="col">Товар</th>
-							<th scope="col">Код страна</th>
-							<th scope="col">Страна <br> грузотпровитель / грузополучателя</th>
-							<th scope="col">Вид транспорта</th>
-							<th scope="col" >Страна <br> регстрация <br> транспорта</th>
-							<th scope="col">Вес (тн)</th>
-							<th scope="col">Стоимость <br> (тыс.долл.)</th>
-							<th scope="col">Действия</th>
+						<tr class="table_tr">
+							<th class="table_number">№</th>
+							<th>Режим</th>
+							<th width="100px"> Дата</th>
+							<th>Код ТН ВЭД</th>
+							<th>Товар</th>
+							<th>Код страна</th>
+							<th width="150px">Страна <br> грузотпровитель / грузополучателя</th>
+							<th>Вид транспорта</th>
+							<th >Страна <br> регстрация <br> транспорта</th>
+							<th>Вес (тн)</th>
+							<th>Стоимость <br> (тыс.долл.)</th>
+							<th width="100px">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(item,index) in form">
-							<td scope="row">{{index+1}}</td>
+						<tr v-for="(item,index) in getExcelList.data">
+							<td>{{item.id}}</td>
 							<td>{{item.mode}}</td>
 							<td>{{item.date}}</td>
 							<td>{{item.vedcode}}</td>
@@ -105,8 +105,9 @@
 							</td>
 						</tr>
 					</tbody>
-					<!-- <pagination :limit="4" :data="getEmployees" @pagination-change-page="getResults"></pagination> -->
 				</table>
+					<pagination :limit="4" :data="getExcelList" @pagination-change-page="getResults"></pagination>
+
 			  </div>
 			  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -158,12 +159,14 @@
 		},
 		async mounted(){
 			let page = 1;
+			await this.actionImportExcelList({page: page});
+			this.form = this.getExcelList
 		},
 		computed:{
-			...mapGetters("customs", ["getMassage"]),
+			...mapGetters("customs", ["getMassage", "getExcelList"]),
 		},
 		methods:{
-			...mapActions("customs", ["actionImportExcel"]),
+			...mapActions("customs", ["actionImportExcel", "actionImportExcelList"]),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
@@ -187,6 +190,9 @@
 					toast.fire({type: 'success',icon: 'success',title: 'Пользователь удалено!', })
 				}
 			},
+			async getResults(page = 1){ 
+				await this.actionImportExcelList({page:page})
+			},
 			ExcelDateToJSDate(serial) {
 				var utc_days  = Math.floor(serial - 25569);
 				var utc_value = utc_days * 86400;                                        
@@ -206,12 +212,9 @@
 				return new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
 			},
 			async sendExelData() {
-				console.log(this.form)
-				// console.log(this.ExcelDateToJSDate(43831))
-
-				// if(this.form.length){
-				// 	await this.actionImportExcel(this.form)
-				// }
+				if(this.form.length){
+					await this.actionImportExcel(this.form)
+				}
 			},
 			previewFiles(e) {
 				this.loading = true
@@ -234,5 +237,6 @@
 	}
 </script>
 <style scoped>
-	
+	.table_number{
+	}
 </style>
