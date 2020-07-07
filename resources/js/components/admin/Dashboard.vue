@@ -45,7 +45,6 @@
 		async mounted(){
 			await this.actionDashboard()
 			this.loaded = true
-			console.log(this.getDashboard)
 		}
 	}
 </script>
