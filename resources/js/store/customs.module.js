@@ -2,7 +2,7 @@ import {CustomsService} from "../services/customs.service";
 
 const state = {
 	message: [],
-	excelList: []
+	excelList: {}
 };
 
 const getters = {

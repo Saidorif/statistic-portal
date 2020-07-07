@@ -23,24 +23,18 @@
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
-  					  		<div class="form-group col-lg-3">
-	  							<label for="name">Ф.И.О</label>
-	  							<input 
-	  								type="text" 
-	  								class="form-control" 
-	  								id="name" 
-	  								placeholder="Ф.И.О..."
-	  								v-model="filter.name"
-  								>
+  					  		<div class="form-group col-lg-2">
+	  							<label for="name">Режим</label>
+								  <select v-model="filter.mode" class="form-control">
+									  <option value="">Все</option>
+									  <option value="ИМ">Импорт</option>
+									  <option value="ЭХ">Экспорт</option>
+									  <option value="ТР">Транзит</option>
+								  </select>
 				  			</div>
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Должность</label>
-  								<select name="" v-model="filter.position_id" class="form-control" >
-  									<option value="">Выберите должность!</option>
-  									<option :value="position.id" v-for="(position,index) in getPositionList" :key="position.id">	
-  										{{position.name}}
-  									</option>
-  								</select>
+  								<date-picker v-model="filter.date" range></date-picker>
 				  			</div>	
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Направления</label>
@@ -135,9 +129,9 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import XLSX from 'xlsx';
 	import Loader from '../../Loader'
-
+ 	import DatePicker from 'vue2-datepicker';
 	export default{
-		components:{Loader},
+		components:{Loader, DatePicker},
 		data(){
 			return{
 				filter:{
@@ -160,7 +154,6 @@
 		async mounted(){
 			let page = 1;
 			await this.actionImportExcelList({page: page});
-			this.form = this.getExcelList
 		},
 		computed:{
 			...mapGetters("customs", ["getMassage", "getExcelList"]),
