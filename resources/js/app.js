@@ -1,6 +1,5 @@
 require('./bootstrap');
 window.Vue = require('vue');
-
 // ProgressBar
 import VueProgressBar from 'vue-progressbar';
 
@@ -24,6 +23,8 @@ Vue.use(abilitiesPlugin, ability);
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
 import 'material-icons/iconfont/material-icons.css';
+import 'vue2-datepicker/scss/index.scss'
+
 Vue.use(Vuesax)
 
 

@@ -32,18 +32,27 @@
 									  <option value="ТР">Транзит</option>
 								  </select>
 				  			</div>
-  					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Должность</label>
+  					  		<div class="form-group col-lg-2">
+	  							<label for="category_id">Дата</label>
   								<date-picker v-model="filter.date" range></date-picker>
 				  			</div>	
-  					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Направления</label>
-  								<select name="" v-model="filter.category_id" class="form-control" >
-  									<option value="">Выберите направления!</option>
-  									<option :value="cat.id" v-for="(cat,index) in getCategories" :key="cat.id">{{cat.name}}</option>
-  								</select>
+  					  		<div class="form-group col-lg-2">
+	  							<label for="category_id">Вид транспорта</label>
+								<select  class="form-control">
+									<option value="">Все</option>
+									<option value="20">Железнодорожная</option>
+									<option value="30">Авто</option>
+									<option value="40">Авиа</option>
+								</select>
 				  			</div>	
-						  	<div class="col-lg-3 form-group btn_search">
+  					  		<div class="form-group col-lg-3">
+	  							<label for="category_id">Страна</label>
+								<select  class="form-control">
+									<option value="">Все</option>
+									<option value="756">ШВЕЙЦАРИЯ</option>
+								</select>
+				  			</div>	
+						  	<div class="col-lg-2 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
 								  	найти
@@ -208,6 +217,7 @@
 				if(this.form.length){
 					$('#exampleModalLong').modal('hide')
 					this.loading = true
+					console.log(this.form)
 					await this.actionImportExcel(this.form)
 					this.loading = false
 					if(this.getMassage.success){
@@ -238,6 +248,7 @@
 					/* DO SOMETHING WITH workbook HERE */
 					let worksheet = workbook.Sheets[sheetName];
 					parentThis.form = XLSX.utils.sheet_to_json(worksheet)
+					console.log(parentThis.form)
 					parentThis.loading = false
 				};
 				reader.readAsArrayBuffer(f);
