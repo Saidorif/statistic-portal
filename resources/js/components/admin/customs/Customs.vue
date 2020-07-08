@@ -157,6 +157,7 @@
 				},
 				filterShow:false,
 				form:[],
+				file: null,
 				loading: false
 			}
 		},
@@ -214,12 +215,13 @@
 				return new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
 			},
 			async sendExelData() {
-				if(this.form.length){
-					$('#exampleModalLong').modal('hide')
+				if(this.file){
 					this.loading = true
-					console.log(this.form)
-					await this.actionImportExcel(this.form)
+					let formData = new FormData();
+					formData.append('file', this.file);
+					await this.actionImportExcel(formData);
 					this.loading = false
+					$('#exampleModalLong').modal('hide')
 					if(this.getMassage.success){
 						toast.fire({
 							type: "success",
@@ -233,25 +235,50 @@
 							title: this.getMassage.message
 						});
 					}
+
 				}
+
+				// if(this.form.length){
+				// 	$('#exampleModalLong').modal('hide')
+				// 	this.loading = true
+				// 	console.log(this.form)
+				// 	await this.actionImportExcel(this.form)
+				// 	this.loading = false
+				// 	if(this.getMassage.success){
+				// 		toast.fire({
+				// 			type: "success",
+				// 			icon: "success",
+				// 			title: this.getMassage.message
+				// 		});
+				// 	}else{
+				// 		toast.fire({
+				// 			type: "error",
+				// 			icon: "error",
+				// 			title: this.getMassage.message
+				// 		});
+				// 	}
+				// }
 			},
 			previewFiles(e) {
 				this.loading = true
-				var files = e.target.files, f = files[0];
-				var reader = new FileReader();
-				let xlsxReader = this.$xlsx;
-				let parentThis = this;
-				reader.onload = function(e) {
-					var data = new Uint8Array(e.target.result);
-					var workbook = XLSX.read(data, {type: 'array'});
-					let sheetName = workbook.SheetNames[0]
-					/* DO SOMETHING WITH workbook HERE */
-					let worksheet = workbook.Sheets[sheetName];
-					parentThis.form = XLSX.utils.sheet_to_json(worksheet)
-					console.log(parentThis.form)
-					parentThis.loading = false
-				};
-				reader.readAsArrayBuffer(f);
+				this.file = e.target.files[0];
+				this.loading = false
+				// var files = e.target.files, f = files[0];
+				// var reader = new FileReader();
+				// let xlsxReader = this.$xlsx;
+				// let parentThis = this;
+				// reader.onload = function(e) {
+				// 	var data = new Uint8Array(e.target.result);
+				// 	var workbook = XLSX.read(data, {type: 'array'});
+				// 	let sheetName = workbook.SheetNames[0]
+				// 	/* DO SOMETHING WITH workbook HERE */
+				// 	let worksheet = workbook.Sheets[sheetName];
+				// 	parentThis.form = XLSX.utils.sheet_to_json(worksheet)
+				// 	console.log(parentThis.form)
+				// 	parentThis.loading = false
+				// };
+				// reader.readAsArrayBuffer(f);
+
 			},
 		}
 	}

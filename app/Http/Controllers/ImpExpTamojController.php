@@ -256,21 +256,24 @@ class ImpExpTamojController extends Controller
         }
 
         if($request->file){
-            $strposfile = strpos($request->file,';');
-            $subfile = substr($request->file, 0,$strposfile);
-            $exfile = explode('/',$subfile)[1];
-            $file_name = time()."file.".$exfile;
+            // $strposfile = strpos($request->file,';');
+            // $subfile = substr($request->file, 0,$strposfile);
+            // $exfile = explode('/',$subfile)[1];
+            // $file_name = time()."file.".$exfile;
 
-            $file = Image::make($request->file);
-            $file_path = public_path()."/excels/";
-            $file->save($file_path.$file_name);
-            $inputs['file'] = $file_name;
+            // $file = Image::make($request->file);
+            // $file_path = public_path()."/excels/";
+            // $file->save($file_path.$file_name);
+            // $inputs['file'] = $file_name;
             
             $rows = [];
 
-            $reader = ReaderEntityFactory::createXLSXReader($file_path.$file_name);
+            // $reader = ReaderEntityFactory::createXLSXReader($file_path.$file_name);
 
-            $reader->open($file_path.$file_name);
+            // $reader->open($file_path.$file_name);
+            $reader = ReaderEntityFactory::createXLSXReader($request->file);
+
+            $reader->open($request->file);
 
             foreach ($reader->getSheetIterator() as $sheet) {
                 foreach ($sheet->getRowIterator() as $k => $row) {
@@ -288,7 +291,7 @@ class ImpExpTamojController extends Controller
             //Remove keys array
             array_shift($rows);
 
-            return response()->json(['success' => true,'filepath' => $file_path.$file_name , 'rows' => count($rows)]);
+            return response()->json(['success' => true, 'rows' => count($rows)]);
             
 
             //Write to DB
