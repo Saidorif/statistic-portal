@@ -174,8 +174,6 @@ export default {
   },
   async mounted(){
     await this.profileUser()
-
-
   },
   methods: {
     ...mapActions(['logout','profileUser']),

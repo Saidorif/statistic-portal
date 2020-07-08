@@ -44,6 +44,8 @@ Route::group([
             Route::delete('codegroup/destroy/{id}', 'CodeGroupController@destroy');
 
             //ImpExpTamoj CRUD
+            Route::post('impexp/excel-upload', 'ImpExpTamojController@excel');
+            Route::get('impexp/report/first', 'ImpExpTamojController@firstReport');
             Route::post('impexp', 'ImpExpTamojController@index');
             Route::post('impexp/upload', 'ImpExpTamojController@upload');
             Route::get('impexp/edit/{id}', 'ImpExpTamojController@edit');
