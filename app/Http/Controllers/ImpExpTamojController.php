@@ -256,6 +256,12 @@ class ImpExpTamojController extends Controller
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
         $countries = Country::pluck('id','code');
+        $country_id = 9999;
+
+        // if(isset($countries["276"])){
+        //     $country_id = 276;
+        // }
+        // return response()->json(['error' => true, 'country_id' => $country_id]);
 
         if($request->file){
             
@@ -263,6 +269,7 @@ class ImpExpTamojController extends Controller
             $reader = ReaderEntityFactory::createXLSXReader($request->file);
 
             $reader->open($request->file);
+            
 
             foreach ($reader->getSheetIterator() as $sheet) {
                 foreach ($sheet->getRowIterator() as $k => $row) {
@@ -272,10 +279,8 @@ class ImpExpTamojController extends Controller
                         $cellData[] = $c->getValue();
                     }
                     if($k != 1){
-                        if(array_key_exists($cellData[4], $countries)){
+                        if(isset($countries[$cellData[4]])){
                             $country_id = $countries[$cellData[4]];
-                        }else{
-                            $country_id = 9999;
                         }
                         $result = [
                             'mode'  => $cellData[0],
@@ -303,14 +308,21 @@ class ImpExpTamojController extends Controller
             //Make a collection to use chunk method
             $rows = collect($rows);
             $chunks = $rows->chunk(500);
+            $err_rows = [];
+
+            // return response()->json(['error' => true, 'chunks' => $chunks]);
 
             //Write to DB
             foreach ($chunks as $key => $chunk) {
-                \DB::table('imp_exp_tamojs')->insert($chunk->toArray());
+                try {
+                    \DB::table('imp_exp_tamojs')->insert($chunk->toArray());                    
+                } catch (Exception $e) {
+                    $err_rows[] = $chunk;
+                }
             }
         }
 
 
-        return response()->json(['success' => true, 'rows' => count($rows)]);
+        return response()->json(['success' => true, 'rows' => count($rows),'err_rows' => $err_rows]);
     }
 }
