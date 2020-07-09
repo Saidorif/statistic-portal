@@ -255,6 +255,7 @@ class ImpExpTamojController extends Controller
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
+        $countries = Country::pluck('id','code');
 
         if($request->file){
             
@@ -270,7 +271,28 @@ class ImpExpTamojController extends Controller
                     foreach ($cells as $key => $c) {
                         $cellData[] = $c->getValue();
                     }
-                    $rows[] = $cellData;
+                    if($k != 1){
+                        if(array_key_exists($cellData[4], $countries)){
+                            $country_id = $countries[$cellData[4]];
+                        }else{
+                            $country_id = 9999;
+                        }
+                        $result = [
+                            'mode'  => $cellData[0],
+                            'date' => $cellData[1],
+                            'vedcode' => $cellData[2],
+                            'product' => $cellData[3],
+                            'country_code' => (int)$cellData[4],
+                            'code_group_id' => substr($cellData[2], 0,2),
+                            'country_id' => $country_id,
+                            'country_name' => $cellData[5],
+                            'transport_type' => (int)$cellData[6],
+                            'transport_country_code' => (int)$cellData[7],
+                            'weight' => floatval($cellData[8]) * 1000,
+                            'cost' => floatval($cellData[9]) * 1000,
+                        ];
+                        $rows[] = $result;
+                    }
                 }
             }
 
@@ -278,33 +300,13 @@ class ImpExpTamojController extends Controller
 
             //Remove keys array
             array_shift($rows);
-            // return response()->json(['success' => true, 'rows' => $rows]);
-            
+            //Make a collection to use chunk method
+            $rows = collect($rows);
+            $chunks = $rows->chunk(500);
 
             //Write to DB
-            foreach ($rows as $key => $inputs) {
-                $country_id = 999;
-                $inputs[4] = (int)$inputs[4];
-                $country = Country::where(['code' => $inputs[4]])->first();
-                if($country){
-                    $country_id = $country->id;
-                }
-                // $time = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($inputs[1])->format('Y-m-d');
-
-                $result = ImpExpTamoj::create([
-                    'mode'  => $inputs[0],
-                    'date' => $inputs[1],
-                    'vedcode' => $inputs[2],
-                    'product' => $inputs[3],
-                    'country_code' => $inputs[4],
-                    'code_group_id' => substr($inputs[2], 0,2),
-                    'country_id' => $country_id,
-                    'country_name' => $inputs[5],
-                    'transport_type' => $inputs[6],
-                    'transport_country_code' => $inputs[7],
-                    'weight' => floatval($inputs[8]) * 1000,
-                    'cost' => floatval($inputs[9]) * 1000,
-                ]);
+            foreach ($chunks as $key => $chunk) {
+                \DB::table('imp_exp_tamojs')->insert($chunk->toArray());
             }
         }
 
