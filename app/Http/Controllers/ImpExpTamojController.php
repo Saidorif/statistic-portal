@@ -216,6 +216,7 @@ class ImpExpTamojController extends Controller
         //Remove keys array
         array_shift($rows);
 
+
         //Write to DB
         foreach ($rows as $key => $inputs) {
             $country_id = 999;
@@ -256,21 +257,8 @@ class ImpExpTamojController extends Controller
         }
 
         if($request->file){
-            // $strposfile = strpos($request->file,';');
-            // $subfile = substr($request->file, 0,$strposfile);
-            // $exfile = explode('/',$subfile)[1];
-            // $file_name = time()."file.".$exfile;
-
-            // $file = Image::make($request->file);
-            // $file_path = public_path()."/excels/";
-            // $file->save($file_path.$file_name);
-            // $inputs['file'] = $file_name;
             
             $rows = [];
-
-            // $reader = ReaderEntityFactory::createXLSXReader($file_path.$file_name);
-
-            // $reader->open($file_path.$file_name);
             $reader = ReaderEntityFactory::createXLSXReader($request->file);
 
             $reader->open($request->file);
@@ -290,8 +278,7 @@ class ImpExpTamojController extends Controller
 
             //Remove keys array
             array_shift($rows);
-
-            return response()->json(['success' => true, 'rows' => count($rows)]);
+            // return response()->json(['success' => true, 'rows' => $rows]);
             
 
             //Write to DB
@@ -302,11 +289,11 @@ class ImpExpTamojController extends Controller
                 if($country){
                     $country_id = $country->id;
                 }
-                $time = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($inputs[1])->format('Y-m-d');
+                // $time = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($inputs[1])->format('Y-m-d');
 
                 $result = ImpExpTamoj::create([
                     'mode'  => $inputs[0],
-                    'date' => $time,
+                    'date' => $inputs[1],
                     'vedcode' => $inputs[2],
                     'product' => $inputs[3],
                     'country_code' => $inputs[4],
