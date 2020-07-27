@@ -80,6 +80,8 @@ class ImpExpTamojController extends Controller
                 'transport_country_code' => $inputs['transport_country_code'],
                 'weight' => floatval($inputs['weight']) * 1000,
                 'cost' => floatval($inputs['cost']) * 1000,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
@@ -125,6 +127,8 @@ class ImpExpTamojController extends Controller
             'transport_country_code' => $inputs['transport_country_code'],
             'weight' => floatval($inputs['weight']) * 1000,
             'cost' => floatval($inputs['cost']) * 1000,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return response()->json(['success' => true, 'message' => 'Содержимое успешно создан']);
@@ -172,6 +176,7 @@ class ImpExpTamojController extends Controller
             'transport_country_code' => $inputs['transport_country_code'],
             'weight' => floatval($inputs['weight']) * 1000,
             'cost' => floatval($inputs['cost']) * 1000,
+            'updated_at' => now(),
         ]);
 
         return response()->json(['success' => true, 'message' => 'Содержимое успешно обновлен']);
@@ -240,6 +245,8 @@ class ImpExpTamojController extends Controller
                 'transport_country_code' => $inputs[7],
                 'weight' => floatval($inputs[8]) * 1000,
                 'cost' => floatval($inputs[9]) * 1000,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
@@ -295,6 +302,8 @@ class ImpExpTamojController extends Controller
                             'transport_country_code' => (int)$cellData[7],
                             'weight' => floatval($cellData[8]) * 1000,
                             'cost' => floatval($cellData[9]) * 1000,
+                            'created_at' => now(),
+                            'updated_at' => now(),
                         ];
                         $rows[] = $result;
                     }
