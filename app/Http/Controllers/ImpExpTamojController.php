@@ -17,20 +17,6 @@ class ImpExpTamojController extends Controller
         return response()->json(['success' => true, 'result' => $result]);
     }
 
-    public function firstReport(Request $request)
-    {
-        $start = microtime(true);
-        // $result = DB::select("select c.name,ex_imp.summ from countries as c left join ( select country_id, SUM(weight) as summ from imp_exp_tamojs GROUP BY country_id ) as ex_imp ON c.id = ex_imp.country_id");
-        $countries = Country::all();
-        $result = [];
-        foreach ($countries as $key => $country) {
-            $weight = ImpExpTamoj::where(['country_id' => $country->id])->sum('weight');
-            $result[][$country->name] = $weight;
-        }
-        $time_elapsed_secs = microtime(true) - $start;
-        return response()->json(['success' => true, 'result' => $result,'time_elapsed_secs' => $time_elapsed_secs]);
-    }
-
     public function edit($id)
     {
         $result = ImpExpTamoj::find($id);

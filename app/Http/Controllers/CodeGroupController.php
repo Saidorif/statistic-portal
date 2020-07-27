@@ -28,6 +28,7 @@ class CodeGroupController extends Controller
         $validator = Validator::make($request->all(), [            
             'name'  => 'required|string',
             'code_from'  => 'required',
+            'code_to'  => 'required',
         ]);
 
         if($validator->fails()){
