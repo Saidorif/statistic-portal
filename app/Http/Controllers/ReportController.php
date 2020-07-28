@@ -13,12 +13,60 @@ class ReportController extends Controller
     public function first(Request $request)
     {
         $start = microtime(true);
-        // $result = DB::select("select c.name,ex_imp.summ from countries as c left join ( select country_id, SUM(weight) as summ from imp_exp_tamojs GROUP BY country_id ) as ex_imp ON c.id = ex_imp.country_id");
-        $countries = Country::all();
+        $data = DB::select("select
+            c.id, 
+            c.name, 
+            COALESCE (ex_old_whole_year.ex_old_whole_weight, 0) ex_old_whole_weight,
+            COALESCE (ex_old_year.ex_old_weight, 0) ex_old_weight,
+            COALESCE (ex_new_year.ex_new_weight, 0) ex_new_weight,
+            COALESCE (( ex_new_year.ex_new_weight/ex_old_year.ex_old_weight ) *100, 0) ex_percantage,
+            COALESCE (imp_old_whole_year.imp_old_whole_weight, 0) imp_old_whole_weight,
+            COALESCE (imp_old_year.imp_old_weight, 0) imp_old_weight,
+            COALESCE (imp_new_year.imp_new_weight, 0) imp_new_weight,
+            COALESCE (( imp_new_year.imp_new_weight/imp_old_year.imp_old_weight ) *100, 0) imp_percantage
+            from countries c 
+            left join ( select SUM( weight )/1000 ex_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2019-01-01' AND '2019-12-31' GROUP BY country_id ) 
+            ex_old_whole_year 
+            on c.id = ex_old_whole_year.country_id
+            left join ( select SUM( weight )/1000 ex_old_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2019-01-01' AND '2019-04-01' GROUP BY country_id ) 
+            ex_old_year 
+            on c.id = ex_old_year.country_id
+            left join ( select SUM( weight )/1000 ex_new_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2020-01-01' AND '2020-04-01' GROUP BY country_id ) 
+            ex_new_year 
+            on c.id = ex_new_year.country_id
+            left join ( select SUM( weight )/1000 imp_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2019-01-01' AND '2019-12-31' GROUP BY country_id ) 
+            imp_old_whole_year 
+            on c.id = imp_old_whole_year.country_id
+            left join ( select SUM( weight )/1000 imp_old_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2019-01-01' AND '2019-04-01' GROUP BY country_id ) 
+            imp_old_year 
+            on c.id = imp_old_year.country_id
+            left join ( select SUM( weight )/1000 imp_new_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2020-01-01' AND '2020-04-01' GROUP BY country_id ) 
+            imp_new_year 
+            on c.id = imp_new_year.country_id
+            WHERE ex_old_whole_year.ex_old_whole_weight is not null OR 
+            ex_new_year.ex_new_weight is not null OR  
+            ex_old_year.ex_old_weight is not null OR  
+            imp_old_whole_year.imp_old_whole_weight is not null OR 
+            imp_new_year.imp_new_weight is not null OR  
+            imp_old_year.imp_old_weight is not null");
+        
         $result = [];
-        foreach ($countries as $key => $country) {
-            $weight = ImpExpTamoj::where(['country_id' => $country->id])->sum('weight');
-            $result[][$country->name] = $weight;
+        foreach ($data as $key => $d) {
+            $result[] = [
+                "city" => $d->name,
+                "import" => [
+                  "year" => $d->imp_old_whole_weight,
+                  "lastYear" => $d->imp_old_weight,
+                  "currentYear" => $d->imp_new_weight,
+                  "tempUp" => $d->imp_percantage
+                ],
+                "export" => [
+                  "year" => $d->ex_old_whole_weight,
+                  "lastYear" => $d->ex_old_weight,
+                  "currentYear" => $d->ex_new_weight,
+                  "tempUp" => $d->ex_percantage
+                ],
+            ];
         }
         $time_elapsed_secs = microtime(true) - $start;
         return response()->json(['success' => true, 'result' => $result,'time_elapsed_secs' => $time_elapsed_secs]);
