@@ -80,7 +80,7 @@ export default {
     ...mapGetters("vedgroup", ["getMassage"]),
   },
   methods: {
-    ...mapActions("vedgroup", ["actionEditVed",'actionEditVed']),
+    ...mapActions("vedgroup", ["actionAddVed"]),
     isRequired(input) {
       if (input != null) {
         return this.requiredInput && input === "";

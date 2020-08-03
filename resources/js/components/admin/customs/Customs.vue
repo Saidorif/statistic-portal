@@ -5,7 +5,7 @@
 		  	<div class="card-header header_filter">
 		  		<div class="header_title">
 				    <h4 class="title_user">
-				    	              <i class="sidebar_icon fas fa-file-excel"></i>
+				    <i class="sidebar_icon fas fa-file-excel"></i>
 					     Таможня  (Excel) 
 					</h4>
 					<div class="add_user_btn">

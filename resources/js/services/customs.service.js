@@ -10,6 +10,15 @@ const CustomsService = {
 	importExcelList(data){
 		return ApiService.post(`/api/impexp?page=`+ data.page)
 	},
+	customsAddService(data){
+		return ApiService.post(`/api/impexp/store`, data)
+	},
+	editCustomsService(data){
+		return ApiService.get(`/api/impexp/edit/${data.id}`,data)
+	},
+	updateCustomsService(data){
+		return ApiService.post(`/api/impexp/update/${data.id}`,data)
+	},
 };
 
 export { CustomsService };

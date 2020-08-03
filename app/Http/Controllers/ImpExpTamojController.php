@@ -17,20 +17,6 @@ class ImpExpTamojController extends Controller
         return response()->json(['success' => true, 'result' => $result]);
     }
 
-    public function firstReport(Request $request)
-    {
-        $start = microtime(true);
-        // $result = DB::select("select c.name,ex_imp.summ from countries as c left join ( select country_id, SUM(weight) as summ from imp_exp_tamojs GROUP BY country_id ) as ex_imp ON c.id = ex_imp.country_id");
-        $countries = Country::all();
-        $result = [];
-        foreach ($countries as $key => $country) {
-            $weight = ImpExpTamoj::where(['country_id' => $country->id])->sum('weight');
-            $result[][$country->name] = $weight;
-        }
-        $time_elapsed_secs = microtime(true) - $start;
-        return response()->json(['success' => true, 'result' => $result,'time_elapsed_secs' => $time_elapsed_secs]);
-    }
-
     public function edit($id)
     {
         $result = ImpExpTamoj::find($id);
@@ -80,6 +66,8 @@ class ImpExpTamojController extends Controller
                 'transport_country_code' => $inputs['transport_country_code'],
                 'weight' => floatval($inputs['weight']) * 1000,
                 'cost' => floatval($inputs['cost']) * 1000,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
@@ -125,6 +113,8 @@ class ImpExpTamojController extends Controller
             'transport_country_code' => $inputs['transport_country_code'],
             'weight' => floatval($inputs['weight']) * 1000,
             'cost' => floatval($inputs['cost']) * 1000,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return response()->json(['success' => true, 'message' => 'Содержимое успешно создан']);
@@ -172,6 +162,7 @@ class ImpExpTamojController extends Controller
             'transport_country_code' => $inputs['transport_country_code'],
             'weight' => floatval($inputs['weight']) * 1000,
             'cost' => floatval($inputs['cost']) * 1000,
+            'updated_at' => now(),
         ]);
 
         return response()->json(['success' => true, 'message' => 'Содержимое успешно обновлен']);
@@ -240,6 +231,8 @@ class ImpExpTamojController extends Controller
                 'transport_country_code' => $inputs[7],
                 'weight' => floatval($inputs[8]) * 1000,
                 'cost' => floatval($inputs[9]) * 1000,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
@@ -295,6 +288,8 @@ class ImpExpTamojController extends Controller
                             'transport_country_code' => (int)$cellData[7],
                             'weight' => floatval($cellData[8]) * 1000,
                             'cost' => floatval($cellData[9]) * 1000,
+                            'created_at' => now(),
+                            'updated_at' => now(),
                         ];
                         $rows[] = $result;
                     }

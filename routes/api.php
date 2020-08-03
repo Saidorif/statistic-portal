@@ -45,13 +45,16 @@ Route::group([
 
             //ImpExpTamoj CRUD
             Route::post('impexp/excel-upload', 'ImpExpTamojController@excel');
-            Route::get('impexp/report/first', 'ImpExpTamojController@firstReport');
             Route::post('impexp', 'ImpExpTamojController@index');
             Route::post('impexp/upload', 'ImpExpTamojController@upload');
             Route::get('impexp/edit/{id}', 'ImpExpTamojController@edit');
             Route::post('impexp/update/{id}', 'ImpExpTamojController@update');
             Route::post('impexp/store', 'ImpExpTamojController@store');
             Route::delete('impexp/destroy/{id}', 'ImpExpTamojController@destroy');
+
+            //Reports
+            Route::get('report/first', 'ReportController@first');
+            Route::get('report/second', 'ReportController@second');
 
             //Employee CRUD
             Route::post('employee', 'EmployeeController@index');

@@ -9,49 +9,127 @@
           <router-link class="btn btn-primary back_btn" to="/crm/customs-import-export"><span class="peIcon pe-7s-back"></span> Назад</router-link>
         </div>
       </div>
-      <form role="form" @submit.prevent.enter="sendEmployee" enctype="multipart/form-data">
+      <form role="form" @submit.prevent.enter="sendData">
         <div class="card-body d-flex flex-wrap">
+          <template v-if="errorMsg.length">
+            <div class="alert alert-danger w-100" v-for="msg in errorMsg">{{msg}}</div>
+          </template>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="name">Основная номенклатура экспортных грузов</label>
+              <label for="mode">Режим</label>
               <input
                 type="text"
                 class="form-control input_style"
-                id="name"
-                :class="isRequired(form.name) ? 'isRequired' : ''"
-                placeholder="Основная номенклатура экспортных грузов"
-                v-model="form.name"
+                id="mode"
+                :class="isRequired(form.mode) ? 'isRequired' : ''"
+                placeholder="Режим"
+                v-model="form.mode"
+              />
+            </div>
+            <div class="form-group">
+              <label for="vedcode">Код ТН ВЭД</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="vedcode"
+                :class="isRequired(form.vedcode) ? 'isRequired' : ''"
+                placeholder="Код ТН ВЭД"
+                v-model="form.vedcode"
+              />
+            </div>
+            <div class="form-group">
+              <label for="country_code">Код страна</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="country_code"
+                :class="isRequired(form.country_code) ? 'isRequired' : ''"
+                placeholder="Код страна"
+                v-model="form.country_code"
+              />
+            </div>
+            <div class="form-group">
+              <label for="transport_type">Вид транспорта</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="transport_type"
+                :class="isRequired(form.transport_type) ? 'isRequired' : ''"
+                placeholder="Вид транспорта"
+                v-model="form.transport_type"
+              />
+            </div>
+            <div class="form-group">
+              <label for="weight">Вес (тн)</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="weight"
+                :class="isRequired(form.weight) ? 'isRequired' : ''"
+                placeholder="Вес (тн)"
+                v-model="form.weight"
               />
             </div>
           </div>
-          <div class="col-md-6 d-flex">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Код ТН ВЭД</label>
-                <input
-                  type="text"
-                  class="form-control input_style"
-                  id="name"
-                  :class="isRequired(form.name) ? 'isRequired' : ''"
-                  placeholder="с"
-                  v-model="form.code_from"
-                />
-              </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="date">Дата</label>
+              <input
+                type="date"
+                class="form-control input_style"
+                id="date"
+                :class="isRequired(form.date) ? 'isRequired' : ''"
+                placeholder="Дата"
+                v-model="form.date"
+              />
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="name">Код ТН ВЭД</label>
-                <input
-                  type="text"
-                  class="form-control input_style"
-                  id="name"
-                  :class="isRequired(form.name) ? 'isRequired' : ''"
-                  placeholder="до"
-                  v-model="form.code_to"
-                />
-              </div>
+            <div class="form-group">
+              <label for="product">Товар</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="product"
+                :class="isRequired(form.product) ? 'isRequired' : ''"
+                placeholder="Товар"
+                v-model="form.product"
+              />
             </div>
-
+            <div class="form-group">
+              <label for="country_name">Страна  грузотпровитель / грузополучателя</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="country_name"
+                :class="isRequired(form.country_name) ? 'isRequired' : ''"
+                placeholder="Страна  грузотпровитель / грузополучателя"
+                v-model="form.country_name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="transport_country_code">Страна  регстрация  транспорта</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="transport_country_code"
+                :class="isRequired(form.transport_country_code) ? 'isRequired' : ''"
+                placeholder="Страна  регстрация  транспорта"
+                v-model="form.transport_country_code"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cost">Стоимость (тыс.долл.)</label>
+              <input
+                type="text"
+                class="form-control input_style"
+                id="cost"
+                :class="isRequired(form.cost) ? 'isRequired' : ''"
+                placeholder="Стоимость (тыс.долл.)"
+                v-model="form.cost"
+              />
+            </div>
+          </div>
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
           </div>
         </div>
       </form>
@@ -68,152 +146,66 @@ export default {
   data() {
     return {
       form: {
-        name: "",
-        code_to:'',
-        code_from: ''
+        mode: "",
+        date:'',
+        vedcode: '',
+        product: '',
+        country_code: '',
+        country_name: '',
+        transport_type: '',
+        transport_country_code: '',
+        weight: '',
+        cost: '',
       },
       fileFormat: "нет-файла",
       requiredInput: false,
       checkPassword: false,
-      emailError: false
+      emailError: false,
+      errorMsg: [],
     };
   },
   async mounted() {
-    await this.actionRoleList();
-    await this.actionPositionList();
   },
   computed: {
-    ...mapGetters("employee", ["getMassage"]),
-    ...mapGetters("role", ["getRoleList"]),
-    ...mapGetters("position", ["getPositionList"])
+    ...mapGetters("customs", ["getMassage"]),
   },
   methods: {
-    ...mapActions("role", ["actionRoleList"]),
-    ...mapActions("employee", ["actionAddEmployee", "actionCheckEmail"]),
-    ...mapActions("position", ["actionPositionList"]),
-    confirmPassword() {
-      if (this.form.password && this.form.confirm_password) {
-        if (this.form.password != this.form.confirm_password) {
-          this.checkPassword = true;
-        } else {
-          this.checkPassword = false;
-        }
-      }
-    },
-    photoImg(img) {
-      if (img.length < 100) {
-        return "/img/user.jpg";
-      } else {
-        return img;
-      }
-    },
-    changeFile(event) {
-      let file = event.target.files[0];
-      if (file.size > 1048576) {
-        swal.fire({
-          type: "error",
-          icon: "error",
-          title: "Ошибка",
-          text: "Размер файл не должно быть больше 1мб"
-        });
-      } else {
-        let reader = new FileReader();
-        reader.onload = e => {
-          this.form.file = e.target.result;
-          this.fileFormat = event.target.files[0].name
-            .substr(event.target.files[0].name.lastIndexOf("\\") + 1)
-            .split(".")[0];
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-    changePhoto(event) {
-      let file = event.target.files[0];
-      if (
-        event.target.files[0]["type"] === "image/png" ||
-        event.target.files[0]["type"] === "image/jpeg" ||
-        event.target.files[0]["type"] === "image/jpg"
-      ) {
-        if (file.size > 1048576) {
-          swal.fire({
-            type: "error",
-            title: "Ошибка",
-            text: "Размер изображения больше лимита"
-          });
-        } else {
-          let reader = new FileReader();
-          reader.onload = event => {
-            this.form.image = event.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      } else {
-        swal.fire({
-          type: "error",
-          title: "Ошибка",
-          text: "Картинка должна быть только png,jpg,jpeg!"
-        });
-      }
-    },
+    ...mapActions("customs", ["actionCustomsAdd"]),
     isRequired(input) {
       if (input != null) {
         return this.requiredInput && input === "";
       }
     },
-    async sendEmployee() {
+    async sendData() {
       if (
-        this.form.name &&
-        this.form.email &&
-        this.form.password &&
-        this.form.confirm_password &&
-        this.form.role_id &&
-        this.form.gender &&
-        this.checkPassword == false
+        this.form.mode &&
+        this.form.date &&
+        this.form.vedcode &&
+        this.form.product &&
+        this.form.country_code &&
+        this.form.country_name &&
+        this.form.transport_type &&
+        this.form.transport_country_code &&
+        this.form.weight &&
+        this.form.cost
       ) {
-        if (this.form.experience && this.form.experience.length) {
-          await this.actionAddEmployee(this.form);
-        } else {
-          delete this.form.experience;
-          await this.actionAddEmployee(this.form);
-        }
+        await this.actionCustomsAdd(this.form)
+        console.log(this.getMassage)
         if (this.getMassage.success) {
-          this.$router.push("/crm/employee");
+          this.$router.push("/crm/customs-import-export");
           this.requiredInput = false;
           toast.fire({
             type: "success",
             icon: "success",
-            title: "Ползователь добавлено!"
+            title: "Успешно добавлено!"
           });
+        }else{
+          this.errorMsg = Object.values(this.getMassage.message);
         }
       } else {
         this.requiredInput = true;
       }
     },
-    async checkEmailInput() {
-      await this.actionCheckEmail({ email: this.form.email });
-      if (
-        this.getMassage.error &&
-        this.getMassage.message.email == "Почта уже занята."
-      ) {
-        this.emailError = true;
-      } else {
-        this.emailError = false;
-      }
-    },
-    addExperience() {
-      let item = {
-        company: "",
-        date_from: "",
-        date_to: "",
-        address: "",
-        position: "",
-        description: ""
-      };
-      this.form.experience.push(item);
-    },
-    removeExperience(ex, index) {
-      this.form.experience.splice(index, 1);
-    }
   }
 };
 </script>

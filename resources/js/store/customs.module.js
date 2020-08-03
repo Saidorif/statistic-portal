@@ -2,7 +2,8 @@ import {CustomsService} from "../services/customs.service";
 
 const state = {
 	message: [],
-	excelList: {}
+	excelList: {},
+	custom: [],
 };
 
 const getters = {
@@ -11,6 +12,9 @@ const getters = {
 	},
 	getExcelList(state){
 		return state.excelList
+	},
+	getCustom(state){
+		return state.custom
 	},
 };
 
@@ -34,6 +38,34 @@ const actions = {
 			return false
 		}
 	},
+	async actionCustomsAdd({commit}, payload){
+		try {
+			const exData =  await CustomsService.customsAddService(payload);
+			await commit('setMessage',exData.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionEditCustoms({commit},payload){
+
+		try {
+			const exData =  await CustomsService.editCustomsService(payload);
+			await commit('setEditCustoms',exData.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionUpdateCustoms({commit},payload){
+		try {
+			const exData =  await CustomsService.updateCustomsService(payload);
+			await commit('setMessage',exData.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {
@@ -42,6 +74,9 @@ const mutations = {
 	},
 	setExcelList(state, excelList){
 		state.excelList = excelList
+	},
+	setEditCustoms(state, custom){
+		state.custom = custom
 	},
 };
 
