@@ -267,6 +267,7 @@ return array(
     'Carbon\\Traits\\Units' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Units.php',
     'Carbon\\Traits\\Week' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Week.php',
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
+    'CodeGroupSeeder' => $baseDir . '/database/seeds/CodeGroupSeeder.php',
     'Complex\\Complex' => $vendorDir . '/markbaker/complex/classes/src/Complex.php',
     'Complex\\Exception' => $vendorDir . '/markbaker/complex/classes/src/Exception.php',
     'CountrySeeder' => $baseDir . '/database/seeds/CountrySeeder.php',

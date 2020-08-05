@@ -12,7 +12,6 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        DB::enableQueryLog();
         $data_vedcode = DB::select("select code.name,code.code,coalesce(total_weight) as total_weight,
           coalesce(total_cost) as total_cost,
           coalesce(im_total_cost) as im_total_cost,

@@ -835,6 +835,7 @@ class ComposerStaticInitce3a0fe830babba10c14d6b1c3652e66
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'CodeGroupSeeder' => __DIR__ . '/../..' . '/database/seeds/CodeGroupSeeder.php',
         'Complex\\Complex' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Complex.php',
         'Complex\\Exception' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Exception.php',
         'CountrySeeder' => __DIR__ . '/../..' . '/database/seeds/CountrySeeder.php',
