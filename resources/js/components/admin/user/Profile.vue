@@ -30,7 +30,7 @@
                 type="password"
                 class="form-control input_style"
                 id="exampleInputPassword1"
-                placeholder="Password.."
+                placeholder="Пароль..."
                 :class="isRequiredPassword(passwords.password) ? 'isRequired' : ''"
                 v-model="passwords.password"
               />
