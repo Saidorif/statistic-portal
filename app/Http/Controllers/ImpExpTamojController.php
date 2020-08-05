@@ -13,7 +13,39 @@ class ImpExpTamojController extends Controller
 {
     public function index(Request $request)
     {
-        $result = ImpExpTamoj::paginate(12);
+        $validator = Validator::make($request->all(), [
+            'date_from' => 'nullable|date',
+            'date_to' => 'nullable|date',
+            'mode' => 'nullable|string',
+            'transport_type' => 'nullable|integer',
+            'country_id' => 'nullable|array',
+            'code_group_id' => 'nullable|array',
+        ]);
+        if($validator->fails()){
+            return response()->json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $params = $request->all();
+        if(!empty($params)){
+          $builder = ImpExpTamoj::query();
+          if(!empty($params['date_from']) && !empty($params['date_to'])){
+            $builder->whereBetween('date',[$params['date_from'],$params['date_to']]);
+          }
+          if(!empty($params['mode'])){
+            $builder->where('mode','=',$params['mode']);
+          }
+          if(!empty($params['transport_type'])){
+            $builder->where('transport_type','=',$params['transport_type']);
+          }
+          if(!empty($params['country_id'])){
+            $builder->whereIn('country_id',$params['country_id']);
+          }
+          if(!empty($params['code_group_id'])){
+            $builder->whereIn('code_group_id',$params['code_group_id']);
+          }
+          $result = $builder->paginate(20);
+        }else{
+          $result = ImpExpTamoj::paginate(20);
+        }
         return response()->json(['success' => true, 'result' => $result]);
     }
 
@@ -203,7 +235,7 @@ class ImpExpTamojController extends Controller
             }
             $rows[] = $cells;
         }
-        
+
         //Remove keys array
         array_shift($rows);
 
@@ -257,12 +289,12 @@ class ImpExpTamojController extends Controller
         // return response()->json(['error' => true, 'country_id' => $country_id]);
 
         if($request->file){
-            
+
             $rows = [];
             $reader = ReaderEntityFactory::createXLSXReader($request->file);
 
             $reader->open($request->file);
-            
+
 
             foreach ($reader->getSheetIterator() as $sheet) {
                 foreach ($sheet->getRowIterator() as $k => $row) {
@@ -310,7 +342,7 @@ class ImpExpTamojController extends Controller
             //Write to DB
             foreach ($chunks as $key => $chunk) {
                 try {
-                    \DB::table('imp_exp_tamojs')->insert($chunk->toArray());                    
+                    \DB::table('imp_exp_tamojs')->insert($chunk->toArray());
                 } catch (Exception $e) {
                     $err_rows[] = $chunk;
                 }

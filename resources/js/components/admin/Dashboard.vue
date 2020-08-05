@@ -3,7 +3,7 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-rocket"></i>
+			    	<i class="sidebar_icon fas fa-desktop"></i>
 				    Админ панель
 				</h4>
 		  	</div>

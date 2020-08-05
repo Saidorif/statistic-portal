@@ -2,11 +2,15 @@
 	<div class="action">
 		<div class="card">
 		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i  class="peIcon pe-7s-box1"></i>
-				    Action 
-				</h4>
-				<router-link class="btn btn-primary" to="/crm/action/add"><i class="fas fa-plus"></i> Add</router-link>
+				<div class="header_title">
+				    <h4 class="title_user">
+				    	<i  class="sidebar_icon fas fa-star"></i>
+					     Action 
+					</h4>
+					<div class="add_user_btn">
+						<router-link class="btn btn-primary" to="/crm/action/add"><i class="fas fa-plus"></i> Добавить</router-link>
+		            </div>
+		  		</div>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">

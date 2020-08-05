@@ -2,15 +2,19 @@
 	<div class="add_role">
 		<div class="card">
 		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-id"></i>
-				    Добавить Должность
-				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/position"><span class="peIcon pe-7s-back"></span> Назад</router-link>
-		  	</div>
+		  		<div class="header_title">
+				    <h4 class="title_user">
+				    	<i  class="sidebar_icon fas fa-star"></i>
+					     Добавить Должность 
+					</h4>
+					<div class="add_user_btn">
+						<router-link class="btn btn-primary back_btn" to="/crm/position"><i class="pe-7s-back"></i> Назад</router-link>
+		            </div>
+		  		</div>
+			  </div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="savePosition" >
-					<div class="row">
+					<div class="row align-items-end">
 					  <div class="form-group col-md-9">
 					    <label for="roleName">Название должность</label>
 					    <input 

@@ -2,15 +2,19 @@
 	<div class="add_action">
 		<div class="card">
 		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-id"></i>
-				    Add Action
-				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/action"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<div class="header_title">
+				    <h4 class="title_user">
+				    	<i  class="peIcon pe-7s-id"></i>
+					     Add Action 
+					</h4>
+					<div class="add_user_btn">
+						<router-link class="btn btn-primary" to="/crm/action"><i class="peIcon pe-7s-back"></i> Назад</router-link>
+		            </div>
+		  		</div>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveAction" >
-					<div class="row">
+					<div class="row align-items-end">
 					  <div class="form-group col-md-9">
 					    <label for="contName">Название контроллера</label>
 						<multiselect 
