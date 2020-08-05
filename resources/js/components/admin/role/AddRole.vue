@@ -2,15 +2,19 @@
 	<div class="add_role">
 		<div class="card">
 		  	<div class="card-header">
+				  <div class="header_title">
+
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-id"></i>
 				    Add Role
 				</h4>
 				<router-link class="btn btn-primary back_btn" to="/crm/role"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				  </div>
+
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveRole" >
-					<div class="row">
+					<div class="row align-items-end">
 					  <div class="form-group col-md-9">
 					    <label for="roleName">Role Name</label>
 					    <input 

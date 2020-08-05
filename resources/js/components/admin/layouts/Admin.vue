@@ -94,6 +94,22 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/report-by-country">
+              <i class="sidebar_icon fas fa-file-excel"></i>
+              <p>
+                Отчет по странам
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/report-by-product">
+              <i class="sidebar_icon fas fa-file-excel"></i>
+              <p>
+                Отчет по продуктам
+              </p>
+            </router-link>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <span class="sidebar_icon fas fa-users-cog" style="font-size: 20px;"></span>

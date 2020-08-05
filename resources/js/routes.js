@@ -51,6 +51,10 @@ import Customs from './components/admin/customs/Customs'
 import EditCustoms from './components/admin/customs/EditCustoms'
 import AddCustoms from './components/admin/customs/AddCustoms'
 
+// Customs
+import ReportByCountry from './components/admin/reports/ReportByCountry'
+import ReportByProduct from './components/admin/reports/ReportByProduct'
+
 // NotFound
 import NotFound from './components/NotFound/NotFound'
 const router = new Router({
@@ -171,6 +175,14 @@ const router = new Router({
 				{
 					path:'customs-import-export/add',
 					component:AddCustoms,
+				},
+				{
+					path:'report-by-country',
+					component:ReportByCountry,
+				},
+				{
+					path:'report-by-product',
+					component:ReportByProduct,
 				},
 			]
 		},

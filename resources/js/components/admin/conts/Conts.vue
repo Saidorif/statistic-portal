@@ -2,11 +2,15 @@
 	<div class="role">
 		<div class="card">
 		  	<div class="card-header">
-			    <h4 class="title_user">
-			    	<i  class="peIcon pe-7s-box1"></i>
-				    Controller 
-				</h4>
-				<router-link class="btn btn-primary" to="/crm/conts/add"><i class="fas fa-plus"></i> Add</router-link>
+				<div class="header_title">
+				    <h4 class="title_user">
+				    	<i  class="peIcon pe-7s-box1"></i>
+					     Controller 
+					</h4>
+					<div class="add_user_btn">
+						<router-link class="btn btn-primary" to="/crm/conts/add"><i class="fas fa-plus"></i> Add</router-link>
+		            </div>
+		  		</div>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
