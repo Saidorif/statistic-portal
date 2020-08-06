@@ -23,6 +23,12 @@ class CountryController extends Controller
         return response()->json(['success' => true, 'result' => $result]);
     }
 
+    public function list(Request $request)
+    {
+        $countries = Country::all();
+        return response()->json(['success' => true, 'result' => $countries]);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [            

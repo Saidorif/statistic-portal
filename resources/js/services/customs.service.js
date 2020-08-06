@@ -8,7 +8,7 @@ const CustomsService = {
 		return ApiService.fileSend(`/api/impexp/excel-upload`,data)
 	},
 	importExcelList(data){
-		return ApiService.post(`/api/impexp?page=`+ data.page)
+		return ApiService.post(`/api/impexp?page=`+ data.page, data.filter)
 	},
 	customsAddService(data){
 		return ApiService.post(`/api/impexp/store`, data)

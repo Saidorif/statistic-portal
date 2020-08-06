@@ -148,6 +148,9 @@
 		},
 		methods:{
 			...mapActions("report", ["ActionReportByCoutryList"]),
+			toggleFilter(){
+				this.filterShow = !this.filterShow
+			},
 		}
 	}
 </script>
