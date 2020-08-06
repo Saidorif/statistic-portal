@@ -28,17 +28,17 @@
 								  <select v-model="filter.mode" class="form-control">
 									  <option value="">Все</option>
 									  <option value="ИМ">Импорт</option>
-									  <option value="ЭХ">Экспорт</option>
+									  <option value="ЭК">Экспорт</option>
 									  <option value="ТР">Транзит</option>
 								  </select>
 				  			</div>
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Дата</label>
-  								<date-picker v-model="filter.date" range></date-picker>
+  								<date-picker v-model="filter.date_from" range></date-picker>
 				  			</div>	
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Вид транспорта</label>
-								<select  class="form-control">
+								<select  class="form-control" v-model="filter.transport_type">
 									<option value="">Все</option>
 									<option value="20">Железнодорожная</option>
 									<option value="30">Авто</option>
@@ -47,9 +47,9 @@
 				  			</div>	
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Страна</label>
-								<select  class="form-control">
+								<select  class="form-control" v-model="filter.country_id">
 									<option value="">Все</option>
-									<option value="756">ШВЕЙЦАРИЯ</option>
+									<option v-for="(item,index) in getCountries.data" :value="item">{{item.name}}</option>
 								</select>
 				  			</div>	
 						  	<div class="col-lg-2 form-group btn_search">
@@ -144,16 +144,12 @@
 		data(){
 			return{
 				filter:{
+					date_from:'',
+					date_to:'',
 					mode:'',
-					date:'',
-					vedcode:'',
-					product:'',
-					country_code:'',
-					country_name:'',
 					transport_type:'',
-					transport_country_code:'',
-					weight:'',
-					cost:'',
+					country_id:'',
+					code_group_id:'',
 				},
 				filterShow:false,
 				form:[],
@@ -163,29 +159,28 @@
 		},
 		async mounted(){
 			let page = 1;
-			await this.actionImportExcelList({page: page});
+			await this.actionImportExcelList({page: page, filter: this.filter});
+			await this.actionCountries({page:page,items:this.filter})
 		},
 		computed:{
 			...mapGetters("customs", ["getMassage", "getExcelList"]),
+			...mapGetters('country',['getCountries']),
 		},
 		methods:{
 			...mapActions("customs", ["actionImportExcel", "actionImportExcelList"]),
+			...mapActions('country',['actionCountries']),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
 			async search(){
-				let page = 1
-				if(this.filter.name || this.filter.category_id || this.filter.position_id){
-				}
+				let page = 1;
+				await this.actionImportExcelList({page: page, filter: this.filter});
 			},
 			async clear(){
-				if(this.filter.name || this.filter.category_id || this.filter.position_id){
-					this.filter.name = ''
-					this.filter.category_id = ''
-					this.filter.position_id = ''
-					let page  = 1
-				}
-
+				this.filter.name = ''
+				this.filter.category_id = ''
+				this.filter.position_id = ''
+				let page  = 1
 			},
 			async deleteEmployee(id){
 				if(confirm("Вы действительно хотите удалить?")){
@@ -285,5 +280,8 @@
 </script>
 <style scoped>
 	.table_number{
+	}
+	.mx-input{
+		height: 37px;
 	}
 </style>
