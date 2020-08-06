@@ -28,10 +28,10 @@
 							<td>{{position.name}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/position/edit/${position.id}`'>
-									<i class="pe_icon pe-7s-edit editColor"></i>
+									<i class="fas fa-pen"></i>
 								</router-link>
 								<button class="btn_transparent" @click="deletePosition(position.id)">
-									<i class="pe_icon pe-7s-trash trashColor"></i>
+									<i class="fas fa-trash"></i>
 								</button>
 							</td>
 						</tr>
