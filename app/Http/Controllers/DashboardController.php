@@ -40,8 +40,38 @@ class DashboardController extends Controller
           left join (select code_group_id, sum(weight / 1000) as im_total_weight from imp_exp_tamojs
           where mode='ИМ'
           group by code_group_id) as import_t on code.code::int = import_t.code_group_id");
+
+        $data_country = DB::select("select c.name,c.id,coalesce(total_weight) as total_weight,
+          coalesce(total_cost) as total_cost,
+          coalesce(im_total_cost) as im_total_cost,
+          coalesce(im_eks_total_cost) as im_eks_total_cost,
+          coalesce(ek_total_weight) as ek_total_weight,
+          coalesce(im_total_weight) as im_total_weight
+          from countries as c
+          left join (select country_id, sum(weight / 1000) as total_weight from imp_exp_tamojs
+          group by country_id) as im on c.id = im.country_id
+          left join (select country_id, sum(cost / 1000) as total_cost from imp_exp_tamojs
+          group by country_id) as ir on c.id = ir.country_id
+
+          left join (select country_id, sum(cost / 1000) as im_total_cost from imp_exp_tamojs
+          where mode='ИМ'
+          group by country_id) as im_t on c.id = im_t.country_id
+
+          left join (select country_id, sum(cost / 1000) as im_eks_total_cost from imp_exp_tamojs
+          where mode='ЭК'
+          group by country_id) as im_eks_t on c.id = im_eks_t.country_id
+
+
+          left join (select country_id, sum(weight / 1000) as ek_total_weight from imp_exp_tamojs
+          where mode='ЭК'
+          group by country_id) as ek_t on c.id = ek_t.country_id
+
+          left join (select country_id, sum(weight / 1000) as im_total_weight from imp_exp_tamojs
+          where mode='ИМ'
+          group by country_id) as import_t on c.id = import_t.country_id");
         $result = [
-          'data_vedcode' => $data_vedcode
+          'data_vedcode' => $data_vedcode,
+          'data_country' => $data_country,
         ];
         return response()->json(['success' => true, 'result' => $result]);
     }
