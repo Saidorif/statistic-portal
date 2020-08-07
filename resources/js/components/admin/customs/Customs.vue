@@ -33,8 +33,12 @@
 								  </select>
 				  			</div>
   					  		<div class="form-group col-lg-2">
-	  							<label for="category_id">Дата</label>
-  								<date-picker v-model="filter.date_from" range></date-picker>
+	  							<label for="category_id">Дата c</label>
+  								<date-picker v-model="filter.date_from" format="DD-MM-YYYY"  ></date-picker>
+				  			</div>	
+  					  		<div class="form-group col-lg-2">
+	  							<label for="category_id">Дата по</label>
+  								<date-picker v-model="filter.date_to" format="DD-MM-YYYY"  ></date-picker>
 				  			</div>	
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Вид транспорта</label>
@@ -45,9 +49,9 @@
 									<option value="40">Авиа</option>
 								</select>
 				  			</div>	
-  					  		<div class="form-group col-lg-3">
+  					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Страна</label>
-								<multiselect v-model="filter.country_id" :options="getCountries"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+								<multiselect v-model="filter.country_id" :options="getCountries"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Выберите страну" label="name" track-by="name" :searchable="false"  :preselect-first="false">
 									<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.name }}</strong></template>
 								</multiselect>
 				  			</div>	
@@ -173,6 +177,11 @@
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
+			formatDate (d) {
+				// you could also provide your own month names array
+				const months = this.$refs.datePicker.translation.months
+				return `${d.getDate().toString().padStart(2, 0)} ${months[d.getMonth()]} ${d.getFullYear()}`
+				},
 			async search(){
 				let page = 1;
 				await this.actionImportExcelList({page: page, filter: this.filter});

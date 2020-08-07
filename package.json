@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@amcharts/amcharts4": "^4.9.34",
         "@casl/ability": "^3.4.0",
         "@casl/vue": "^0.5.1",
         "@fortawesome/fontawesome-free": "^5.13.0",
@@ -42,6 +43,7 @@
         "vue-chartjs": "^3.5.0",
         "vue-js-xlsx": "0.0.2",
         "vue-json-excel": "^0.2.98",
+        "vue-morris": "^1.1.0",
         "vue-multiselect": "^2.1.6",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.1.5",

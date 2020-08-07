@@ -5,30 +5,43 @@
 import { Bar } from 'vue-chartjs'
 export default {
   	extends: Bar,
-	props: ['propchartdata', 'propLabel', 'propColor'],
+	props: ['propchartdata', 'propSettings'],
 	data(){
 		return{
 			chartdata: {
 				labels: this.propchartdata.labels,
-				// labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-				datasets: [
-					{
-						label: this.propLabel,
-						backgroundColor: this.propColor,
-						data: this.propchartdata.datas
-						// data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-					}
-				]
+				datasets: []
 			},
 			options: {
 				responsive: true,
 				type: Object,
 				default: null,
-				maintainAspectRatio: false
+				maintainAspectRatio: false,
+				title: {
+					display: true,
+					text: this.propSettings[0].chartTitle
+				},
+				scales: {
+					xAxes: [{
+						ticks: {
+							display: false
+						}
+					}]
+				}
 			},
 		}
 	},
 	mounted () {
+		this.propSettings.forEach((element, index, array) => {
+				const ThisData = {
+					label: element.label,
+					backgroundColor: element.backgroundColor,
+					borderWidth: element.borderWidth,
+					borderColor: element.borderColor,
+					data: this.propchartdata[element.data],	
+				}
+				this.chartdata.datasets.push(ThisData)
+		});
 		this.renderChart(this.chartdata, this.options)
 	}
 }
