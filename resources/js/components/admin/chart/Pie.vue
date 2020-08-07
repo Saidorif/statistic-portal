@@ -1,5 +1,5 @@
 <template>
-	<canvas ref="canvas" height="400"></canvas>
+	<canvas ref="canvas" height="600"></canvas>
 </template>
 <script>
 import { Pie } from 'vue-chartjs'
@@ -9,12 +9,12 @@ export default {
 	data(){
 		return{
 			chartdata: {
-				labels: Object.keys(this.propchartdata),
+				labels: this.propchartdata.labels,
 				datasets: [
 					{
 						label: this.propLabel,
 						backgroundColor: this.propColor,
-						data: Object.values(this.propchartdata)
+						data: this.propchartdata.datas
 					}
 				]
 			},

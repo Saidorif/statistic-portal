@@ -66,43 +66,17 @@
 				<table class="table table-bordered text-center table-hover table-striped">
 					<thead>
 						<tr class="table_tr">
-							<th class="table_number" rowspan="2">№</th>
-							<th rowspan="2">Выди сообщений</th>
-							<th colspan="4">Транзит (тыс.тонн)</th>
-							<th colspan="4">Импорт (тыс.тонн)</th>
-							<th colspan="4">Экспорт (тыс.тонн)</th>
-						</tr>
-						<tr class="table_tr">
-							<th >2019 г.</th>
-							<th>2019 г. (5 мес)</th>
-							<th>2020 г. (5 мес)</th>
-							<th>темп роста (%)</th>
-							<th >2019 г.</th>
-							<th>2019 г. (5 мес)</th>
-							<th>2020 г. (5 мес)</th>
-							<th>темп роста (%)</th>
-							<th >2019 г.</th>
-							<th>2019 г. (5 мес)</th>
-							<th>2020 г. (5 мес)</th>
-							<th>темп роста (%)</th>
+							<th class="table_number">№</th>
+							<th>Выд товара</th>
+							<th>Всего</th>
+							<!-- <th v-for="city in form.result"></th> -->
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(item,index) in form">
+						<tr v-for="(item,key, index) in form.result">
 							<td>{{index + 1}}</td>
-							<td>{{item.city}}</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>{{item.export.lastYear}}</td>
-							<td>{{item.export.currentYear}}</td>
-							<td>{{item.export.year}}</td>
-							<td>{{item.export.tempUp}}</td>
-							<td>{{item.import.lastYear}}</td>
-							<td>{{item.import.currentYear}}</td>
-							<td>{{item.import.year}}</td>
-							<td>{{item.import.tempUp}}</td>
+							<td>{{key}}</td>
+							<th v-for="chItem in item['AFGHANISTAN']">{{chItem.c_name}}</th>
 						</tr>
 					</tbody>
 				</table>
@@ -141,7 +115,8 @@
 		},
 		async mounted(){
 			await this.ActionReportByProductList();
-			this.form = this.getReportByProductList.result ? this.getReportByProductList.result : []
+			this.form = this.getReportByProductList ? this.getReportByProductList : []
+			console.log(this.form)
 		},
 		computed:{
 			...mapGetters("report", ["getReportByProductList"]),

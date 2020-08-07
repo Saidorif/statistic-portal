@@ -9,12 +9,14 @@ export default {
 	data(){
 		return{
 			chartdata: {
-				labels: Object.keys(this.propchartdata),
+				labels: this.propchartdata.labels,
+				// labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 				datasets: [
 					{
 						label: this.propLabel,
 						backgroundColor: this.propColor,
-						data: Object.values(this.propchartdata)
+						data: this.propchartdata.datas
+						// data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
 					}
 				]
 			},

@@ -141,16 +141,20 @@
 		},
 		async mounted(){
 			await this.ActionReportByCoutryList();
-			this.form = this.getReportByCoutryList.result ? this.getReportByCoutryList.result : []
+			await this.actionCountryList();
+			this.form = this.getReportByCoutryList.result ? this.getReportByCoutryList.result : [];
 		},
 		computed:{
 			...mapGetters("report", ["getReportByCoutryList"]),
+			...mapGetters("country", ["getCountries"]),
 		},
 		methods:{
 			...mapActions("report", ["ActionReportByCoutryList"]),
+			...mapActions("country", ["actionCountryList"]),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
+			
 		}
 	}
 </script>

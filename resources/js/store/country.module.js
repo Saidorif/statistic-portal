@@ -25,6 +25,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionCountryList({commit},payload){
+		try {
+			const countries =  await CountryService.countryList(payload);
+			await commit('setCountries',countries.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {

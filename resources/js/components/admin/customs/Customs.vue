@@ -47,10 +47,9 @@
 				  			</div>	
   					  		<div class="form-group col-lg-3">
 	  							<label for="category_id">Страна</label>
-								<select  class="form-control" v-model="filter.country_id">
-									<option value="">Все</option>
-									<option v-for="(item,index) in getCountries.data" :value="item">{{item.name}}</option>
-								</select>
+								<multiselect v-model="filter.country_id" :options="getCountries"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+									<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.name }}</strong></template>
+								</multiselect>
 				  			</div>	
 						  	<div class="col-lg-2 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
@@ -138,9 +137,10 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import XLSX from 'xlsx';
 	import Loader from '../../Loader'
- 	import DatePicker from 'vue2-datepicker';
+	 import DatePicker from 'vue2-datepicker';
+	  import Multiselect from 'vue-multiselect'
 	export default{
-		components:{Loader, DatePicker},
+		components:{Loader, DatePicker, Multiselect},
 		data(){
 			return{
 				filter:{
@@ -148,19 +148,20 @@
 					date_to:'',
 					mode:'',
 					transport_type:'',
-					country_id:'',
+					country_id:[],
 					code_group_id:'',
 				},
 				filterShow:false,
 				form:[],
 				file: null,
-				loading: false
+				loading: false,
+				options: ['list', 'of', 'options']
 			}
 		},
 		async mounted(){
 			let page = 1;
 			await this.actionImportExcelList({page: page, filter: this.filter});
-			await this.actionCountries({page:page,items:this.filter})
+			await this.actionCountryList();
 		},
 		computed:{
 			...mapGetters("customs", ["getMassage", "getExcelList"]),
@@ -168,7 +169,7 @@
 		},
 		methods:{
 			...mapActions("customs", ["actionImportExcel", "actionImportExcelList"]),
-			...mapActions('country',['actionCountries']),
+			...mapActions('country',['actionCountryList']),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},

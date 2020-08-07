@@ -32,7 +32,7 @@ const actions = {
 	async ActionReportByProductList({commit}){
 		try {
 			const reportByCoutryList =  await ReportService.reportByProductListService();
-			await commit('setReportByCoutryList',reportByCoutryList.data)
+			await commit('setReportByProductList',reportByCoutryList.data)
 			return true
 		} catch (error) {
 			return false
