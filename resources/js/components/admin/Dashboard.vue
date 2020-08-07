@@ -10,7 +10,7 @@
 		  	<div class="card-body">
 	  			<div class="row">
 	  			<div class="col-md-12" v-if="loaded">
-	  					<Bar :propchartdata="this.vedGroupChartData" propLabel="Yoshi" propColor="#f87979"/>
+	  					<Bar :propchartdata="this.vedGroupChartData" :propLabel="this.vedGroupChartData.labels" propColor="#f87979"/>
 	  				</div>
 	  				<div class="col-md-12" v-if="loaded">
 	  					<Pie :propchartdata="this.vedGroupChartData" propLabel="Product" propColor="['red', 'yellow']"/>
