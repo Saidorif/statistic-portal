@@ -1,5 +1,5 @@
 <template>
-	<canvas ref="canvas" height="400"></canvas>
+	<canvas ref="canvas" height="400" style="width: 100%"></canvas>
 </template>
 <script>
 import { Bar } from 'vue-chartjs'
@@ -13,7 +13,7 @@ export default {
 				datasets: []
 			},
 			options: {
-				responsive: true,
+				responsive: false,
 				type: Object,
 				default: null,
 				maintainAspectRatio: false,
