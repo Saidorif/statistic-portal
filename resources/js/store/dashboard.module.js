@@ -12,9 +12,9 @@ const getters = {
 
 
 const actions = {
-	async actionDashboard({commit}){
+	async actionDashboard({commit}, payload){
 		try {
-			const dashboard =  await DashboardService.dashboardChart();
+			const dashboard =  await DashboardService.dashboardChart(payload);
 			await commit('setDashboard',dashboard.data.result)
 			return true
 		} catch (error) {

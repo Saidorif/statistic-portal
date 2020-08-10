@@ -1,8 +1,8 @@
 import ApiService from './api.service'
 
 const DashboardService = {
-	dashboardChart(){
-		return ApiService.get(`/api/dashboard`)
+	dashboardChart(data){
+		return ApiService.get(`/api/dashboard?date_from=${data.date_from ? data.date_from : ''}&date_to=${data.date_to ? data.date_to : ''}`)
 	},
 };
 
