@@ -7,11 +7,25 @@ use App\Country;
 use App\ImpExpTamoj;
 use App\CodeGroup;
 use DB;
+use Carbon;
 
 class ReportController extends Controller
 {
     public function first(Request $request)
     {
+        if ($request->date) {
+            $old_year = (int)date('Y', strtotime($request->date))-1;
+            $current_year = date('Y', strtotime($request->date));
+            $current_m_d = date('m-d', strtotime($request->date));
+            $date = date('Y-m-d', strtotime($request->date));
+        }else{
+            $mytime = Carbon\Carbon::now();
+            $old_year = (int)date('Y', strtotime($mytime->toDateTimeString()))-1;
+            $current_year = date('Y', strtotime($mytime->toDateTimeString()));
+            $current_m_d = date('m-d', strtotime($mytime->toDateTimeString()));
+            $date = date('Y-m-d', strtotime($mytime->toDateTimeString()));
+        }
+
         $start = microtime(true);
         $data = DB::select("select
             c.id, 
@@ -25,22 +39,22 @@ class ReportController extends Controller
             COALESCE (imp_new_year.imp_new_weight, 0) imp_new_weight,
             COALESCE (( imp_new_year.imp_new_weight/imp_old_year.imp_old_weight ) *100, 0) imp_percantage
             from countries c 
-            left join ( select SUM( weight )/1000 ex_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2019-01-01' AND '2019-12-31' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 ex_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '$old_year-01-01' AND '$old_year-12-31' GROUP BY country_id ) 
             ex_old_whole_year 
             on c.id = ex_old_whole_year.country_id
-            left join ( select SUM( weight )/1000 ex_old_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2019-01-01' AND '2019-04-01' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 ex_old_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '$old_year-01-01' AND '$old_year-$current_m_d' GROUP BY country_id ) 
             ex_old_year 
             on c.id = ex_old_year.country_id
-            left join ( select SUM( weight )/1000 ex_new_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '2020-01-01' AND '2020-04-01' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 ex_new_weight , country_id from imp_exp_tamojs where mode = 'ЭК' AND date between '$current_year-01-01' AND '$date' GROUP BY country_id ) 
             ex_new_year 
             on c.id = ex_new_year.country_id
-            left join ( select SUM( weight )/1000 imp_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2019-01-01' AND '2019-12-31' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 imp_old_whole_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '$old_year-01-01' AND '$old_year-12-31' GROUP BY country_id ) 
             imp_old_whole_year 
             on c.id = imp_old_whole_year.country_id
-            left join ( select SUM( weight )/1000 imp_old_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2019-01-01' AND '2019-04-01' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 imp_old_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '$old_year-01-01' AND '$old_year-$current_m_d' GROUP BY country_id ) 
             imp_old_year 
             on c.id = imp_old_year.country_id
-            left join ( select SUM( weight )/1000 imp_new_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '2020-01-01' AND '2020-04-01' GROUP BY country_id ) 
+            left join ( select SUM( weight )/1000 imp_new_weight , country_id from imp_exp_tamojs where mode = 'ИМ' AND date between '$current_year-01-01' AND '$date' GROUP BY country_id ) 
             imp_new_year 
             on c.id = imp_new_year.country_id
             WHERE ex_old_whole_year.ex_old_whole_weight is not null OR 
@@ -69,7 +83,7 @@ class ReportController extends Controller
             ];
         }
         $time_elapsed_secs = microtime(true) - $start;
-        return response()->json(['success' => true, 'result' => $result,'time_elapsed_secs' => $time_elapsed_secs]);
+        return response()->json(['success' => true, 'result' => $result,'time_elapsed_secs' => $time_elapsed_secs,'today'=>$mytime->toDateTimeString()]);
     }
 
     public function second(Request $request)

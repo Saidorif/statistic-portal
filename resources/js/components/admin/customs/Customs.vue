@@ -51,7 +51,7 @@
 				  			</div>	
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Страна</label>
-								<multiselect v-model="filter.country_id" :options="getCountries"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Выберите страну" label="name" track-by="name" :searchable="false"  :preselect-first="false">
+								<multiselect v-model="country_idArray" :options="getCountries"  :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Выберите страну" label="name" track-by="id" :searchable="true"  :preselect-first="false" @input="save">
 									<template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.name }}</strong></template>
 								</multiselect>
 				  			</div>	
@@ -155,6 +155,7 @@
 					country_id:[],
 					code_group_id:'',
 				},
+				country_idArray: [],
 				filterShow:false,
 				form:[],
 				file: null,
@@ -175,7 +176,17 @@
 			...mapActions("customs", ["actionImportExcel", "actionImportExcelList"]),
 			...mapActions('country',['actionCountryList']),
 			toggleFilter(){
+				this.filter.date_from = ''
+				this.filter.date_to = ''
+				this.filter.mode = ''
+				this.filter.transport_type = ''
+				this.filter.country_id = ''
+				this.filter.code_group_id = ''
+				this.country_idArray = []
 				this.filterShow = !this.filterShow
+			},
+			save (plan_start) {
+				// console.log(plan_start)
 			},
 			formatDate (d) {
 				// you could also provide your own month names array
@@ -183,14 +194,22 @@
 				return `${d.getDate().toString().padStart(2, 0)} ${months[d.getMonth()]} ${d.getFullYear()}`
 				},
 			async search(){
+				this.filter.country_id = this.country_idArray.map(item => {
+					return item.id
+				})
 				let page = 1;
 				await this.actionImportExcelList({page: page, filter: this.filter});
 			},
 			async clear(){
-				this.filter.name = ''
-				this.filter.category_id = ''
-				this.filter.position_id = ''
+				this.filter.date_from = ''
+				this.filter.date_to = ''
+				this.filter.mode = ''
+				this.filter.transport_type = ''
+				this.filter.country_id = ''
+				this.filter.code_group_id = ''
+				this.country_idArray = []
 				let page  = 1
+				await this.actionImportExcelList({page: page, filter: this.filter});
 			},
 			async deleteEmployee(id){
 				if(confirm("Вы действительно хотите удалить?")){

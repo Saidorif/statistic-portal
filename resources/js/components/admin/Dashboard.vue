@@ -9,17 +9,15 @@
 		  	</div>
 		  	<div class="card-body">
 	  			<div class="row">
-					<div class="col-md-6" v-if="loaded">
+					<div class="col-md-12" v-if="loaded">
 						<Bar :propchartdata="this.vedGroupChartData"  :propSettings="this.vedGroupChartDataSettings"/>
 					</div>
-					<div class="col-md-6" v-if="loaded">
+					<div class="col-md-12" v-if="loaded">
 						<Bar :propchartdata="this.vedGroupChartDataByCountry" :propSettings="this.vedGroupChartDataByCountrySettings"/>
 					</div> 
-					<div class="col-md-12 overauto" v-if="loaded">
-						<!-- <div class="mw_5000"> -->
+					<!-- <div class="col-md-12 overauto" v-if="loaded">
 							<Bar :propchartdata="this.countryChartData" :propSettings="this.countryChartDataSettings"/>
-						<!-- </div> -->
-					</div> 
+					</div>  -->
 	  			</div>
 		  	</div>
 	  	</div>
@@ -102,7 +100,7 @@
 					}
 				}
 			});
-			console.log(this.countryChartData.data_total)
+			// console.log(this.countryChartData.data_total)
 			this.loaded = true
 		},
 	}

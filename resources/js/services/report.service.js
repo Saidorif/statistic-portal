@@ -1,8 +1,8 @@
 import ApiService from './api.service'
 
 const ReportService = {
-	reportByCountryListService(){
-		return ApiService.get(`/api/report/first`)
+	reportByCountryListService(data){
+		return ApiService.post(`/api/report/first`,data)
 	},
 	reportByProductListService(){
 		return ApiService.get(`/api/report/second`)

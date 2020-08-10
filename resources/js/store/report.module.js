@@ -20,9 +20,9 @@ const getters = {
 
 
 const actions = {
-	async ActionReportByCoutryList({commit}){
+	async ActionReportByCoutryList({commit},payload){
 		try {
-			const reportByCoutryList =  await ReportService.reportByCountryListService();
+			const reportByCoutryList =  await ReportService.reportByCountryListService(payload);
 			await commit('setReportByCoutryList',reportByCoutryList.data)
 			return true
 		} catch (error) {
