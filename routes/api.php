@@ -54,7 +54,7 @@ Route::group([
             Route::delete('impexp/destroy/{id}', 'ImpExpTamojController@destroy');
 
             //Reports
-            Route::get('report/first', 'ReportController@first');
+            Route::post('report/first', 'ReportController@first');
             Route::get('report/second', 'ReportController@second');
 
             //Employee CRUD

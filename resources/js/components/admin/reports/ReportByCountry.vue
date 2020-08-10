@@ -18,36 +18,11 @@
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
-  					  		<div class="form-group col-lg-2">
-	  							<label for="name">Режим</label>
-								  <select v-model="filter.mode" class="form-control">
-									  <option value="">Все</option>
-									  <option value="ИМ">Импорт</option>
-									  <option value="ЭХ">Экспорт</option>
-									  <option value="ТР">Транзит</option>
-								  </select>
-				  			</div>
-  					  		<div class="form-group col-lg-2">
-	  							<label for="category_id">Дата</label>
-  								<date-picker v-model="filter.date" range></date-picker>
+  					  		<div class="form-group col-lg-6">
+	  							<label for="date">Дата</label>
+  								<date-picker v-model="filter.date" placeholder="Дата..."></date-picker>
 				  			</div>	
-  					  		<div class="form-group col-lg-2">
-	  							<label for="category_id">Вид транспорта</label>
-								<select  class="form-control">
-									<option value="">Все</option>
-									<option value="20">Железнодорожная</option>
-									<option value="30">Авто</option>
-									<option value="40">Авиа</option>
-								</select>
-				  			</div>	
-  					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Страна</label>
-								<select  class="form-control">
-									<option value="">Все</option>
-									<option value="756">ШВЕЙЦАРИЯ</option>
-								</select>
-				  			</div>	
-						  	<div class="col-lg-2 form-group btn_search">
+						  	<div class="col-lg-6 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
 								  	найти
@@ -122,16 +97,7 @@
 		data(){
 			return{
 				filter:{
-					mode:'',
 					date:'',
-					vedcode:'',
-					product:'',
-					country_code:'',
-					country_name:'',
-					transport_type:'',
-					transport_country_code:'',
-					weight:'',
-					cost:'',
 				},
 				filterShow:false,
 				form:[],
@@ -140,7 +106,7 @@
 			}
 		},
 		async mounted(){
-			await this.ActionReportByCoutryList();
+			await this.ActionReportByCoutryList(this.filter);
 			await this.actionCountryList();
 			this.form = this.getReportByCoutryList.result ? this.getReportByCoutryList.result : [];
 		},
@@ -154,6 +120,23 @@
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
+			async search(){
+				if(this.filter.date != ''){
+					await this.ActionReportByCoutryList(this.filter);
+					if (this.getReportByCoutryList) {
+						this.form = this.getReportByCoutryList.result
+					}else{
+						this.form = []
+					}
+				}
+			},
+			async clear(){
+				if(this.filter.date != ''){
+					await this.ActionReportByCoutryList(this.filter);
+					this.filter.date = ''	
+					this.form = []
+				}
+			}
 			
 		}
 	}
