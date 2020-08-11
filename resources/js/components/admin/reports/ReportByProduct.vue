@@ -8,58 +8,7 @@
 				    <i class="sidebar_icon fas fa-file-excel"></i>
 		                Отчет по продуктам
 					</h4>
-					<div class="add_user_btn">
-			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
-						    <i class="fas fa-filter"></i>
-			            	Филтр
-						</button>
-		            </div>
 		  		</div>
-		    	<transition name="slide">
-				  	<div class="filters" v-if="filterShow">
-				  		<div class="row">
-  					  		<div class="form-group col-lg-2">
-	  							<label for="name">Режим</label>
-								  <select v-model="filter.mode" class="form-control">
-									  <option value="">Все</option>
-									  <option value="ИМ">Импорт</option>
-									  <option value="ЭХ">Экспорт</option>
-									  <option value="ТР">Транзит</option>
-								  </select>
-				  			</div>
-  					  		<div class="form-group col-lg-2">
-	  							<label for="category_id">Дата</label>
-  								<date-picker v-model="filter.date" range></date-picker>
-				  			</div>	
-  					  		<div class="form-group col-lg-2">
-	  							<label for="category_id">Вид транспорта</label>
-								<select  class="form-control">
-									<option value="">Все</option>
-									<option value="20">Железнодорожная</option>
-									<option value="30">Авто</option>
-									<option value="40">Авиа</option>
-								</select>
-				  			</div>	
-  					  		<div class="form-group col-lg-3">
-	  							<label for="category_id">Страна</label>
-								<select  class="form-control">
-									<option value="">Все</option>
-									<option value="756">ШВЕЙЦАРИЯ</option>
-								</select>
-				  			</div>	
-						  	<div class="col-lg-2 form-group btn_search">
-							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
-							  		<i class="fas fa-search"></i>
-								  	найти
-							  	</button>
-							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
-							  		<i class="fas fa-times"></i>
-								  	сброс
-							  	</button>
-					  	  	</div>	
-				  		</div>
-				  	</div>	
-			  	</transition>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive" >
@@ -68,15 +17,18 @@
 						<tr class="table_tr">
 							<th class="table_number">№</th>
 							<th>Выд товара</th>
-							<th>Всего</th>
-							<!-- <th v-for="city in form.result"></th> -->
+							<th>Действия</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(item,key, index) in form.result">
 							<td>{{index + 1}}</td>
 							<td>{{key}}</td>
-							<th v-for="chItem in item['AFGHANISTAN']">{{chItem.c_name}}</th>
+							<td>
+								<button class="btn_transparent mr-1" @click="showDetails(item, index)" >
+									<i class="fas fa-eye"></i>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -116,13 +68,16 @@
 		async mounted(){
 			await this.ActionReportByProductList();
 			this.form = this.getReportByProductList ? this.getReportByProductList : []
-			console.log(this.form)
 		},
 		computed:{
 			...mapGetters("report", ["getReportByProductList"]),
 		},
 		methods:{
 			...mapActions("report", ["ActionReportByProductList"]),
+			showDetails(item, index){
+				localStorage.setItem('selectedProduct', JSON.stringify(item))
+				this.$router.push(`/crm/report-by-product/show/${index}`)
+			}
 		}
 	}
 </script>

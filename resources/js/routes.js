@@ -54,6 +54,7 @@ import AddCustoms from './components/admin/customs/AddCustoms'
 // Customs
 import ReportByCountry from './components/admin/reports/ReportByCountry'
 import ReportByProduct from './components/admin/reports/ReportByProduct'
+import ShowReportByProduct from './components/admin/reports/ShowReportByProduct'
 
 // NotFound
 import NotFound from './components/NotFound/NotFound'
@@ -183,6 +184,10 @@ const router = new Router({
 				{
 					path:'report-by-product',
 					component:ReportByProduct,
+				},
+				{
+					path:'report-by-product/show/:dataId',
+					component:ShowReportByProduct,
 				},
 			]
 		},

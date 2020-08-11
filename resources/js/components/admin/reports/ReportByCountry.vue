@@ -97,7 +97,7 @@
 		data(){
 			return{
 				filter:{
-					date:'',
+					date:new Date(),
 				},
 				filterShow:false,
 				form:[],
