@@ -13,13 +13,13 @@ class ReportController extends Controller
 {
     public function first(Request $request)
     {
+        $mytime = Carbon\Carbon::now();
         if ($request->date) {
             $old_year = (int)date('Y', strtotime($request->date))-1;
             $current_year = date('Y', strtotime($request->date));
             $current_m_d = date('m-d', strtotime($request->date));
             $date = date('Y-m-d', strtotime($request->date));
         }else{
-            $mytime = Carbon\Carbon::now();
             $old_year = (int)date('Y', strtotime($mytime->toDateTimeString()))-1;
             $current_year = date('Y', strtotime($mytime->toDateTimeString()));
             $current_m_d = date('m-d', strtotime($mytime->toDateTimeString()));
