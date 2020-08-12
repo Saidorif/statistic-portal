@@ -41,11 +41,11 @@
 		  	</div>
 		  	<div class="card-body">
 	  			<div class="row">
-					<div class="col-md-12" v-if="loaded">
-						<Bar :propchartdata="this.vedGroupChartData"  :propSettings="this.vedGroupChartDataSettings"/>
+					<div class="col-md-6" v-if="loaded">
+						<Bar ref="chartone" :propchartdata="this.vedGroupChartData"  :propSettings="this.vedGroupChartDataSettings"/>
 					</div>
-					<div class="col-md-12" v-if="loaded">
-						<Bar :propchartdata="this.vedGroupChartDataByCountry" :propSettings="this.vedGroupChartDataByCountrySettings"/>
+					<div class="col-md-6" v-if="loaded">
+						<Bar ref="charttwo" :propchartdata="this.vedGroupChartDataByCountry" :propSettings="this.vedGroupChartDataByCountrySettings"/>
 					</div> 
 					<!-- <div class="col-md-12 overauto" v-if="loaded">
 							<Bar :propchartdata="this.countryChartData" :propSettings="this.countryChartDataSettings"/>
@@ -146,6 +146,41 @@
 					}
 				});
 			},
+			async clear(){
+				this.filter.date_to = '';
+				this.filter.date_from = '';
+				await this.actionDashboard(this.filter);
+				this.vedGroupChartData = {labels: [], datas_ex: [], data_im: [], data_total: []},
+				this.vedGroupChartDataByCountry = {labels: [], datas_ex: [], data_im: [], data_total: []},
+				this.countryChartData = {labels: [], datas_ex: [], data_im: [], data_total: []},
+				this.countryChartDataByCountry = {labels: [], datas_ex: [], data_im: [], data_total: []},
+				this.getDashboard.data_vedcode.forEach(element => {
+					if(!this.vedGroupChartData.labels.includes(element.name)){
+						this.vedGroupChartData.labels.push(element.name)
+						this.vedGroupChartData.data_im.push(element.im_total_weight)
+						this.vedGroupChartData.datas_ex.push(element.ek_total_weight)
+						this.vedGroupChartData.data_total.push(element.total_weight)
+						this.vedGroupChartDataByCountry.labels.push(element.name)
+						this.vedGroupChartDataByCountry.data_im.push(element.im_total_cost)
+						this.vedGroupChartDataByCountry.datas_ex.push(element.im_eks_total_cost)
+						this.vedGroupChartDataByCountry.data_total.push(element.total_cost)
+					}
+				});
+				this.getDashboard.data_country.forEach(element => {
+					if(!this.countryChartData.labels.includes(element.name)){
+						if(element.total_weight){
+							this.countryChartData.labels.push(element.name)
+							this.countryChartData.data_im.push(element.im_total_weight)
+							this.countryChartData.datas_ex.push(element.ek_total_weight)
+							this.countryChartData.data_total.push(element.total_weight)
+							this.countryChartDataByCountry.labels.push(element.name)
+							this.countryChartDataByCountry.data_im.push(element.im_total_cost)
+							this.countryChartDataByCountry.datas_ex.push(element.im_eks_total_cost)
+							this.countryChartDataByCountry.data_total.push(element.total_cost)
+						}
+					}
+				});
+			}
 		},
 		async mounted(){
 			await this.actionDashboard(this.filter)

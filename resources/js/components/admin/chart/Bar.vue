@@ -1,5 +1,5 @@
 <template>
-	<canvas ref="canvas"  height="600" style="width: 100%"></canvas>
+	<canvas ref="canvas"   style="width: 100%; height: 400px;"></canvas>
 </template>
 <script>
 import { Bar } from 'vue-chartjs'
@@ -13,7 +13,7 @@ export default {
 				datasets: []
 			},
 			options: {
-				responsive: false,
+				responsive: true,
 				type: Object,
 				default: null,
 				maintainAspectRatio: false,
@@ -27,15 +27,15 @@ export default {
 							display: false
 						}
 					}]
-				}
-			},
+				},
+			}
 		}
 	},
 	mounted () {
 		this.renderThisChart();
 	},
 	computed: {
-		chartData: function() {
+		chartBarData: function() {
 			return this.propchartdata;
 		}
 	},
@@ -55,11 +55,12 @@ export default {
 					backgroundColor: element.backgroundColor,
 					borderWidth: element.borderWidth,
 					borderColor: element.borderColor,
-					data: this.propchartdata[element.data],	
+					data: this.chartBarData[element.data],	
 				}
 				this.chartdata.datasets.push(ThisData)
 			});
 			this.renderChart(this.chartdata, this.options)
+			console.log(this.chartBarData)
 		}
 	}
   }
