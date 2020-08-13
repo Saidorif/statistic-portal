@@ -17,8 +17,8 @@
 		  		</div>
 		    	<transition name="slide">
 				  	<div class="filters" v-if="filterShow">
-				  		<div class="row">
-  					  		<div class="form-group col-lg-6">
+				  		<div class="row align-items-end">
+  					  		<div class="form-group col-lg-3">
 	  							<label for="date">Дата</label>
   								<date-picker v-model="filter.date" placeholder="Дата..."></date-picker>
 				  			</div>	
