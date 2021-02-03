@@ -68,7 +68,7 @@ class EmployeeController extends Controller
         $user = $request->user();
         $validator = Validator::make($request->all(), [
             'status'                    => ['required',Rule::in(['active', 'inactive']),],
-            'gender'                    => ['required',Rule::in(['male', 'female']),],
+            // 'gender'                    => ['required',Rule::in(['male', 'female']),],
             'name'                      => 'required|string',
             'email'                     => 'required|email|unique:users,email',
             'password'                  => 'required|string|min:6',
@@ -135,7 +135,7 @@ class EmployeeController extends Controller
         }
         $validator = Validator::make($request->all(), [            
             'status'                    => ['required',Rule::in(['active', 'inactive']),],
-            'gender'                    => ['required',Rule::in(['male', 'female']),],
+            // 'gender'                    => ['required',Rule::in(['male', 'female']),],
             'name'                      => 'required|string',
             'email'                     => 'required|email|unique:users,email,'.$employee->id,
             'password'                  => 'required|string|min:6',
