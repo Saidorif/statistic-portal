@@ -21,6 +21,7 @@ import {dashboard} from "./dashboard.module"
 import {country} from "./country.module"
 import {vedgroup} from "./vedgroup.module"
 import {report} from "./report.module"
+import {region} from "./region.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -49,6 +50,7 @@ const store = new Vuex.Store(
 			dashboard,
 			vedgroup,
 			report,
+			region,
 		},
 		state:{
 			rules:[],

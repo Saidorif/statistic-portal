@@ -122,21 +122,9 @@ export default {
         email: "",
         password: "",
         passwordConfirm: "",
-        category_id: "",
-        address: "",
         role_id: "",
         position_id: "",
-        phone: "",
-        image: "",
-        file: "",
-        text: "",
-        order_date: "",
-        birthday: "",
-        leave_date: "",
-        gender: "",
         status: 'active',
-        working: false,
-        experience: []
       },
       requiredInput: false,
       checkPassword: false,
@@ -234,13 +222,14 @@ export default {
       return this.requiredInput && input === "";
     },
     async sendEmployee(){
-      if (this.form.name && this.form.email && this.form.role_id && this.form.gender) {
-        if (this.form.experience.length){
-          await this.actionUpdateEmployee(this.form);
-        } else {
-          delete this.form.experience;
-          await this.actionUpdateEmployee(this.form);
-        }
+      if (
+        this.form.name !='' &&
+        this.form.email !='' &&
+        this.form.password !='' &&
+        this.form.confirm_password !='' &&
+        this.form.role_id !='' &&
+        this.checkPassword == false) {
+        await this.actionUpdateEmployee(this.form);
         if (this.getMassage.success) {
           this.$router.push("/crm/employee");
           this.requiredInput = false;
@@ -265,20 +254,6 @@ export default {
         this.emailError = false;
       }
     },
-    addExperience() {
-      let item = {
-        company: "",
-        date_from: "",
-        date_to: "",
-        address: "",
-        position: "",
-        description: ""
-      };
-      this.form.experience.push(item);
-    },
-    removeExperience(ex, index) {
-      this.form.experience.splice(index, 1);
-    }
   }
 };
 </script>
