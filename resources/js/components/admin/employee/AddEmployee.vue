@@ -121,25 +121,14 @@ export default {
   data() {
     return {
       form: {
+        id: "",
         name: "",
         email: "",
         password: "",
-        confirm_password: "",
-        category_id: "",
-        address: "",
+        passwordConfirm: "",
         role_id: "",
         position_id: "",
-        phone: "",
-        image: "",
-        file: "",
-        text: "",
-        birthday: "",
-        order_date: "",
-        leave_date: "",
-        status: "active",
-        gender: "",
-        working: false,
-        experience: [],
+        status: 'active',
       },
       fileFormat: "нет-файла",
       requiredInput: false,
@@ -229,22 +218,16 @@ export default {
         return this.requiredInput && input === "";
       }
     },
-    async sendEmployee() {
+    async sendEmployee(){
       if (
-        this.form.name &&
-        this.form.email &&
-        this.form.password &&
-        this.form.confirm_password &&
-        this.form.role_id &&
-        this.form.gender &&
+        this.form.name !='' &&
+        this.form.email !='' &&
+        this.form.password !='' &&
+        this.form.confirm_password !='' &&
+        this.form.role_id !='' &&
         this.checkPassword == false
       ) {
-        if (this.form.experience && this.form.experience.length) {
-          await this.actionAddEmployee(this.form);
-        } else {
-          delete this.form.experience;
-          await this.actionAddEmployee(this.form);
-        }
+        await this.actionAddEmployee(this.form);
         if (this.getMassage.success) {
           this.$router.push("/crm/employee");
           this.requiredInput = false;
@@ -268,20 +251,6 @@ export default {
       } else {
         this.emailError = false;
       }
-    },
-    addExperience() {
-      let item = {
-        company: "",
-        date_from: "",
-        date_to: "",
-        address: "",
-        position: "",
-        description: "",
-      };
-      this.form.experience.push(item);
-    },
-    removeExperience(ex, index) {
-      this.form.experience.splice(index, 1);
     },
   },
 };
