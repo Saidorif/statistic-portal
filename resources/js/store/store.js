@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// ability 
+// ability
 import storage from "./storage"
 import {abilityPlugin, ability as appAbility} from './ability'
 import router from "./../routes"
@@ -22,6 +22,7 @@ import {country} from "./country.module"
 import {vedgroup} from "./vedgroup.module"
 import {report} from "./report.module"
 import {region} from "./region.module"
+import {bus} from "./bus.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -51,6 +52,7 @@ const store = new Vuex.Store(
 			vedgroup,
 			report,
 			region,
+            bus
 		},
 		state:{
 			rules:[],
@@ -131,7 +133,7 @@ const store = new Vuex.Store(
 				if(newUser.data.error === true){
 					await commit('registerError', newUser);
 				}
-			}, 
+			},
 			logout({ commit }){
 				UserService.logout();
 				commit('logoutSuccess');

@@ -21,6 +21,11 @@ import Region from './components/admin/region/Region'
 import AddRegion from './components/admin/region/AddRegion'
 import EditRegion from './components/admin/region/EditRegion'
 
+// Bus
+import Bus from './components/admin/bus/Bus'
+import AddBus from './components/admin/bus/AddBus'
+import EditBus from './components/admin/bus/EditBus'
+
 // Role
 import Role from './components/admin/role/Role'
 import AddRole from './components/admin/role/AddRole'
@@ -64,11 +69,11 @@ import ShowReportByProduct from './components/admin/reports/ShowReportByProduct'
 // NotFound
 import NotFound from './components/NotFound/NotFound'
 const router = new Router({
-	mode: 'history', 
+	mode: 'history',
 	base: process.env.BASE_URL,
 	linkActiveClass: 'active',
 	routes: [
-		// public components 
+		// public components
 		{
 			path:'/crm',
 			name:'crm',
@@ -141,6 +146,18 @@ const router = new Router({
 				{
 					path:'region/edit/:regionId',
 					component:EditRegion,
+				},
+				{
+					path:'bus',
+					component:Bus,
+				},
+				{
+					path:'bus/add',
+					component:AddBus,
+				},
+				{
+					path:'bus/edit/:busId',
+					component:EditBus,
 				},
 				{
 					path:'conts',
@@ -245,7 +262,7 @@ router.beforeEach((to, from, next) => {
       	next()
     }
   } else {
-    next() 
+    next()
   }
 })
 
