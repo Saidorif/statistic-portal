@@ -74,6 +74,21 @@ Route::group([
             Route::post('position/update/{id}','PositionController@update');
             Route::delete('position/destroy/{id}','PositionController@destroy');
 
+            //Region CRUD
+            Route::post('region', 'RegionController@index');
+            Route::post('region/store', 'RegionController@store');
+            Route::get('region/edit/{id}', 'RegionController@edit');
+            Route::post('region/update/{id}', 'RegionController@update');
+            Route::delete('region/destroy/{id}', 'RegionController@destroy');
+
+            //Area CRUD
+            Route::post('area', 'AreaController@index');
+            Route::post('area/store', 'AreaController@store');
+            Route::get('area/list', 'AreaController@list');
+            Route::get('area/edit/{id}', 'AreaController@edit');
+            Route::post('area/update/{id}', 'AreaController@update');
+            Route::delete('area/destroy/{id}', 'AreaController@destroy');
+
             //Role model
             Route::get('role', 'RoleController@index');
             Route::post('role/store', 'RoleController@store');
