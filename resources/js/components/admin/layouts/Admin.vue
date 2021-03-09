@@ -118,6 +118,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/bus">
+              <i class="sidebar_icon fas fa-bus"></i>
+              <p>
+                Автобус
+              </p>
+            </router-link>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <span class="sidebar_icon fas fa-users-cog" style="font-size: 20px;"></span>
@@ -149,7 +157,7 @@
                 </router-link>
               </li>
             </ul>
-          </li>  
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -165,7 +173,7 @@
         <div class="row">
           <div class="col-lg-12">
             <router-view></router-view>
-            <vue-progress-bar></vue-progress-bar> 
+            <vue-progress-bar></vue-progress-bar>
           </div>
         </div>
       </div>
@@ -190,7 +198,7 @@ export default {
   },
   data(){
     return {
-      
+
     }
   },
   computed: {
@@ -204,7 +212,7 @@ export default {
     logoutProfile(){
       this.logout();
     },
-    
+
   }
 };
 </script>
