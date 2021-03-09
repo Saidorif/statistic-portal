@@ -16,6 +16,11 @@ import Employee from './components/admin/employee/Employee'
 import AddEmployee from './components/admin/employee/AddEmployee'
 import EditEmployee from './components/admin/employee/EditEmployee'
 
+// Region
+import Region from './components/admin/region/Region'
+import AddRegion from './components/admin/region/AddRegion'
+import EditRegion from './components/admin/region/EditRegion'
+
 // Role
 import Role from './components/admin/role/Role'
 import AddRole from './components/admin/role/AddRole'
@@ -124,6 +129,18 @@ const router = new Router({
 				{
 					path:'position/edit/:positionId',
 					component:EditPosition,
+				},
+				{
+					path:'region',
+					component:Region,
+				},
+				{
+					path:'region/add',
+					component:AddRegion,
+				},
+				{
+					path:'region/edit/:regionId',
+					component:EditRegion,
 				},
 				{
 					path:'conts',
