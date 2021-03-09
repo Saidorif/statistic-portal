@@ -7,7 +7,7 @@
 			    	<i  class="peIcon fas fa-bus"></i>
 				    Bus
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/region/add" v-if="$can('store', 'RegionController')">
+				<router-link class="btn btn-primary" to="/crm/bus/add" >
 						<i class="fas fa-plus"></i>
 					Добавить
 				</router-link>
