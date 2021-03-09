@@ -11,7 +11,7 @@ Vue.use(VueProgressBar,{
 
 Vue.config.devtools = false
 
- 
+
 /* FOR MANAGING USER PERMISSIONS */
 import {abilitiesPlugin} from '@casl/vue'
 import {ability} from "./store/store";
