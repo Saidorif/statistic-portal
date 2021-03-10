@@ -26258,6 +26258,13 @@ svg:not(:root).svg-inline--fa {
   content: "\F1BA";
 }
 
+.form_btn {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+}
+
 .login_logo {
   display: flex;
   justify-content: center;

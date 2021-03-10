@@ -16,10 +16,20 @@ import Employee from './components/admin/employee/Employee'
 import AddEmployee from './components/admin/employee/AddEmployee'
 import EditEmployee from './components/admin/employee/EditEmployee'
 
+// RegionPlan
+import RegionPlan from './components/admin/regionplan/RegionPlan'
+import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
+import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
+
 // Region
 import Region from './components/admin/region/Region'
 import AddRegion from './components/admin/region/AddRegion'
 import EditRegion from './components/admin/region/EditRegion'
+
+// Area
+import Area from './components/admin/area/Area'
+import AddArea from './components/admin/area/AddArea'
+import EditArea from './components/admin/area/EditArea'
 
 // Bus
 import Bus from './components/admin/bus/Bus'
@@ -36,6 +46,11 @@ import Permission from './components/admin/permission/Permission'
 import Position from './components/admin/position/Position'
 import AddPosition from './components/admin/position/AddPosition'
 import EditPosition from './components/admin/position/EditPosition'
+
+// expectation
+import Expectation from './components/admin/expectation/Expectation'
+import AddExpectation from './components/admin/expectation/AddExpectation'
+import EditExpectation from './components/admin/expectation/EditExpectation'
 
 // controller
 import Conts from './components/admin/conts/Conts'
@@ -182,6 +197,42 @@ const router = new Router({
 				{
 					path:'action/edit/:actionId',
 					component:EditAction,
+				},
+				{
+					path:'area',
+					component:Area,
+				},
+				{
+					path:'area/add',
+					component:AddArea,
+				},
+				{
+					path:'area/edit/:areaId',
+					component:EditArea,
+				},
+				{
+					path:'expectation',
+					component:Expectation,
+				},
+				{
+					path:'expectation/add',
+					component:AddExpectation,
+				},
+				{
+					path:'expectation/edit/:expectationId',
+					component:EditExpectation,
+				},
+				{
+					path:'regionplan',
+					component:RegionPlan,
+				},
+				{
+					path:'regionplan/add',
+					component:AddRegionPlan,
+				},
+				{
+					path:'regionplan/edit/:regionplanId',
+					component:EditRegionPlan,
 				},
 				{
 					path:'country',

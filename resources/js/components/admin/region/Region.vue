@@ -7,7 +7,7 @@
 			    	<i  class="peIcon pe-7s-box1"></i>
 				    Region 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/region/add" v-if="$can('store', 'RegionController')">
+				<router-link class="btn btn-primary" to="/crm/region/add">
 						<i class="fas fa-plus"></i> 
 					Добавить
 				</router-link>
@@ -27,10 +27,10 @@
 							<td scope="row">{{reg.id}}</td>
 							<td>{{reg.name}}</td>
 							<td>
-								<router-link v-if="$can('edit', 'RegionController')" tag="button" class="btn_transparent" :to='`/crm/region/edit/${reg.id}`'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/region/edit/${reg.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button v-if="$can('destroy', 'RegionController')" class="btn_transparent" @click="deleteRegion(reg.id)">
+								<button class="btn_transparent" @click="deleteRegion(reg.id)">
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
