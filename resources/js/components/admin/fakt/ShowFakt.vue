@@ -8,14 +8,14 @@
 				    Изменить Fakt
 				</h4>
 				<div>
-					<div class="alert" :class="getStatusClass(form.status)">
+					<div class="btn_green mr-2" :class="getStatusClass(form.status)">
 						{{getStatusName(form.status)}}
 					</div>
-				</div>
 				<router-link class="btn_black" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
 					<span class="peIcon fas fa-arrow-left"></span>
 					Назад
 				</router-link>
+				</div>
 		  	</div>
 		  	<div class="card-body">
 		  		<form>

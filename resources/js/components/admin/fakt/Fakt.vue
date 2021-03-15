@@ -51,14 +51,14 @@
 							<td>{{reg.purchase_date}}</td>
 							<td>{{reg.registr_cerf}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/edit/${reg.id}?expectId=${$route.query.expectId}`'>
-									<i class="pe_icon pe-7s-edit editColor"></i>
+								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/edit/${reg.id}?expectId=${$route.query.expectId}`'>
+									<i class="pe_icon fas fa-pen editColor"></i>
 								</router-link>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/show/${reg.id}?expectId=${$route.query.expectId}`'>
+								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/show/${reg.id}?expectId=${$route.query.expectId}`'>
 									<i class="pe_icon fas fa-eye editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteFakt(reg.id)">
-									<i class="pe_icon pe-7s-trash trashColor"></i>
+								<button class="btn_blue" @click="deleteFakt(reg.id)">
+									<i class="pe_icon fas fa-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>

@@ -81,8 +81,8 @@
 					    	:class="isRequired(form.registr_cerf) ? 'isRequired' : ''"
 				    	>
 					  </div>
-					  <div class="form-group col-lg-12 d-flex justify-content-end">
-					  	<button type="submit" class="btn btn-primary btn_save_category">
+					  <div class="form-group col-lg-12 d-flex justify-content-end m-0">
+					  	<button type="submit" class="btn_green">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
 						</button>
