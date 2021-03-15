@@ -8,11 +8,27 @@ use App\RegionPlanModel;
 use App\Expectation;
 use Validator;
 use Carbon\Carbon;
+
 class RegionPlanController extends Controller
 {
     public function index(Request $request)
     {
         $result = RegionPlanModel::with(['region','exception','exceptionFakt'])->paginate(12);
+        $result->getCollection()->transform(function ($item) {
+            $fakts = $item->exceptionFakt;
+            $item['accepted_fakt_count'] = 0;
+            $item['rejected_fakt_count'] = 0;
+            $item['waiting_fakt_count'] = 0;
+            foreach ($fakts as $key => $value) {
+                $item['accepted_fakt_count'] += (int)$value['accepted_fakt_count'];
+                $item['rejected_fakt_count'] += (int)$value['rejected_fakt_count'];
+                $item['waiting_fakt_count'] += (int)$value['waiting_fakt_count'];
+            }
+            return (
+                $item
+            );
+        });
+
         return response()->json(['success' => true, 'result' => $result]);
     }
     public function list()
