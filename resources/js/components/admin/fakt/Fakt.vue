@@ -7,14 +7,16 @@
 			    	<i class="peIcon pe-7s-box1"></i>
 				    Fakt
 				</h4>
-				<router-link class="btn btn-primary" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/add?expectId=${$route.query.expectId}`'>
-					<i class="fas fa-plus"></i>
-					Добавить
-				</router-link>
-				<router-link class="btn_black" :to='`/crm/regionplan/expectation/${$route.query.expectId}`'>
-					<span class="peIcon fas fa-arrow-left "></span>
-					Назад
-				</router-link>
+                <div>
+                    <router-link class="btn_green mr-1" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/add?expectId=${$route.query.expectId}`'>
+                        <i class="fas fa-plus"></i>
+                        Добавить
+                    </router-link>
+                    <router-link class="btn_black" :to='`/crm/regionplan/expectation/${$route.query.expectId}`'>
+                        <span class="peIcon fas fa-arrow-left "></span>
+                        Назад
+                    </router-link>
+                </div>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">

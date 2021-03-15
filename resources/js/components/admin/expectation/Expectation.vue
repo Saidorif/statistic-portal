@@ -1,18 +1,42 @@
 <template>
 	<div class="expectation">
 		<Loader v-if="laoding"/>
+        <div class="exp_header">
+            <div class="exp_header_item">
+                <span class="circle"><i class="fas fa-globe-asia"></i></span>
+                <div class="content_item">
+                    <h6>Region</h6>
+                    <h3>{{regionName}}</h3>
+                </div>
+            </div>
+            <div class="exp_header_item">
+                <span class="circle"><i class="fas fa-chart-line"></i></span>
+                <div class="content_item">
+                    <h6>Plan</h6>
+                    <h3>{{planQty}}</h3>
+                </div>
+            </div>
+            <div class="exp_header_item">
+                <span class="circle"><i class="fas fa-chart-area"></i></span>
+                <div class="content_item">
+                    <h6>Кутилиши</h6>
+                    <h3>{{expectationQty}}</h3>
+                </div>
+            </div>
+            <div class="exp_header_item">
+                <span class="circle"><i class="fas fa-vote-yea"></i></span>
+                <div class="content_item">
+                    <h6>Тасдикланганлар</h6>
+                    <h3>{{faktQty}}</h3>
+                </div>
+            </div>
+        </div>
 		<div class="card">
 		  	<div class="card-header d-flex justify-content-between">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-box1"></i>
 				    Expectation
 				</h4>
-				<h5>
-					<em>{{regionName}}</em>
-				</h5>
-				<span>План: {{planQty}}</span>
-				<span>Кутилиши: {{expectationQty}}</span>
-				<span>Тасдикланганлар: {{faktQty}}</span>
 				<div class="d-flex justify-content-end">
 				    <router-link class="btn_green mr-3" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/add`'>
 						<i class="fas fa-plus"></i>
@@ -57,7 +81,7 @@
 							<td>{{countWaitingFakt(expectation.waiting_fakt)}}</td>
 							<td>{{countRejectedFakt(expectation.rejected_fakt)}}</td>
 							<td>
-								<ul v-if="expectation.busexpect.length > 0" class="list-inline">
+								<ul v-if="expectation.busexpect.length > 0" class="list-inline m-0">
 								    <li v-for="(exp,key) in expectation.busexpect">{{exp.bus ? exp.bus.name : ''}}</li>
 								</ul>
 								<ul v-else class="list-inline">
@@ -66,11 +90,11 @@
 							</td>
 							<td>{{expectation.date}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/edit/${expectation.id}`'>
-									<i class="pe_icon pe-7s-edit editColor"></i>
+								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/edit/${expectation.id}`'>
+									<i class="pe_icon fas fa-pen editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteExpectation(expectation.id)">
-									<i class="pe_icon pe-7s-trash trashColor"></i>
+								<button class="btn_blue" @click="deleteExpectation(expectation.id)">
+									<i class="pe_icon fas fa-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>
