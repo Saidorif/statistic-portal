@@ -143,10 +143,10 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/expectation">
+            <router-link class="nav-link" to="/crm/confirmfakt">
               <i class="sidebar_icon fas fa-file"></i>
               <p>
-                Expectation
+                Confirmfakt
               </p>
             </router-link>
           </li>

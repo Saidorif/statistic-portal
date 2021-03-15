@@ -98,13 +98,32 @@ Route::group([
             Route::post('area/update/{id}', 'AreaController@update');
             Route::delete('area/destroy/{id}', 'AreaController@destroy');
 
-            //Area CRUD
+            //RegionPlan CRUD
             Route::post('regionplan', 'RegionPlanController@index');
             Route::post('regionplan/store', 'RegionPlanController@store');
             Route::get('regionplan/list', 'RegionPlanController@list');
             Route::get('regionplan/edit/{id}', 'RegionPlanController@edit');
             Route::post('regionplan/update/{id}', 'RegionPlanController@update');
             Route::delete('regionplan/destroy/{id}', 'RegionPlanController@destroy');
+
+            //Expectation CRUD
+            Route::post('expectation', 'ExpectationController@index');
+            Route::post('expectation/store', 'ExpectationController@store');
+            Route::get('expectation/list', 'ExpectationController@list');
+            Route::get('expectation/edit/{id}', 'ExpectationController@edit');
+            Route::post('expectation/update/{id}', 'ExpectationController@update');
+            Route::delete('expectation/destroyAll/{id}', 'ExpectationController@destroyAll');
+            Route::delete('expectation/destroy/{id}', 'ExpectationController@destroy');
+
+            //Fakt CRUD
+            Route::post('fakt', 'FaktController@index');
+            Route::post('fakt/store', 'FaktController@store');
+            Route::get('fakt/list', 'FaktController@list');
+            Route::get('fakt/edit/{id}', 'FaktController@edit');
+            Route::post('fakt/update/{id}', 'FaktController@update');
+            Route::delete('fakt/destroy/{id}', 'FaktController@destroy');
+            Route::post('fakt/accept', 'FaktController@accept');
+            Route::post('fakt/reject', 'FaktController@reject');
 
             //Role model
             Route::get('role', 'RoleController@index');

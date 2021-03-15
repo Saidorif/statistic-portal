@@ -15,10 +15,9 @@ class CreateExpectationsTable extends Migration
     {
         Schema::create('expectations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('expectation')->nullable();
-            $table->string('bus_qty')->nullable();
-            $table->integer('bus_id')->nullable();
-            $table->integer('region_id')->nullable();
+            $table->string('company_name')->nullable();
+            $table->integer('inn')->unique();
+            $table->integer('plan_id')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
         });

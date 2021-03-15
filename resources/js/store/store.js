@@ -26,6 +26,8 @@ import {busmodel} from "./bus.module"
 import {area} from "./area.module"
 import {regionplan} from "./regionplan.module"
 import {expectation} from "./expectation.module"
+import {fakt} from "./fakt.module"
+import {confirmfakt} from "./confirmfakt.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -58,6 +60,8 @@ const store = new Vuex.Store(
 			area,
 			regionplan,
 			expectation,
+			fakt,
+            confirmfakt,
             busmodel,
 		},
 		state:{

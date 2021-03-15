@@ -4,8 +4,8 @@ const ExpectationService = {
 	expectationList(){
 		return ApiService.get(`/api/expectation/list`)
 	},
-	allexpectations(page){
-		return ApiService.post(`/api/expectation?page=${page}`)
+	allexpectations(date){
+		return ApiService.post(`/api/expectation?page=${date.page}`,date)
 	},
 	addexpectation(data){
 		return ApiService.post(`/api/expectation/store`,data)
@@ -15,6 +15,9 @@ const ExpectationService = {
 	},
 	updateexpectation(data){
 		return ApiService.post(`/api/expectation/update/${data.id}`,data)
+	},
+	deleteexpectationAll(id){
+		return ApiService.delete(`/api/expectation/destroyAll/${id}`)
 	},
 	deleteexpectation(id){
 		return ApiService.delete(`/api/expectation/destroy/${id}`)
