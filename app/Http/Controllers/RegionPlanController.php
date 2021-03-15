@@ -12,7 +12,7 @@ class RegionPlanController extends Controller
 {
     public function index(Request $request)
     {
-        $result = RegionPlanModel::with('region')->paginate(12);
+        $result = RegionPlanModel::with(['region','exception','exceptionFakt'])->paginate(12);
         return response()->json(['success' => true, 'result' => $result]);
     }
     public function list()
