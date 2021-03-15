@@ -3,15 +3,11 @@
 		<Loader v-if="laoding"/>
 		<div class="card">
 		  	<div class="card-header">
-			    <div class="d-flex justify-content-between align-items-center">
-			    	<h4 class="title_user">
-				    	<i class="peIcon pe-7s-id"></i>
-					    Добавить План
-					</h4>
-					<div class="btn_header d-flex justify-content-end">
-						<router-link class="btn btn-info back_btn" to="/crm/regionplan"><span class="peIcon pe-7s-back"></span> Назад</router-link>
-					</div>
-			    </div>
+			    <h4 class="title_user">
+					<i class="peIcon pe-7s-id"></i>
+				    Добавить План
+				</h4>
+				<router-link class="btn_black" to="/crm/regionplan"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveRegion" >
@@ -29,13 +25,13 @@
 					  </div>
 					  <div class="form-group col-md-3">
 					    <label for="number">План количества</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="number" 
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="number"
 					    	placeholder="План количества"
 					    	v-model="form.number"
-					    	:class="isRequired(form.number) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.number) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-3 d-flex flex-column">
@@ -48,11 +44,11 @@
 			                :class="isRequired(form.date) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-					  <div class="form-group col-lg-3 form_btn">
-					  	<button type="submit" class="btn btn-primary btn_save_category">
+					  <div class="form-group col-lg-3 d-flex justify-content-end align-items-end">
+					  	<button type="submit" class="btn_green">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>
@@ -117,5 +113,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

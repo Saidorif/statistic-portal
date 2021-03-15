@@ -12,8 +12,8 @@
 						{{getStatusName(form.status)}}
 					</div>
 				</div>
-				<router-link class="btn btn-primary back_btn" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
-					<span class="peIcon pe-7s-back"></span> 
+				<router-link class="btn_black" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
+					<span class="peIcon fas fa-arrow-left"></span>
 					Назад
 				</router-link>
 		  	</div>
@@ -60,11 +60,11 @@
 					  	<button type="button" class="btn btn-danger mr-3" @click.prevent="openModal" v-if="form.status != 'accepted'">
 					  		<i class="fas fa-minus-circle"></i>
 						  	Отказать
-						</button>	
+						</button>
 					  	<button type="button" class="btn btn-primary btn_save_category" @click.prevent="acceptFakt" v-if="form.status != 'accepted'">
 					  		<i class="fas fa-save"></i>
 						  	Подтвердить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>

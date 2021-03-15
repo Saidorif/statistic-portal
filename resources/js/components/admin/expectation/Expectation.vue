@@ -5,7 +5,7 @@
 		  	<div class="card-header d-flex justify-content-between">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-box1"></i>
-				    Expectation 
+				    Expectation
 				</h4>
 				<h5>
 					<em>{{regionName}}</em>
@@ -14,12 +14,12 @@
 				<span>Кутилиши: {{expectationQty}}</span>
 				<span>Тасдикланганлар: {{faktQty}}</span>
 				<div class="d-flex justify-content-end">
-				    <router-link class="btn btn-primary" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/add`'>
-						<i class="fas fa-plus"></i> 
+				    <router-link class="btn_green mr-3" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/add`'>
+						<i class="fas fa-plus"></i>
 						Добавить
 					</router-link>
-					<router-link class="btn btn-info" to='/crm/regionplan'>
-						<span class="peIcon pe-7s-back "></span> 
+					<router-link class="btn_black" to='/crm/regionplan'>
+						<span class="peIcon fas fa-arrow-left "></span>
 						Назад
 					</router-link>
 				</div>
@@ -176,7 +176,7 @@
 				}
 				return count
 			},
-			async getResults(page = 1){ 
+			async getResults(page = 1){
 				this.laoding = true
 				let data = {
 					plan_id:this.$route.params.expectregionId,
@@ -206,5 +206,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

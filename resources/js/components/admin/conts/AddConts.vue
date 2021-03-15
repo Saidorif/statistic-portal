@@ -7,8 +7,8 @@
             <i class="peIcon pe-7s-id"></i>
             Add Controller
           </h4>
-          <router-link class="btn btn-primary back_btn" to="/crm/conts">
-            <span class="peIcon pe-7s-back"></span> Назад
+          <router-link class="btn_black" to="/crm/conts">
+            <span class="peIcon fas fa-arrow-left"></span> Назад
           </router-link>
         </div>
       </div>

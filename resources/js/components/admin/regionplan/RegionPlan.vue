@@ -5,10 +5,10 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-box1"></i>
-				    План 
+				    План
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/regionplan/add">
-						<i class="fas fa-plus"></i> 
+				<router-link class="btn_green" to="/crm/regionplan/add">
+						<i class="fas fa-plus"></i>
 					Добавить
 				</router-link>
 		  	</div>
@@ -35,11 +35,11 @@
 							<td>{{reg.date}}</td>
 							<td>{{reg.number}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/regionplan/edit/${reg.id}`'>
-									<i class="pe_icon pe-7s-edit editColor"></i>
+								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/edit/${reg.id}`'>
+									<i class="pe_icon fas fa-pen editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteRegion(reg.id)">
-									<i class="pe_icon pe-7s-trash trashColor"></i>
+								<button class="btn_blue" @click="deleteRegion(reg.id)">
+									<i class="pe_icon fas fa-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>
@@ -74,7 +74,7 @@
 		},
 		methods:{
 			...mapActions('regionplan',['actionRegionPlans','actionDeleteRegionPlan']),
-			async getResults(page = 1){ 
+			async getResults(page = 1){
 				this.laoding = true
 				await this.actionRegionPlans(page)
 				this.laoding = false
@@ -97,5 +97,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

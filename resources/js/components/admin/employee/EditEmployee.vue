@@ -5,7 +5,7 @@
         <h3 class="card-title title_user mb-0">
           <i class="peIcon pe-7s-user"></i>Редактировать пользователя
         </h3>
-        <router-link class="btn btn-primary back_btn" to="/crm/employee"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+        <router-link class="btn_black" to="/crm/employee"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
       </div>
       <form role="form" @submit.prevent.enter="sendEmployee" enctype="multipart/form-data">
         <div class="card-body d-flex flex-wrap">

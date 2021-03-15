@@ -7,8 +7,8 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Изменить Fakt
 				</h4>
-				<router-link class="btn btn-primary back_btn" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
-					<span class="peIcon pe-7s-back"></span> 
+				<router-link class="btn_black" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
+					<span class="peIcon fas fa-arrow-left"></span>
 					Назад
 				</router-link>
 		  	</div>
@@ -28,35 +28,35 @@
 					  </div>
 					  <div class="form-group col-md-4">
 					    <label for="capacity">Автобус сиғими</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="capacity" 
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="capacity"
 					    	placeholder="Автобус сиғими"
 					    	v-model="form.capacity"
-					    	:class="isRequired(form.capacity) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.capacity) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-4">
 					    <label for="bank_credit">Молиялаштириш манбаи</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="bank_credit" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="bank_credit"
 					    	placeholder="Молиялаштириш манбаи"
 					    	v-model="form.bank_credit"
-					    	:class="isRequired(form.bank_credit) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.bank_credit) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-4">
 					    <label for="auto_price">Автобус нарҳи</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="auto_price" 
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="auto_price"
 					    	placeholder="Автобус нарҳи"
 					    	v-model="form.auto_price"
-					    	:class="isRequired(form.auto_price) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.auto_price) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-4 d-flex flex-column">
@@ -72,20 +72,20 @@
 		              </div>
 					  <div class="form-group col-md-4">
 					    <label for="registr_cerf">Давлат рўйҳатидан ўтганлик ҳақида гувохнома рақами</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="registr_cerf" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="registr_cerf"
 					    	placeholder="Давлат рўйҳатидан ўтганлик ҳақида гувохнома рақами"
 					    	v-model="form.registr_cerf"
-					    	:class="isRequired(form.registr_cerf) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.registr_cerf) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-lg-12 d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>

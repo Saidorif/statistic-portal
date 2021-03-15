@@ -7,7 +7,7 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Изменить Area
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/area"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/area"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveArea" >

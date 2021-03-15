@@ -5,14 +5,14 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-box1"></i>
-				    Fakt 
+				    Fakt
 				</h4>
 				<router-link class="btn btn-primary" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/add?expectId=${$route.query.expectId}`'>
-					<i class="fas fa-plus"></i> 
+					<i class="fas fa-plus"></i>
 					Добавить
 				</router-link>
-				<router-link class="btn btn-info" :to='`/crm/regionplan/expectation/${$route.query.expectId}`'>
-					<span class="peIcon pe-7s-back "></span> 
+				<router-link class="btn_black" :to='`/crm/regionplan/expectation/${$route.query.expectId}`'>
+					<span class="peIcon fas fa-arrow-left "></span>
 					Назад
 				</router-link>
 		  	</div>
@@ -93,7 +93,7 @@
 		},
 		methods:{
 			...mapActions('fakt',['actionFakts','actionDeleteFakt']),
-			async getResults(page = 1){ 
+			async getResults(page = 1){
 				this.laoding = true
 					let data = {
 					expect_id:this.$route.params.faktregionId,
@@ -142,5 +142,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>
