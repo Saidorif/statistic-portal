@@ -76,10 +76,19 @@ Route::group([
 
             //Region CRUD
             Route::post('region', 'RegionController@index');
+            Route::get('region/list', 'RegionController@list');
             Route::post('region/store', 'RegionController@store');
             Route::get('region/edit/{id}', 'RegionController@edit');
             Route::post('region/update/{id}', 'RegionController@update');
             Route::delete('region/destroy/{id}', 'RegionController@destroy');
+
+            //Busmodel CRUD
+            Route::post('busmodel', 'BusmodelController@index');
+            Route::get('busmodel/list', 'BusmodelController@list');
+            Route::post('busmodel/store', 'BusmodelController@store');
+            Route::get('busmodel/edit/{id}', 'BusmodelController@edit');
+            Route::post('busmodel/update/{id}', 'BusmodelController@update');
+            Route::delete('busmodel/destroy/{id}', 'BusmodelController@destroy');
 
             //Area CRUD
             Route::post('area', 'AreaController@index');
@@ -88,6 +97,14 @@ Route::group([
             Route::get('area/edit/{id}', 'AreaController@edit');
             Route::post('area/update/{id}', 'AreaController@update');
             Route::delete('area/destroy/{id}', 'AreaController@destroy');
+
+            //Area CRUD
+            Route::post('regionplan', 'RegionPlanController@index');
+            Route::post('regionplan/store', 'RegionPlanController@store');
+            Route::get('regionplan/list', 'RegionPlanController@list');
+            Route::get('regionplan/edit/{id}', 'RegionPlanController@edit');
+            Route::post('regionplan/update/{id}', 'RegionPlanController@update');
+            Route::delete('regionplan/destroy/{id}', 'RegionPlanController@destroy');
 
             //Role model
             Route::get('role', 'RoleController@index');

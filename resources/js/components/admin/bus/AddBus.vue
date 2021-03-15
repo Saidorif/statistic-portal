@@ -5,7 +5,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="peIcon pe-7s-id"></i>
-				    Добавить Область
+				    Добавить Автобус
 				</h4>
 				<router-link class="btn btn-primary back_btn" to="/crm/bus"><span class="peIcon pe-7s-back"></span> Назад</router-link>
 		  	</div>
@@ -13,12 +13,12 @@
 		  		<form @submit.prevent.enter="saveRegion" >
 					<div class="row">
 					  <div class="form-group col-md-9">
-					    <label for="name">Область</label>
+					    <label for="name">Название</label>
 					    <input
 					    	type="text"
 					    	class="form-control input_style"
 					    	id="name"
-					    	placeholder="Область"
+					    	placeholder="Название"
 					    	v-model="form.name"
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"
 				    	>
@@ -52,27 +52,27 @@
 			}
 		},
 		computed:{
-			...mapGetters('region',['getMassage'])
+			...mapGetters('busmodel',['getMassage'])
 		},
 		mounted(){
 			this.laoding = false
 		},
 		methods:{
-			...mapActions('region',['actionAddRegion']),
+			...mapActions('busmodel',['actionAddBusmodel']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
 			async saveRegion(){
 		    	if (this.form.name != ''){
 					this.laoding = true
-					await this.actionAddRegion(this.form)
+					await this.actionAddBusmodel(this.form)
 					if (this.getMassage.success) {
 						toast.fire({
 					    	type: 'success',
 					    	icon: 'success',
 							title: this.getMassage.message,
 					    })
-						this.$router.push("/crm/region");
+						this.$router.push("/crm/bus");
 						this.requiredInput = false
 					}
 					this.laoding = false

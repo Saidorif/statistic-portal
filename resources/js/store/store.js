@@ -22,7 +22,10 @@ import {country} from "./country.module"
 import {vedgroup} from "./vedgroup.module"
 import {report} from "./report.module"
 import {region} from "./region.module"
-import {bus} from "./bus.module"
+import {busmodel} from "./bus.module"
+import {area} from "./area.module"
+import {regionplan} from "./regionplan.module"
+import {expectation} from "./expectation.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -52,7 +55,10 @@ const store = new Vuex.Store(
 			vedgroup,
 			report,
 			region,
-            bus
+			area,
+			regionplan,
+			expectation,
+            busmodel,
 		},
 		state:{
 			rules:[],

@@ -1,78 +1,78 @@
-import {BusService} from "../services/bus.service";
+import {BusModelService} from "../services/bus.service";
 
 const state = {
-	regions: {},
-	regionlist: [],
+	busmodels: {},
+	busmodellist: [],
 	message: [],
-	region: [],
+	busmodel: [],
 };
 
 const getters = {
-	getRegionList(state){
-		return state.regionlist
+	getBusmodelList(state){
+		return state.busmodellist
 	},
-	getRegions(state){
-		return state.regions
+	getBusmodels(state){
+		return state.busmodels
 	},
 	getMassage(state){
 		return state.message
 	},
-	getRegion(state){
-		return state.region
+	getBusmodel(state){
+		return state.busmodel
 	},
 };
 
 
 const actions = {
-	async actionRegionList({commit},page){
+	async actionBusmodelList({commit},page){
 		try {
-			const regions =  await RegionService.regionList(page);
-			await commit('setRegionList',regions.data.result)
+			const busmodels =  await BusModelService.busmodelList(page);
+			await commit('setBusmodelList',busmodels.data.result)
 			return true
 		} catch (error) {
 			return false
 		}
 	},
-	async actionRegions({commit},page){
+	async actionBusmodels({commit},page){
 		try {
-			const regions =  await RegionService.allregions(page);
-			await commit('setRegions',regions.data.result)
+			const busmodels =  await BusModelService.allbusmodels(page);
+			await commit('setBusmodels',busmodels.data.result)
 			return true
 		} catch (error) {
 			return false
 		}
 	},
-	async actionAddRegion({commit},payload){
+	async actionAddBusmodel({commit},payload){
 		try {
-			const regions =  await RegionService.addregion(payload);
-			await commit('setMessage',regions.data)
+			const busmodels =  await BusModelService.addbusmodel(payload);
+			await commit('setMessage',busmodels.data)
 			return true
 		} catch (error) {
 			return false
 		}
 	},
-	async actionEditRegion({commit},id){
+	async actionEditBusmodel({commit},id){
 		try {
-			const regions =  await RegionService.editregion(id);
-			await commit('setEditRegion',regions.data.result)
+			const busmodels =  await BusModelService.editbusmodel(id);
+			await commit('setEditBusmodel',busmodels.data.result)
 			return true
 		} catch (error) {
 			return false
 		}
 	},
-	async actionUpdateRegion({commit},payload){
+	async actionUpdateBusmodel({commit},payload){
 		try {
-			const region =  await RegionService.updateregion(payload);
-			await commit('setMessage',region.data)
+			const busmodel =  await BusModelService.updatebusmodel(payload);
+			await commit('setMessage',busmodel.data)
 			return true
 		} catch (error) {
 			return false
 		}
 	},
-	async actionDeleteRegion({commit},id){
+	async actionDeleteBusmodel({commit},id){
 		try {
-			const region =  await RegionService.deleteregion(id);
-			await commit('setMessage',region.data)
+			const busmodel =  await BusModelService.deletebusmodel(id);
+			await commit('setMessage',busmodel.data)
 			return true
 		} catch (error) {
 			return false
@@ -81,21 +81,21 @@ const actions = {
 };
 
 const mutations = {
-	setRegionList(state, regionlist){
-		state.regionlist = regionlist
+	setBusmodelList(state, busmodellist){
+		state.busmodellist = busmodellist
 	},
-	setRegions(state, regions){
-		state.regions = regions
+	setBusmodels(state, busmodels){
+		state.busmodels = busmodels
 	},
 	setMessage(state, message){
 		state.message = message
 	},
-	setEditRegion(state, region){
-		state.region = region
+	setEditBusmodel(state, busmodel){
+		state.busmodel = busmodel
 	},
 };
 
-export const bus = {
+export const busmodel = {
 	namespaced: true,
 	state,
 	getters,

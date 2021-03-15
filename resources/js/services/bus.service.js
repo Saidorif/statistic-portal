@@ -1,24 +1,24 @@
 import ApiService from './api.service'
 
-const BusService = {
-	regionList(){
-		return ApiService.get(`/api/region/list`)
+const BusModelService = {
+	busmodelList(){
+		return ApiService.get(`/api/busmodel/list`)
 	},
-	allregions(page){
-		return ApiService.post(`/api/region?page=${page}`)
+	allbusmodels(page){
+		return ApiService.post(`/api/busmodel?page=${page}`)
 	},
-	addregion(data){
-		return ApiService.post(`/api/region/store`,data)
+	addbusmodel(data){
+		return ApiService.post(`/api/busmodel/store`,data)
 	},
-	editregion(id){
-		return ApiService.get(`/api/region/edit/${id}`)
+	editbusmodel(id){
+		return ApiService.get(`/api/busmodel/edit/${id}`)
 	},
-	updateregion(data){
-		return ApiService.post(`/api/region/update/${data.id}`,data)
+	updatebusmodel(data){
+		return ApiService.post(`/api/busmodel/update/${data.id}`,data)
 	},
-	deleteregion(id){
-		return ApiService.delete(`/api/region/destroy/${id}`)
+	deletebusmodel(id){
+		return ApiService.delete(`/api/busmodel/destroy/${id}`)
 	},
 };
 
-export { BusService };
+export { BusModelService };

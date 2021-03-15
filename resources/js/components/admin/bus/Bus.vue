@@ -23,20 +23,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(reg,index) in getRegions.data">
+						<tr v-for="(reg,index) in getBusmodels.data">
 							<td scope="row">{{reg.id}}</td>
 							<td>{{reg.name}}</td>
 							<td>
-								<router-link v-if="$can('edit', 'RegionController')" tag="button" class="btn_transparent" :to='`/crm/region/edit/${reg.id}`'>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/bus/edit/${reg.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button v-if="$can('destroy', 'RegionController')" class="btn_transparent" @click="deleteRegion(reg.id)">
+								<button class="btn_transparent" @click="deleteRegion(reg.id)">
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
 						</tr>
 					</tbody>
-					<pagination :limit="4" :data="getRegions" @pagination-change-page="getResults"></pagination>
+					<pagination :limit="4" :data="getBusmodels" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -57,30 +57,30 @@
 		},
 		async mounted(){
 			let page = 1;
-			await this.actionRegions(page)
+			await this.actionBusmodels(page)
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('region',['getRegions','getMassage'])
+			...mapGetters('busmodel',['getBusmodels','getMassage'])
 		},
 		methods:{
-			...mapActions('region',['actionRegions','actionDeleteRegion']),
+			...mapActions('busmodel',['actionBusmodels','actionDeleteBusmodel']),
 			async getResults(page = 1){
 				this.laoding = true
-				await this.actionRegions(page)
+				await this.actionBusmodels(page)
 				this.laoding = false
 			},
 			async deleteRegion(id){
 				if(confirm("Вы действительно хотите удалить?")){
 					let page = 1
 					this.laoding = true
-					await this.actionDeleteRegion(id)
-					await this.actionRegions(page)
+					await this.actionDeleteBusmodel(id)
+					await this.actionBusmodels(page)
 					this.laoding = false
 					toast.fire({
 				    	type: 'success',
 				    	icon: 'success',
-						title: 'Region удалено!',
+						title: 'Busmodel удалено!',
 				    })
 				}
 			}

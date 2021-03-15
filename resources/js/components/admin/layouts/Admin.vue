@@ -119,10 +119,34 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/area">
+              <i class="sidebar_icon fas fa-building"></i>
+              <p>
+                Регион
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/bus">
               <i class="sidebar_icon fas fa-bus"></i>
               <p>
                 Автобус
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/regionplan">
+              <i class="sidebar_icon fas fa-bus"></i>
+              <p>
+                Region Plan
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/expectation">
+              <i class="sidebar_icon fas fa-file"></i>
+              <p>
+                Expectation
               </p>
             </router-link>
           </li>
