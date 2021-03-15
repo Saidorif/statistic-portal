@@ -6,8 +6,8 @@
           <i class="nav-icon pe-7s-box1"></i>
           Edit Action
         </h4>
-        <router-link class="btn btn-primary" to="/crm/category">
-          <i class="fas fa-arrow-circle-left"></i> Back
+        <router-link class="btn_black" to="/crm/category">
+          <i class="peIcon fas fa-arrow-left"></i> Back
         </router-link>
       </div>
       <div class="card-body">

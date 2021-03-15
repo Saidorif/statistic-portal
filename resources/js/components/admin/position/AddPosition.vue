@@ -5,10 +5,10 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="sidebar_icon fas fa-star"></i>
-					     Добавить Должность 
+					     Добавить Должность
 					</h4>
 					<div class="add_user_btn">
-						<router-link class="btn btn-primary back_btn" to="/crm/position"><i class="pe-7s-back"></i> Назад</router-link>
+						<router-link class="btn_black" to="/crm/position"><i class="peIcon fas fa-arrow-left"></i> Назад</router-link>
 		            </div>
 		  		</div>
 			  </div>
@@ -17,20 +17,20 @@
 					<div class="row align-items-end">
 					  <div class="form-group col-md-9">
 					    <label for="roleName">Название должность</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="roleName" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="roleName"
 					    	placeholder="Должность"
 					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.name) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-lg-3 form_btn">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>
@@ -70,5 +70,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

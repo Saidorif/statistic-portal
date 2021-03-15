@@ -6,38 +6,38 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Edit Role
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/role"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/role"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveRole" >
 					<div class="row">
 					  <div class="form-group col-md-9">
 					    <label for="roleName">Role Name</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="roleName" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="roleName"
 					    	placeholder="Role Name"
 					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.name) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					 <div class="form-group col-md-9">
 					    <label for="roleName">Label</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="roleName" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="roleName"
 					    	placeholder="Label"
 					    	v-model="form.label"
-					    	:class="isRequired(form.label) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.label) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-lg-3 form_btn">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>
@@ -82,5 +82,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

@@ -7,7 +7,7 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Изменить План
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/regionplan"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/regionplan"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveRegion" >
@@ -25,13 +25,13 @@
 					  </div>
 					  <div class="form-group col-md-3">
 					    <label for="number">План количества</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="number" 
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="number"
 					    	placeholder="План количества"
 					    	v-model="form.number"
-					    	:class="isRequired(form.number) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.number) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-3 d-flex flex-column">
@@ -44,11 +44,11 @@
 			                :class="isRequired(form.date) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-					  <div class="form-group col-lg-3 form_btn">
-					  	<button type="submit" class="btn btn-primary btn_save_category">
+					  <div class="form-group col-lg-3 d-flex justify-content-end align-items-end">
+					  	<button type="submit" class="btn_green">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>
@@ -115,5 +115,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>

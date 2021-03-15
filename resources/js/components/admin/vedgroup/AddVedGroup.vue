@@ -6,7 +6,7 @@
           <h3 class="card-title title_user mb-0">
             <i class="sidebar_icon fas fa-file mr-1"></i>Добавить ВЭД группу
           </h3>
-          <router-link class="btn btn-primary back_btn" to="/crm/vedgroup"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+          <router-link class="btn_black" to="/crm/vedgroup"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
         </div>
       </div>
       <form role="form" @submit.prevent.enter="sendVed" enctype="multipart/form-data">

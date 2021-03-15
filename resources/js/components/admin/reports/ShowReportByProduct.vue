@@ -8,8 +8,8 @@
 				    <i class="sidebar_icon fas fa-file-excel"></i>
 		                Отчет по продуктам
 					</h4>
-					<router-link class="btn btn-primary back_btn" to="/crm/report-by-product">
-						<span class="peIcon pe-7s-back"></span> Назад
+					<router-link class="btn_black" to="/crm/report-by-product">
+						<span class="peIcon fas fa-arrow-left"></span> Назад
 					</router-link>
 		  		</div>
 		  	</div>
@@ -30,7 +30,7 @@
 							<td>{{item.c_name}}</td>
 							<td>{{item.code_name}}</td>
 							<td>{{item.total}}</td>
-						</tr> 
+						</tr>
 					</tbody>
 				</table>
 				<!-- <pagination :limit="4" :data="getExcelList" @pagination-change-page="getResults"></pagination> -->

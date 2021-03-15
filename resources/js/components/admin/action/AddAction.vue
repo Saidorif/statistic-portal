@@ -5,10 +5,10 @@
 				<div class="header_title">
 				    <h4 class="title_user">
 				    	<i  class="peIcon pe-7s-id"></i>
-					     Add Action 
+					     Add Action
 					</h4>
 					<div class="add_user_btn">
-						<router-link class="btn btn-primary" to="/crm/action"><i class="peIcon pe-7s-back"></i> Назад</router-link>
+						<router-link class="btn_black" to="/crm/action"><i class="peIcon fas fa-arrow-left"></i> Назад</router-link>
 		            </div>
 		  		</div>
 		  	</div>
@@ -17,11 +17,11 @@
 					<div class="row align-items-end">
 					  <div class="form-group col-md-9">
 					    <label for="contName">Название контроллера</label>
-						<multiselect 
+						<multiselect
 							:value="findController"
 							:options="getContList"
 							@search-change="value => filterController(value)"
-							v-model="findController" 
+							v-model="findController"
 							placeholder="Выберите"
 							:searchable="true"
 							track-by="id"
@@ -31,7 +31,7 @@
 							selectLabel="Нажмите Enter, чтобы выбрать"
 							deselectLabel="Нажмите Enter, чтобы удалить"
 							@select="selectedItem"
-	      					:class="isRequired(form.conts_id) ? 'isRequired' : ''"  
+	      					:class="isRequired(form.conts_id) ? 'isRequired' : ''"
 							>
 							<span slot="noResult">По вашему запросу ничего не найдено</span>
 							<span slot="noOptions">Cписок пустой</span>
@@ -39,32 +39,32 @@
 					  </div>
 					  <div class="form-group col-md-9">
 					    <label for="contName">Action Name</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="contName" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="contName"
 					    	placeholder="Action Name"
 					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.name) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-9">
 					    <label for="contName">Code</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="contName" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="contName"
 					    	placeholder="Code"
 					    	v-model="form.code"
-					    	:class="isRequired(form.code) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.code) ? 'isRequired' : ''"
 				    	>
 					  </div>
-					 
+
 					  <div class="form-group col-lg-3 form_btn">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>

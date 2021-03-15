@@ -7,7 +7,7 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Изменить Автобус
 				</h4>
-				<router-link class="btn btn-primary back_btn" to="/crm/bus"><span class="peIcon pe-7s-back"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/bus"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveRegion" >

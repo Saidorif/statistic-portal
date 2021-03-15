@@ -8,8 +8,8 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Добавить Expectation
 				</h4>
-				<router-link class="btn btn-primary back_btn" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}`'>
-					<span class="peIcon pe-7s-back"></span> 
+				<router-link class="btn_black" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}`'>
+					<span class="peIcon fas fa-arrow-left"></span>
 					Назад
 				</router-link>
 		  	</div>
@@ -18,24 +18,24 @@
 					<div class="row">
 					  <div class="form-group col-md-4">
 					    <label for="company_name">Название компании</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="company_name" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="company_name"
 					    	placeholder="Название компании"
 					    	v-model="form.company_name"
-					    	:class="isRequired(form.company_name) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.company_name) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-4">
 					    <label for="inn">ИНН</label>
-					    <input 
-					    	type="number" 
-					    	class="form-control input_style" 
-					    	id="inn" 
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="inn"
 					    	placeholder="ИНН"
 					    	v-model="form.inn"
-					    	:class="isRequired(form.inn) ? 'isRequired' : ''"  
+					    	:class="isRequired(form.inn) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-4 d-flex flex-column">
@@ -49,7 +49,7 @@
 			                :class="isRequired(form.date) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-		            </div>	
+		            </div>
 	              	<div class="row" v-for="(item,index) in buses">
 	              	  <div>
 	              	  	<h4>{{index+1}})</h4>
@@ -67,13 +67,13 @@
 					  </div>
 					  <div class="form-group col-md-4">
 					    <label for="bus_qty">Количество автобуса</label>
-					    <input 
-					    	type="text" 
-					    	class="form-control input_style" 
-					    	id="bus_qty" 
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="bus_qty"
 					    	placeholder="Количество автобуса"
 					    	v-model="item.bus_qty"
-					    	:class="isRequired(item.bus_qty) ? 'isRequired' : ''"  
+					    	:class="isRequired(item.bus_qty) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-2" v-if="index != 0">
@@ -86,12 +86,12 @@
 					  <div class="form-group col-lg-12 d-flex justify-content-end align-items-center mt-4">
 					  	<button type="submit" class="btn btn-info mr-3" @click.prevent="addItem">
 					  		<i class="fas fa-plus"></i>
-						  	Добавить 
+						  	Добавить
 						</button>
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
-						</button>	
+						</button>
 				  	  </div>
 					</div>
 				</form>

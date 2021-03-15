@@ -20,10 +20,10 @@ class CreateBusExpectsTable extends Migration
             $table->string('bus_qty');
             $table->timestamps();
 
-            $table->foreign('expect_id')
-                ->references('id')
-                ->on('expectations')
-                ->onDelete('cascade');
+            // $table->foreign('expect_id')
+            //     ->references('id')
+            //     ->on('expectations')
+            //     ->onDelete('cascade');
         });
     }
 
