@@ -2,15 +2,27 @@
 	<div class="expectation">
 		<Loader v-if="laoding"/>
 		<div class="card">
-		  	<div class="card-header">
+		  	<div class="card-header d-flex justify-content-between">
 			    <h4 class="title_user">
 			    	<i  class="peIcon pe-7s-box1"></i>
 				    Expectation 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/expectation/add">
+				<h5>
+					<em>{{regionName}}</em>
+				</h5>
+				<span>План: {{planQty}}</span>
+				<span>Кутилиши: {{expectationQty}}</span>
+				<span>Тасдикланганлар: {{faktQty}}</span>
+				<div class="d-flex justify-content-end">
+				    <router-link class="btn btn-primary" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/add`'>
 						<i class="fas fa-plus"></i> 
-					Добавить
-				</router-link>
+						Добавить
+					</router-link>
+					<router-link class="btn btn-info" to='/crm/regionplan'>
+						<span class="peIcon pe-7s-back "></span> 
+						Назад
+					</router-link>
+				</div>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">
@@ -18,16 +30,43 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Название</th>
+							<th scope="col">Название компании</th>
+							<th scope="col">ИНН</th>
+							<th scope="col">Количество автобуса (шт)</th>
+							<th scope="col">Кол. подтвержденных автобусов (шт)</th>
+							<th scope="col">Кол. неподтвержденных автобусов (шт)</th>
+							<th scope="col">Кол. отказанных автобусов (шт)</th>
+							<th scope="col">Buses</th>
+							<th scope="col">Дата</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(expectation,index) in getExpectations.data">
 							<td scope="row">{{expectation.id}}</td>
-							<td>{{expectation.name}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/expectation/edit/${expectation.id}`'>
+								<router-link tag="a" class="btn-link" :to='`/crm/regionplan/fakt/${expectation.id}?expectId=${$route.params.expectregionId}`'>
+									{{expectation.company_name}}
+								</router-link>
+							</td>
+							<td>
+								{{expectation.inn}}
+							</td>
+							<td>{{countBus(expectation.busexpect)}}</td>
+							<td>{{countAcceptedFakt(expectation.accepted_fakt)}}</td>
+							<td>{{countWaitingFakt(expectation.waiting_fakt)}}</td>
+							<td>{{countRejectedFakt(expectation.rejected_fakt)}}</td>
+							<td>
+								<ul v-if="expectation.busexpect.length > 0" class="list-inline">
+								    <li v-for="(exp,key) in expectation.busexpect">{{exp.bus ? exp.bus.name : ''}}</li>
+								</ul>
+								<ul v-else class="list-inline">
+								    <li>EMPTY</li>
+								</ul>
+							</td>
+							<td>{{expectation.date}}</td>
+							<td>
+								<router-link tag="button" class="btn_transparent" :to='`/crm/regionplan/expectation/${$route.params.expectregionId}/edit/${expectation.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
 								<button class="btn_transparent" @click="deleteExpectation(expectation.id)">
@@ -56,26 +95,105 @@
 			}
 		},
 		async mounted(){
-			let page = 1;
-			await this.actionExpectations(page)
+			await this.actionEditRegionPlan(this.$route.params.expectregionId)
+			let data = {
+				plan_id:this.$route.params.expectregionId,
+				page:1
+			}
+			await this.actionExpectations(data)
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('expectation',['getExpectations','getMassage'])
+			...mapGetters('expectation',['getExpectations','getMassage']),
+			...mapGetters('regionplan',['getRegionPlan']),
+			regionName(){
+				if(this.getRegionPlan){
+					let name = this.getRegionPlan.region
+					if(name){
+						return name.name
+					}
+				}
+			},
+			planQty(){
+				if(this.getRegionPlan){
+					let name = this.getRegionPlan
+					if(name){
+						return name.number
+					}
+				}
+			},
+			expectationQty(){
+				let count = 0
+				if(this.getExpectations.data && this.getExpectations.data.length > 0){
+					let items = this.getExpectations.data
+					items.forEach((item,index)=>{
+						count += this.countBus(item.busexpect)
+					})
+				}
+				return count
+			},
+			faktQty(){
+				let count = 0
+				if(this.getExpectations.data && this.getExpectations.data.length > 0){
+					let items = this.getExpectations.data
+					items.forEach((item,index)=>{
+						count += this.countAcceptedFakt(item.accepted_fakt)
+					})
+				}
+				return count
+			},
 		},
 		methods:{
-			...mapActions('expectation',['actionExpectations','actionDeleteExpectation']),
+			...mapActions('expectation',['actionExpectations','actionDeleteExpectationAll']),
+			...mapActions('regionplan',['actionEditRegionPlan']),
+			countBus(items){
+				let count = 0
+				if(items.length > 0){
+					items.forEach((item,index)=>{
+						count += Number(item.bus_qty)
+					})
+				}
+				return count
+			},
+			countAcceptedFakt(items){
+				let count = 0
+				if(items.length > 0){
+					return items.length
+				}
+				return count
+			},
+			countWaitingFakt(items){
+				let count = 0
+				if(items.length > 0){
+					return items.length
+				}
+				return count
+			},
+			countRejectedFakt(items){
+				let count = 0
+				if(items.length > 0){
+					return items.length
+				}
+				return count
+			},
 			async getResults(page = 1){ 
 				this.laoding = true
-				await this.actionExpectations(page)
+				let data = {
+					plan_id:this.$route.params.expectregionId,
+					page:page
+				}
+				await this.actionExpectations(data)
 				this.laoding = false
 			},
 			async deleteExpectation(id){
 				if(confirm("Вы действительно хотите удалить?")){
-					let page = 1
+					let data = {
+						plan_id:this.$route.params.expectregionId,
+						page:1
+					}
 					this.laoding = true
-					await this.actionDeleteExpectation(id)
-					await this.actionExpectations(page)
+					await this.actionDeleteExpectationAll(id)
+					await this.actionExpectations(data)
 					this.laoding = false
 					toast.fire({
 				    	type: 'success',

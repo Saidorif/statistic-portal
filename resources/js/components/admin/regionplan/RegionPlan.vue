@@ -27,7 +27,11 @@
 					<tbody>
 						<tr v-for="(reg,index) in getRegionPlans.data">
 							<td scope="row">{{reg.id}}</td>
-							<td>{{reg.region.name}}</td>
+							<td>
+								<router-link tag="a" class="btn-link" :to='`/crm/regionplan/expectation/${reg.id}`'>
+									{{reg.region.name}}
+								</router-link>
+							</td>
 							<td>{{reg.date}}</td>
 							<td>{{reg.number}}</td>
 							<td>

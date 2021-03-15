@@ -33,9 +33,9 @@ const actions = {
 			return false
 		}
 	},
-	async actionExpectations({commit},page){
+	async actionExpectations({commit},payload){
 		try {
-			const expectations =  await ExpectationService.allexpectations(page);
+			const expectations =  await ExpectationService.allexpectations(payload);
 			await commit('setExpectations',expectations.data.result)
 			return true
 		} catch (error) {
@@ -63,6 +63,15 @@ const actions = {
 	async actionUpdateExpectation({commit},payload){
 		try {
 			const expectation =  await ExpectationService.updateexpectation(payload);
+			await commit('setMessage',expectation.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionDeleteExpectationAll({commit},id){
+		try {
+			const expectation =  await ExpectationService.deleteexpectationAll(id);
 			await commit('setMessage',expectation.data)
 			return true
 		} catch (error) {

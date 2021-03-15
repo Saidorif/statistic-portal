@@ -21,6 +21,17 @@ import RegionPlan from './components/admin/regionplan/RegionPlan'
 import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
 import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
 
+// Fakt
+import Fakt from './components/admin/fakt/Fakt'
+import AddFakt from './components/admin/fakt/AddFakt'
+import EditFakt from './components/admin/fakt/EditFakt'
+import ShowFakt from './components/admin/fakt/ShowFakt'
+
+// Confirmfakt
+import Confirmfakt from './components/admin/confirmfakt/Confirmfakt'
+import AddConfirmfakt from './components/admin/confirmfakt/AddConfirmfakt'
+import EditConfirmfakt from './components/admin/confirmfakt/EditConfirmfakt'
+
 // Region
 import Region from './components/admin/region/Region'
 import AddRegion from './components/admin/region/AddRegion'
@@ -211,16 +222,44 @@ const router = new Router({
 					component:EditArea,
 				},
 				{
-					path:'expectation',
+					path:'regionplan/expectation/:expectregionId',
 					component:Expectation,
 				},
 				{
-					path:'expectation/add',
+					path:'regionplan/expectation/:expectregionId/add',
 					component:AddExpectation,
 				},
 				{
-					path:'expectation/edit/:expectationId',
+					path:'regionplan/expectation/:expectregionId/edit/:expectationId',
 					component:EditExpectation,
+				},
+				{
+					path:'regionplan/fakt/:faktregionId',
+					component:Fakt,
+				},
+				{
+					path:'regionplan/fakt/:faktregionId/add',
+					component:AddFakt,
+				},
+				{
+					path:'regionplan/fakt/:faktregionId/edit/:FaktId',
+					component:EditFakt,
+				},
+				{
+					path:'regionplan/fakt/:faktregionId/show/:FaktId',
+					component:ShowFakt,
+				},
+				{
+					path:'confirmfakt',
+					component:Confirmfakt,
+				},
+				{
+					path:'confirmfakt/add',
+					component:AddConfirmfakt,
+				},
+				{
+					path:'confirmfakt/edit/:confirmfaktId',
+					component:EditConfirmfakt,
 				},
 				{
 					path:'regionplan',

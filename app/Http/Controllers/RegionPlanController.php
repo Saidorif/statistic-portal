@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\RegionPlanModel;
+use App\Expectation;
 use Validator;
 use Carbon\Carbon;
 class RegionPlanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $result = RegionPlanModel::with('region')->paginate(12);
         return response()->json(['success' => true, 'result' => $result]);
@@ -40,7 +41,7 @@ class RegionPlanController extends Controller
 
     public function edit($id)
     {
-        $result = RegionPlanModel::find($id);
+        $result = RegionPlanModel::with('region')->find($id);
         if(!$result){
             return response()->json(['error' => true, 'message' => 'План региона не найден']);
         }
@@ -57,7 +58,6 @@ class RegionPlanController extends Controller
             'date' => 'required',
             'number' => 'required|integer',
             'region_id'       => 'required|integer|unique:region_plan_models,region_id,'.$result->id,
-            'region_id'  => 'required|integer',
         ]);
 
         if($validator->fails()){
@@ -73,10 +73,12 @@ class RegionPlanController extends Controller
     public function destroy($id)
     {
         $result = RegionPlanModel::find($id);
+        $expectations = Expectation::where('plan_id',$id);
         if(!$result){
             return response()->json(['error' => true, 'message' => 'План региона не найден']);
         }
         $result->delete();
+        $expectations->delete();
 
         return response()->json(['success' => true, 'message' => 'План региона удален']);
     }
