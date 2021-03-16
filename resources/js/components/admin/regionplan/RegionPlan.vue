@@ -21,6 +21,10 @@
 							<th scope="col">Область</th>
 							<th scope="col">Дата</th>
 							<th scope="col">План</th>
+							<th scope="col">Кутилиши</th>
+							<th scope="col">Факт</th>
+							<th scope="col">Кол. неподтвержденных автобусов (шт)</th>
+							<th scope="col">Кол. отказанных автобусов (шт)</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -34,6 +38,10 @@
 							</td>
 							<td>{{reg.date}}</td>
 							<td>{{reg.number}}</td>
+							<td>{{reg.all_bus_qty}}</td>
+							<td>{{reg.accepted_fakt_count}}</td>
+							<td>{{reg.waiting_fakt_count}}</td>
+							<td>{{reg.rejected_fakt_count}}</td>
 							<td>
 								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/edit/${reg.id}`'>
 									<i class="pe_icon fas fa-pen editColor"></i>

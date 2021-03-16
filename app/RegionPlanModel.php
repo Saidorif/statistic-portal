@@ -14,14 +14,11 @@ class RegionPlanModel extends Model
     }
 
     public function exception(){
-    	return $this->hasMany(Expectation::class,'plan_id')->with('busexpect');
+    	return $this->hasMany(Expectation::class,'plan_id')->with(['busexpect']);
     }
 
     public function exceptionFakt(){
     	return $this->hasMany(Expectation::class,'plan_id')->withCount(['acceptedFakt','rejected_fakt','waiting_fakt']);
     }
 
-    public function getMirxanAttribute(){
-    	return 'Mirxan';
-    }
 }
