@@ -127,7 +127,7 @@
 			}
 		},
 		computed:{
-			...mapGetters('expectation',['getMassage']),
+			...mapGetters('expectationmod',['getMassage']),
 			...mapGetters('busmodel',['getBusmodelList']),
 			...mapGetters('region',['getRegionList']),
 		},
@@ -137,7 +137,7 @@
 			this.laoding = false
 		},
 		methods:{
-			...mapActions('expectation',['actionAddExpectation']),
+			...mapActions('expectationmod',['actionAddExpectation']),
 			...mapActions('busmodel',['actionBusmodelList']),
 			...mapActions('region',['actionRegionList']),
 			isRequired(input){

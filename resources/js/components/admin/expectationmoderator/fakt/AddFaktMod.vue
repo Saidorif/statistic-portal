@@ -117,7 +117,7 @@
 			}
 		},
 		computed:{
-			...mapGetters('fakt',['getMassage']),
+			...mapGetters('faktmod',['getMassage']),
 			...mapGetters('busmodel',['getBusmodelList']),
 		},
 		async mounted(){
@@ -125,7 +125,7 @@
 			this.laoding = false
 		},
 		methods:{
-			...mapActions('fakt',['actionAddFakt']),
+			...mapActions('faktmod',['actionAddFakt']),
 			...mapActions('busmodel',['actionBusmodelList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';

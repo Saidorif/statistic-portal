@@ -121,7 +121,7 @@
 			}
 		},
 		computed:{
-			...mapGetters('fakt',['getMassage','getFakt']),
+			...mapGetters('faktmod',['getMassage','getFakt']),
 			...mapGetters('busmodel',['getBusmodelList']),
 		},
 		async mounted(){

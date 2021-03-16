@@ -26,7 +26,9 @@ import {busmodel} from "./bus.module"
 import {area} from "./area.module"
 import {regionplan} from "./regionplan.module"
 import {expectation} from "./expectation.module"
+import {expectationmod} from "./expectationmod.module"
 import {fakt} from "./fakt.module"
+import {faktmod} from "./faktmod.module"
 import {confirmfakt} from "./confirmfakt.module"
 
 import { TokenService } from './../services/storage.service'
@@ -63,6 +65,8 @@ const store = new Vuex.Store(
 			fakt,
             confirmfakt,
             busmodel,
+            faktmod,
+            expectationmod
 		},
 		state:{
 			rules:[],

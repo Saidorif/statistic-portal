@@ -128,7 +128,7 @@
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('expectation',['getExpectations','getMassage']),
+			...mapGetters('expectationmod',['getExpectations','getMassage']),
 			...mapGetters('regionplan',['getRegionPlan']),
 			regionName(){
 				if(this.getRegionPlan){

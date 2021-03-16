@@ -135,7 +135,7 @@
 			}
 		},
 		computed:{
-			...mapGetters('expectation',['getMassage','getExpectation']),
+			...mapGetters('expectationmod',['getMassage','getExpectation']),
 			...mapGetters('busmodel',['getBusmodelList']),
 			...mapGetters('region',['getRegionList']),
 		},

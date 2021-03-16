@@ -91,10 +91,10 @@
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('fakt',['getFakts','getMassage'])
+			...mapGetters('faktmod',['getFakts','getMassage'])
 		},
 		methods:{
-			...mapActions('fakt',['actionFakts','actionDeleteFakt']),
+			...mapActions('faktmod',['actionFakts','actionDeleteFakt']),
 			async getResults(page = 1){
 				this.laoding = true
 					let data = {
