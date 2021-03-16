@@ -19,7 +19,11 @@ class CreateFaktsTable extends Migration
             $table->integer('bus_id');
             $table->string('capacity')->nullable();
             $table->string('bank_credit')->nullable();
-            $table->string('auto_price')->nullable();
+            $table->string('auto_price_sum')->nullable();
+            $table->string('auto_price_dollar')->nullable();
+            $table->string('auto_price_euro')->nullable();
+            $table->string('bank_contract')->nullable();
+            $table->string('zavod_contract')->nullable();
             $table->string('purchase_date')->nullable();
             $table->string('registr_cerf')->nullable();
             $table->string('status')->nullable();

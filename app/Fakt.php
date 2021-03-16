@@ -23,11 +23,15 @@ class Fakt extends Model
     	'bus_id',
     	'capacity',
     	'bank_credit',
-    	'auto_price',
     	'purchase_date',
     	'registr_cerf',
     	'status',
-    	'comment'
+    	'comment',
+        'auto_price_sum',
+        'auto_price_dollar',
+        'auto_price_euro',
+        'bank_contract',
+        'zavod_contract',
     ];
 
     public function bus(){

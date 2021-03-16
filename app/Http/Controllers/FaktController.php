@@ -33,7 +33,11 @@ class FaktController extends Controller
             'bus_id' => 'required|integer',
             'capacity'  => 'required|integer',
             'bank_credit'  => 'required|string',
-            'auto_price'  => 'required',
+            'auto_price_sum'  => 'required',
+            'auto_price_dollar'  => 'required',
+            'auto_price_euro'  => 'required',
+            'bank_contract'  => 'required',
+            'zavod_contract'  => 'required',
             'purchase_date'  => 'required|date',
             'registr_cerf'  => 'required|string',
         ]);
