@@ -140,6 +140,7 @@
     vertical-align: middle;
     align-items: center;
 }
+.btn_blue_icon i,
 .btn_black i,
 .btn_green i{
     margin-right: 0.5rem !important;
@@ -173,6 +174,7 @@
     border-color: #1d2124;
     text-decoration: none;
 }
+.btn_blue_icon,
 .btn_blue{
     box-shadow: 0 0.125rem 0.625rem rgb(22 170 255 / 40%), 0 0.0625rem 0.125rem rgb(22 170 255 / 50%);
     position: relative;
@@ -191,6 +193,9 @@
     align-items: center;
     text-align: center;
     vertical-align: middle;
+}
+.btn_blue_icon{
+    padding: 0.375rem 0.75rem !important;
 }
 .btn_blue:hover{
     box-shadow: 0 0.125rem 0.625rem rgb(22 170 255 / 50%), 0 0.0625rem 0.125rem rgb(22 170 255 / 60%);

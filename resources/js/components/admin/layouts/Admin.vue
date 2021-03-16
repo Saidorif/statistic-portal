@@ -143,6 +143,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/expec-mod/1">
+                <i class="sidebar_icon fas fa-bus"></i>
+                <p>
+                    Expectation Moderator
+                </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/confirmfakt">
               <i class="sidebar_icon fas fa-file"></i>
               <p>

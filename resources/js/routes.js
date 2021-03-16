@@ -22,10 +22,25 @@ import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
 import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
 
 // Fakt
-import Fakt from './components/admin/fakt/Fakt'
-import AddFakt from './components/admin/fakt/AddFakt'
-import EditFakt from './components/admin/fakt/EditFakt'
-import ShowFakt from './components/admin/fakt/ShowFakt'
+import Fakt from './components/admin/regionplan/fakt/Fakt'
+import AddFakt from './components/admin/regionplan/fakt/AddFakt'
+import EditFakt from './components/admin/regionplan/fakt/EditFakt'
+import ShowFakt from './components/admin/regionplan/fakt/ShowFakt'
+// expectation
+import Expectation from './components/admin/regionplan/expectation/Expectation'
+import AddExpectation from './components/admin/regionplan/expectation/AddExpectation'
+import EditExpectation from './components/admin/regionplan/expectation/EditExpectation'
+
+// expectation moderator
+import ExpectationMod from './components/admin/expectationmoderator/expectation/ExpectationMod'
+import AddExpectationMod from './components/admin/expectationmoderator/expectation/AddExpectationMod'
+import EditExpectationMod from './components/admin/expectationmoderator/expectation/EditExpectationMod'
+
+// fakt moderator
+import FaktMod from './components/admin/expectationmoderator/fakt/FaktMod'
+import AddFaktMod from './components/admin/expectationmoderator/fakt/AddFaktMod'
+import EditFaktMod from './components/admin/expectationmoderator/fakt/EditFaktMod'
+import ShowFaktMod from './components/admin/expectationmoderator/fakt/ShowFaktMod'
 
 // Confirmfakt
 import Confirmfakt from './components/admin/confirmfakt/Confirmfakt'
@@ -58,10 +73,7 @@ import Position from './components/admin/position/Position'
 import AddPosition from './components/admin/position/AddPosition'
 import EditPosition from './components/admin/position/EditPosition'
 
-// expectation
-import Expectation from './components/admin/expectation/Expectation'
-import AddExpectation from './components/admin/expectation/AddExpectation'
-import EditExpectation from './components/admin/expectation/EditExpectation'
+
 
 // controller
 import Conts from './components/admin/conts/Conts'
@@ -222,6 +234,18 @@ const router = new Router({
 					component:EditArea,
 				},
 				{
+					path:'expec-mod/:expId',
+					component:ExpectationMod,
+				},
+				{
+					path:'expec-mod/:expId/add',
+					component:AddExpectationMod,
+				},
+				{
+					path:'expec-mod/:expId/edit/:expectationId',
+					component:EditExpectationMod,
+				},
+				{
 					path:'regionplan/expectation/:expectregionId',
 					component:Expectation,
 				},
@@ -232,6 +256,22 @@ const router = new Router({
 				{
 					path:'regionplan/expectation/:expectregionId/edit/:expectationId',
 					component:EditExpectation,
+				},
+				{
+					path:'expec-mod/fakt/:faktregionId',
+					component:FaktMod,
+				},
+				{
+					path:'expec-mod/fakt/:faktregionId/add',
+					component:AddFaktMod,
+				},
+				{
+					path:'expec-mod/fakt/:faktregionId/edit/:FaktId',
+					component:EditFaktMod,
+				},
+				{
+					path:'expec-mod/fakt/:faktregionId/show/:FaktId',
+					component:ShowFaktMod,
 				},
 				{
 					path:'regionplan/fakt/:faktregionId',
