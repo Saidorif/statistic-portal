@@ -29,10 +29,14 @@
 							<th scope="col">Статус</th>
 							<th scope="col">Автобус сиғими</th>
 							<th scope="col">Молиялаштириш манбаи</th>
-							<th scope="col">Автобус нарҳи</th>
+							<th scope="col">Автобус нарҳи (cум)</th>
+							<th scope="col">Автобус нарҳи (доллар)</th>
+							<th scope="col">Автобус нарҳи (евро)</th>
 							<th scope="col">Ҳарид қилинган сана</th>
 							<th scope="col">Давлат рўйҳатидан ўтганлик ҳақида гувохнома рақами</th>
-							<th scope="col">Действия</th>
+							<th scope="col">Банк кредит</th>
+							<th scope="col">Завод кредит</th>
+							<th scope="col" width="10%">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,8 +51,12 @@
 							</td>
 							<td>{{reg.capacity}}</td>
 							<td>{{reg.bank_credit}}</td>
-							<td>{{reg.auto_price}}</td>
+							<td>{{reg.auto_price_sum}}</td>
+							<td>{{reg.auto_price_dollar}}</td>
+							<td>{{reg.auto_price_euro}}</td>
 							<td>{{reg.purchase_date}}</td>
+							<td>{{reg.bank_contract}}</td>
+							<td>{{reg.zavod_contract}}</td>
 							<td>{{reg.registr_cerf}}</td>
 							<td>
 								<router-link tag="button" class="btn_blue mr-1" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}/edit/${reg.id}?expectId=${$route.query.expectId}`'>
