@@ -2,7 +2,7 @@
   <div class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand top_nav_header">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -142,22 +142,34 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/offerbuilding">
-              <i class="sidebar_icon fas fa-city"></i>
+                    <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>
               <p>
-                Offer building
+                Offer & Recon
+                <i class="right fas fa-angle-left"></i>
               </p>
-            </router-link>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/crm/offerbuilding">
+                    <i class="sidebar_icon fas fa-city"></i>
+                    <p>
+                        Offer building
+                    </p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/crm/reconstruction">
+                    <i class="sidebar_icon fas fa-building"></i>
+                    <p>
+                        Reconstruction
+                    </p>
+                    </router-link>
+                </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/reconstruction">
-              <i class="sidebar_icon fas fa-building"></i>
-              <p>
-                Reconstruction
-              </p>
-            </router-link>
-          </li>
+
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/expec-mod/1">
                 <i class="sidebar_icon fas fa-bus"></i>
@@ -286,7 +298,7 @@ export default {
   }
   .sidebar_icon{
     font-size: 18px;
-    color: #3e6174;
+    color: #fff;
     margin-right: 5px;
   }
   .content-wrapper{
@@ -294,7 +306,7 @@ export default {
     padding-top: 30px;
   }
   .nav-sidebar .nav-item>.nav-link{
-    color: #3e6174;
+    color: #fff;
   }
   .nav-sidebar .nav-item>.nav-link:hover,
   .nav-pills .nav-link.active,

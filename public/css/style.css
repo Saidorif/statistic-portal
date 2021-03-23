@@ -1,3 +1,16 @@
+* {
+  font-family: "Overpass-Regular" !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Overpass-Bold" !important;
+}
+
 .card-body::after,
 .card-footer::after,
 .card-header::after {
@@ -98,7 +111,7 @@
 }
 
 .content-wrapper {
-  background: rgba(255, 255, 255, 0.45) !important;
+  background: #070d19 !important;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -244,9 +257,10 @@
   vertical-align: middle;
 }
 
+.top_nav_header,
 .main-sidebar {
-  background: #fff;
-  box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
+  background: #0c1427;
+  border-bottom: 1px solid #172340;
 }
 
 .nav-sidebar .nav-item > .nav-link {
@@ -256,14 +270,14 @@
 .nav-sidebar .nav-item > .nav-link:hover,
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  background: #e0f3ff !important;
-  color: #3f6ad8 !important;
+  background: #0c1427 !important;
+  color: #727cf5 !important;
   font-weight: bold;
 }
 
 .nav-pills .nav-link.active .sidebar_icon,
 .nav-sidebar .nav-item > .nav-link:hover .sidebar_icon {
-  color: #3f6ad8 !important;
+  color: #727cf5 !important;
 }
 
 .exp_header {
