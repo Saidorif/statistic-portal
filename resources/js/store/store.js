@@ -32,6 +32,7 @@ import {faktmod} from "./faktmod.module"
 import {confirmfakt} from "./confirmfakt.module"
 import {offerbuilding} from "./offerbuilding.module"
 import {station} from "./station.module"
+import {reconstruction} from "./reconstruction.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -68,6 +69,7 @@ const store = new Vuex.Store(
             confirmfakt,
             offerbuilding,
             station,
+            reconstruction,
             busmodel,
             faktmod,
             expectationmod

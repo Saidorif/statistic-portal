@@ -12,7 +12,7 @@
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveOfferbuilding" enctype="multipart/form-data">
 					<div class="row">
-				      <div class="form-group col-md-3">
+	<!-- 			      <div class="form-group col-md-3">
 					    <label for="type_of_construction">Таклиф тури</label>
 					    <select 
 					    	class="form-control input_style" 
@@ -22,6 +22,29 @@
 					    	<option value="" selected disabled>Таклиф турини танланг!</option>
 					    	<option value="construction">Курилиш!</option>
 					    	<option value="reconstruction">Тамирлаш ва кайта куриш!</option>
+					    </select>
+					  </div> -->
+				      <div class="form-group col-md-3">
+					    <label for="area_id">Туман/шахарлар</label>
+					    <select 
+					    	class="form-control input_style" 
+					    	v-model="form.area_id"
+					    	:class="isRequired(form.area_id) ? 'isRequired' : ''"
+					    	@change="stationAreaBy"
+				    	>
+					    	<option value="" selected disabled>Туман/шахарни турини танланг!</option>
+					    	<option :value="item.id" v-for="(item,index) in getAreaLists">{{item.name}}</option>
+					    </select>
+					  </div>
+				      <div class="form-group col-md-3">
+					    <label for="station_id">Бекатлар</label>
+					    <select 
+					    	class="form-control input_style" 
+					    	v-model="form.station_id"
+					    	:class="isRequired(form.station_id) ? 'isRequired' : ''"
+				    	>
+					    	<option value="" selected disabled>Бекатни турини танланг!</option>
+					    	<option :value="item.id" v-for="(item,index) in getStationsAreaByList">{{item.name}}</option>
 					    </select>
 					  </div>
 					  <div class="form-group col-md-3">
@@ -58,6 +81,28 @@
 				    	>
 					  </div>
 					  <div class="form-group col-md-3">
+					    <label for="longitude">Longitude</label>
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="longitude"
+					    	placeholder="Longitude"
+					    	v-model="form.longitude"
+					    	:class="isRequired(form.longitude) ? 'isRequired' : ''"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="latitude">Latitude</label>
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="latitude"
+					    	placeholder="latitude"
+					    	v-model="form.latitude"
+					    	:class="isRequired(form.latitude) ? 'isRequired' : ''"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
 					    <label for="address">Адрес</label>
 					    <textarea
 					    	class="form-control input_style"
@@ -86,6 +131,17 @@
 					    	placeholder="Лойиҳа ва унинг қиймати"
 					    	v-model="form.price"
 					    	:class="isRequired(form.price) ? 'isRequired' : ''"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="project_photo">Ер ажратиш ва қурилиш учун ҳокимнинг қарори</label>
+					    <input
+					    	type="file"
+					    	class="form-control input_style"
+					    	id="project_photo"
+					    	placeholder="Проект фото"
+				    	 	@change="changeOfferHakim($event)"
+					    	:class="isRequired(form.project_photo) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-3">
@@ -119,6 +175,17 @@
 			                v-model="form.time_of_construction_start"
 			                class="datepicker"
 			                :class="isRequired(form.time_of_construction_start) ? 'isRequired' : ''"
+			              ></date-picker>
+		              </div>
+					  <div class="form-group col-md-3">
+			              <label for="time_of_construction_end">Лойиҳани топшириш вақти</label>
+			              <date-picker
+			                lang="ru"
+			                placeholder="Дата"
+			                type="date" format="YYYY-MM-DD" valueType="format"
+			                v-model="form.time_of_construction_end"
+			                class="datepicker"
+			                :class="isRequired(form.time_of_construction_end) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
   					  <div class="form-group col-md-3">
@@ -172,9 +239,9 @@
 					    	class="form-control input_style"
 					    	id="project_photo"
 					    	placeholder="Проект фото"
-					    	:class="isRequired(form.project_photo) ? 'isRequired' : ''"
-					    	 @change="changePhoto($event)"
+				    	 	@change="changePhoto($event)"
 				    	>
+					    	<!-- :class="isRequired(form.project_photo) ? 'isRequired' : ''" -->
 					  </div>
 					  <div class="form-group col-lg-12 d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
@@ -200,10 +267,13 @@
 		data(){
 			return{
 				form:{
-					type_of_construction:'',
+					// type_of_construction:'',
+					station_id:'',
 			    	name:'',
 			    	company_name:'',
 			    	station_id:'', 
+			    	longitude:'',
+			    	latitude:'', 
 			    	inn:'',
 			    	address:'', 
 			    	region_id:'',
@@ -226,21 +296,116 @@
 			}
 		},
 		computed:{
-			...mapGetters('offerbuilding',['getMassage'])
+			...mapGetters('offerbuilding',['getMassage']),
+			...mapGetters('station',['getStationsList','getStationsAreaByList']),
+			...mapGetters('area',['getAreaLists']),
+		    checkFormInput(){
+		    	console.log(this.form)
+		    	if (
+		    		// this.form.type_of_construction != '' &&
+		    		this.form.longitude != '' &&
+			    	this.form.latitude != '' && 
+					this.form.station_id != '' &&
+			    	this.form.name != '' &&
+			    	this.form.company_name != '' &&
+			    	this.form.station_id != '' && 
+			    	this.form.inn != '' &&
+			    	this.form.address != '' && 
+			    	this.form.area_id != '' &&
+			    	this.form.asos != '' && 
+			    	this.form.offer_hakim != '' &&
+			    	this.form.price != '' && 
+			    	this.form.bank_credit != '' && 
+			    	this.form.land_area != '' && 
+			    	this.form.time_of_construction_start != '' &&
+			    	this.form.time_of_construction_end != '' &&
+			    	this.form.telephon != '' &&
+			    	this.form.capacity_passenger != '' && 
+			    	this.form.work_schedule != '' && 
+			    	this.form.ustav_fond != ''
+		    	) {
+		    		return true
+		    	}else{
+		    		return false
+		    	} 
+		    },
 		},
-		mounted(){
+		async mounted(){
+			await this.actionStationLists()
+			await this.actionAreaList()
 			this.laoding = false
 		},
 		methods:{
 			...mapActions('offerbuilding',['actionAddOfferbuilding']),
+			...mapActions('station',['actionStationLists','actionStationByArea']),
+			...mapActions('area',['actionAreaList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-		    changePhoto(event){
-		    	
+		    async stationAreaBy(){
+		    	let data= {
+		    		area_id:this.form.area_id
+		    	}
+		    	await this.actionStationByArea(data)
+		    },
+		    changeOfferHakim(event) {
+		      let file = event.target.files[0];
+		      if (
+		        event.target.files[0]["type"] === "image/png" ||
+		        event.target.files[0]["type"] === "image/jpeg" ||
+		        event.target.files[0]["type"] === "image/jpg"
+		      ) {
+		        if (file.size > 1048576){
+		          swal.fire({
+		            type: "error",
+		            title: "Ошибка",
+		            text: "Размер изображения больше лимита"
+		          });
+		        } else {
+		          let reader = new FileReader();
+		          reader.onload = event => {
+		            this.form.offer_hakim = event.target.result;
+		          };
+		          reader.readAsDataURL(file);
+		        }
+		      } else {
+		        swal.fire({
+		          type: "error",
+		          title: "Ошибка",
+		          text: "Картинка должна быть только png,jpg,jpeg!"
+		        });
+		      }
+		    },
+		    changePhoto(event) {
+		      let file = event.target.files[0];
+		      if (
+		        event.target.files[0]["type"] === "image/png" ||
+		        event.target.files[0]["type"] === "image/jpeg" ||
+		        event.target.files[0]["type"] === "image/jpg"
+		      ) {
+		        if (file.size > 1048576) {
+		          swal.fire({
+		            type: "error",
+		            title: "Ошибка",
+		            text: "Размер изображения больше лимита"
+		          });
+		        } else {
+		          let reader = new FileReader();
+		          reader.onload = event => {
+		            this.form.project_photo = event.target.result;
+		          };
+		          reader.readAsDataURL(file);
+		        }
+		      } else {
+		        swal.fire({
+		          type: "error",
+		          title: "Ошибка",
+		          text: "Картинка должна быть только png,jpg,jpeg!"
+		        });
+		      }
 		    },
 			async saveOfferbuilding(){
-		    	if (this.form.name != ''){
+		    	if (this.checkFormInput){
 					this.laoding = true
 					await this.actionAddOfferbuilding(this.form)
 					if (this.getMassage.success){

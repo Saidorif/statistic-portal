@@ -54,16 +54,6 @@
 			                      <option :value="item.id" v-for="(item,index) in getAreaList">{{item.name}}</option>
 			                    </select>
               				</div>
-				  			<div class="form-group col-md-3">
-							    <label for="station_type">Тип автостанции</label>
-							    <select
-							    	class="form-control input_style"
-							    	v-model="filter.station_type"
-						    	>
-							    	<option value="" selected>Выберите автостанцию</option>
-							    	<option :value="station.id" v-for="(station,index) in $g.stations()">{{station.name}}</option>
-							    </select>
-						  	</div>
 						  	<div class="col-lg-12 form-group d-flex justify-content-end">
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
@@ -87,7 +77,7 @@
 							<th scope="col">Название</th>
 							<th scope="col">Области</th>
 							<th scope="col">Регион</th>
-							<th scope="col">Тип станции</th>
+							<th scope="col">Класс станции</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
@@ -97,7 +87,7 @@
 							<td>{{station.name}}</td>
 							<td>{{station.region ? station.region.name : ''}}</td>
 							<td>{{station.area ? station.area.name : ''}}</td>
-							<td>{{$g.findStation(station.station_type)}}</td>
+							<td>{{station.class}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/station/edit/${station.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>

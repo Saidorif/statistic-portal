@@ -26,6 +26,8 @@ class CreateOfferbuildingsTable extends Migration
             $table->text('asos');
             $table->text('offer_hakim');
             $table->string('price');
+            $table->string('longitude'); 
+            $table->string('latitude');
             $table->string('bank_credit');
             $table->string('land_area');
             $table->date('time_of_construction_start')->nullable();

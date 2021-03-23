@@ -4,15 +4,19 @@ const state = {
 	stations: {},
 	message: [],
 	station: [],
-	stationList: [],
+	stationlist: [],
+	stationareabylist: [],
 };
 
 const getters = {
 	getStations(state){
 		return state.stations
 	},
+	getStationsAreaByList(state){
+		return state.stationareabylist
+	},
 	getStationsList(state){
-		return state.stationList
+		return state.stationlist
 	},
 	getMassage(state){
 		return state.message
@@ -24,6 +28,15 @@ const getters = {
 
 
 const actions = {
+	async actionStationLists({commit}){
+		try {
+			const stations =  await StationService.stationlists();
+			await commit('setStationLists',stations.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 	async actionStations({commit},payload){
 		try {
 			const stations =  await StationService.stations(payload);
@@ -37,6 +50,15 @@ const actions = {
 		try {
 			const stations =  await StationService.stationByRegion(page);
 			await commit('setStationsList',stations.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionStationByArea({commit},page){
+		try {
+			const stations =  await StationService.stationByArea(page);
+			await commit('setStationsAreaByList',stations.data.result)
 			return true
 		} catch (error) {
 			return false
@@ -81,6 +103,12 @@ const actions = {
 };
 
 const mutations = {
+	setStationsAreaByList(state, stationareabylist){
+		state.stationareabylist = stationareabylist
+	},
+	setStationLists(state, stationlist){
+		state.stationlist = stationlist
+	},
 	setStations(state, stations){
 		state.stations = stations
 	},

@@ -67,6 +67,11 @@ import Area from './components/admin/area/Area'
 import AddArea from './components/admin/area/AddArea'
 import EditArea from './components/admin/area/EditArea'
 
+// reconstruction
+import Reconstruction from './components/admin/reconstruction/Reconstruction'
+import AddReconstruction from './components/admin/reconstruction/AddReconstruction'
+import EditReconstruction from './components/admin/reconstruction/EditReconstruction'
+
 // Bus
 import Bus from './components/admin/bus/Bus'
 import AddBus from './components/admin/bus/AddBus'
@@ -242,6 +247,18 @@ const router = new Router({
 				{
 					path:'area/edit/:areaId',
 					component:EditArea,
+				},
+				{
+					path:'reconstruction',
+					component:Reconstruction,
+				},
+				{
+					path:'reconstruction/add',
+					component:AddReconstruction,
+				},
+				{
+					path:'reconstruction/edit/:reconstructionId',
+					component:EditReconstruction,
 				},
 				{
 					path:'offerbuilding',
