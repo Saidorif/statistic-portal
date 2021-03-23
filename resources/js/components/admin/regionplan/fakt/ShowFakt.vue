@@ -11,10 +11,10 @@
 					<div class="btn_green mr-2" :class="getStatusClass(form.status)">
 						{{getStatusName(form.status)}}
 					</div>
-				<router-link class="btn_black" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
-					<span class="peIcon fas fa-arrow-left"></span>
-					Назад
-				</router-link>
+					<router-link class="btn_black" :to='`/crm/regionplan/fakt/${$route.params.faktregionId}?expectId=${$route.query.expectId}`'>
+						<span class="peIcon fas fa-arrow-left"></span>
+						Назад
+					</router-link>
 				</div>
 		  	</div>
 		  	<div class="card-body">
@@ -39,9 +39,21 @@
 					    </div>
 					  </div>
 					  <div class="form-group col-md-4">
-					    <label for="auto_price">Автобус нарҳи</label>
+					    <label for="auto_price_sum">Автобус нарҳи (сум)</label>
 					    <div class="form-control input_style bg_disabled_color">
-					    	{{form.auto_price}}
+					    	{{form.auto_price_sum}}
+					    </div>
+					  </div>
+					  <div class="form-group col-md-4">
+					    <label for="auto_price_dollar">Автобус нарҳи (доллар)</label>
+					    <div class="form-control input_style bg_disabled_color">
+					    	{{form.auto_price_dollar}}
+					    </div>
+					  </div>
+					  <div class="form-group col-md-4">
+					    <label for="auto_price_euro">Автобус нарҳи (евро)</label>
+					    <div class="form-control input_style bg_disabled_color">
+					    	{{form.auto_price_euro}}
 					    </div>
 					  </div>
 					  <div class="form-group col-md-4 d-flex flex-column">
@@ -110,7 +122,7 @@
 					bus_id:'',
 					capacity:'',
 					bank_credit:'',
-					auto_price:'',
+					auto_price_sum:'',
 					purchase_date:'',
 					registr_cerf:'',
 					status:'',

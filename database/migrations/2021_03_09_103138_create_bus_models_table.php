@@ -16,6 +16,9 @@ class CreateBusModelsTable extends Migration
         Schema::create('bus_models', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

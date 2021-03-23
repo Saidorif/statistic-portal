@@ -19,6 +19,9 @@ class CreateExpectationsTable extends Migration
             $table->integer('inn')->unique();
             $table->integer('plan_id')->nullable();
             $table->date('date')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

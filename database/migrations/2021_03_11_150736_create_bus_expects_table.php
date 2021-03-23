@@ -18,6 +18,9 @@ class CreateBusExpectsTable extends Migration
             $table->integer('expect_id');
             $table->integer('bus_id');
             $table->string('bus_qty');
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             // $table->foreign('expect_id')

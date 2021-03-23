@@ -17,6 +17,9 @@ class CreateAreasTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('region_id');
             $table->string('name');
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

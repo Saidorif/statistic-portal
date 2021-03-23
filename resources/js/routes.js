@@ -47,10 +47,20 @@ import Confirmfakt from './components/admin/confirmfakt/Confirmfakt'
 import AddConfirmfakt from './components/admin/confirmfakt/AddConfirmfakt'
 import EditConfirmfakt from './components/admin/confirmfakt/EditConfirmfakt'
 
+// Station
+import Station from './components/admin/station/Station'
+import AddStation from './components/admin/station/AddStation'
+import EditStation from './components/admin/station/EditStation'
+
 // Region
 import Region from './components/admin/region/Region'
 import AddRegion from './components/admin/region/AddRegion'
 import EditRegion from './components/admin/region/EditRegion'
+
+// Offer
+import Offerbuilding from './components/admin/offerbuilding/Offerbuilding'
+import AddOfferbuilding from './components/admin/offerbuilding/AddOfferbuilding'
+import EditOfferbuilding from './components/admin/offerbuilding/EditOfferbuilding'
 
 // Area
 import Area from './components/admin/area/Area'
@@ -234,6 +244,18 @@ const router = new Router({
 					component:EditArea,
 				},
 				{
+					path:'offerbuilding',
+					component:Offerbuilding,
+				},
+				{
+					path:'offerbuilding/add',
+					component:AddOfferbuilding,
+				},
+				{
+					path:'offerbuilding/edit/:offerbuildingId',
+					component:EditOfferbuilding,
+				},
+				{
 					path:'expec-mod/:expId',
 					component:ExpectationMod,
 				},
@@ -300,6 +322,18 @@ const router = new Router({
 				{
 					path:'confirmfakt/edit/:confirmfaktId',
 					component:EditConfirmfakt,
+				},
+				{
+					path:'station',
+					component:Station,
+				},
+				{
+					path:'station/add',
+					component:AddStation,
+				},
+				{
+					path:'station/edit/:stationId',
+					component:EditStation,
 				},
 				{
 					path:'regionplan',

@@ -19,6 +19,9 @@ class CreateRegionPlanModelsTable extends Migration
             $table->string('name')->nullable();
             $table->string('number')->default(0);
             $table->date('date')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

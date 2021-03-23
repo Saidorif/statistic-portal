@@ -26265,6 +26265,10 @@ svg:not(:root).svg-inline--fa {
   justify-content: center;
 }
 
+.mx-datepicker {
+  width: 100% !important;
+}
+
 .login_logo {
   display: flex;
   justify-content: center;

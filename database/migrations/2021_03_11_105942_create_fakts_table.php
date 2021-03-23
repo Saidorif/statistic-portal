@@ -28,6 +28,9 @@ class CreateFaktsTable extends Migration
             $table->string('registr_cerf')->nullable();
             $table->string('status')->nullable();
             $table->text('comment')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

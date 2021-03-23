@@ -143,6 +143,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/offerbuilding">
+              <i class="sidebar_icon fas fa-city"></i>
+              <p>
+                Offer building
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/expec-mod/1">
                 <i class="sidebar_icon fas fa-bus"></i>
                 <p>
@@ -155,6 +163,14 @@
               <i class="sidebar_icon fas fa-file"></i>
               <p>
                 Confirmfakt
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/station">
+              <i class="sidebar_icon fas fa-file"></i>
+              <p>
+                Station
               </p>
             </router-link>
           </li>
