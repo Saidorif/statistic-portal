@@ -45,17 +45,17 @@
 					    	:class="isRequired(form.name) ? 'isRequired' : ''"
 				    	>
 					  </div>
-				<!-- 	  <div class="form-group col-md-9">
-					    <label for="station_type">Station Type</label>
-					    <select
+					  <div class="form-group col-md-9">
+					    <label for="class">Class name</label>
+					    <input
+					    	type="text"
 					    	class="form-control input_style"
-					    	v-model="form.station_type"
-					    	:class="isRequired(form.station_type) ? 'isRequired' : ''"
+					    	id="class"
+					    	placeholder="Class name"
+					    	v-model="form.class"
+					    	:class="isRequired(form.class) ? 'isRequired' : ''"
 				    	>
-					    	<option value="" selected disabled>choose option</option>
-					    	<option :value="station.id" v-for="(station,index) in $g.stations()">{{station.name}}</option>
-					    </select>
-					  </div> -->
+					  </div>
 					  <div class="form-group col-lg-3 form_btn">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -80,8 +80,8 @@
 				form:{
 					region_id:'',
 					area_id:'',
-					station_type:'',
 					name:'',
+					class:'',
 				},
 				requiredInput:false,
 				laoding: true
@@ -107,7 +107,7 @@
 	    		return this.requiredInput && input === '';
 		    },
 			async saveStation(){
-		    	if (this.form.name != '' && this.form.region_id != '' && this.form.area_id != '' && this.form.station_type != ''){
+		    	if (this.form.name != '' && this.form.region_id != '' && this.form.area_id != '' && this.form.class != ''){
 					this.laoding = true
 					await this.actionUpdateStation(this.form)
 					if(this.getMassage.success){

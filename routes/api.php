@@ -96,6 +96,7 @@ Route::group([
             Route::get('area/list', 'AreaController@list');
             Route::get('area/edit/{id}', 'AreaController@edit');
             Route::post('area/update/{id}', 'AreaController@update');
+            Route::post('area/regionby', 'AreaController@regionby');
             Route::delete('area/destroy/{id}', 'AreaController@destroy');
 
             //RegionPlan CRUD
@@ -124,6 +125,24 @@ Route::group([
             Route::delete('fakt/destroy/{id}', 'FaktController@destroy');
             Route::post('fakt/accept', 'FaktController@accept');
             Route::post('fakt/reject', 'FaktController@reject');
+
+            //Station CRUD
+            Route::post('station', 'StationController@index');
+            Route::post('station/store', 'StationController@store');
+            Route::get('station/list', 'StationController@list');
+            Route::post('station/regionby', 'StationController@regionby');
+            Route::post('station/areaby', 'StationController@areaby');
+            Route::get('station/edit/{id}', 'StationController@edit');
+            Route::post('station/update/{id}', 'StationController@update');
+            Route::delete('station/destroy/{id}', 'StationController@destroy');
+
+            //Offerbuilding model
+            Route::post('offerbuilding', 'OfferbuildingController@index');
+            Route::post('offerbuilding/store', 'OfferbuildingController@store');
+            Route::get('offerbuilding/list', 'OfferbuildingController@list');
+            Route::get('offerbuilding/edit/{id}', 'OfferbuildingController@edit');
+            Route::post('offerbuilding/update/{id}', 'OfferbuildingController@update');
+            Route::delete('offerbuilding/destroy/{id}', 'OfferbuildingController@destroy');
 
             //Role model
             Route::get('role', 'RoleController@index');
