@@ -1,4 +1,12 @@
-.card-body::after, .card-footer::after, .card-header::after{
+*{
+    font-family: 'Overpass-Light';
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Overpass-Bold';
+}
+.card-body::after,
+.card-footer::after,
+.card-header::after{
     display: none;
 }
 .lognCard{
@@ -81,7 +89,7 @@
     border-radius: 0.25rem;
 }
 .content-wrapper{
-    background: rgba(255,255,255,0.45) !important;
+    background: #070d19 !important;
 }
 .table-striped tbody tr:nth-of-type(odd){
     background-color: rgba(62, 97, 116, .1);
@@ -206,9 +214,11 @@
 .table.text-center, .table.text-center td, .table.text-center th{
     vertical-align: middle;
 }
+.top_nav_header,
 .main-sidebar{
-    background: #fff;
-    box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
+    background: #0c1427;
+    // box-shadow: 7px 0 60px rgb(0 0 0 / 5%);
+    border-bottom: 1px solid #172340;
 }
 .nav-sidebar .nav-item>.nav-link{
     transition: .5s;
@@ -216,23 +226,25 @@
 .nav-sidebar .nav-item>.nav-link:hover,
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link{
-    background: #e0f3ff !important;
-    color: #3f6ad8 !important;
+    // background: #fff !important;
+    background: #0c1427 !important;
+    color: #727cf5 !important;
     font-weight: bold;
 }
 .nav-pills .nav-link.active .sidebar_icon,
 .nav-sidebar .nav-item>.nav-link:hover .sidebar_icon{
-    color: #3f6ad8 !important;
+    color: #727cf5 !important;
 }
 .exp_header{
     display: flex;
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    box-shadow: 0px 0px 1px white;
     border-width: 0;
     transition: all .2s;
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #0c1427;
     .exp_header_item{
         width: calc(100% / 4);
         display: flex;
@@ -248,7 +260,7 @@
             margin: 0 1rem 0 0;
             background-color: #f7b924;
             font-size: 1.7rem;
-            color: #343a40 ;
+            color: #fff ;
         }
         h6{
             margin: -0.5rem 0 0;
@@ -257,14 +269,14 @@
             font-size: .88rem;
             font-weight: 400;
             line-height: 1.5;
-            color: #495057;
+            color: #fff;
         }
         h3{
             font-weight: bold;
             font-size: 2.5rem;
             display: block;
             line-height: 1;
-            color: #495057;
+            color: #fff;
         }
         &:nth-child(2){
             span{
