@@ -12,7 +12,31 @@
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveReconstruction" >
 					<div class="row">
-					  <div class="form-group col-md-3">
+					  <div class="form-group col-md-4">
+					    <label for="company">Компании</label>
+					    <multiselect
+							:value="values"
+							:options="findList"
+							@search-change="value => findCompany(value)"
+							v-model="values"
+	                        placeholder="Выберите маршрут"
+	                        :searchable="true"
+	                        track-by="id"
+	                        label="name"
+	                        :max="3"
+							:loading="isLoading"
+							selectLabel="Нажмите Enter, чтобы выбрать"
+							deselectLabel="Нажмите Enter, чтобы удалить"
+							:option="[{name: 'Otash', id: 1}]"
+							@select="dispatchAction"
+							@remove="removeCompany"
+							:class="isRequired(form.offerbuilding_id) ? 'isRequired' : ''"
+							>
+							<span slot="noResult">По вашему запросу ничего не найдено</span>
+							<span slot="noOptions">Cписок пустой</span>
+						</multiselect>
+				  	  </div>
+					  <div class="form-group col-md-4">
 			              <label for="start_date">Дата начала</label>
 			              <date-picker
 			                lang="ru"
@@ -22,7 +46,7 @@
 			                :class="isRequired(form.start_date) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-					  <div class="form-group col-md-3">
+					  <div class="form-group col-md-4">
 			              <label for="end_date">Дата окончания</label>
 			              <date-picker
 			                lang="ru"
@@ -74,7 +98,7 @@
 					    	:class="isRequired(form.recon_hakim) ? 'isRequired' : ''"
 				    	>
 					  </div>
-					  <div class="form-group col-lg-6 form_btn d-flex justify-content-end">
+					  <div class="form-group col-lg-12 form_btn d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
@@ -89,15 +113,18 @@
 <script>
 	import { mapGetters , mapActions } from 'vuex'
 	import Loader from '../../Loader'
+	import Multiselect from 'vue-multiselect';
 	import DatePicker from "vue2-datepicker";
 	export default{
 		components:{
 			Loader,
 			DatePicker,
+			Multiselect,
 		},
 		data(){
 			return{
 				form:{
+					offerbuilding_id:'',
 					start_date:'',
 					end_date:'',
 					summa:'',
@@ -106,19 +133,56 @@
 					recon_hakim:'',
 				},
 				requiredInput:false,
-				laoding: true
+				laoding: true,
+				isLoading: false,
+				values: {},
+				findList: [],
 			}
 		},
 		computed:{
-			...mapGetters('reconstruction',['getMassage'])
+			...mapGetters('reconstruction',['getMassage','getReconstructionFindList']),
+			checkInput(){
+				if (
+					this.form.offerbuilding_id != '' && 
+					this.form.start_date != '' && 
+					this.form.end_date != '' && 
+					this.form.summa != '' && 
+					this.form.asos != '' && 
+					this.form.comment != '' && 
+					this.form.recon_hakim != ''
+				) {
+					return true
+				}else{
+					return false
+				}
+			}
 		},
 		mounted(){
 			this.laoding = false
 		},
 		methods:{
-			...mapActions('reconstruction',['actionAddReconstruction']),
+			...mapActions('reconstruction',['actionAddReconstruction','actionReconstructionFind']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
+		    },
+		    removeCompany(){
+		    	this.form.offerbuilding_id=''
+		    	this.values={}
+				this.findList = []
+		    },
+		    async findCompany(value){
+		      if(value != ''){
+		        this.isLoading = true
+		        await setTimeout(async ()=>{
+					await this.actionReconstructionFind({name: value})
+			        this.findList = this.getReconstructionFindList
+		        this.isLoading = false
+		        },1000)
+		      }
+		    },
+		    async dispatchAction(data){
+				this.values = data;
+				this.form.offerbuilding_id = data.id
 		    },
 		    changeOfferHakim(event) {
 		      let file = event.target.files[0];
@@ -149,7 +213,7 @@
 		      }
 		    },
 			async saveReconstruction(){
-		    	if (this.form.name != ''){
+		    	if (this.checkInput){
 					this.laoding = true
 					await this.actionAddReconstruction(this.form)
 					if (this.getMassage.success) {

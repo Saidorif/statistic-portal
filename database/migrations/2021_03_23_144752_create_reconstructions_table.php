@@ -21,6 +21,7 @@ class CreateReconstructionsTable extends Migration
             $table->text('asos');
             $table->text('recon_hakim')->nullable();
             $table->string('summa')->nullable();
+            $table->string('status');
             $table->text('comment')->nullable();
             $table->timestamps();
         });

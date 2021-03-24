@@ -5,6 +5,7 @@ const state = {
 	reconstructionlist: [],
 	message: [],
 	reconstruction: [],
+	reconstructionFindList: [],
 };
 
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
 	getReconstruction(state){
 		return state.reconstruction
 	},
+	getReconstructionFindList(state){
+		return state.reconstructionFindList
+	},
 };
 
 
@@ -28,6 +32,15 @@ const actions = {
 		try {
 			const reconstructions =  await ReconstructionService.reconstructionList(page);
 			await commit('setReconstructionList',reconstructions.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionReconstructionFind({commit},payload){
+		try {
+			const reconstructions =  await ReconstructionService.reconstructionFind(payload);
+			await commit('setReconstructionFind',reconstructions.data.result)
 			return true
 		} catch (error) {
 			return false
@@ -92,6 +105,9 @@ const mutations = {
 	},
 	setEditReconstruction(state, reconstruction){
 		state.reconstruction = reconstruction
+	},
+	setReconstructionFind(state, reconstructionFindList){
+		state.reconstructionFindList = reconstructionFindList
 	},
 };
 

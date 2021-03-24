@@ -144,6 +144,16 @@ Route::group([
             Route::post('offerbuilding/update/{id}', 'OfferbuildingController@update');
             Route::delete('offerbuilding/destroy/{id}', 'OfferbuildingController@destroy');
 
+            //Reconstruction CRUD
+            Route::post('reconstruction', 'ReconstructionController@index');
+            Route::post('reconstruction/find', 'ReconstructionController@find');
+            Route::post('reconstruction/store', 'ReconstructionController@store');
+            Route::get('reconstruction/list', 'ReconstructionController@list');
+            Route::get('reconstruction/edit/{id}', 'ReconstructionController@edit');
+            Route::post('reconstruction/update/{id}', 'ReconstructionController@update');
+            Route::delete('reconstruction/destroy/{id}', 'ReconstructionController@destroy');
+
+
             //Role model
             Route::get('role', 'RoleController@index');
             Route::post('role/store', 'RoleController@store');

@@ -18,14 +18,34 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Название</th>
+							<th scope="col">Туман/Шахар</th>
+							<th scope="col">Станция</th>
+							<th scope="col">Компании</th>
+							<th scope="col">Ф.И.О</th>
+							<th scope="col">ИНН</th>
+							<th scope="col">Статус</th>
+							<th scope="col">Дата начала</th>
+							<th scope="col">Дата окончания</th>
+							<th scope="col">Сумма</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(reg,index) in getReconstructions.data">
 							<td scope="row">{{reg.id}}</td>
-							<td>{{reg.name}}</td>
+							<td>{{reg.offerbuilding.area ? reg.offerbuilding.area.name : ''}}</td>
+							<td>{{reg.offerbuilding.station ? reg.offerbuilding.station.name : ''}}</td>
+							<td>{{reg.offerbuilding.company_name}}</td>
+							<td>{{reg.offerbuilding.name}}</td>
+							<td>{{reg.offerbuilding.inn}}</td>
+							<td>
+								<div class="badge" :class="getStatusClass(reg.status)">
+									{{getStatusName(reg.status)}}
+								</div>
+							</td>
+							<td>{{reg.start_date}}</td>
+							<td>{{reg.end_date}}</td>
+							<td>{{reg.summa}}</td>
 							<td>
 								<router-link tag="button" class="btn_transparent" :to='`/crm/reconstruction/edit/${reg.id}`'>
 									<i class="pe_icon pe-7s-edit editColor"></i>
@@ -69,6 +89,24 @@
 				this.laoding = true
 				await this.actionReconstructions(page)
 				this.laoding = false
+			},
+			getStatusName(status){
+				if(status == 'waiting'){
+					return "Тасдикланмаган"
+				}else if(status == 'rejected'){
+					return "Рад этилган"
+				}else if(status == 'accepted'){
+					return "Тасдикланган"
+				}
+			},
+			getStatusClass(status){
+				if(status == 'waiting'){
+					return "badge-warning"
+				}else if(status == 'rejected'){
+					return "badge-danger"
+				}else if(status == 'accepted'){
+					return "badge-primary"
+				}
 			},
 			async deleteReconstruction(id){
 				if(confirm("Вы действительно хотите удалить?")){

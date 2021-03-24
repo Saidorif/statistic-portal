@@ -4,6 +4,9 @@ const ReconstructionService = {
 	reconstructionList(){
 		return ApiService.get(`/api/reconstruction/list`)
 	},
+	reconstructionFind(data){
+		return ApiService.post(`/api/reconstruction/find`,data)
+	},
 	allreconstructions(page){
 		return ApiService.post(`/api/reconstruction?page=${page}`)
 	},
