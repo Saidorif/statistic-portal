@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard">
 		<div class="card">
-		  	<div class="card-header">
+		  	<div class="card-header header_filter">
 				  <div class="header_title">
 						<h4 class="title_user">
 							<i class="sidebar_icon fas fa-desktop"></i>
@@ -20,11 +20,11 @@
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Дата c</label>
   								<date-picker v-model="filter.date_from" value-type="format" format="YYYY-MM-DD"></date-picker>
-				  			</div>	
+				  			</div>
   					  		<div class="form-group col-lg-2">
 	  							<label for="category_id">Дата по</label>
   								<date-picker v-model="filter.date_to" value-type="format" format="YYYY-MM-DD"></date-picker>
-				  			</div>	
+				  			</div>
 						  	<div class="col-lg-2 form-group btn_search">
 							  	<button type="button" class="btn btn-primary mr-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
@@ -34,9 +34,9 @@
 							  		<i class="fas fa-times"></i>
 								  	сброс
 							  	</button>
-					  	  	</div>	
+					  	  	</div>
 				  		</div>
-				  	</div>	
+				  	</div>
 			  	</transition>
 		  	</div>
 		  	<div class="card-body">
@@ -46,7 +46,7 @@
 					</div>
 					<div class="col-md-6" v-if="loaded">
 						<Bar ref="charttwo" :propchartdata="this.vedGroupChartDataByCountry" :propSettings="this.vedGroupChartDataByCountrySettings"/>
-					</div> 
+					</div>
 					<!-- <div class="col-md-12 overauto" v-if="loaded">
 							<Bar :propchartdata="this.countryChartData" :propSettings="this.countryChartDataSettings"/>
 					</div>  -->

@@ -307,14 +307,25 @@ export default {
   }
   .nav-sidebar .nav-item>.nav-link{
     color: #fff;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #ffffff1f;
+    transition: .5s !important;
   }
+  .nav-sidebar  .nav-item.menu-open>.nav-link,
   .nav-sidebar .nav-item>.nav-link:hover,
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link{
-    background-color: #e6e6e6;
-    font-weight: bold;
+    background: #727cf561 !important;
+    color: white !important;
+    font-weight: 400;
+    border-color: red;
+    padding-left: 30px;
   }
   .nav-pills .nav-link{
     border-radius: 0px;
+
+  }
+  .nav-item .nav-treeview{
+      padding-left: 20px;
   }
 </style>
