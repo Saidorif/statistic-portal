@@ -96,11 +96,12 @@
 					  	  	</div>
 					  		<div class="form-group col-lg-9 d-flex align-items-center">
 					  			<div v-for="(image, key) in form.gallery" :key="key" class="gallery_item">
-								     <img :src="image" class="preview" style="width:50px;"/>
+								     <img :src="image" class="preview"/>
+                                      <a href="" class="remove"><i class="fas fa-trash"></i></a>
 								 </div>
 					  	  	</div>
 					  	</div>
-				  	  </div>	
+				  	  </div>
 					  <div class="form-group col-lg-12 form_btn d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -147,11 +148,11 @@
 			...mapGetters('reconstruction',['getMassage','getReconstructionFindList']),
 			checkInput(){
 				if (
-					this.form.offerbuilding_id != '' && 
-					this.form.start_date != '' && 
-					this.form.end_date != '' && 
-					this.form.summa != '' && 
-					this.form.asos != '' && 
+					this.form.offerbuilding_id != '' &&
+					this.form.start_date != '' &&
+					this.form.end_date != '' &&
+					this.form.summa != '' &&
+					this.form.asos != '' &&
 					this.form.recon_hakim != ''
 				) {
 					return true
@@ -267,9 +268,5 @@
 	}
 </script>
 <style scoped>
-	.gallery_item{
-		width: 80px;
-	    border: 1px solid #988e8e;
-	    margin: 15px;
-	}
+
 </style>
