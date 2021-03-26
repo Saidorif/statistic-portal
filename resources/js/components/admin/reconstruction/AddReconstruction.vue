@@ -10,7 +10,7 @@
 				<router-link class="btn_black" to="/crm/reconstruction"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveReconstruction" >
+		  		<form @submit.prevent.enter="saveReconstruction" enctype="multipart/form-data">
 					<div class="row">
 					  <div class="form-group col-md-4">
 					    <label for="company">Компании</label>
@@ -22,12 +22,12 @@
 	                        placeholder="Выберите маршрут"
 	                        :searchable="true"
 	                        track-by="id"
-	                        label="name"
+	                        label="company_name"
 	                        :max="3"
 							:loading="isLoading"
 							selectLabel="Нажмите Enter, чтобы выбрать"
 							deselectLabel="Нажмите Enter, чтобы удалить"
-							:option="[{name: 'Otash', id: 1}]"
+							:option="[{company_name: 'Otash', id: 1}]"
 							@select="dispatchAction"
 							@remove="removeCompany"
 							:class="isRequired(form.offerbuilding_id) ? 'isRequired' : ''"
@@ -78,16 +78,6 @@
 					    ></textarea>
 					  </div>
 					  <div class="form-group col-md-3">
-					    <label for="comment">Комментарии</label>
-					    <textarea
-					    	class="form-control input_style"
-					    	v-model="form.comment"
-					    	:class="isRequired(form.comment) ? 'isRequired' : ''"
-					    	rows="1"
-					    	placeholder="Комментарии"
-					    ></textarea>
-					  </div>
-					  <div class="form-group col-md-3">
 					    <label for="recon_hakim">Реконструкция учун ҳокимнинг қарори</label>
 					    <input
 					    	type="file"
@@ -98,6 +88,19 @@
 					    	:class="isRequired(form.recon_hakim) ? 'isRequired' : ''"
 				    	>
 					  </div>
+					  <div class="form-group col-lg-12">
+					  	<div class="row">
+					  		<div class="form-group col-lg-3">
+					  			<label for="gallery">Изображения</label>
+						  		<input type="file" id="gallery" class="form-control" multiple @change="uploadImage"/>
+					  	  	</div>
+					  		<div class="form-group col-lg-9 d-flex align-items-center">
+					  			<div v-for="(image, key) in form.gallery" :key="key" class="gallery_item">
+								     <img :src="image" class="preview" style="width:50px;"/>
+								 </div>
+					  	  	</div>
+					  	</div>
+				  	  </div>	
 					  <div class="form-group col-lg-12 form_btn d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -129,14 +132,15 @@
 					end_date:'',
 					summa:'',
 					asos:'',
-					comment:'',
 					recon_hakim:'',
+					gallery:[],
 				},
 				requiredInput:false,
 				laoding: true,
 				isLoading: false,
 				values: {},
 				findList: [],
+				files: [],
 			}
 		},
 		computed:{
@@ -148,7 +152,6 @@
 					this.form.end_date != '' && 
 					this.form.summa != '' && 
 					this.form.asos != '' && 
-					this.form.comment != '' && 
 					this.form.recon_hakim != ''
 				) {
 					return true
@@ -165,6 +168,36 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
+		    uploadImage(event) {
+	            let selectedFiles = event.target.files;
+				selectedFiles.forEach((file,index)=>{
+			      	if (
+				        file["type"] === "image/png" ||
+				        file["type"] === "image/jpeg" ||
+				        file["type"] === "image/jpg"
+			      	) {
+				        if (file.size > 1048576){
+				          swal.fire({
+				            type: "error",
+				            title: "Ошибка",
+				            text: "Размер изображения больше лимита"
+				          });
+			        	} else {
+				          let reader = new FileReader();
+				          reader.onload = event => {
+				            this.form.gallery.push(event.target.result);
+				          };
+				          reader.readAsDataURL(file);
+				        }
+			      	} else {
+				        swal.fire({
+				          type: "error",
+				          title: "Ошибка",
+				          text: "Картинка должна быть только png,jpg,jpeg!"
+				        });
+			      	}
+				})
+	        },
 		    removeCompany(){
 		    	this.form.offerbuilding_id=''
 		    	this.values={}
@@ -234,5 +267,9 @@
 	}
 </script>
 <style scoped>
-
+	.gallery_item{
+		width: 80px;
+	    border: 1px solid #988e8e;
+	    margin: 15px;
+	}
 </style>

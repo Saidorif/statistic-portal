@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Offerbuilding;
 use App\Reconstruction;
+use App\ReconstructionGallery;
 use Validator;
 use Image;
 use Illuminate\Support\Str;
@@ -62,14 +63,14 @@ class ReconstructionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
         $validator = Validator::make($request->all(), [   
             'offerbuilding_id'      => 'required|integer',
             'start_date'      => 'required|date',
             'end_date'      => 'required|date',
             'summa'      => 'required',
             'asos'      => 'required|string',
-            'comment'      => 'required|string',
             'recon_hakim'      => 'required|string',
         ]);
 
@@ -91,7 +92,27 @@ class ReconstructionController extends Controller
         }
         $inputs['status'] = 'waiting';
         $inputs['created_by'] = $request->user()->id;
-        $result = Reconstruction::create($inputs);
+        $reconstruction = Reconstruction::create($inputs);
+
+        // Create Reconstruction Gallery
+        if(count($inputs['gallery']) > 0){
+            foreach ($inputs['gallery'] as $key => $gallery) {
+                $strpositem = strpos($gallery,';');
+                $subitem = substr($gallery, 0,$strpositem);
+                $exitem = explode('/',$subitem)[1];
+                $img_nameitem = 'foto'.time().$key."g.".$exitem;
+
+                $imgitem = Image::make($gallery);
+                $img_pathitem = public_path()."/reconstructiongallery/";
+                $imgitem->save($img_pathitem.$img_nameitem);
+
+                $gal = new ReconstructionGallery();
+                $gal->reconstruction_id = $reconstruction->id;
+                $gal->name = $img_nameitem;
+                $gal->save();
+
+            }
+        }
 
         return response()->json(['success' => true, 'message' => 'Reconstruction успешно создан']);
     }
@@ -104,7 +125,7 @@ class ReconstructionController extends Controller
      */
     public function edit($id)
     {
-        $result = Reconstruction::with('offerbuilding')->find($id);
+        $result = Reconstruction::with(['offerbuilding','gallery'])->find($id);
         if(!$result){
             return response()->json(['error' => true, 'message' => 'Reconstruction не найден']);
         }
@@ -131,7 +152,6 @@ class ReconstructionController extends Controller
             'end_date'      => 'required|date',
             'summa'      => 'required',
             'asos'      => 'required|string',
-            'comment'      => 'required|string',
             'recon_hakim'      => 'required|string',
         ]);
 
@@ -184,5 +204,35 @@ class ReconstructionController extends Controller
         $result->delete();
 
         return response()->json(['success' => true, 'message' => 'Reconstruction удален']);
+    }
+
+    public function reject(Request $request)
+    {
+        $id = $request->id;
+        $inputs = $request->only('id','comment');
+        $result = Reconstruction::find($id);
+        if(!$result){
+            return response()->json(['error' => true, 'message' => 'Reconstruction не найден']);
+        }
+        if($result->status == 'accepted'){
+            return response()->json(['error' => true, 'message' => 'Вы не можете изменить подтвержденный статус']);
+        }else{
+            $result->comment = $request->comment;
+            $result->status = 'rejected';
+            $result->save();
+        }
+        return response()->json(['success' => true, 'message' => 'Статус изменен']);
+    }
+
+    public function accept(Request $request)
+    {   
+        $id = $request->id;
+        $result = Reconstruction::find($id);
+        if(!$result){
+            return response()->json(['error' => true, 'message' => 'Reconstruction не найден']);
+        }
+        $result->status = 'accepted';
+        $result->save();
+        return response()->json(['success' => true, 'message' => 'Статус изменен']);
     }
 }

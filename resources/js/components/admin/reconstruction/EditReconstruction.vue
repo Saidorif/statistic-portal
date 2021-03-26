@@ -10,7 +10,7 @@
 				<router-link class="btn_black" to="/crm/reconstruction"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveReconstruction" >
+		  		<form @submit.prevent.enter="saveReconstruction" enctype="multipart/form-data">
 					<div class="row">
 					  <div class="form-group col-md-4">
 					    <label for="company">Компании</label>
@@ -22,12 +22,12 @@
 	                        placeholder="Выберите маршрут"
 	                        :searchable="true"
 	                        track-by="id"
-	                        label="name"
+	                        label="company_name"
 	                        :max="3"
 							:loading="isLoading"
 							selectLabel="Нажмите Enter, чтобы выбрать"
 							deselectLabel="Нажмите Enter, чтобы удалить"
-							:option="[{name: 'Otash', id: 1}]"
+							:option="[{company_name: 'Otash', id: 1}]"
 							@select="dispatchAction"
 							@remove="removeCompany"
 							:class="isRequired(form.offerbuilding_id) ? 'isRequired' : ''"
@@ -78,16 +78,6 @@
 					    ></textarea>
 					  </div>
 					  <div class="form-group col-md-3">
-					    <label for="comment">Комментарии</label>
-					    <textarea
-					    	class="form-control input_style"
-					    	v-model="form.comment"
-					    	:class="isRequired(form.comment) ? 'isRequired' : ''"
-					    	rows="1"
-					    	placeholder="Комментарии"
-					    ></textarea>
-					  </div>
-					  <div class="form-group col-md-3">
 					    <label for="recon_hakim">Реконструкция учун ҳокимнинг қарори</label>
 					    <input
 					    	type="file"
@@ -129,7 +119,6 @@
 					end_date:'',
 					summa:'',
 					asos:'',
-					comment:'',
 					recon_hakim:'',
 				},
 				requiredInput:false,
@@ -148,7 +137,6 @@
 					this.form.end_date != '' && 
 					this.form.summa != '' && 
 					this.form.asos != '' && 
-					this.form.comment != '' && 
 					this.form.recon_hakim != ''
 				){
 					return true

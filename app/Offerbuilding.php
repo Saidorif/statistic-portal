@@ -33,6 +33,7 @@ class Offerbuilding extends Model
     	'ustav_fond', // устав фонди (давлат улуши ва таъсисчилар улуши)
     	'project_photo', // проект расми
     	'status',
+        'comment',
     	'created_by',
     	'updated_by',
     ];

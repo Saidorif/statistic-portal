@@ -37,6 +37,7 @@ class CreateOfferbuildingsTable extends Migration
             $table->string('work_schedule');
             $table->string('ustav_fond');
             $table->text('project_photo')->nullable();
+            $table->text('comment')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();

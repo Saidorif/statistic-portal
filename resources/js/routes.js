@@ -62,6 +62,11 @@ import Offerbuilding from './components/admin/offerbuilding/Offerbuilding'
 import AddOfferbuilding from './components/admin/offerbuilding/AddOfferbuilding'
 import EditOfferbuilding from './components/admin/offerbuilding/EditOfferbuilding'
 
+// Offer
+import ConfirmOfferbuilding from './components/admin/confirmofferbuilding/ConfirmOfferbuilding'
+import AddConfirmOfferbuilding from './components/admin/confirmofferbuilding/AddConfirmOfferbuilding'
+import EditConfirmOfferbuilding from './components/admin/confirmofferbuilding/EditConfirmOfferbuilding'
+
 // Area
 import Area from './components/admin/area/Area'
 import AddArea from './components/admin/area/AddArea'
@@ -71,6 +76,11 @@ import EditArea from './components/admin/area/EditArea'
 import Reconstruction from './components/admin/reconstruction/Reconstruction'
 import AddReconstruction from './components/admin/reconstruction/AddReconstruction'
 import EditReconstruction from './components/admin/reconstruction/EditReconstruction'
+
+// confirm-reconstruction
+import ConfirmReconstruction from './components/admin/confirmreconstruction/ConfirmReconstruction'
+import AddConfirmReconstruction from './components/admin/confirmreconstruction/AddConfirmReconstruction'
+import EditConfirmReconstruction from './components/admin/confirmreconstruction/EditConfirmReconstruction'
 
 // Bus
 import Bus from './components/admin/bus/Bus'
@@ -261,6 +271,18 @@ const router = new Router({
 					component:EditReconstruction,
 				},
 				{
+					path:'confirm-reconstruction',
+					component:ConfirmReconstruction,
+				},
+				{
+					path:'confirm-reconstruction/add',
+					component:AddConfirmReconstruction,
+				},
+				{
+					path:'confirm-reconstruction/edit/:reconstructionId',
+					component:EditConfirmReconstruction,
+				},
+				{
 					path:'offerbuilding',
 					component:Offerbuilding,
 				},
@@ -271,6 +293,18 @@ const router = new Router({
 				{
 					path:'offerbuilding/edit/:offerbuildingId',
 					component:EditOfferbuilding,
+				},
+				{
+					path:'confirm-offerbuilding',
+					component:ConfirmOfferbuilding,
+				},
+				{
+					path:'confirm-offerbuilding/add',
+					component:AddConfirmOfferbuilding,
+				},
+				{
+					path:'confirm-offerbuilding/edit/:offerbuildingId',
+					component:EditConfirmOfferbuilding,
 				},
 				{
 					path:'expec-mod/:expId',

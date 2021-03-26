@@ -93,7 +93,7 @@ class OfferbuildingController extends Controller
      */
     public function edit($id)
     {
-        $result = Offerbuilding::find($id);
+        $result = Offerbuilding::with(['area','station'])->find($id);
         if(!$result){
             return response()->json(['error' => true, 'message' => 'Offerbuilding не найден']);
         }
@@ -207,5 +207,35 @@ class OfferbuildingController extends Controller
         $result->delete();
 
         return response()->json(['success' => true, 'message' => 'Offerbuilding удален']);
+    }
+
+    public function reject(Request $request)
+    {
+        $id = $request->id;
+        $inputs = $request->only('id','comment');
+        $result = Offerbuilding::find($id);
+        if(!$result){
+            return response()->json(['error' => true, 'message' => 'Offerbuilding не найден']);
+        }
+        if($result->status == 'accepted'){
+            return response()->json(['error' => true, 'message' => 'Вы не можете изменить подтвержденный статус']);
+        }else{
+            $result->comment = $request->comment;
+            $result->status = 'rejected';
+            $result->save();
+        }
+        return response()->json(['success' => true, 'message' => 'Статус изменен']);
+    }
+
+    public function accept(Request $request)
+    {   
+        $id = $request->id;
+        $result = Offerbuilding::find($id);
+        if(!$result){
+            return response()->json(['error' => true, 'message' => 'Offerbuilding не найден']);
+        }
+        $result->status = 'accepted';
+        $result->save();
+        return response()->json(['success' => true, 'message' => 'Статус изменен']);
     }
 }

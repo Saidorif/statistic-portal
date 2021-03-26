@@ -28,6 +28,24 @@ const getters = {
 
 
 const actions = {
+	async actionAcceptReconstruction({commit},payload){
+		try {
+			const items =  await ReconstructionService.accept(payload);
+			await commit('setMessage',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionRejectReconstruction({commit},payload){
+		try {
+			const items =  await ReconstructionService.reject(payload);
+			await commit('setMessage',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 	async actionReconstructionList({commit},page){
 		try {
 			const reconstructions =  await ReconstructionService.reconstructionList(page);

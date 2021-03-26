@@ -33,11 +33,11 @@
 					<tbody>
 						<tr v-for="(reg,index) in getReconstructions.data">
 							<td scope="row">{{reg.id}}</td>
-							<td>{{reg.offerbuilding.area ? reg.offerbuilding.area.name : ''}}</td>
-							<td>{{reg.offerbuilding.station ? reg.offerbuilding.station.name : ''}}</td>
-							<td>{{reg.offerbuilding.company_name}}</td>
-							<td>{{reg.offerbuilding.name}}</td>
-							<td>{{reg.offerbuilding.inn}}</td>
+							<td>{{reg.offerbuilding && reg.offerbuilding.area ? reg.offerbuilding.area.name : ''}}</td>
+							<td>{{reg.offerbuilding && reg.offerbuilding.station ? reg.offerbuilding.station.name : ''}}</td>
+							<td>{{reg.offerbuilding && reg.offerbuilding.company_name}}</td>
+							<td>{{reg.offerbuilding && reg.offerbuilding.name}}</td>
+							<td>{{reg.offerbuilding && reg.offerbuilding.inn}}</td>
 							<td>
 								<div class="badge" :class="getStatusClass(reg.status)">
 									{{getStatusName(reg.status)}}

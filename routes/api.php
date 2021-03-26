@@ -143,7 +143,9 @@ Route::group([
             Route::get('offerbuilding/edit/{id}', 'OfferbuildingController@edit');
             Route::post('offerbuilding/update/{id}', 'OfferbuildingController@update');
             Route::delete('offerbuilding/destroy/{id}', 'OfferbuildingController@destroy');
-
+            Route::post('offerbuilding/accept', 'OfferbuildingController@accept');
+            Route::post('offerbuilding/reject', 'OfferbuildingController@reject');
+            
             //Reconstruction CRUD
             Route::post('reconstruction', 'ReconstructionController@index');
             Route::post('reconstruction/find', 'ReconstructionController@find');
@@ -152,7 +154,8 @@ Route::group([
             Route::get('reconstruction/edit/{id}', 'ReconstructionController@edit');
             Route::post('reconstruction/update/{id}', 'ReconstructionController@update');
             Route::delete('reconstruction/destroy/{id}', 'ReconstructionController@destroy');
-
+            Route::post('reconstruction/accept', 'ReconstructionController@accept');
+            Route::post('reconstruction/reject', 'ReconstructionController@reject');
 
             //Role model
             Route::get('role', 'RoleController@index');

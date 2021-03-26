@@ -12,18 +12,6 @@
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveOfferbuilding" enctype="multipart/form-data">
 					<div class="row">
-	<!-- 			      <div class="form-group col-md-3">
-					    <label for="type_of_construction">Таклиф тури</label>
-					    <select 
-					    	class="form-control input_style" 
-					    	v-model="form.type_of_construction"
-					    	:class="isRequired(form.type_of_construction) ? 'isRequired' : ''"
-				    	>
-					    	<option value="" selected disabled>Таклиф турини танланг!</option>
-					    	<option value="construction">Курилиш!</option>
-					    	<option value="reconstruction">Тамирлаш ва кайта куриш!</option>
-					    </select>
-					  </div> -->
 				      <div class="form-group col-md-3">
 					    <label for="area_id">Туман/шахарлар</label>
 					    <select 
@@ -81,17 +69,6 @@
 				    	>
 					  </div>
 					  <div class="form-group col-md-3">
-					    <label for="longitude">Longitude</label>
-					    <input
-					    	type="number"
-					    	class="form-control input_style"
-					    	id="longitude"
-					    	placeholder="Longitude"
-					    	v-model="form.longitude"
-					    	:class="isRequired(form.longitude) ? 'isRequired' : ''"
-				    	>
-					  </div>
-					  <div class="form-group col-md-3">
 					    <label for="latitude">Latitude</label>
 					    <input
 					    	type="number"
@@ -100,6 +77,17 @@
 					    	placeholder="latitude"
 					    	v-model="form.latitude"
 					    	:class="isRequired(form.latitude) ? 'isRequired' : ''"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="longitude">Longitude</label>
+					    <input
+					    	type="number"
+					    	class="form-control input_style"
+					    	id="longitude"
+					    	placeholder="Longitude"
+					    	v-model="form.longitude"
+					    	:class="isRequired(form.longitude) ? 'isRequired' : ''"
 				    	>
 					  </div>
 					  <div class="form-group col-md-3">

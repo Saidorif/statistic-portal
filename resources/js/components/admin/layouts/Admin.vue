@@ -142,7 +142,7 @@
               </p>
             </router-link>
           </li>
-                    <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>
               <p>
@@ -164,6 +164,33 @@
                     <i class="sidebar_icon fas fa-building"></i>
                     <p>
                         Reconstruction
+                    </p>
+                    </router-link>
+                </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>
+              <p>
+                Confirm Offer & Recon
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/crm/confirm-offerbuilding">
+                    <i class="sidebar_icon fas fa-city"></i>
+                    <p>
+                        Confirm Offer building
+                    </p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/crm/confirm-reconstruction">
+                    <i class="sidebar_icon fas fa-building"></i>
+                    <p>
+                        Confirm Reconstruction
                     </p>
                     </router-link>
                 </li>

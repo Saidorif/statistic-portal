@@ -24,6 +24,24 @@ const getters = {
 
 
 const actions = {
+	async actionAcceptOfferbuilding({commit},payload){
+		try {
+			const items =  await OfferbuildingService.accept(payload);
+			await commit('setMessage',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionRejectOfferbuilding({commit},payload){
+		try {
+			const items =  await OfferbuildingService.reject(payload);
+			await commit('setMessage',items.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 	async actionOfferbuildingList({commit},page){
 		try {
 			const items =  await OfferbuildingService.offerbuildingList(page);

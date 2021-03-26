@@ -19,6 +19,12 @@ const OfferbuildingService = {
 	deleteofferbuilding(id){
 		return ApiService.delete(`/api/offerbuilding/destroy/${id}`)
 	},
+	accept(data){
+		return ApiService.post(`/api/offerbuilding/accept`,data)
+	},
+	reject(data){
+		return ApiService.post(`/api/offerbuilding/reject`,data)
+	},
 };
 
 export { OfferbuildingService };

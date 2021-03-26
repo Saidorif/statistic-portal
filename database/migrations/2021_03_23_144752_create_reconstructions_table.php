@@ -24,6 +24,11 @@ class CreateReconstructionsTable extends Migration
             $table->string('status');
             $table->text('comment')->nullable();
             $table->timestamps();
+
+            $table->foreign('offerbuilding_id')
+                ->references('id')
+                ->on('offerbuildings')
+                ->onDelete('cascade');
         });
     }
 
