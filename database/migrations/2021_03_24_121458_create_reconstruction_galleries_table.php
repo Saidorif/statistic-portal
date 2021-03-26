@@ -19,10 +19,10 @@ class CreateReconstructionGalleriesTable extends Migration
             $table->text('name');
             $table->timestamps();
 
-            $table->foreign('reconstruction_id')
-                ->references('id')
-                ->on('reconstructions')
-                ->onDelete('cascade');
+            // $table->foreign('reconstruction_id')
+            //     ->references('id')
+            //     ->on('reconstructions')
+            //     ->onDelete('cascade');
         });
     }
 

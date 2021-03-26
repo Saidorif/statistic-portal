@@ -25,10 +25,10 @@ class CreateReconstructionsTable extends Migration
             $table->text('comment')->nullable();
             $table->timestamps();
 
-            $table->foreign('offerbuilding_id')
-                ->references('id')
-                ->on('offerbuildings')
-                ->onDelete('cascade');
+            // $table->foreign('offerbuilding_id')
+            //     ->references('id')
+            //     ->on('offerbuildings')
+            //     ->onDelete('cascade');
         });
     }
 
