@@ -95,10 +95,10 @@
 						  		<input type="file" id="gallery" class="form-control" multiple @change="uploadImage"/>
 					  	  	</div>
 					  		<div class="form-group col-lg-9 d-flex align-items-center">
-					  			<div v-for="(image, key) in form.gallery" :key="key" class="gallery_item">
-								     <img :src="image" class="preview"/>
-                                      <a href="" class="remove"><i class="fas fa-trash"></i></a>
-								 </div>
+					  			<div v-for="(image, key) in form.gallery" :key="key" :class="'gallery_item imgb'+key">
+								    <img @click="showImgScaledVersion('imgb'+key)" :src="image" class="preview"/>
+                                    <a href="" class="remove"><i class="fas fa-trash"></i></a>
+								</div>
 					  	  	</div>
 					  	</div>
 				  	  </div>
@@ -184,11 +184,11 @@
 				            text: "Размер изображения больше лимита"
 				          });
 			        	} else {
-				          let reader = new FileReader();
-				          reader.onload = event => {
-				            this.form.gallery.push(event.target.result);
-				          };
-				          reader.readAsDataURL(file);
+                            let reader = new FileReader();
+                            reader.onload = event => {
+                                this.form.gallery.push(event.target.result);
+                            };
+                            reader.readAsDataURL(file);
 				        }
 			      	} else {
 				        swal.fire({
@@ -199,6 +199,10 @@
 			      	}
 				})
 	        },
+            showImgScaledVersion(elem) {
+                let elemDiv = document.querySelector(`.${elem}`);
+                elemDiv.classList.toggle('showed')
+            },
 		    removeCompany(){
 		    	this.form.offerbuilding_id=''
 		    	this.values={}
@@ -225,19 +229,19 @@
 		        event.target.files[0]["type"] === "image/jpeg" ||
 		        event.target.files[0]["type"] === "image/jpg"
 		      ) {
-		        if (file.size > 1048576){
-		          swal.fire({
-		            type: "error",
-		            title: "Ошибка",
-		            text: "Размер изображения больше лимита"
-		          });
-		        } else {
-		          let reader = new FileReader();
-		          reader.onload = event => {
-		            this.form.recon_hakim = event.target.result;
-		          };
-		          reader.readAsDataURL(file);
-		        }
+                    if (file.size > 1048576){
+                        swal.fire({
+                            type: "error",
+                            title: "Ошибка",
+                            text: "Размер изображения больше лимита"
+                        });
+                    } else {
+                        let reader = new FileReader();
+                        reader.onload = event => {
+                            this.form.recon_hakim = event.target.result;
+                        };
+                        reader.readAsDataURL(file);
+		            }
 		      } else {
 		        swal.fire({
 		          type: "error",
