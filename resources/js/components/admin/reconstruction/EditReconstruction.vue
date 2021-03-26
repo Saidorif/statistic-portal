@@ -56,7 +56,7 @@
 			                :class="isRequired(form.end_date) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-					  <div class="form-group col-md-3">
+					  <div class="form-group col-md-4">
 					    <label for="summa">Сумма</label>
 					    <input
 					    	type="number"
@@ -67,7 +67,7 @@
 					    	:class="isRequired(form.summa) ? 'isRequired' : ''"
 				    	>
 					  </div>
-					  <div class="form-group col-md-3">
+					  <div class="form-group col-md-4">
 					    <label for="asos">Асос</label>
 					    <textarea
 					    	class="form-control input_style"
@@ -77,7 +77,7 @@
 					    	placeholder="Асос"
 					    ></textarea>
 					  </div>
-					  <div class="form-group col-md-3">
+					  <div class="form-group col-md-4">
 					    <label for="recon_hakim">Реконструкция учун ҳокимнинг қарори</label>
 					    <input
 					    	type="file"
@@ -88,6 +88,25 @@
 					    	:class="isRequired(form.recon_hakim) ? 'isRequired' : ''"
 				    	>
 					  </div>
+					  <div class="form-group col-lg-12">
+					  	<div class="row">
+					  		<div class="form-group col-lg-4">
+					  			<label for="gallery">Изображения</label>
+						  		<input type="file" id="gallery" class="form-control" multiple @change="uploadImage"/>
+					  	  	</div>
+					  		<div class="form-group col-lg-9 d-flex align-items-center">
+					  			<div v-for="(image, key) in form.gallery" :key="key" :class="'gallery_item imgb'+key">
+								    <img @click="showImgScaledVersion('imgb'+key)" :src="getImg(image)" class="preview"/>
+                                    <a href="#" class="remove" @click.prevent="removeGalleryFromServer(image.id)" v-if="image.id">
+                                		<i class="fas fa-trash"></i>
+                                	</a>
+                                    <a href="#" class="remove" @click.prevent="removeGallery(key)" v-else>
+                                		<i class="fas fa-trash"></i>
+                                	</a>
+								</div>
+					  	  	</div>
+					  	</div>
+				  	  </div>
 					  <div class="form-group col-lg-12 form_btn d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -120,12 +139,14 @@
 					summa:'',
 					asos:'',
 					recon_hakim:'',
+					gallery:[],
 				},
 				requiredInput:false,
 				laoding: true,
 				isLoading: false,
 				values: {},
 				findList: [],
+				files: [],
 			}
 		},
 		computed:{
@@ -152,10 +173,68 @@
 			this.laoding = false
 		},
 		methods:{
-			...mapActions('reconstruction',['actionEditReconstruction','actionUpdateReconstruction','actionReconstructionFind']),
+			...mapActions('reconstruction',[
+				'actionEditReconstruction',
+				'actionUpdateReconstruction',
+				'actionReconstructionFind',
+				'actionDeleteReconstructionGallery'
+			]),
+			async removeGalleryFromServer(id){
+				if(confirm("Вы действительно хотите удалить?")){
+					await this.actionDeleteReconstructionGallery(id)
+					await this.actionEditReconstruction(this.$route.params.reconstructionId)
+					this.form = this.getReconstruction
+				}
+			},
+			removeGallery(index){
+				if(confirm("Вы действительно хотите удалить?")){
+					Vue.delete(this.form.gallery,index)
+				}
+			},
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
+		    getImg(item){
+		    	if(item.id){
+		    		return '/reconstructiongallery/'+item.name
+		    	}else{
+		    		return item
+		    	}
+		    },
+		    uploadImage(event) {
+	            let selectedFiles = event.target.files;
+				selectedFiles.forEach((file,index)=>{
+			      	if (
+				        file["type"] === "image/png" ||
+				        file["type"] === "image/jpeg" ||
+				        file["type"] === "image/jpg"
+			      	) {
+				        if (file.size > 1048576){
+				          swal.fire({
+				            type: "error",
+				            title: "Ошибка",
+				            text: "Размер изображения больше лимита"
+				          });
+			        	} else {
+                            let reader = new FileReader();
+                            reader.onload = event => {
+                                this.form.gallery.push(event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+				        }
+			      	} else {
+				        swal.fire({
+				          type: "error",
+				          title: "Ошибка",
+				          text: "Картинка должна быть только png,jpg,jpeg!"
+				        });
+			      	}
+				})
+	        },
+            showImgScaledVersion(elem) {
+                let elemDiv = document.querySelector(`.${elem}`);
+                elemDiv.classList.toggle('showed')
+            },
 		    removeCompany(){
 		    	this.form.offerbuilding_id=''
 		    	this.values={}
@@ -206,6 +285,11 @@
 			async saveReconstruction(){
 		    	if (this.checkInput){
 					this.laoding = true
+					this.form['gallery'] = this.form.gallery.filter((item,index)=>{
+						if(!item.id){
+							return item
+						}
+					})
 					await this.actionUpdateReconstruction(this.form)
 					if (this.getMassage.success) {
 						toast.fire({

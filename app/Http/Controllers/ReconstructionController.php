@@ -20,7 +20,7 @@ class ReconstructionController extends Controller
      */
     public function index()
     {
-        $result = Reconstruction::with('offerbuilding')->paginate(12);
+        $result = Reconstruction::with('offerbuilding')->orderByDesc('id')->paginate(12);
         return response()->json(['success' => true, 'result' => $result]);
     }
 
@@ -176,6 +176,27 @@ class ReconstructionController extends Controller
         else{
             $recon_hakim = $result->recon_hakim;
         }
+
+        // Create Reconstruction Gallery
+        if(count($inputs['gallery']) > 0){
+            foreach ($inputs['gallery'] as $key => $gallery) {
+                $strpositem = strpos($gallery,';');
+                $subitem = substr($gallery, 0,$strpositem);
+                $exitem = explode('/',$subitem)[1];
+                $img_nameitem = 'foto'.time().$key."g.".$exitem;
+
+                $imgitem = Image::make($gallery);
+                $img_pathitem = public_path()."/reconstructiongallery/";
+                $imgitem->save($img_pathitem.$img_nameitem);
+
+                $gal = new ReconstructionGallery();
+                $gal->reconstruction_id = $result->id;
+                $gal->name = $img_nameitem;
+                $gal->save();
+
+            }
+        }
+
         $inputs['recon_hakim'] = $recon_hakim;
         $inputs['status'] = 'waiting';
         $inputs['updated_by'] = $request->user()->id;
@@ -201,9 +222,34 @@ class ReconstructionController extends Controller
         if(!$result){
             return response()->json(['error' => true, 'message' => 'Reconstruction не найден']);
         }
+        $gallery = ReconstructionGallery::where(['reconstruction_id'=>$id])->get();
+        foreach ($gallery as $key => $value) {
+            $img_path = public_path()."/reconstructiongallery/";
+            $recon_gallery = $img_path.$value->name;
+            if (file_exists($recon_gallery)){
+                @unlink($recon_gallery);
+            }
+            $value->delete();
+        }
         $result->delete();
 
         return response()->json(['success' => true, 'message' => 'Reconstruction удален']);
+    }
+
+    public function removeGallery($id)
+    {
+        $gallery = ReconstructionGallery::find($id);
+        $img_path = public_path()."/reconstructiongallery/";
+        $recon_gallery = $img_path.$gallery->name;
+        if (file_exists($recon_gallery)){
+            @unlink($recon_gallery);
+        }
+        if(!$gallery){
+            return response()->json(['error' => true, 'message' => 'ReconstructionGallery не найден']);
+        }
+        $gallery->delete();
+
+        return response()->json(['success' => true, 'message' => 'ReconstructionGallery удален']);
     }
 
     public function reject(Request $request)

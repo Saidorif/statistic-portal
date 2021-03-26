@@ -156,6 +156,7 @@ Route::group([
             Route::delete('reconstruction/destroy/{id}', 'ReconstructionController@destroy');
             Route::post('reconstruction/accept', 'ReconstructionController@accept');
             Route::post('reconstruction/reject', 'ReconstructionController@reject');
+            Route::delete('reconstruction/destroy-gallery/{id}', 'ReconstructionController@removeGallery');
 
             //Role model
             Route::get('role', 'RoleController@index');

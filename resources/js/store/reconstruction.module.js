@@ -109,6 +109,15 @@ const actions = {
 			return false
 		}
 	},
+	async actionDeleteReconstructionGallery({commit},id){
+		try {
+			const reconstruction =  await ReconstructionService.deletereconstructiongallery(id);
+			await commit('setMessage',reconstruction.data)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
 };
 
 const mutations = {

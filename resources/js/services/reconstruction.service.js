@@ -22,6 +22,9 @@ const ReconstructionService = {
 	deletereconstruction(id){
 		return ApiService.delete(`/api/reconstruction/destroy/${id}`)
 	},
+	deletereconstructiongallery(id){
+		return ApiService.delete(`/api/reconstruction/destroy-gallery/${id}`)
+	},
 	accept(data){
 		return ApiService.post(`/api/reconstruction/accept`,data)
 	},
