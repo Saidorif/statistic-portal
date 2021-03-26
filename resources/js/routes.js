@@ -16,6 +16,9 @@ import Employee from './components/admin/employee/Employee'
 import AddEmployee from './components/admin/employee/AddEmployee'
 import EditEmployee from './components/admin/employee/EditEmployee'
 
+// Tender
+import Tender from './components/admin/tender/Tender'
+
 // RegionPlan
 import RegionPlan from './components/admin/regionplan/RegionPlan'
 import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
@@ -153,6 +156,10 @@ const router = new Router({
 					// 	action:'index',
 					// 	subject:'IndexController'
 					// }
+				},
+				{
+					path:'tender',
+					component:Tender,
 				},
 				{
 					path:'profile',

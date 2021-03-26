@@ -33,6 +33,7 @@ import {confirmfakt} from "./confirmfakt.module"
 import {offerbuilding} from "./offerbuilding.module"
 import {station} from "./station.module"
 import {reconstruction} from "./reconstruction.module"
+import {tender} from "./tender.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -72,7 +73,8 @@ const store = new Vuex.Store(
             reconstruction,
             busmodel,
             faktmod,
-            expectationmod
+            expectationmod,
+            tender,
 		},
 		state:{
 			rules:[],

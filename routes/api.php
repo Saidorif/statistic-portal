@@ -22,6 +22,8 @@ Route::group([
     Route::group(['middleware' => 'jwt.auth'], function(){
         // Route::group(['middleware' => 'permit'], function(){
 
+            // Integration
+            Route::post('tender', 'IntegrationController@tender');
             //Dashboard
             Route::get('dashboard', 'DashboardController@index');
 

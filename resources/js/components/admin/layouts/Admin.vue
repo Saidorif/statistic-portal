@@ -142,6 +142,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/tender">
+              <i class="sidebar_icon fas fa-bus"></i>
+              <p>
+                Tenders
+              </p>
+            </router-link>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>

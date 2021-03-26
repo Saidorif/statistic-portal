@@ -1,3 +1,4 @@
+const TENDER_TOKEN = 't_token'
 const TOKEN_KEY = 'access_token'
 const USER = 'user'
 const GUEST = 'guestInfo'
@@ -8,6 +9,12 @@ const TokenService = {
 	},
 	saveToken(token) {
 		localStorage.setItem(TOKEN_KEY, token);
+	},
+	getTender() {
+		return localStorage.getItem(TENDER_TOKEN);
+	},
+	saveTender(token) {
+		localStorage.setItem(TENDER_TOKEN, token);
 	},
 	saveCurrentUser(user){
 		localStorage.setItem(USER, JSON.stringify(user));
