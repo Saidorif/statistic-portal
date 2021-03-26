@@ -5,7 +5,7 @@
 		  		<div class="header_title">
 				    <h4 class="title_user">
 				    	<i class="sidebar_icon fas fa-city"></i>
-					     Страны 
+					     Страны
 					</h4>
 					<div class="add_user_btn">
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
@@ -19,20 +19,20 @@
 				  		<div class="row">
   					  		<div class="form-group col-lg-3">
 	  							<label for="name">Название</label>
-	  							<input 
-	  								type="text" 
-	  								class="form-control" 
-	  								id="name" 
+	  							<input
+	  								type="text"
+	  								class="form-control"
+	  								id="name"
 	  								placeholder="Название..."
 	  								v-model="filter.name"
   								>
 				  			</div>
   					  		<div class="form-group col-lg-3">
 	  							<label for="code">Код</label>
-	  							<input 
-	  								type="text" 
-	  								class="form-control" 
-	  								id="code" 
+	  							<input
+	  								type="text"
+	  								class="form-control"
+	  								id="code"
 	  								placeholder="Код..."
 	  								v-model="filter.code"
   								>
@@ -46,9 +46,9 @@
 							  		<i class="fas fa-times"></i>
 								  	сброс
 							  	</button>
-					  	  	</div>	
+					  	  	</div>
 				  		</div>
-				  	</div>	
+				  	</div>
 			  	</transition>
 		  	</div>
 		  	<div class="card-body">
@@ -81,8 +81,8 @@
 							</td>
 						</tr>
 					</tbody>
-					<pagination :limit="4" :data="getCountries" @pagination-change-page="getResults"></pagination>
 				</table>
+					<pagination :limit="4" :data="getCountries" @pagination-change-page="getResults"></pagination>
 			  </div>
 		  </div>
 	  	</div>
@@ -111,7 +111,7 @@
 		},
 		methods:{
 			...mapActions('country',['actionCountries']),
-			async getResults(page = 1){ 
+			async getResults(page = 1){
 				await this.actionCountries({page:page,items:this.filter})
 			},
 			toggleFilter(){
@@ -149,5 +149,5 @@
 	}
 </script>
 <style scoped>
-	
+
 </style>
