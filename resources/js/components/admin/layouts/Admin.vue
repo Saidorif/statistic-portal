@@ -146,7 +146,7 @@
             <router-link class="nav-link" to="/crm/tender">
               <i class="sidebar_icon fas fa-route"></i>
               <p>
-                Направления
+                Направления маршрутов
               </p>
             </router-link>
           </li>

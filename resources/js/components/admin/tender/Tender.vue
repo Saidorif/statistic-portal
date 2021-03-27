@@ -6,7 +6,7 @@
 		  		<div class="header_title mb-2">
 				    <h4 class="title_user">
 				    	<i class="peIcon fas fa-route"></i>
-					    Направления
+					    Направления маршрутов
 					</h4>
 	            	<div class="add_user_btn">
 		                <span class="alert alert-info" style="    margin: 0px 15px 0px auto;">
@@ -81,7 +81,17 @@
                       			  <option value="taxi">Йўналиши тахи йуналиши</option>
 			                    </select>
               				</div>
-				  			<div class="form-group col-lg-3">
+  							<div class="form-group col-lg-3">
+				  				<label for="year">Сортировать по году</label>
+				  				<date-picker
+					                lang="ru"
+					                type="year" format="YYYY" valueType="format"
+					                v-model="filter.year"
+					                placeholder="Выберите дату!"
+					                class="input_style"
+				              	></date-picker>
+              				</div>
+				<!--   			<div class="form-group col-lg-3">
 				  				<label for="from_date">Сортировать по дате <em>c</em></label>
 				  				<date-picker
 					                lang="ru"
@@ -100,8 +110,8 @@
 					                placeholder="Выберите дату!"
 					                class="input_style"
 				              	></date-picker>
-              				</div>
-						  	<div class="col-lg-12 form-group filter_btn">
+              				</div> -->
+						  	<div class="col-lg-3 form-group filter_btn">
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
 								  	сброс
@@ -175,6 +185,7 @@
 					region_id:'',
 					dir_type:'',
 					profitability:'',
+                    year:'',
                     from_date:'',
                     to_date:'',
                     pass_number: '',
@@ -201,7 +212,7 @@
 			},
 			async search(){
 				let page = 1
-				if(this.filter.pass_number != '' || this.filter.region_id != '' || this.filter.dir_type != '' || this.filter.from_date != '' || this.filter.profitability != '' || this.filter.to_date != ''){
+				if(this.filter.pass_number != '' || this.filter.region_id != '' || this.filter.dir_type != '' || this.filter.from_date != '' || this.filter.profitability != '' || this.filter.to_date != '' || this.filter.year != ''){
 					let data = {
 						page:page,
 						items:this.filter
@@ -217,6 +228,7 @@
 					this.filter.dir_type = ''
 					this.filter.from_date = ''
 					this.filter.to_date = ''
+					this.filter.year = ''
 					this.filter.profitability = ''
 					this.filter.pass_number = ''
                     let page  = 1
