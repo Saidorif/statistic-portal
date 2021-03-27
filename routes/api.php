@@ -24,6 +24,7 @@ Route::group([
 
             // Integration
             Route::post('tender', 'IntegrationController@tender');
+            Route::get('tender/regions', 'IntegrationController@getTenderRegions');
             //Dashboard
             Route::get('dashboard', 'DashboardController@index');
 

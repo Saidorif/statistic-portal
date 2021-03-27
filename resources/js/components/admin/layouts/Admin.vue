@@ -144,9 +144,9 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/crm/tender">
-              <i class="sidebar_icon fas fa-bus"></i>
+              <i class="sidebar_icon fas fa-route"></i>
               <p>
-                Tenders
+                Направления
               </p>
             </router-link>
           </li>
