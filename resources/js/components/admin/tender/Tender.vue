@@ -88,7 +88,7 @@
 					                type="year" format="YYYY" valueType="format"
 					                v-model="filter.year"
 					                placeholder="Выберите дату!"
-					                class="input_style"
+					                class="input_style form-date"
 				              	></date-picker>
               				</div>
 				<!--   			<div class="form-group col-lg-3">

@@ -23,7 +23,7 @@ class IntegrationController extends Controller
             return response()->json($result);
         } catch (\Throwable $th) {
             throw $th;die;
-            return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже']);
+            return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже!']);
         }
     }
 
@@ -58,17 +58,16 @@ class IntegrationController extends Controller
                 return response()->json($result);
             } catch (\Throwable $th) {
                 throw $th;die;
-                return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже']);
+                return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже!']);
             }
         }
-        return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже']);
+        return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже!']);
     }
 
     public function getTenderToken(){
         $integ = TokenIntegration::where('expired_time', '>', date('Y-m-d H:m:s'))->where('type','tender')->first();
         if(!$integ){
             try {
-                //Send query and get token
                 $client = new \GuzzleHttp\Client();
 
                 $response = $client->post('http://crm.uztrans.uz/api/login', [
@@ -91,7 +90,6 @@ class IntegrationController extends Controller
                     ]);
                 }
             } catch (\Throwable $th) {
-                // throw $th;
                 return false;
             }
         }
