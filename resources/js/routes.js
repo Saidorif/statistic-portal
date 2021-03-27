@@ -18,6 +18,7 @@ import EditEmployee from './components/admin/employee/EditEmployee'
 
 // Tender
 import Tender from './components/admin/tender/Tender'
+import TenderByRegion from './components/admin/tender/TenderByRegion'
 
 // RegionPlan
 import RegionPlan from './components/admin/regionplan/RegionPlan'
@@ -160,6 +161,10 @@ const router = new Router({
 				{
 					path:'tender',
 					component:Tender,
+				},
+				{
+					path:'tender/byregion/:tenderId',
+					component:TenderByRegion,
 				},
 				{
 					path:'profile',

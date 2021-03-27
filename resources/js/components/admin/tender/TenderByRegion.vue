@@ -10,17 +10,44 @@
 					</h4>
 	            	<div class="add_user_btn">
 		                <span class="alert alert-info" style="    margin: 0px 15px 0px auto;">
-		            		Общее количество направления <b>{{ qtyTotal }} шт.</b>
+		            		Количество направления <b>{{ getTenderByRegions.total }} шт.</b>
 		            	</span>
 			            <button type="button" class="btn btn-info toggleFilter" @click.prevent="toggleFilter">
 						    <i class="fas fa-filter"></i>
 			            	Филтр
 						</button>
+						<router-link class="btn btn-info" to='/crm/tender'>
+				            <span class="peIcon fas fa-arrow-left"></span> Назад
+			          	</router-link>
 		            </div>
 	            </div>
 	            <transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
+				  			<div class="form-group col-lg-3">
+				  				<label for="bypass_number">Номер направления</label>
+                                  <input class="form-control input_style" placeholder="Поиск по номеру" type="text" v-model="filter.pass_number" id="bypass_number">
+              				</div>
+				  			<div class="form-group col-lg-3">
+				  				<label for="status">По статусу закрепления!</label>
+			                    <select
+			                      id="status"
+			                      class="form-control input_style"
+			                      v-model="filter.status"
+			                    >
+			                      <option value="" selected >Выберите статус закрепления!</option>
+			                    </select>
+              				</div>
+				  			<div class="form-group col-lg-3">
+				  				<label for="status">По статусу размещения!</label>
+			                    <select
+			                      id="status"
+			                      class="form-control input_style"
+			                      v-model="filter.status"
+			                    >
+			                      <option value="" selected >Выберите статус размещения!</option>
+			                    </select>
+              				</div>
 				  			<div class="form-group col-lg-3">
 				  				<label for="profitability">Сортировать по рентабельности!</label>
 			                    <select
@@ -76,7 +103,7 @@
 					                class="input_style"
 				              	></date-picker>
               				</div> -->
-						  	<div class="col-lg-3 form-group filter_btn">
+						  	<div class="col-lg-6 form-group filter_btn">
 							  	<button type="button" class="btn btn-warning clear" @click.prevent="clear">
 							  		<i class="fas fa-times"></i>
 								  	сброс
@@ -96,25 +123,37 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-                            <th>Регион</th>
-                            <th>Количество направления</th>
-                            <th>Посмотреть</th>
+                            <th width="10%">Регион</th>
+                            <th>Номер и наименования маршрута</th>
+                            <th>Наименования организации </th>
+                            <th>Срок действитвия контракта </th>
+                            <th width="13%">Статус</th>
+                            <th>Йўналиши тури</th>
+                            <th>Дата открытия</th>
+                            <th>Потверждения</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(direct,index) in getTenders">
+						<tr v-for="(direct,index) in getTenderByRegions.data">
 							<td scope="row">{{index + 1}}</td>
-							<td>{{direct.region_name}}</td>
-							<td>{{direct.count_by_region}}</td>
 							<td>
-								<button type="button" class="btn_transparent" @click.prevent="showDirectionByregion(direct.id)">
-									<i class="pe_icon fas fa-eye"></i>
-								</button>
-							<!-- 	<router-link tag="button" class="btn_transparent" :to='`/crm/tender/byregion/${direct.id}`'>
-								</router-link> -->
+								<template v-if="direct.created_by">
+									{{direct.created_by.region ? direct.created_by.region.name : ''}}
+								</template>
 							</td>
+							<td><b>{{direct.pass_number}}</b> - {{direct.name}}</td>
+							<td></td>
+							<td></td>
+							<td>
+                                <span class="alert alert-danger pt-1 pb-1" v-if="direct.status == 'active'"> Неразмещен в тендер</span>
+                                <span class="alert alert-success pt-1 pb-1" v-if="direct.status == 'busy'"> Размещен в тендер</span>
+                            </td>
+							<td>{{direct.dir_type == 'taxi' ? 'Йўналишли тахи йуналиши' : 'Автобус йуналиши'}}</td>
+							<td>{{direct.year}}</td>
+							<td>{{ checkApprove(direct) }}</td>
 						</tr>
 					</tbody>
+					<pagination :limit="4" :data="getTenderByRegions" @pagination-change-page="getResults"></pagination>
 				</table>
 			  </div>
 		  </div>
@@ -138,58 +177,54 @@
 					dir_type:'',
 					profitability:'',
                     year:'',
-                    // from_date:'',
-                    // to_date:'',
+                    from_date:'',
+                    to_date:'',
+                    pass_number: '',
 				},
 				filterShow:false,
 			}
 		},
 		async mounted(){
-			await this.actionTenders()
+			this.filter['region_id'] = this.$route.params.tenderId
+			let data = {
+				page : 1,
+				items:this.filter,
+			}
+			await this.actionTenderByRegions(data)
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('tender',['getTenders','getMassage']),
-			qtyTotal(){
-				let count = 0;
-				if(this.getTenders.length > 0){
-					this.getTenders.forEach((item,index)=>{
-						count += Number(item.count_by_region)
-					})
-				}
-				return count
-			}
+			...mapGetters('tender',['getTenderByRegions','getMassage'])
 		},
 		methods:{
-			...mapActions('tender',['actionTenders']),
-			showDirectionByregion(id){
-				this.$router.push({path:`/crm/tender/byregion/${id}`,query:this.filter})
-			},
+			...mapActions('tender',['actionTenderByRegions']),
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
 			async search(){
-				// let page = 1
-				// if(this.filter.dir_type != '' || this.filter.from_date != '' || this.filter.profitability != '' || this.filter.to_date != '' || this.filter.year != ''){
-				// 	let data = {
-				// 		page:page,
-				// 		items:this.filter
-    //                 }
-				// 	this.laoding = true
-				// 	await this.actionTenders(data)
-				// 	this.laoding = false
-				// }
+				let page = 1
+				if(this.filter.pass_number != '' || this.filter.dir_type != '' || this.filter.from_date != '' || this.filter.profitability != '' || this.filter.to_date != '' || this.filter.year != ''){
+					let data = {
+						page:page,
+						items:this.filter
+                    }
+					this.laoding = true
+					await this.actionTenderByRegions(data)
+					this.laoding = false
+				}
 			},
 			async clear(){
-					// this.filter.dir_type = ''
-					// this.filter.from_date = ''
-					// this.filter.to_date = ''
-					// this.filter.year = ''
-					// this.filter.profitability = ''
-     //                let page  = 1
-     //                this.laoding = true
-     //                await this.actionTenders({page: page,items:this.filter})
-     //                this.laoding = false
+				
+					this.filter.dir_type = ''
+					this.filter.from_date = ''
+					this.filter.to_date = ''
+					this.filter.year = ''
+					this.filter.profitability = ''
+					this.filter.pass_number = ''
+                    let page  = 1
+                    this.laoding = true
+                    await this.actionTenderByRegions({page: page,items:this.filter})
+                    this.laoding = false
 
 			},
 			async getResults(page = 1){ 
@@ -198,7 +233,7 @@
 					items:this.filter
 				}
 				this.laoding = true
-				await this.actionTenders(data)
+				await this.actionTenderByRegions(data)
 				this.laoding = false
 			},
 			checkApprove(item){

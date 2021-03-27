@@ -3,8 +3,11 @@ import { TokenService } from './storage.service'
 import axios from 'axios'
 
 const TenderService = {
-	tenderAll(date){
-		return ApiService.post(`/api/tender?page=${date.page}`,date.items)
+	tenderAll(){
+		return ApiService.post(`/api/tender`)
+	},
+	tenderbyRegion(data){
+		return ApiService.post(`/api/tenderByRegion?page=${data.page}`,data.items)
 	},
 	tenderRegions(){
 		return ApiService.get(`/api/tender/regions`)

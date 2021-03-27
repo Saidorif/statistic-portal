@@ -1,7 +1,8 @@
 import {TenderService} from "../services/tender.service";
 
 const state = {
-	tenders: {},
+	tenders: [],
+	tenderbyregions: {},
 	message: [],
 	regions: [],
 };
@@ -9,6 +10,9 @@ const state = {
 const getters = {
 	getTenders(state){
 		return state.tenders
+	},
+	getTenderByRegions(state){
+		return state.tenderbyregions
 	},
 	getMassage(state){
 		return state.message
@@ -20,10 +24,19 @@ const getters = {
 
 
 const actions = {
-	async actionTenders({commit},payload){
+	async actionTenders({commit}){
 		try {
-			const tenders =  await TenderService.tenderAll(payload);
+			const tenders =  await TenderService.tenderAll();
 			await commit('setTenders',tenders.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionTenderByRegions({commit},payload){
+		try {
+			const tenders =  await TenderService.tenderbyRegion(payload);
+			await commit('setTenderByRegions',tenders.data.result)
 			return true
 		} catch (error) {
 			return false
@@ -44,6 +57,9 @@ const actions = {
 const mutations = {
 	setTenderRegionList(state, regions){
 		state.regions = regions
+	},
+	setTenderByRegions(state, tenderbyregions){
+		state.tenderbyregions = tenderbyregions
 	},
 	setTenders(state, tenders){
 		state.tenders = tenders

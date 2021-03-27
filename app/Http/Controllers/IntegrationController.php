@@ -29,8 +29,44 @@ class IntegrationController extends Controller
 
     public function tender(Request $request)
     {
+        // $validator = Validator::make($request->all(),[
+        //     'dir_type' => 'nullable|string',
+        //     'from_date' => 'nullable|string',
+        //     'to_date' => 'nullable|string',
+        // ]);
+        // if($validator->fails()){
+        //     return response()->json(['error' => true, 'message' => $validator->messages()]);
+        // }
+        $inputs = $request->all();
+        $user = $request->user();
+   
+        $checkInteg = $this->getTenderToken();
+        if($checkInteg){
+            try {
+                // $query = json_encode($inputs);
+                $client = new \GuzzleHttp\Client();
+                $response = $client->post('http://crm.uztrans.uz/api/integration/get-directions', [
+                    'headers' => [
+                        'Content-Type' => 'application/json', 
+                        'Accept' => 'application/json',
+                        'Authorization' => "Bearer {$checkInteg->token}"
+                    ],
+                    // 'body' => $query
+                ]);
+                $result = json_decode($response->getBody()->getContents(),true);
+                return response()->json($result);
+            } catch (\Throwable $th) {
+                throw $th;die;
+                return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже!']);
+            }
+        }
+        return response()->json(['error' => true, 'message' => 'Что-то пошло не так. Пожалуйста, повторите попытку позже!']);
+    }
+
+    public function tenderByRegion(Request $request)
+    {
         $validator = Validator::make($request->all(),[
-            'region_id' => 'nullable',
+            'region_id' => 'required',
             'dir_type' => 'nullable|string',
             'from_date' => 'nullable|string',
             'to_date' => 'nullable|string',
@@ -46,7 +82,7 @@ class IntegrationController extends Controller
             try {
                 $query = json_encode($inputs);
                 $client = new \GuzzleHttp\Client();
-                $response = $client->post('http://crm.uztrans.uz/api/integration/get-directions', [
+                $response = $client->post('http://crm.uztrans.uz/api/integration/get-direction-byregion', [
                     'headers' => [
                         'Content-Type' => 'application/json', 
                         'Accept' => 'application/json',
