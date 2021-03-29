@@ -25,6 +25,11 @@ import RegionPlan from './components/admin/regionplan/RegionPlan'
 import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
 import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
 
+// Statistic
+import Statistic from './components/admin/statistic/Statistic'
+import AddStatistic from './components/admin/statistic/AddStatistic'
+import EditStatistic from './components/admin/statistic/EditStatistic'
+
 // Fakt
 import Fakt from './components/admin/regionplan/fakt/Fakt'
 import AddFakt from './components/admin/regionplan/fakt/AddFakt'
@@ -409,6 +414,18 @@ const router = new Router({
 				{
 					path:'regionplan/edit/:regionplanId',
 					component:EditRegionPlan,
+				},
+				{
+					path:'statistic',
+					component:Statistic,
+				},
+				{
+					path:'statistic/add',
+					component:AddStatistic,
+				},
+				{
+					path:'statistic/edit/:statisticId',
+					component:EditStatistic,
 				},
 				{
 					path:'country',

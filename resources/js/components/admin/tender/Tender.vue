@@ -158,7 +158,7 @@
 					})
 				}
 				return count
-			}
+			},
 		},
 		methods:{
 			...mapActions('tender',['actionTenders']),

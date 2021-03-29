@@ -143,6 +143,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/statistic">
+              <i class="sidebar_icon fas fa-bus"></i>
+              <p>
+                Автомобиль транспорти асосий кўрсаткичлар
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/tender">
               <i class="sidebar_icon fas fa-route"></i>
               <p>
