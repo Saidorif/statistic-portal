@@ -123,23 +123,7 @@ class StatisticInternationalCargoController extends Controller
                     IFNULL(t1.noyabr, 0) + 
                     IFNULL(t1.dekabr, 0) + 
                 0) total,
-                MAX(IFNULL(t2.total,0)) last_total,
-                IFNULL(SUM(t1.yanvar),0) yanvar,
-                IFNULL(SUM(t1.fevral),0) fevral,
-                IFNULL(SUM(t1.mart),0) mart,
-                IFNULL(SUM(t1.aprel),0) aprel,
-                IFNULL(SUM(t1.may),0) may,
-                IFNULL(SUM(t1.iyun),0) iyun,
-                IFNULL(SUM(t1.iyul),0) iyul,
-                IFNULL(SUM(t1.avgust),0) avgust,
-                IFNULL(SUM(t1.sentabr),0) sentabr,
-                IFNULL(SUM(t1.oktabr),0) oktabr,
-                IFNULL(SUM(t1.noyabr),0) noyabr,
-                IFNULL(SUM(t1.dekabr),0) dekabr
-                FROM `statistic_international_cargos` t1
-                CROSS JOIN(
-                    SELECT 
-                    year,
+                IFNULL((SELECT 
                     SUM(
                     IFNULL(yanvar, 0) + 
                     IFNULL(fevral, 0) + 
@@ -156,8 +140,20 @@ class StatisticInternationalCargoController extends Controller
                     0) total
                     FROM `statistic_international_cargos`
                     where year = '$oldyear'
-                    GROUP BY year
-                ) t2
+                    GROUP BY year),0) last_total,
+                IFNULL(SUM(t1.yanvar),0) yanvar,
+                IFNULL(SUM(t1.fevral),0) fevral,
+                IFNULL(SUM(t1.mart),0) mart,
+                IFNULL(SUM(t1.aprel),0) aprel,
+                IFNULL(SUM(t1.may),0) may,
+                IFNULL(SUM(t1.iyun),0) iyun,
+                IFNULL(SUM(t1.iyul),0) iyul,
+                IFNULL(SUM(t1.avgust),0) avgust,
+                IFNULL(SUM(t1.sentabr),0) sentabr,
+                IFNULL(SUM(t1.oktabr),0) oktabr,
+                IFNULL(SUM(t1.noyabr),0) noyabr,
+                IFNULL(SUM(t1.dekabr),0) dekabr
+                FROM `statistic_international_cargos` t1
                 where t1.year = '$getYear'
                 GROUP BY t1.year
             ");
@@ -168,7 +164,8 @@ class StatisticInternationalCargoController extends Controller
         }
         $all = array_merge($all_calculation,$result);
         $r['items'] = $all;
-        $r['getYear'] = substr($getYear,0,4);
+        $r['all_calculation'] = $all_calculation;
+        $r['getYear'] = $getYear;
         return response()->json(['success' => true, 'result' => $r]);
     }
 
@@ -268,56 +265,3 @@ class StatisticInternationalCargoController extends Controller
     }
 }
 
-// SELECT 
-// t1.year,
-// SUM(
-//     IFNULL(t1.yanvar, 0) + 
-//     IFNULL(t1.fevral, 0) + 
-//     IFNULL(t1.mart, 0) + 
-//     IFNULL(t1.aprel, 0) + 
-//     IFNULL(t1.may, 0) + 
-//     IFNULL(t1.iyun, 0) + 
-//     IFNULL(t1.iyul, 0) + 
-//     IFNULL(t1.avgust, 0) + 
-//     IFNULL(t1.sentabr, 0) + 
-//     IFNULL(t1.oktabr, 0) + 
-//     IFNULL(t1.noyabr, 0) + 
-//     IFNULL(t1.dekabr, 0) + 
-// 0) total,
-// MAX(IFNULL(t2.total,0)) last_total,
-// IFNULL(SUM(t1.yanvar),0) yanvar,
-// IFNULL(SUM(t1.fevral),0) fevral,
-// IFNULL(SUM(t1.mart),0) mart,
-// IFNULL(SUM(t1.aprel),0) aprel,
-// IFNULL(SUM(t1.may),0) may,
-// IFNULL(SUM(t1.iyun),0) iyun,
-// IFNULL(SUM(t1.iyul),0) iyul,
-// IFNULL(SUM(t1.avgust),0) avgust,
-// IFNULL(SUM(t1.sentabr),0) sentabr,
-// IFNULL(SUM(t1.oktabr),0) oktabr,
-// IFNULL(SUM(t1.noyabr),0) noyabr,
-// IFNULL(SUM(t1.dekabr),0) dekabr
-// FROM `statistic_international_cargos` t1
-// CROSS JOIN(
-//     SELECT 
-//     year,
-//     SUM(
-//     IFNULL(yanvar, 0) + 
-//     IFNULL(fevral, 0) + 
-//     IFNULL(mart, 0) + 
-//     IFNULL(aprel, 0) + 
-//     IFNULL(may, 0) + 
-//     IFNULL(iyun, 0) + 
-//     IFNULL(iyul, 0) + 
-//     IFNULL(avgust, 0) + 
-//     IFNULL(sentabr, 0) + 
-//     IFNULL(oktabr, 0) + 
-//     IFNULL(noyabr, 0) + 
-//     IFNULL(dekabr, 0) + 
-//     0) total
-//     FROM `statistic_international_cargos`
-//     where year = '2019'
-//     GROUP BY year
-// ) t2
-// where t1.year = '2020'
-// GROUP BY t1.year

@@ -25,7 +25,6 @@ export const g = {
         {key:'export',name:'Экспорт'},
         {key:'import',name:'Импорт'},
         {key:'tranzit',name:'Транзит'},
-        {key:'all',name:'Общее'},
       ];
     },
     findTypeOfInternationalCargo(key){

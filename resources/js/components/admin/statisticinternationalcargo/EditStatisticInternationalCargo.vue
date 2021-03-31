@@ -7,7 +7,7 @@
 			    	<i class="peIcon fas fa-box"></i>
 					Добавить Международные автомобильные перевозки
 				</h4>
-				<router-link class="btn_black" to="/crm/statisticinternationalcargo/all"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/statisticinternationalcargo"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveStatistic">

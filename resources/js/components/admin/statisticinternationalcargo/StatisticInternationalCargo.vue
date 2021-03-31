@@ -31,6 +31,15 @@
 					                placeholder="Выберите дату!"
 					                class="input_style form-date"
 				              	></date-picker>
+
+				              	<date-picker
+							    v-model="filter.month"
+							    range
+							    type="month"
+							    format="MMMM"
+							    valueType="format"
+							    :not-before="disabledBefore"
+							    :not-after="disabledAfter"></date-picker>
               				</div>
 						  	<div class="col-lg-6 form-group filter_btn">
 							  	<button type="button" class="btn btn-primary ml-2" @click.prevent="search">
@@ -114,6 +123,7 @@
 	import { mapGetters , mapActions } from 'vuex'
 	import Loader from '../../Loader'
 	import DatePicker from "vue2-datepicker";
+	import 'vue2-datepicker/locale/ru';
 	export default{
 		components:{
 			Loader,
@@ -124,7 +134,7 @@
 				laoding: true,
 				items:[],
 				filterShow:false,
-				filter:{year:'',}
+				filter:{year:'',month:''}
 			}
 		},
 		async mounted(){
@@ -134,15 +144,20 @@
 			this.laoding = false
 		},
 		computed:{
-			...mapGetters('statisticinternationalcargo',['getMainStatisticInternationalCargos','getMassage'])
+			...mapGetters('statisticinternationalcargo',['getMainStatisticInternationalCargos','getMassage']),
+			disabledBefore(){return new Date(2021, 10, 2)},
+			disabledAfter(){return new Date(2021, 10, 6)},
 		},
 		methods:{
-			...mapActions('statisticinternationalcargo',['actionMainStatisticInternationalCargos']),
+			...mapActions('statisticinternationalcargo',['actionMainStatisticInternationalCargos','actionDeleteStatisticInternationalCargo']),
 			calPercentage(item){
 				if(item.id){
 					return item.total_percentage ? item.total_percentage + ' %' : '0 %'
 				}else{
-					let count = Math.round((item.total/item.last_total)*100)
+					let count = 0;
+					if(item.last_total){
+						count = Math.round((item.total/item.last_total)*100)
+					}
 					return count + ' %'
 				}
 			},
@@ -170,14 +185,10 @@
 			},
 			async deleteStatistic(id){
 				if(confirm("Вы действительно хотите удалить?")){
-					let page = 1
-					let data = {
-						page:page,
-						items:this.filter
-					}
 					this.laoding = true
-					await this.actionDeleteStatistic(id)
-					await this.actionStatistics(data)
+					await this.actionDeleteStatisticInternationalCargo(id)
+					await this.actionMainStatisticInternationalCargos(this.filter)
+					this.items = this.getMainStatisticInternationalCargos.items
 					this.laoding = false
 					toast.fire({
 				    	type: 'success',
