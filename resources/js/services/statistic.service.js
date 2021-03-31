@@ -4,8 +4,11 @@ const StatisticService = {
 	statisticList(){
 		return ApiService.get(`/api/statistic/list`)
 	},
-	allstatistics(page){
-		return ApiService.post(`/api/statistic?page=${page}`)
+	mainstatistic(data){
+		return ApiService.post(`/api/statistic/main`,data)
+	},
+	allstatistics(data){
+		return ApiService.post(`/api/statistic?page=${data.page}`,data.items)
 	},
 	addstatistic(data){
 		return ApiService.post(`/api/statistic/store`,data)

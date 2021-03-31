@@ -186,6 +186,9 @@
 		},
 		async mounted(){
 			this.filter['region_id'] = this.$route.params.tenderId
+			this.filter.dir_type = this.$route.query.dir_type
+			this.filter.profitability = this.$route.query.profitability
+			this.filter.year = this.$route.query.year
 			let data = {
 				page : 1,
 				items:this.filter,

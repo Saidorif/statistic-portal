@@ -18,8 +18,13 @@ class CreateStatisticAvtoMainIndicatorsTable extends Migration
             $table->integer('region_id');
             $table->string('type');
             $table->date('year');
-            $table->string('quarter');
-            $table->string('number');
+            $table->double('quarter_one',15,2)->nullable();
+            $table->double('quarter_two',15,2)->nullable();
+            $table->double('quarter_three',15,2)->nullable();
+            $table->double('quarter_four',15,2)->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

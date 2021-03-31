@@ -145,7 +145,7 @@
 			}
 		},
 		async mounted(){
-			await this.actionTenders()
+			await this.actionTenders(this.filter)
 			this.laoding = false
 		},
 		computed:{
@@ -169,37 +169,24 @@
 				this.filterShow = !this.filterShow
 			},
 			async search(){
-				// let page = 1
-				// if(this.filter.dir_type != '' || this.filter.from_date != '' || this.filter.profitability != '' || this.filter.to_date != '' || this.filter.year != ''){
-				// 	let data = {
-				// 		page:page,
-				// 		items:this.filter
-    //                 }
-				// 	this.laoding = true
-				// 	await this.actionTenders(data)
-				// 	this.laoding = false
-				// }
+				let page = 1
+				if(this.filter.dir_type != '' || this.filter.profitability != '' || this.filter.year != ''){
+					this.laoding = true
+					await this.actionTenders(this.filter)
+					this.laoding = false
+				}
 			},
 			async clear(){
-					// this.filter.dir_type = ''
+					this.filter.dir_type = ''
+					this.filter.year = ''
+					this.filter.profitability = ''
 					// this.filter.from_date = ''
 					// this.filter.to_date = ''
-					// this.filter.year = ''
-					// this.filter.profitability = ''
-     //                let page  = 1
-     //                this.laoding = true
-     //                await this.actionTenders({page: page,items:this.filter})
-     //                this.laoding = false
+                    let page  = 1
+                    this.laoding = true
+                    await this.actionTenders(this.filter)
+                    this.laoding = false
 
-			},
-			async getResults(page = 1){ 
-				let data = {
-					page : page,
-					items:this.filter
-				}
-				this.laoding = true
-				await this.actionTenders(data)
-				this.laoding = false
 			},
 			checkApprove(item){
                 if(

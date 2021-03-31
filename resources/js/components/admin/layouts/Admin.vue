@@ -143,10 +143,18 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/statistic">
+            <router-link class="nav-link" to="/crm/statistic/all">
               <i class="sidebar_icon fas fa-bus"></i>
               <p>
                 Автомобиль транспорти асосий кўрсаткичлар
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/statisticinternationalcargo">
+              <i class="sidebar_icon fas fa-box"></i>
+              <p>
+                Международные автомобильные перевозки
               </p>
             </router-link>
           </li>

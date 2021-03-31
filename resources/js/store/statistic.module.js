@@ -3,8 +3,9 @@ import {StatisticService} from "../services/statistic.service";
 const state = {
 	statistics: {},
 	statisticlist: [],
-	message: [],
 	statistic: [],
+	message: [],
+	mainstatistics: [],
 };
 
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
 	getStatistic(state){
 		return state.statistic
 	},
+	getMainStatistics(state){
+		return state.mainstatistics
+	},
 };
 
 
@@ -33,10 +37,23 @@ const actions = {
 			return false
 		}
 	},
-	async actionStatistics({commit},page){
+	async actionMainStatistics({commit},payload){
 		try {
-			const statistics =  await StatisticService.allstatistics(page);
-			await commit('setStatistics',statistics.data.result)
+			const statistics =  await StatisticService.mainstatistic(payload);
+			await commit('setMainStatistics',statistics.data.result)
+			return true
+		} catch (error) {
+			return false
+		}
+	},
+	async actionStatistics({commit},payload){
+		try {
+			const statistics =  await StatisticService.allstatistics(payload);
+			if(statistics.data.error){
+				await commit('setMessage',statistics.data)
+			}else{
+				await commit('setStatistics',statistics.data.result)
+			}
 			return true
 		} catch (error) {
 			return false
@@ -69,7 +86,7 @@ const actions = {
 			return false
 		}
 	},
-	async actionDeletestatistic({commit},id){
+	async actionDeleteStatistic({commit},id){
 		try {
 			const statistic =  await StatisticService.deletestatistic(id);
 			await commit('setMessage',statistic.data)
@@ -92,6 +109,9 @@ const mutations = {
 	},
 	setEditStatistic(state, statistic){
 		state.statistic = statistic
+	},
+	setMainStatistics(state, mainstatistics){
+		state.mainstatistics = mainstatistics
 	},
 };
 

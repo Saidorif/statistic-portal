@@ -94,6 +94,24 @@ Route::group([
             Route::post('busmodel/update/{id}', 'BusmodelController@update');
             Route::delete('busmodel/destroy/{id}', 'BusmodelController@destroy');
 
+            //StatisticAvtoMainIndicator CRUD
+            Route::post('statistic/main', 'StatisticAvtoMainIndicatorController@main');
+            Route::post('statistic', 'StatisticAvtoMainIndicatorController@index');
+            Route::get('statistic/list', 'StatisticAvtoMainIndicatorController@list');
+            Route::post('statistic/store', 'StatisticAvtoMainIndicatorController@store');
+            Route::get('statistic/edit/{id}', 'StatisticAvtoMainIndicatorController@edit');
+            Route::post('statistic/update/{id}', 'StatisticAvtoMainIndicatorController@update');
+            Route::delete('statistic/destroy/{id}', 'StatisticAvtoMainIndicatorController@destroy');
+
+            //StatisticInternational CRUD
+            Route::post('statisticinternationalcargo/main', 'StatisticInternationalCargoController@main');
+            // Route::post('statisticinternationalcargo', 'StatisticInternationalCargoController@index');
+            Route::get('statisticinternationalcargo/list', 'StatisticInternationalCargoController@list');
+            Route::post('statisticinternationalcargo/store', 'StatisticInternationalCargoController@store');
+            Route::get('statisticinternationalcargo/edit/{id}', 'StatisticInternationalCargoController@edit');
+            Route::post('statisticinternationalcargo/update/{id}', 'StatisticInternationalCargoController@update');
+            Route::delete('statisticinternationalcargo/destroy/{id}', 'StatisticInternationalCargoController@destroy');
+
             //Area CRUD
             Route::post('area', 'AreaController@index');
             Route::post('area/store', 'AreaController@store');

@@ -23,6 +23,9 @@ class CreateReconstructionsTable extends Migration
             $table->string('summa')->nullable();
             $table->string('status');
             $table->text('comment')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             // $table->foreign('offerbuilding_id')

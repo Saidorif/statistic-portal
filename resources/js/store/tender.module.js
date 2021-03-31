@@ -24,9 +24,9 @@ const getters = {
 
 
 const actions = {
-	async actionTenders({commit}){
+	async actionTenders({commit},payload){
 		try {
-			const tenders =  await TenderService.tenderAll();
+			const tenders =  await TenderService.tenderAll(payload);
 			await commit('setTenders',tenders.data.result)
 			return true
 		} catch (error) {

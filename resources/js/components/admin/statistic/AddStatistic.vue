@@ -4,10 +4,10 @@
 		<div class="card">
 		  	<div class="card-header">
 			    <h4 class="title_user">
-			    	<i class="peIcon pe-7s-box1"></i>
+			    	<i class="peIcon fas fa-bus"></i>
 				    Добавить асосий кўрсаткич
 				</h4>
-				<router-link class="btn_black" to="/crm/statistic"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/statistic/all"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveStatistic">
@@ -27,34 +27,16 @@
 					    <label for="type">Фаолият тури</label>
 					    <select name="" v-model="form.type" :class="isRequired(form.type) ? 'isRequired' : ''" class="form-control input_style">
 					    	<option value="" selected disabled>Выберите фаолият тури</option>
-					    	<option value="passenger_transportation">Йўловчи ташиш</option>
-					    	<option value="passenger_turnover">Йўловчи айланмаси</option>
-					    	<option value="shipping">Юк ташиш</option>
-					    	<option value="cargo_turnover">Юк айланмаси</option>
+					    	<option :value="type.key" v-for="(type,index) in $g.typeOfAvtoActivity()">{{type.name}}</option>
 					    </select>
 					  </div>
 					  <div class="form-group col-md-3">
-					    <label for="quarter">Квартал</label>
-					    <select name="" v-model="form.quarter" :class="isRequired(form.quarter) ? 'isRequired' : ''" class="form-control input_style">
-					    	<option value="" selected disabled>Выберите квартал</option>
-					    	<option value="1">I чорак</option>
-					    	<option value="2">II чорак</option>
-					    	<option value="3">III чорак</option>
-					    	<option value="4">IV чорак</option>
-					    </select>
+					    <label for="unit">Ўлчов бирлиги</label>
+					    <div class="form-control input_style">
+					    	{{$g.findUnitTypeOfAvtoActivity(form.type)}}
+					    </div>
 					  </div>
-					  <div class="form-group col-md-3">
-					    <label for="number">Количества</label>
-					    <input
-					    	type="number"
-					    	class="form-control input_style"
-					    	id="number"
-					    	placeholder="Количества"
-					    	v-model="form.number"
-					    	:class="isRequired(form.number) ? 'isRequired' : ''"
-				    	>
-					  </div>
-					  <div class="form-group col-md-3 d-flex flex-column">
+  					  <div class="form-group col-md-3 d-flex flex-column">
 			              <label for="date">Дата</label>
 			              <date-picker
 			                lang="ru"
@@ -64,7 +46,52 @@
 			                :class="isRequired(form.year) ? 'isRequired' : ''"
 			              ></date-picker>
 		              </div>
-					  <div class="form-group col-lg-9 d-flex justify-content-end align-items-end">
+	              	</div>
+	              	<hr>
+	              	<div class="row">
+					  <div class="form-group col-md-3">
+					    <label for="quarter_one">I чорак</label>
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="quarter_one"
+					    	placeholder="Количества"
+					    	v-model="form.quarter_one"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="quarter_two">II чорак</label>
+					    <input 
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="quarter_two"
+					    	placeholder="Количества"
+					    	v-model="form.quarter_two"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="quarter_three">III чорак</label>
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="quarter_three"
+					    	placeholder="Количества"
+					    	v-model="form.quarter_three"
+				    	>
+					  </div>
+					  <div class="form-group col-md-3">
+					    <label for="quarter_four">VI чорак</label>
+					    <input
+					    	type="text"
+					    	class="form-control input_style"
+					    	id="quarter_four"
+					    	placeholder="Количества"
+					    	v-model="form.quarter_four"
+				    	>
+					  </div>
+	              	</div>
+	              	<div class="row">
+					  <div class="form-group col-lg-12 d-flex justify-content-end align-items-end">
 					  	<button type="submit" class="btn_green">
 					  		<i class="fas fa-save"></i>
 						  	Сохранить
@@ -90,9 +117,11 @@
 				form:{
 					region_id:'',
 					type:'',
-					number:'',
 					year:'',
-					quarter:'',
+					quarter_one:'',
+				 	quarter_two:'',
+				  	quarter_three:'',
+				  	quarter_four:'',
 				},
 				requiredInput:false,
 				laoding: true
@@ -113,7 +142,8 @@
 	    		return this.requiredInput && input === '';
 		    },
 			async saveStatistic(){
-		    	if (this.form.region_id != '' && this.form.type != '' && this.form.number != '' && this.form.year != '' && this.form.quarter != ''){
+				console.log(this.form)
+		    	if (this.form.region_id != '' && this.form.type != '' && this.form.year != ''){
 					this.laoding = true
 					await this.actionAddStatistic(this.form)
 					if (this.getMassage.success){
@@ -122,8 +152,14 @@
 					    	icon: 'success',
 							title: this.getMassage.message,
 					    })
-						this.$router.push("/crm/statistic");
+						this.$router.push("/crm/statistic/all");
 						this.requiredInput = false
+					}else{
+						toast.fire({
+					    	type: 'error',
+					    	icon: 'error',
+							title: this.getMassage.message,
+					    })
 					}
 					this.laoding = false
 				}else{

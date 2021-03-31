@@ -17,6 +17,9 @@ class CreateReconstructionGalleriesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('reconstruction_id');
             $table->text('name');
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             // $table->foreign('reconstruction_id')

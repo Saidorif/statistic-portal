@@ -26,9 +26,15 @@ import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
 import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
 
 // Statistic
+import StatisticAll from './components/admin/statistic/StatisticAll'
 import Statistic from './components/admin/statistic/Statistic'
 import AddStatistic from './components/admin/statistic/AddStatistic'
 import EditStatistic from './components/admin/statistic/EditStatistic'
+
+// StatisticInternationalCargo
+import StatisticInternationalCargo from './components/admin/statisticinternationalcargo/StatisticInternationalCargo'
+import AddStatisticInternationalCargo from './components/admin/statisticinternationalcargo/AddStatisticInternationalCargo'
+import EditStatisticInternationalCargo from './components/admin/statisticinternationalcargo/EditStatisticInternationalCargo'
 
 // Fakt
 import Fakt from './components/admin/regionplan/fakt/Fakt'
@@ -416,6 +422,10 @@ const router = new Router({
 					component:EditRegionPlan,
 				},
 				{
+					path:'statistic/all',
+					component:StatisticAll,
+				},
+				{
 					path:'statistic',
 					component:Statistic,
 				},
@@ -426,6 +436,18 @@ const router = new Router({
 				{
 					path:'statistic/edit/:statisticId',
 					component:EditStatistic,
+				},
+				{
+					path:'statisticinternationalcargo',
+					component:StatisticInternationalCargo,
+				},
+				{
+					path:'statisticinternationalcargo/add',
+					component:AddStatisticInternationalCargo,
+				},
+				{
+					path:'statisticinternationalcargo/edit/:statisticinternationalcargoId',
+					component:EditStatisticInternationalCargo,
 				},
 				{
 					path:'country',
