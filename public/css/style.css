@@ -740,3 +740,9 @@ body {
   border-color: #dee2e6 #dee2e6 #f8fafc !important;
 }
 
+.light .form-date input,
+.light .mx-datepicker-body {
+  background-color: #fff !important;
+  border: 1px solid #0c1427 !important;
+}
+

@@ -53,5 +53,11 @@
                 }
             }
         </script>
+        <style>
+            .myCustomCalendar .mx-calendar-header,
+            .myCustomCalendar .mx-calendar:last-child{
+                display: none !important;
+            }
+        </style>
     </body>
 </html>
