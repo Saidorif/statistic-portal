@@ -17,18 +17,27 @@ class StatisticInternationalCargoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function main(Request $request)
     {
         $year= $request->year;
+        $months= $request->months;
         $lastYear = StatisticInternationalCargo::latest('year')->first();
-        $getYear = '';
-        if($lastYear){
-            $getYear = empty($request->year) ? $lastYear->year : $year; 
-            $oldyear = (int)($getYear-1);
-            $result = DB::select("SELECT 
-                t1.id,
-                t1.type,
-                IFNULL(t1.yanvar, 0) + 
+        $sqlT1Sum = '';
+        $sqlSum = '';
+        $sqlT1 = '';
+        $sqlT1GroupBySum = '';
+        $sqlT2Sum = '';
+        if(count($months) > 0){
+            foreach($months as $key => $value){
+                $sqlT1Sum .= 'IFNULL(t1.'.$value.', 0) + ';
+                $sqlT2Sum .= 'IFNULL(t2.'.$value.', 0) + ';
+                $sqlT1 .= 'IFNULL(t1.'.$value.', 0) '.$value.',';
+                $sqlSum = 'IFNULL('.$value.', 0) + '; 
+                $sqlT1GroupBySum .= 'IFNULL(SUM(t1.'.$value.'),0) '.$value.',';
+            }
+        }else{
+            $sqlT1Sum = 'IFNULL(t1.yanvar, 0) +
                 IFNULL(t1.fevral, 0) + 
                 IFNULL(t1.mart, 0) + 
                 IFNULL(t1.aprel, 0) + 
@@ -39,9 +48,9 @@ class StatisticInternationalCargoController extends Controller
                 IFNULL(t1.sentabr, 0) + 
                 IFNULL(t1.oktabr, 0) + 
                 IFNULL(t1.noyabr, 0) + 
-                IFNULL(t1.dekabr, 0) + 
-                0 total,
-                IFNULL(t2.yanvar, 0) + 
+                IFNULL(t1.dekabr, 0) + ';
+
+            $sqlT2Sum = 'IFNULL(t2.yanvar, 0) + 
                 IFNULL(t2.fevral, 0) + 
                 IFNULL(t2.mart, 0) + 
                 IFNULL(t2.aprel, 0) + 
@@ -52,40 +61,9 @@ class StatisticInternationalCargoController extends Controller
                 IFNULL(t2.sentabr, 0) + 
                 IFNULL(t2.oktabr, 0) + 
                 IFNULL(t2.noyabr, 0) + 
-                IFNULL(t2.dekabr, 0) + 
-                0 old_total,
-                ROUND(
-                    IFNULL(
-                        IFNULL(t1.yanvar, 0) + 
-                        IFNULL(t1.fevral, 0) + 
-                        IFNULL(t1.mart, 0) + 
-                        IFNULL(t1.aprel, 0) + 
-                        IFNULL(t1.may, 0) + 
-                        IFNULL(t1.iyun, 0) + 
-                        IFNULL(t1.iyul, 0) + 
-                        IFNULL(t1.avgust, 0) + 
-                        IFNULL(t1.sentabr, 0) + 
-                        IFNULL(t1.oktabr, 0) + 
-                        IFNULL(t1.noyabr, 0) + 
-                        IFNULL(t1.dekabr, 0) + 
-                        0
-                    ,0)/IFNULL(
-                        IFNULL(t2.yanvar, 0) + 
-                        IFNULL(t2.fevral, 0) + 
-                        IFNULL(t2.mart, 0) + 
-                        IFNULL(t2.aprel, 0) + 
-                        IFNULL(t2.may, 0) + 
-                        IFNULL(t2.iyun, 0) + 
-                        IFNULL(t2.iyul, 0) + 
-                        IFNULL(t2.avgust, 0) + 
-                        IFNULL(t2.sentabr, 0) + 
-                        IFNULL(t2.oktabr, 0) + 
-                        IFNULL(t2.noyabr, 0) + 
-                        IFNULL(t2.dekabr, 0) + 
-                        0
-                    ,0)
-                *100) total_percentage,
-                IFNULL(t1.yanvar, 0) yanvar,
+                IFNULL(t2.dekabr, 0) + ';   
+
+            $sqlT1 = 'IFNULL(t1.yanvar, 0) yanvar,
                 IFNULL(t1.fevral, 0) fevral,
                 IFNULL(t1.mart, 0) mart,
                 IFNULL(t1.aprel, 0) aprel, 
@@ -96,7 +74,58 @@ class StatisticInternationalCargoController extends Controller
                 IFNULL(t1.sentabr, 0) sentabr, 
                 IFNULL(t1.oktabr, 0) oktabr, 
                 IFNULL(t1.noyabr, 0) noyabr, 
-                IFNULL(t1.dekabr, 0) dekabr,
+                IFNULL(t1.dekabr, 0) dekabr,';    
+
+            $sqlSum = 'IFNULL(yanvar, 0) + 
+                IFNULL(fevral, 0) + 
+                IFNULL(mart, 0) + 
+                IFNULL(aprel, 0) + 
+                IFNULL(may, 0) + 
+                IFNULL(iyun, 0) + 
+                IFNULL(iyul, 0) + 
+                IFNULL(avgust, 0) + 
+                IFNULL(sentabr, 0) + 
+                IFNULL(oktabr, 0) + 
+                IFNULL(noyabr, 0) + 
+                IFNULL(dekabr, 0) +'; 
+
+            $sqlT1GroupBySum = 'IFNULL(SUM(t1.yanvar),0) yanvar,
+                IFNULL(SUM(t1.fevral),0) fevral,
+                IFNULL(SUM(t1.mart),0) mart,
+                IFNULL(SUM(t1.aprel),0) aprel,
+                IFNULL(SUM(t1.may),0) may,
+                IFNULL(SUM(t1.iyun),0) iyun,
+                IFNULL(SUM(t1.iyul),0) iyul,
+                IFNULL(SUM(t1.avgust),0) avgust,
+                IFNULL(SUM(t1.sentabr),0) sentabr,
+                IFNULL(SUM(t1.oktabr),0) oktabr,
+                IFNULL(SUM(t1.noyabr),0) noyabr,
+                IFNULL(SUM(t1.dekabr),0) dekabr,'; 
+
+
+        }
+        $getYear = '';
+  
+        if($lastYear){
+            $getYear = empty($request->year) ? $lastYear->year : $year; 
+            $oldyear = (int)($getYear-1);
+            $result = DB::select("SELECT 
+                t1.id,
+                t1.type,
+                $sqlT1Sum
+                0 total,
+                $sqlT2Sum
+                0 old_total,
+                ROUND(
+                    IFNULL(
+                        $sqlT1Sum
+                        0
+                    ,0)/IFNULL(
+                        $sqlT2Sum
+                        0
+                    ,0)
+                *100) total_percentage,
+                $sqlT1
                 t1.year year
                 FROM statistic_international_cargos t1
                 left join (
@@ -110,49 +139,16 @@ class StatisticInternationalCargoController extends Controller
                 t1.year,
                 MAX('all') type,
                 SUM(
-                    IFNULL(t1.yanvar, 0) + 
-                    IFNULL(t1.fevral, 0) + 
-                    IFNULL(t1.mart, 0) + 
-                    IFNULL(t1.aprel, 0) + 
-                    IFNULL(t1.may, 0) + 
-                    IFNULL(t1.iyun, 0) + 
-                    IFNULL(t1.iyul, 0) + 
-                    IFNULL(t1.avgust, 0) + 
-                    IFNULL(t1.sentabr, 0) + 
-                    IFNULL(t1.oktabr, 0) + 
-                    IFNULL(t1.noyabr, 0) + 
-                    IFNULL(t1.dekabr, 0) + 
+                    $sqlT1Sum
                 0) total,
+                $sqlT1GroupBySum
                 IFNULL((SELECT 
                     SUM(
-                    IFNULL(yanvar, 0) + 
-                    IFNULL(fevral, 0) + 
-                    IFNULL(mart, 0) + 
-                    IFNULL(aprel, 0) + 
-                    IFNULL(may, 0) + 
-                    IFNULL(iyun, 0) + 
-                    IFNULL(iyul, 0) + 
-                    IFNULL(avgust, 0) + 
-                    IFNULL(sentabr, 0) + 
-                    IFNULL(oktabr, 0) + 
-                    IFNULL(noyabr, 0) + 
-                    IFNULL(dekabr, 0) + 
+                        $sqlSum
                     0) total
                     FROM `statistic_international_cargos`
                     where year = '$oldyear'
-                    GROUP BY year),0) last_total,
-                IFNULL(SUM(t1.yanvar),0) yanvar,
-                IFNULL(SUM(t1.fevral),0) fevral,
-                IFNULL(SUM(t1.mart),0) mart,
-                IFNULL(SUM(t1.aprel),0) aprel,
-                IFNULL(SUM(t1.may),0) may,
-                IFNULL(SUM(t1.iyun),0) iyun,
-                IFNULL(SUM(t1.iyul),0) iyul,
-                IFNULL(SUM(t1.avgust),0) avgust,
-                IFNULL(SUM(t1.sentabr),0) sentabr,
-                IFNULL(SUM(t1.oktabr),0) oktabr,
-                IFNULL(SUM(t1.noyabr),0) noyabr,
-                IFNULL(SUM(t1.dekabr),0) dekabr
+                    GROUP BY year),0) last_total       
                 FROM `statistic_international_cargos` t1
                 where t1.year = '$getYear'
                 GROUP BY t1.year

@@ -138,18 +138,18 @@ export const g = {
       let new_date = date.split('-')
       let month = Number(new_date[1]);
       let months=[
-        {id:1,name:'январь'},
-        {id:2,name:'февраль'},
-        {id:3,name:'март'},
-        {id:4,name:'апрель'},
-        {id:5,name:'май'},
-        {id:6,name:'июнь'},
-        {id:7,name:'июль'},
-        {id:8,name:'августь'},
-        {id:9,name:'сентябрь'},
-        {id:10,name:'октябрь'},
-        {id:11,name:'ноябрь'},
-        {id:12,name:'декабрь'},
+        {id:1,name:'январь',key:'yanvar'},
+        {id:2,name:'февраль',key:'fevral'},
+        {id:3,name:'март',key:'mart'},
+        {id:4,name:'апрель',key:'aprel'},
+        {id:5,name:'май',key:'may'},
+        {id:6,name:'июнь',key:'iyun'},
+        {id:7,name:'июль',key:'iyul'},
+        {id:8,name:'август',key:'avgust'},
+        {id:9,name:'сентябрь',key:'sentabr'},
+        {id:10,name:'октябрь',key:'oktabr'},
+        {id:11,name:'ноябрь',key:'noyabr'},
+        {id:12,name:'декабрь',key:'dekabr'},
       ];
       months.forEach((items,index)=>{
         if(month == items.id){
@@ -160,5 +160,125 @@ export const g = {
     }else{
       return date
     }
+  },
+  filterMonthTitles(items=[]){
+    let months = [
+      {id:1,name:'январь',key:'yanvar'},
+      {id:2,name:'февраль',key:'fevral'},
+      {id:3,name:'март',key:'mart'},
+      {id:4,name:'апрель',key:'aprel'},
+      {id:5,name:'май',key:'may'},
+      {id:6,name:'июнь',key:'iyun'},
+      {id:7,name:'июль',key:'iyul'},
+      {id:8,name:'август',key:'avgust'},
+      {id:9,name:'сентябрь',key:'sentabr'},
+      {id:10,name:'октябрь',key:'oktabr'},
+      {id:11,name:'ноябрь',key:'noyabr'},
+      {id:12,name:'декабрь',key:'dekabr'},
+    ];
+    let result= []
+    if(items.length > 0){
+      items.forEach((item,index)=>{
+        months.forEach((value,m_index)=>{
+          if(item == value.key){
+            result.push(value)
+          }
+        })
+      })
+    }else{
+      result = months
+    }
+    return result
+  },
+  allMonths(){
+    return [
+        {id:1,name:'январь',key:'yanvar'},
+        {id:2,name:'февраль',key:'fevral'},
+        {id:3,name:'март',key:'mart'},
+        {id:4,name:'апрель',key:'aprel'},
+        {id:5,name:'май',key:'may'},
+        {id:6,name:'июнь',key:'iyun'},
+        {id:7,name:'июль',key:'iyul'},
+        {id:8,name:'август',key:'avgust'},
+        {id:9,name:'сентябрь',key:'sentabr'},
+        {id:10,name:'октябрь',key:'oktabr'},
+        {id:11,name:'ноябрь',key:'noyabr'},
+        {id:12,name:'декабрь',key:'dekabr'},
+      ];
+  },
+  findKeyOfMonth(month){
+    let name = ''
+    if(month){
+      let months=[
+        {id:1,name:'январь',key:'yanvar'},
+        {id:2,name:'февраль',key:'fevral'},
+        {id:3,name:'март',key:'mart'},
+        {id:4,name:'апрель',key:'aprel'},
+        {id:5,name:'май',key:'may'},
+        {id:6,name:'июнь',key:'iyun'},
+        {id:7,name:'июль',key:'iyul'},
+        {id:8,name:'август',key:'avgust'},
+        {id:9,name:'сентябрь',key:'sentabr'},
+        {id:10,name:'октябрь',key:'oktabr'},
+        {id:11,name:'ноябрь',key:'noyabr'},
+        {id:12,name:'декабрь',key:'dekabr'},
+      ];
+      months.forEach((items,index)=>{
+        if(month == items.name){
+          name = items.key
+        }
+      })  
+    }
+    return name
+  },
+  findValueOfMonth(month){
+    let name = ''
+    if(month){
+      let months=[
+        {id:1,name:'январь',key:'yanvar'},
+        {id:2,name:'февраль',key:'fevral'},
+        {id:3,name:'март',key:'mart'},
+        {id:4,name:'апрель',key:'aprel'},
+        {id:5,name:'май',key:'may'},
+        {id:6,name:'июнь',key:'iyun'},
+        {id:7,name:'июль',key:'iyul'},
+        {id:8,name:'август',key:'avgust'},
+        {id:9,name:'сентябрь',key:'sentabr'},
+        {id:10,name:'октябрь',key:'oktabr'},
+        {id:11,name:'ноябрь',key:'noyabr'},
+        {id:12,name:'декабрь',key:'dekabr'},
+      ];
+      months.forEach((items,index)=>{
+        if(month == items.key){
+          name = items.name
+        }
+      })  
+    }
+    return name
+  },
+  findIdOfMonth(month){
+    let name = ''
+    if(month){
+      let months=[
+        {id:1,name:'январь',key:'yanvar'},
+        {id:2,name:'февраль',key:'fevral'},
+        {id:3,name:'март',key:'mart'},
+        {id:4,name:'апрель',key:'aprel'},
+        {id:5,name:'май',key:'may'},
+        {id:6,name:'июнь',key:'iyun'},
+        {id:7,name:'июль',key:'iyul'},
+        {id:8,name:'август',key:'avgust'},
+        {id:9,name:'сентябрь',key:'sentabr'},
+        {id:10,name:'октябрь',key:'oktabr'},
+        {id:11,name:'ноябрь',key:'noyabr'},
+        {id:12,name:'декабрь',key:'dekabr'},
+      ];
+      months.forEach((items,index)=>{
+        if(month == items.name){
+          name = items.id
+        }
+      })  
+    }
+    return name
   },
 }

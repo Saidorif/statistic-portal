@@ -25,37 +25,25 @@
   							<div class="form-group col-lg-6 year_range">
 				  				<label for="year">Сортировать по году</label>
                                 <date-picker
-							    v-model="filter.month"
-							    type="month"
-                                range
-                                :editable="false"
-							    format="MMMM-YYYY"
-                                default-panel="year"
-							    valueType="format"
-                                @open="dateOpen()"
-							    :not-before="disabledBefore"
-							    :not-after="disabledAfter"></date-picker>
-				  				<!-- <date-picker
-					                lang="ru"
-					                type="year" format="YYYY" valueType="format"
-					                v-model="filter.year"
-					                placeholder="Выберите дату!"
-					                class="input_style form-date"
-				              	></date-picker>
-
-				              	<date-picker
-							    v-model="filter.month"
-							    range
-							    type="month"
-							    format="MMMM"
-							    valueType="format"
-							    :not-before="disabledBefore"
-							    :not-after="disabledAfter"></date-picker> -->
+								    v-model="month"
+								    type="month"
+	                                range
+	                                :editable="false"
+								    format="MMMM-YYYY"
+	                                default-panel="year"
+								    valueType="format"
+	                                @open="dateOpen()"
+	                                @clear="clear"
+						    	></date-picker>
               				</div>
 						  	<div class="col-lg-6 form-group filter_btn">
 							  	<button type="button" class="btn btn-primary ml-2" @click.prevent="search">
 							  		<i class="fas fa-search"></i>
 								  	найти
+							  	</button>
+							  	<button type="button" class="btn btn-warning ml-2" @click.prevent="clear">
+							  		<i class="fas fa-search"></i>
+								  	очистить
 							  	</button>
 					  	  	</div>
 				  		</div>
@@ -73,18 +61,9 @@
 								<th scope="col">Год</th>
 								<th scope="col">Йиллик</th>
 								<th scope="col">Ўтган йилги мос даврга нисбатан, %</th>
-								<th scope="col">Январь</th>
-								<th scope="col">Февраль</th>
-								<th scope="col">Март</th>
-								<th scope="col">Апрель</th>
-								<th scope="col">Май</th>
-								<th scope="col">Июнь</th>
-								<th scope="col">Июль</th>
-								<th scope="col">Августь</th>
-								<th scope="col">Сентябрь</th>
-								<th scope="col">Октябрь</th>
-								<th scope="col">Ноябрь</th>
-								<th scope="col">Декабрь</th>
+								<template v-for="(item,index) in $g.filterMonthTitles(allmonths)">
+									<th scope="col">{{item.name}}</th>
+								</template>
 								<th scope="col">Действия</th>
 							</tr>
 						</thead>
@@ -96,20 +75,19 @@
 								<td>{{$g.getYear(reg.year)}}</td>
 								<td>{{reg.total}}</td>
 								<td>{{calPercentage(reg)}}</td>
-								<td>{{reg.yanvar}}</td>
-								<td>{{reg.fevral}}</td>
-								<td>{{reg.mart}}</td>
-								<td>{{reg.aprel}}</td>
-								<td>{{reg.may}}</td>
-								<td>{{reg.iyun}}</td>
-								<td>{{reg.iyul}}</td>
-								<td>{{reg.avgust}}</td>
-								<td>{{reg.sentabr}}</td>
-								<td>{{reg.oktabr}}</td>
-								<td>{{reg.noyabr}}</td>
-								<td>{{reg.dekabr}}</td>
+								<td v-if="reg.yanvar != undefined">{{reg.yanvar}}</td>
+								<td v-if="reg.fevral != undefined">{{reg.fevral}}</td>
+								<td v-if="reg.mart != undefined">{{reg.mart}}</td>
+								<td v-if="reg.aprel != undefined">{{reg.aprel}}</td>
+								<td v-if="reg.may != undefined">{{reg.may}}</td>
+								<td v-if="reg.iyun != undefined">{{reg.iyun}}</td>
+								<td v-if="reg.iyul != undefined">{{reg.iyul}}</td>
+								<td v-if="reg.avgust != undefined">{{reg.avgust}}</td>
+								<td v-if="reg.sentabr != undefined">{{reg.sentabr}}</td>
+								<td v-if="reg.oktabr != undefined">{{reg.oktabr}}</td>
+								<td v-if="reg.noyabr != undefined">{{reg.noyabr}}</td>
+								<td v-if="reg.dekabr != undefined">{{reg.dekabr}}</td>
 								<td>
-									<!-- ?year=${$g.getYear(reg.year)} -->
 									<template v-if="reg.id">
 										<router-link tag="button" class="btn_transparent" :to='`/crm/statisticinternationalcargo/edit/${reg.id}`'>
 											<i class="pe_icon pe-7s-edit editColor"></i>
@@ -145,7 +123,9 @@
 				laoding: true,
 				items:[],
 				filterShow:false,
-				filter:{year:'',month:''}
+				filter:{year:'',months:[]},
+				month:'',
+				allmonths:[],
 			}
 		},
 		async mounted(){
@@ -156,8 +136,6 @@
 		},
 		computed:{
 			...mapGetters('statisticinternationalcargo',['getMainStatisticInternationalCargos','getMassage']),
-			disabledBefore(){return new Date(2021, 10, 2)},
-			disabledAfter(){return new Date(2021, 10, 6)},
 		},
 		methods:{
 			...mapActions('statisticinternationalcargo',['actionMainStatisticInternationalCargos','actionDeleteStatisticInternationalCargo']),
@@ -172,20 +150,33 @@
 					return count + ' %'
 				}
 			},
+			removedateOpen(){
+				console.log('no')
+			},
             dateOpen(){
                 setTimeout(()=>{
                     $('.mx-datepicker-main').addClass('myCustomCalendar')
-                console.log('ss')
-                },100)
+                },10)
 
             },
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
 			async search(){
-                console.log(this.filter.month)
-				let page = 1
-				if(this.filter.year != ''){
+				let dates = this.month
+				this.allmonths = []
+				if(dates.length == 2){
+					let year = dates[0].substr(-4,dates[0].indexOf('-')); 				
+					let data1 = dates[0].substr(0,dates[0].indexOf('-')); 				
+					let data2 = dates[1].substr(0,dates[1].indexOf('-')); 	
+
+					this.$g.allMonths().forEach((item,index)=>{
+						if(item.id >= this.$g.findIdOfMonth(data1) && item.id <= this.$g.findIdOfMonth(data2)){
+							this.allmonths.push(item.key)
+						}
+					})
+					this.filter.year = year
+					this.filter.months = this.allmonths
 					this.laoding = true
 					await this.actionMainStatisticInternationalCargos(this.filter)
 					this.items = this.getMainStatisticInternationalCargos.items
@@ -193,9 +184,9 @@
 				}
 			},
 			async clear(){
-				let currentYear = new Date().getFullYear()
-				this.filter.year = ''
-                let page  = 1
+				this.filter = {year:'',months:[]}
+				this.month = ''
+				this.allmonths = []
                 this.laoding = true
                 await this.actionMainStatisticInternationalCargos(this.filter)
                 this.items = this.getMainStatisticInternationalCargos.items
