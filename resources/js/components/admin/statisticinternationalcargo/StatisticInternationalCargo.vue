@@ -14,7 +14,7 @@
 			            	Филтр
 						</button>
 						<router-link class="btn btn-primary" to="/crm/statisticinternationalcargo/add">
-							<i class="fas fa-plus"></i> 
+							<i class="fas fa-plus"></i>
 							Добавить
 						</router-link>
 		            </div>
@@ -22,9 +22,20 @@
 	            <transition name="slide">
 				  	<div class="filters" v-if="filterShow">
 				  		<div class="row">
-  							<div class="form-group col-lg-6">
+  							<div class="form-group col-lg-6 year_range">
 				  				<label for="year">Сортировать по году</label>
-				  				<date-picker
+                                <date-picker
+							    v-model="filter.month"
+							    type="month"
+                                range
+                                :editable="false"
+							    format="MMMM-YYYY"
+                                default-panel="year"
+							    valueType="format"
+                                @open="dateOpen()"
+							    :not-before="disabledBefore"
+							    :not-after="disabledAfter"></date-picker>
+				  				<!-- <date-picker
 					                lang="ru"
 					                type="year" format="YYYY" valueType="format"
 					                v-model="filter.year"
@@ -39,7 +50,7 @@
 							    format="MMMM"
 							    valueType="format"
 							    :not-before="disabledBefore"
-							    :not-after="disabledAfter"></date-picker>
+							    :not-after="disabledAfter"></date-picker> -->
               				</div>
 						  	<div class="col-lg-6 form-group filter_btn">
 							  	<button type="button" class="btn btn-primary ml-2" @click.prevent="search">
@@ -161,10 +172,18 @@
 					return count + ' %'
 				}
 			},
+            dateOpen(){
+                setTimeout(()=>{
+                    $('.mx-datepicker-main').addClass('myCustomCalendar')
+                console.log('ss')
+                },100)
+
+            },
 			toggleFilter(){
 				this.filterShow = !this.filterShow
 			},
 			async search(){
+                console.log(this.filter.month)
 				let page = 1
 				if(this.filter.year != ''){
 					this.laoding = true
@@ -204,4 +223,5 @@
 	.filter_btn{
 		margin-top:30px;
 	}
+
 </style>

@@ -50,14 +50,14 @@
 					  </div>
 					  <div class="form-group col-md-3">
 					    <label for="fevral">Февраль</label>
-					    <input 
+					    <input
 					    	type="text"
 					    	class="form-control input_style"
 					    	id="fevral"
 					    	placeholder="Февраль"
 					    	v-model="form.fevral"
 				    	>
-					  </div> 
+					  </div>
 					  <div class="form-group col-md-3">
 					    <label for="mart">Март</label>
 					    <input
@@ -87,8 +87,8 @@
 					    	placeholder="Май"
 					    	v-model="form.may"
 				    	>
-					  </div> 
-					  <div class="form-group col-md-3"> 
+					  </div>
+					  <div class="form-group col-md-3">
 					    <label for="iyun">Июнь</label>
 					    <input
 					    	type="text"
