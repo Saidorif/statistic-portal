@@ -112,6 +112,15 @@ Route::group([
             Route::post('statisticinternationalcargo/update/{id}', 'StatisticInternationalCargoController@update');
             Route::delete('statisticinternationalcargo/destroy/{id}', 'StatisticInternationalCargoController@destroy');
 
+            //StatisticInternational CRUD
+            Route::post('statisticinternationalmoney/main', 'StatisticInternationalMoneyController@main');
+            // Route::post('statisticinternationalmoney', 'StatisticInternationalmoneyController@index');
+            Route::get('statisticinternationalmoney/list', 'StatisticInternationalMoneyController@list');
+            Route::post('statisticinternationalmoney/store', 'StatisticInternationalMoneyController@store');
+            Route::get('statisticinternationalmoney/edit/{id}', 'StatisticInternationalMoneyController@edit');
+            Route::post('statisticinternationalmoney/update/{id}', 'StatisticInternationalMoneyController@update');
+            Route::delete('statisticinternationalmoney/destroy/{id}', 'StatisticInternationalMoneyController@destroy');
+
             //Area CRUD
             Route::post('area', 'AreaController@index');
             Route::post('area/store', 'AreaController@store');
