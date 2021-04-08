@@ -47,6 +47,15 @@
             </router-link>
           </li>
           <li class="nav-item">
+             <!-- v-if="$can('profile', 'UserController')" -->
+            <router-link to="/crm/avto" class="nav-link">
+              <i class="sidebar_icon fas fa-bus"></i>
+              <p>
+                Авто
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/profile">
               <i class="sidebar_icon fas fa-user"></i>
               <p>
@@ -123,133 +132,6 @@
               <i class="sidebar_icon fas fa-building"></i>
               <p>
                 Регион
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/bus">
-              <i class="sidebar_icon fas fa-bus"></i>
-              <p>
-                Автобус
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/regionplan">
-              <i class="sidebar_icon fas fa-bus"></i>
-              <p>
-                Region Plan
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/statistic/all">
-              <i class="sidebar_icon fas fa-bus"></i>
-              <p>
-                Автомобиль транспорти асосий кўрсаткичлар
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/statisticinternationalcargo">
-              <i class="sidebar_icon fas fa-box"></i>
-              <p>
-                Международные автомобильные перевозки
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/statisticinternationalmoney">
-              <i class="sidebar_icon fas fa-money-check-alt"></i>
-              <p>
-                Международное денежные обращения
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/tender">
-              <i class="sidebar_icon fas fa-route"></i>
-              <p>
-                Направления маршрутов
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>
-              <p>
-                Offer & Recon
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/crm/offerbuilding">
-                    <i class="sidebar_icon fas fa-city"></i>
-                    <p>
-                        Offer building
-                    </p>
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/crm/reconstruction">
-                    <i class="sidebar_icon fas fa-building"></i>
-                    <p>
-                        Reconstruction
-                    </p>
-                    </router-link>
-                </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <span class="sidebar_icon fas fa-city" style="font-size: 20px;"></span>
-              <p>
-                Confirm Offer & Recon
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/crm/confirm-offerbuilding">
-                    <i class="sidebar_icon fas fa-city"></i>
-                    <p>
-                        Confirm Offer building
-                    </p>
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/crm/confirm-reconstruction">
-                    <i class="sidebar_icon fas fa-building"></i>
-                    <p>
-                        Confirm Reconstruction
-                    </p>
-                    </router-link>
-                </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/expec-mod/1">
-                <i class="sidebar_icon fas fa-bus"></i>
-                <p>
-                    Expectation Moderator
-                </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/confirmfakt">
-              <i class="sidebar_icon fas fa-file"></i>
-              <p>
-                Confirmfakt
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/station">
-              <i class="sidebar_icon fas fa-file"></i>
-              <p>
-                Station
               </p>
             </router-link>
           </li>

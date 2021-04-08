@@ -10,6 +10,7 @@ import Dashboard from './components/admin/Dashboard'
 import Admin from './components/admin/layouts/Admin'
 import Login from './components/auth/login'
 import Profile from './components/admin/user/Profile'
+import AvtoDashboard from './components/admin/avto/Dashboard'
 
 // Employee
 import Employee from './components/admin/employee/Employee'
@@ -17,60 +18,60 @@ import AddEmployee from './components/admin/employee/AddEmployee'
 import EditEmployee from './components/admin/employee/EditEmployee'
 
 // Tender
-import Tender from './components/admin/tender/Tender'
-import TenderByRegion from './components/admin/tender/TenderByRegion'
+import Tender from './components/admin/avto/tender/Tender'
+import TenderByRegion from './components/admin/avto/tender/TenderByRegion'
 
 // RegionPlan
-import RegionPlan from './components/admin/regionplan/RegionPlan'
-import AddRegionPlan from './components/admin/regionplan/AddRegionPlan'
-import EditRegionPlan from './components/admin/regionplan/EditRegionPlan'
+import RegionPlan from './components/admin/avto/regionplan/RegionPlan'
+import AddRegionPlan from './components/admin/avto/regionplan/AddRegionPlan'
+import EditRegionPlan from './components/admin/avto/regionplan/EditRegionPlan'
 
 // Statistic
-import StatisticAll from './components/admin/statistic/StatisticAll'
-import Statistic from './components/admin/statistic/Statistic'
-import AddStatistic from './components/admin/statistic/AddStatistic'
-import EditStatistic from './components/admin/statistic/EditStatistic'
+import StatisticAll from './components/admin/avto/statistic/StatisticAll'
+import Statistic from './components/admin/avto/statistic/Statistic'
+import AddStatistic from './components/admin/avto/statistic/AddStatistic'
+import EditStatistic from './components/admin/avto/statistic/EditStatistic'
 
 // StatisticInternationalCargo
-import StatisticInternationalCargo from './components/admin/statisticinternationalcargo/StatisticInternationalCargo'
-import AddStatisticInternationalCargo from './components/admin/statisticinternationalcargo/AddStatisticInternationalCargo'
-import EditStatisticInternationalCargo from './components/admin/statisticinternationalcargo/EditStatisticInternationalCargo'
+import StatisticInternationalCargo from './components/admin/avto/statisticinternationalcargo/StatisticInternationalCargo'
+import AddStatisticInternationalCargo from './components/admin/avto/statisticinternationalcargo/AddStatisticInternationalCargo'
+import EditStatisticInternationalCargo from './components/admin/avto/statisticinternationalcargo/EditStatisticInternationalCargo'
 
 // StatisticInternationalMoney
-import StatisticInternationalMoney from './components/admin/statisticinternationalmoney/StatisticInternationalMoney'
-import AddStatisticInternationalMoney from './components/admin/statisticinternationalmoney/AddStatisticInternationalMoney'
-import EditStatisticInternationalMoney from './components/admin/statisticinternationalmoney/EditStatisticInternationalMoney'
+import StatisticInternationalMoney from './components/admin/avto/statisticinternationalmoney/StatisticInternationalMoney'
+import AddStatisticInternationalMoney from './components/admin/avto/statisticinternationalmoney/AddStatisticInternationalMoney'
+import EditStatisticInternationalMoney from './components/admin/avto/statisticinternationalmoney/EditStatisticInternationalMoney'
 
 // Fakt
-import Fakt from './components/admin/regionplan/fakt/Fakt'
-import AddFakt from './components/admin/regionplan/fakt/AddFakt'
-import EditFakt from './components/admin/regionplan/fakt/EditFakt'
-import ShowFakt from './components/admin/regionplan/fakt/ShowFakt'
+import Fakt from './components/admin/avto/regionplan/fakt/Fakt'
+import AddFakt from './components/admin/avto/regionplan/fakt/AddFakt'
+import EditFakt from './components/admin/avto/regionplan/fakt/EditFakt'
+import ShowFakt from './components/admin/avto/regionplan/fakt/ShowFakt'
 // expectation
-import Expectation from './components/admin/regionplan/expectation/Expectation'
-import AddExpectation from './components/admin/regionplan/expectation/AddExpectation'
-import EditExpectation from './components/admin/regionplan/expectation/EditExpectation'
+import Expectation from './components/admin/avto/regionplan/expectation/Expectation'
+import AddExpectation from './components/admin/avto/regionplan/expectation/AddExpectation'
+import EditExpectation from './components/admin/avto/regionplan/expectation/EditExpectation'
 
 // expectation moderator
-import ExpectationMod from './components/admin/expectationmoderator/expectation/ExpectationMod'
-import AddExpectationMod from './components/admin/expectationmoderator/expectation/AddExpectationMod'
-import EditExpectationMod from './components/admin/expectationmoderator/expectation/EditExpectationMod'
+import ExpectationMod from './components/admin/avto/expectationmoderator/expectation/ExpectationMod'
+import AddExpectationMod from './components/admin/avto/expectationmoderator/expectation/AddExpectationMod'
+import EditExpectationMod from './components/admin/avto/expectationmoderator/expectation/EditExpectationMod'
 
 // fakt moderator
-import FaktMod from './components/admin/expectationmoderator/fakt/FaktMod'
-import AddFaktMod from './components/admin/expectationmoderator/fakt/AddFaktMod'
-import EditFaktMod from './components/admin/expectationmoderator/fakt/EditFaktMod'
-import ShowFaktMod from './components/admin/expectationmoderator/fakt/ShowFaktMod'
+import FaktMod from './components/admin/avto/expectationmoderator/fakt/FaktMod'
+import AddFaktMod from './components/admin/avto/expectationmoderator/fakt/AddFaktMod'
+import EditFaktMod from './components/admin/avto/expectationmoderator/fakt/EditFaktMod'
+import ShowFaktMod from './components/admin/avto/expectationmoderator/fakt/ShowFaktMod'
 
 // Confirmfakt
-import Confirmfakt from './components/admin/confirmfakt/Confirmfakt'
-import AddConfirmfakt from './components/admin/confirmfakt/AddConfirmfakt'
-import EditConfirmfakt from './components/admin/confirmfakt/EditConfirmfakt'
+import Confirmfakt from './components/admin/avto/confirmfakt/Confirmfakt'
+import AddConfirmfakt from './components/admin/avto/confirmfakt/AddConfirmfakt'
+import EditConfirmfakt from './components/admin/avto/confirmfakt/EditConfirmfakt'
 
 // Station
-import Station from './components/admin/station/Station'
-import AddStation from './components/admin/station/AddStation'
-import EditStation from './components/admin/station/EditStation'
+import Station from './components/admin/avto/station/Station'
+import AddStation from './components/admin/avto/station/AddStation'
+import EditStation from './components/admin/avto/station/EditStation'
 
 // Region
 import Region from './components/admin/region/Region'
@@ -78,14 +79,14 @@ import AddRegion from './components/admin/region/AddRegion'
 import EditRegion from './components/admin/region/EditRegion'
 
 // Offer
-import Offerbuilding from './components/admin/offerbuilding/Offerbuilding'
-import AddOfferbuilding from './components/admin/offerbuilding/AddOfferbuilding'
-import EditOfferbuilding from './components/admin/offerbuilding/EditOfferbuilding'
+import Offerbuilding from './components/admin/avto/offerbuilding/Offerbuilding'
+import AddOfferbuilding from './components/admin/avto/offerbuilding/AddOfferbuilding'
+import EditOfferbuilding from './components/admin/avto/offerbuilding/EditOfferbuilding'
 
 // Offer
-import ConfirmOfferbuilding from './components/admin/confirmofferbuilding/ConfirmOfferbuilding'
-import AddConfirmOfferbuilding from './components/admin/confirmofferbuilding/AddConfirmOfferbuilding'
-import EditConfirmOfferbuilding from './components/admin/confirmofferbuilding/EditConfirmOfferbuilding'
+import ConfirmOfferbuilding from './components/admin/avto/confirmofferbuilding/ConfirmOfferbuilding'
+import AddConfirmOfferbuilding from './components/admin/avto/confirmofferbuilding/AddConfirmOfferbuilding'
+import EditConfirmOfferbuilding from './components/admin/avto/confirmofferbuilding/EditConfirmOfferbuilding'
 
 // Area
 import Area from './components/admin/area/Area'
@@ -93,19 +94,19 @@ import AddArea from './components/admin/area/AddArea'
 import EditArea from './components/admin/area/EditArea'
 
 // reconstruction
-import Reconstruction from './components/admin/reconstruction/Reconstruction'
-import AddReconstruction from './components/admin/reconstruction/AddReconstruction'
-import EditReconstruction from './components/admin/reconstruction/EditReconstruction'
+import Reconstruction from './components/admin/avto/reconstruction/Reconstruction'
+import AddReconstruction from './components/admin/avto/reconstruction/AddReconstruction'
+import EditReconstruction from './components/admin/avto/reconstruction/EditReconstruction'
 
 // confirm-reconstruction
-import ConfirmReconstruction from './components/admin/confirmreconstruction/ConfirmReconstruction'
-import AddConfirmReconstruction from './components/admin/confirmreconstruction/AddConfirmReconstruction'
-import EditConfirmReconstruction from './components/admin/confirmreconstruction/EditConfirmReconstruction'
+import ConfirmReconstruction from './components/admin/avto/confirmreconstruction/ConfirmReconstruction'
+import AddConfirmReconstruction from './components/admin/avto/confirmreconstruction/AddConfirmReconstruction'
+import EditConfirmReconstruction from './components/admin/avto/confirmreconstruction/EditConfirmReconstruction'
 
 // Bus
-import Bus from './components/admin/bus/Bus'
-import AddBus from './components/admin/bus/AddBus'
-import EditBus from './components/admin/bus/EditBus'
+import Bus from './components/admin/avto/bus/Bus'
+import AddBus from './components/admin/avto/bus/AddBus'
+import EditBus from './components/admin/avto/bus/EditBus'
 
 // Role
 import Role from './components/admin/role/Role'
@@ -173,6 +174,10 @@ const router = new Router({
 					// 	action:'index',
 					// 	subject:'IndexController'
 					// }
+				},
+				{
+					path:'avto',
+					component:AvtoDashboard,
 				},
 				{
 					path:'tender',
