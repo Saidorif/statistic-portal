@@ -159,6 +159,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/statisticinternationalmoney">
+              <i class="sidebar_icon fas fa-money-check-alt"></i>
+              <p>
+                Международное денежные обращения
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/tender">
               <i class="sidebar_icon fas fa-route"></i>
               <p>

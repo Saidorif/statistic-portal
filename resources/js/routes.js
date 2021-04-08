@@ -36,6 +36,11 @@ import StatisticInternationalCargo from './components/admin/statisticinternation
 import AddStatisticInternationalCargo from './components/admin/statisticinternationalcargo/AddStatisticInternationalCargo'
 import EditStatisticInternationalCargo from './components/admin/statisticinternationalcargo/EditStatisticInternationalCargo'
 
+// StatisticInternationalMoney
+import StatisticInternationalMoney from './components/admin/statisticinternationalmoney/StatisticInternationalMoney'
+import AddStatisticInternationalMoney from './components/admin/statisticinternationalmoney/AddStatisticInternationalMoney'
+import EditStatisticInternationalMoney from './components/admin/statisticinternationalmoney/EditStatisticInternationalMoney'
+
 // Fakt
 import Fakt from './components/admin/regionplan/fakt/Fakt'
 import AddFakt from './components/admin/regionplan/fakt/AddFakt'
@@ -448,6 +453,18 @@ const router = new Router({
 				{
 					path:'statisticinternationalcargo/edit/:statisticinternationalcargoId',
 					component:EditStatisticInternationalCargo,
+				},
+				{
+					path:'statisticinternationalmoney',
+					component:StatisticInternationalMoney,
+				},
+				{
+					path:'statisticinternationalmoney/add',
+					component:AddStatisticInternationalMoney,
+				},
+				{
+					path:'statisticinternationalmoney/edit/:statisticinternationalmoneyId',
+					component:EditStatisticInternationalMoney,
 				},
 				{
 					path:'country',
