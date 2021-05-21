@@ -18,6 +18,7 @@ class CreateTokenIntegrationsTable extends Migration
             $table->dateTime('expired_time');
             $table->string('type');
             $table->text('token');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

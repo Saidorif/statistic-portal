@@ -281,4 +281,62 @@ export const g = {
     }
     return name
   },
+  getFreedomAirs(){
+    let items = [
+      {key:'1',value:'Биринчи'},
+      {key:'2',value:'Иккинчи'},
+      {key:'3',value:'Учинчи'},
+      {key:'4',value:'Туртинчи'},
+      {key:'5',value:'Бешинчи'},
+      {key:'6',value:'Олтинчи'},
+      {key:'7',value:'Еттинчи'},
+      {key:'8',value:'Саккизинчи'},
+      {key:'9',value:'Туккизинчи'},
+    ]
+    return items
+  },
+  findFreedomAir(item){
+    let name = ''
+    if(item){
+      let items=[
+        {key:'1',value:'Биринчи'},
+        {key:'2',value:'Иккинчи'},
+        {key:'3',value:'Учинчи'},
+        {key:'4',value:'Туртинчи'},
+        {key:'5',value:'Бешинчи'},
+        {key:'6',value:'Олтинчи'},
+        {key:'7',value:'Еттинчи'},
+        {key:'8',value:'Саккизинчи'},
+        {key:'9',value:'Туккизинчи'},
+      ];
+      items.forEach((val,index)=>{
+        if(item == val.key){
+          name = val.value
+        }
+      })  
+    }
+    return name
+  },
+  getFlightModes(){
+    let items = [
+      {key:'clear_sky',value:'Очиқ осмон'},
+      {key:'by_agreement',value:'Келишув асосида'},
+    ]
+    return items
+  },
+  findFlightMode(item){
+    let name = ''
+    if(item){
+      let items=[
+        {key:'clear_sky',value:'Очиқ осмон'},
+        {key:'by_agreement',value:'Келишув асосида'},
+      ];
+      items.forEach((val,index)=>{
+        if(item == val.key){
+          name = val.value
+        }
+      })  
+    }
+    return name
+  },
 }

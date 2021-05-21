@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Area;
 use App\Region;
 use App\Station;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Offerbuilding extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
     	'type_of_construction',
     	'longitude', //longitude

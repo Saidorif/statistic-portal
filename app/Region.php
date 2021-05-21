@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Expectation;
 use App\Area;
 use App\TarifCity;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Region extends Model
 {
+    use SoftDeletes;
     protected $fillable = ['name'];
 
     public function area()

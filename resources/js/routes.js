@@ -93,6 +93,11 @@ import Area from './components/admin/area/Area'
 import AddArea from './components/admin/area/AddArea'
 import EditArea from './components/admin/area/EditArea'
 
+// Airportinfo
+import Airportinfo from './components/admin/airportinfo/Airportinfo'
+import AddAirportinfo from './components/admin/airportinfo/AddAirportinfo'
+import EditAirportinfo from './components/admin/airportinfo/EditAirportinfo'
+
 // reconstruction
 import Reconstruction from './components/admin/avto/reconstruction/Reconstruction'
 import AddReconstruction from './components/admin/avto/reconstruction/AddReconstruction'
@@ -290,6 +295,18 @@ const router = new Router({
 				{
 					path:'area/edit/:areaId',
 					component:EditArea,
+				},
+				{
+					path:'airportinfo',
+					component:Airportinfo,
+				},
+				{
+					path:'airportinfo/add',
+					component:AddAirportinfo,
+				},
+				{
+					path:'airportinfo/edit/:airportinfoId',
+					component:EditAirportinfo,
 				},
 				{
 					path:'reconstruction',

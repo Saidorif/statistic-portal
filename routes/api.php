@@ -86,6 +86,19 @@ Route::group([
             Route::post('region/update/{id}', 'RegionController@update');
             Route::delete('region/destroy/{id}', 'RegionController@destroy');
 
+            //Airportinfo CRUD
+            Route::post('airportinfo', 'AirportinfoController@index');
+            Route::get('airportinfo/list', 'AirportinfoController@list');
+            Route::post('airportinfo/store', 'AirportinfoController@store');
+            Route::get('airportinfo/edit/{id}', 'AirportinfoController@edit');
+            Route::post('airportinfo/update/{id}', 'AirportinfoController@update');
+            Route::delete('airportinfo/destroy/{id}', 'AirportinfoController@destroy');
+            Route::delete('airportinfo/destroy-plane-type/{id}', 'AirportinfoController@destroyPlaneType');
+            Route::delete('airportinfo/destroy-avia-city/{id}', 'AirportinfoController@destroyAviaCity');
+            Route::delete('airportinfo/destroy-airport-code/{id}', 'AirportinfoController@destroyAirportCode');
+            Route::delete('airportinfo/destroy-airport-way/{id}', 'AirportinfoController@destroyAirportWay');
+            Route::delete('airportinfo/destroy-airport-recon/{id}', 'AirportinfoController@destroyAirportRecon');
+
             //Busmodel CRUD
             Route::post('busmodel', 'BusmodelController@index');
             Route::get('busmodel/list', 'BusmodelController@list');

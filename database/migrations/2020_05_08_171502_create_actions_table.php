@@ -18,6 +18,7 @@ class CreateActionsTable extends Migration
             $table->string('name')->nullable();
             $table->bigInteger('conts_id');
             $table->string('code');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ class CreateContsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',90)->unique();
             $table->string('label');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

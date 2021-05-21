@@ -8,8 +8,10 @@ use App\BusModel;
 use App\RegionPlanModel;
 use App\BusExpect;
 use App\Fakt;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Expectation extends Model
 {
+    use SoftDeletes;
     protected $fillable = ['company_name','inn','date','plan_id','region_id'];
 
     public function plan(){

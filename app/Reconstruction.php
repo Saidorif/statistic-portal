@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Offerbuilding;
 use App\ReconstructionGallery;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Reconstruction extends Model
 {
+	use SoftDeletes;
 	protected $fillable = ['offerbuilding_id','start_date','end_date','asos','recon_hakim','summa','comment','status'];
 
 	public function offerbuilding(){

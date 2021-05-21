@@ -20,6 +20,7 @@ class CreateStationsTable extends Migration
             $table->string('name');
             $table->string('class');
             $table->string('station_type')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

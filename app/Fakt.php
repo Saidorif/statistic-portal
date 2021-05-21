@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\BusModel;
 use App\Expectation;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Fakt extends Model
 {
+    use SoftDeletes;
 	/**
 		Expectation=>expect_id
 		Bus=>bus_id

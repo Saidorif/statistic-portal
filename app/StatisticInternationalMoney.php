@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Region;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class StatisticInternationalMoney extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
     	'region_id',
     	'type',

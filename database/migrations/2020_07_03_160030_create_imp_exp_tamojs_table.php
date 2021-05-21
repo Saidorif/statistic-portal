@@ -27,6 +27,7 @@ class CreateImpExpTamojsTable extends Migration
             $table->bigInteger('transport_country_code');//Страна регстрация транспорта
             $table->double('weight',15,2);
             $table->double('cost',15,2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

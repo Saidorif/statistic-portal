@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Region;
 use App\Expectation;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class RegionPlanModel extends Model
 {
+    use SoftDeletes;
     protected $fillable = ['name','region_id','number','date'];
 
     public function region(){
