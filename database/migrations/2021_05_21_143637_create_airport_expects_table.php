@@ -15,6 +15,14 @@ class CreateAirportExpectsTable extends Migration
     {
         Schema::create('airport_expects', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('airport_id');
+            $table->date('expect_date'); 
+            $table->string('type');
+            $table->string('reys_qty');
+            $table->string('seats_qty');
+            $table->string('passengers_qty');
+            $table->string('load_capacity');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

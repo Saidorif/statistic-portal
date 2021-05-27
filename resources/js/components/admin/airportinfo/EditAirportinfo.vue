@@ -5,7 +5,7 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="sidebar_icon fas fa-plane"></i>
-				    Изменить Аэропорт
+				    Изменить Информации аэропорта
 				</h4>
 				<router-link class="btn_black" to="/crm/airportinfo"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>

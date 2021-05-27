@@ -96,10 +96,26 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/airportname">
+              <i class="sidebar_icon fas fa-plane"></i>
+              <p>
+                Названия аэропорта
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/airportinfo">
               <i class="sidebar_icon fas fa-plane"></i>
               <p>
-                Аэропорт
+                Информации аэропорта
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/crm/airportexpect">
+              <i class="sidebar_icon fas fa-plane"></i>
+              <p>
+                План аэропорта
               </p>
             </router-link>
           </li>

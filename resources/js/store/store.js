@@ -38,6 +38,8 @@ import {tender} from "./tender.module"
 import {statisticinternationalcargo} from "./statisticinternationalcargo.module"
 import {statisticinternationalmoney} from "./statisticinternationalmoney.module"
 import {airportinfo} from "./airportinfo.module"
+import {airportexpect} from "./airportexpect.module"
+import {airportname} from "./airportname.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -82,6 +84,8 @@ const store = new Vuex.Store(
             statisticinternationalcargo,
             statisticinternationalmoney,
             airportinfo,
+            airportexpect,
+            airportname,
             statistic,
 		},
 		state:{

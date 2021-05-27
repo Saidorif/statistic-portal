@@ -98,6 +98,16 @@ import Airportinfo from './components/admin/airportinfo/Airportinfo'
 import AddAirportinfo from './components/admin/airportinfo/AddAirportinfo'
 import EditAirportinfo from './components/admin/airportinfo/EditAirportinfo'
 
+// Airportinfo
+import Airportexpect from './components/admin/airportexpect/Airportexpect'
+import AddAirportexpect from './components/admin/airportexpect/AddAirportexpect'
+import EditAirportexpect from './components/admin/airportexpect/EditAirportexpect'
+
+// Airportinfo
+import Airportname from './components/admin/airportname/Airportname'
+import AddAirportname from './components/admin/airportname/AddAirportname'
+import EditAirportname from './components/admin/airportname/EditAirportname'
+
 // reconstruction
 import Reconstruction from './components/admin/avto/reconstruction/Reconstruction'
 import AddReconstruction from './components/admin/avto/reconstruction/AddReconstruction'
@@ -307,6 +317,30 @@ const router = new Router({
 				{
 					path:'airportinfo/edit/:airportinfoId',
 					component:EditAirportinfo,
+				},
+				{
+					path:'airportexpect',
+					component:Airportexpect,
+				},
+				{
+					path:'airportexpect/add',
+					component:AddAirportexpect,
+				},
+				{
+					path:'airportexpect/edit/:airportexpectId',
+					component:EditAirportexpect,
+				},
+				{
+					path:'airportname',
+					component:Airportname,
+				},
+				{
+					path:'airportname/add',
+					component:AddAirportname,
+				},
+				{
+					path:'airportname/edit/:airportnameId',
+					component:EditAirportname,
 				},
 				{
 					path:'reconstruction',
