@@ -319,15 +319,15 @@ const router = new Router({
 					component:EditAirportinfo,
 				},
 				{
-					path:'airportexpect',
+					path:'airportinfo/:airportinfoId/airportexpect',
 					component:Airportexpect,
 				},
 				{
-					path:'airportexpect/add',
+					path:'airportinfo/:airportinfoId/airportexpect/add',
 					component:AddAirportexpect,
 				},
 				{
-					path:'airportexpect/edit/:airportexpectId',
+					path:'airportinfo/:airportinfoId/edit/:airportexpectId',
 					component:EditAirportexpect,
 				},
 				{

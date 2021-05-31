@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AirportInfo;
+use App\PlaneType;
+use App\AviaCity;
+use App\AirportCode;
+use App\AirportWay;
+use App\AirportRecon;
+use App\AirportName;
+use App\AirportExpect;
+use Validator;
 
 class AirportExpectController extends Controller
 {

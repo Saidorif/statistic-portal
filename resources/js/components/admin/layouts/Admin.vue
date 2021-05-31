@@ -112,14 +112,6 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/airportexpect">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                План аэропорта
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" to="/crm/customs-import-export">
               <i class="sidebar_icon fas fa-file-excel"></i>
               <p>

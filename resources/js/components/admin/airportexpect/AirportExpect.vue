@@ -7,10 +7,16 @@
 			    	<i class="sidebar_icon fas fa-plane"></i>
 				    План аэропорта 
 				</h4>
-				<router-link class="btn btn-primary" to="/crm/airportexpect/add">
+				<div class="d-flex justify-content-end">
+					<router-link class="btn btn-primary" :to='`/crm/airportinfo/${$route.params.airportinfoId}/airportexpect/add`'>
 						<i class="fas fa-plus"></i> 
-					Добавить
-				</router-link>
+						Добавить
+					</router-link>
+					<router-link class="btn_black ml-3" :to='`/crm/airportinfo`'>
+						<span class="peIcon fas fa-arrow-left"></span> 
+						Назад
+					</router-link>
+				</div>
 		  	</div>
 		  	<div class="card-body">
 			  <div class="table-responsive">

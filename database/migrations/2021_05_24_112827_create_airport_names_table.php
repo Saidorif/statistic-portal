@@ -15,7 +15,7 @@ class CreateAirportNamesTable extends Migration
     {
         Schema::create('airport_names', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->softDeletes();
             $table->timestamps();
         });

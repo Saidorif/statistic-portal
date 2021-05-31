@@ -7,23 +7,14 @@
 			    	<i class="sidebar_icon fas fa-plane"></i>
 				    Добавить План аэропорта 
 				</h4>
-				<router-link class="btn_black" to="/crm/airportexpect"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
+				<router-link class="btn_black" :to='`/crm/airportinfo/${$route.params.airportinfoId}/airportexpect`'>
+					<span class="peIcon fas fa-arrow-left"></span> 
+					Назад
+				</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveRegion" >
+		  		<form @submit.prevent.enter="saveAirportExpect" >
 					<div class="row">
-						<div class="form-group col-md-4">
-						    <label for="airport_id">Аэропорт номи</label>
-						    <select 
-						    	class="form-control input_style"
-						    	id="airport_id"
-						    	placeholder="Аэропорт номи"
-						    	v-model="form.airport_id"
-						    	:class="isRequired(form.airport_id) ? 'isRequired' : ''"
-						    >
-						    	<option value="" selected diabled>Аэропорт номини танланг!</option>
-						    </select>
-					  	</div>
 					  	<div class="form-group col-md-4">
 						    <label for="type">Кутилиш даври</label>
 						    <date-picker
@@ -46,7 +37,7 @@
 						    	<option value="" selected diabled>Аэропорт номини танланг!</option>
 						    </select>
 					  	</div>
-					  	<div class="form-group col-md-3">
+					  	<div class="form-group col-md-4">
 						    <label for="type">Рейслар сони (кутилиши)</label>
 						    <input
 						    	type="text"
@@ -90,7 +81,7 @@
 						    	:class="isRequired(form.load_capacity) ? 'isRequired' : ''"
 					    	>
 					  	</div>
-					  	<div class="form-group col-lg-12 d-flex justify-content-end align-items-center">
+					  	<div class="form-group col-lg-3 d-flex justify-content-end align-items-center">
 						  	<button type="submit" class="btn btn-primary btn_save_category">
 						  		<i class="fas fa-save"></i>
 							  	Сохранить
@@ -137,7 +128,7 @@
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-			async saveRegion(){
+			async saveAirportExpect(){
 		    	if (this.form.name != ''){
 					this.laoding = true
 					await this.actionAddAirportexpect(this.form)

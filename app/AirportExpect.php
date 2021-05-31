@@ -12,6 +12,6 @@ class AirportExpect extends Model
     protected $fillable = ["airport_id","expect_date","type","reys_qty","seats_qty","passengers_qty","load_capacity"];
 
     public function airportinfo(){
-    	return $this->belongsTo(AirportInfo::class,"airport_id");
+    	return $this->belongsTo(AirportInfo::class,"airport_id")->with(['airport_name']);
     }
 }

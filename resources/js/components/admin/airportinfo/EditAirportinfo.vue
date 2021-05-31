@@ -13,15 +13,17 @@
 		  		<form @submit.prevent.enter="saveAirport" >
 					<div class="row">
 					  <div class="form-group col-md-4">
-					    <label for="name">Аэропорт номи</label>
-					    <input
-					    	type="text"
+					    <label for="airport_name_id">Аэропорт номи</label>
+					    <select 
 					    	class="form-control input_style"
-					    	id="name"
+					    	id="airport_name_id"
 					    	placeholder="Аэропорт номи"
-					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"
+					    	v-model="form.airport_name_id"
+					    	:class="isRequired(form.airport_name_id) ? 'isRequired' : ''"
 				    	>
+					    	<option value="" selected disabled>Выберите аеропорт</option>
+					    	<option :value="name.id" v-for="(name,index) in getAirportnameList">{{name.name}}</option>
+					    </select>
 					  </div>
 					  <div class="form-group col-md-3 d-flex flex-column">
 		              	<label for="year">Очилиш йили</label>
@@ -462,7 +464,7 @@
 		data(){
 			return{
 				form:{
-					name:'',
+					airport_name_id:'',
 					year:'',
 					address:'',
 					flight_mode:'',
@@ -478,10 +480,12 @@
 			}
 		},
 		computed:{
-			...mapGetters('airportinfo',['getMassage','getAirport'])
+			...mapGetters('airportinfo',['getMassage','getAirport']),
+			...mapGetters('airportname',['getAirportnameList']),
 		},
 		async mounted(){
 			await this.actionEditAirport(this.$route.params.airportinfoId)
+			await this.actionAirportnameList()
 			this.laoding = false
 			this.form = this.getAirport
 			this.planeTypes = this.getAirport.plane_type
@@ -509,6 +513,7 @@
 				'actionDeleteAirportway',
 				'actionDeleteAirportrecon',
 			]),
+			...mapActions('airportname',['actionAirportnameList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
@@ -626,7 +631,7 @@
 				this.recons = this.getAirport.airport_recon
 		    },
 			async saveAirport(){
-		    	if (this.form.name != '' && this.form.year != '' && this.form.address != '' && this.form.flight_mode != ''){
+		    	if (this.form.airport_name_id != '' && this.form.year != '' && this.form.address != '' && this.form.flight_mode != ''){
 					this.laoding = true
 					// plane_types
 					let plane_types = this.planeTypes.filter((item,index)=>{

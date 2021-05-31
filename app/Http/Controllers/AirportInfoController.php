@@ -16,7 +16,7 @@ class AirportInfoController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $result = AirportInfo::paginate(12);
+        $result = AirportInfo::with(['airport_name'])->paginate(12);
         return response()->json(['success' => true, 'result' => $result]);
     }
 
@@ -45,7 +45,7 @@ class AirportInfoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [            
-            'name'  => 'required|string',
+            'airport_name_id'  => 'required|integer',
             'year'  => 'required|string',
             'address'  => 'required|string',
             'flight_mode'  => 'required|string',
@@ -73,7 +73,7 @@ class AirportInfoController extends Controller
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
         $inputs = $request->only([
-            'name',
+            'airport_name_id',
             'year',
             'address',
             'flight_mode',
@@ -148,7 +148,7 @@ class AirportInfoController extends Controller
             return response()->json(['error' => true, 'message' => 'Аэропорт не найден']);
         }
         $validator = Validator::make($request->all(), [            
-            'name'  => 'required|string',
+            'airport_name_id'  => 'required|integer',
             'year'  => 'required|string',
             'address'  => 'required|string',
             'flight_mode'  => 'required|string',
@@ -188,7 +188,7 @@ class AirportInfoController extends Controller
         if($validator->fails()){
             return response()->json(['error' => true, 'message' => $validator->messages()]);
         }
-        $inputs = $request->only(['name','year','address','flight_mode','freedom_air','plane_types','new_plane_types','cities','new_cities','codes','new_codes','ways','new_ways','recons','new_recons']);
+        $inputs = $request->only(['airport_name_id','year','address','flight_mode','freedom_air','plane_types','new_plane_types','cities','new_cities','codes','new_codes','ways','new_ways','recons','new_recons']);
         $result->update($inputs);
 
         // эски қабул қиладиган самолёт турлари 

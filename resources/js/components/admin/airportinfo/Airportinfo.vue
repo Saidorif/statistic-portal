@@ -29,7 +29,11 @@
 					<tbody>
 						<tr v-for="(airport,index) in getAirports.data">
 							<td scope="row">{{airport.id}}</td>
-							<td>{{airport.name}}</td>
+							<td>
+								<router-link tag="a" class="btn_transparent" :to='`/crm/airportinfo/${airport.id}/airportexpect`'>
+									{{airport.airport_name ? airport.airport_name.name : ''}}
+								</router-link>
+							</td>
 							<td>{{airport.year}}</td>
 							<td>{{airport.address}}</td>
 							<td>{{$g.findFlightMode(airport.flight_mode)}}</td>
