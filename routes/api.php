@@ -94,6 +94,30 @@ Route::group([
             Route::post('airportname/update/{id}', 'AirportNameController@update');
             Route::delete('airportname/destroy/{id}', 'AirportNameController@destroy');
 
+            //airportexpect CRUD
+            Route::post('airportexpect', 'AirportExpectController@index');
+            Route::get('airportexpect/list', 'AirportExpectController@list');
+            Route::post('airportexpect/store', 'AirportExpectController@store');
+            Route::get('airportexpect/edit/{id}', 'AirportExpectController@edit');
+            Route::post('airportexpect/update/{id}', 'AirportExpectController@update');
+            Route::delete('airportexpect/destroy/{id}', 'AirportExpectController@destroy');
+
+            //aviadirection CRUD
+            Route::post('aviadirection', 'AviaDirectionController@index');
+            Route::get('aviadirection/list', 'AviaDirectionController@list');
+            Route::post('aviadirection/store', 'AviaDirectionController@store');
+            Route::get('aviadirection/edit/{id}', 'AviaDirectionController@edit');
+            Route::post('aviadirection/update/{id}', 'AviaDirectionController@update');
+            Route::delete('aviadirection/destroy/{id}', 'AviaDirectionController@destroy');
+
+            //airwayscompany CRUD
+            Route::post('airwayscompany', 'AirwaysCompanyController@index');
+            Route::get('airwayscompany/list', 'AirwaysCompanyController@list');
+            Route::post('airwayscompany/store', 'AirwaysCompanyController@store');
+            Route::get('airwayscompany/edit/{id}', 'AirwaysCompanyController@edit');
+            Route::post('airwayscompany/update/{id}', 'AirwaysCompanyController@update');
+            Route::delete('airwayscompany/destroy/{id}', 'AirwaysCompanyController@destroy');
+
             //Airportinfo CRUD
             Route::post('airportinfo', 'AirportinfoController@index');
             Route::get('airportinfo/list', 'AirportinfoController@list');

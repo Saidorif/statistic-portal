@@ -22,6 +22,10 @@ class CreateAirportExpectsTable extends Migration
             $table->string('seats_qty');
             $table->string('passengers_qty');
             $table->string('load_capacity');
+            $table->string('reys_qty_fakt')->nullable();
+            $table->string('seats_qty_fakt')->nullable();
+            $table->string('passengers_qty_fakt')->nullable();
+            $table->string('load_capacity_fakt')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

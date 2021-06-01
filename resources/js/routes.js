@@ -108,6 +108,17 @@ import Airportname from './components/admin/airportname/Airportname'
 import AddAirportname from './components/admin/airportname/AddAirportname'
 import EditAirportname from './components/admin/airportname/EditAirportname'
 
+// AirwaysCompany
+import AirwaysCompany from './components/admin/airwayscompany/AirwaysCompany'
+import AddAirwaysCompany from './components/admin/airwayscompany/AddAirwaysCompany'
+import EditAirwaysCompany from './components/admin/airwayscompany/EditAirwaysCompany'
+
+// AviaDirection
+import AviaDirection from './components/admin/aviadirection/AviaDirection'
+import AddAviaDirection from './components/admin/aviadirection/AddAviaDirection'
+import EditAviaDirection from './components/admin/aviadirection/EditAviaDirection'
+
+
 // reconstruction
 import Reconstruction from './components/admin/avto/reconstruction/Reconstruction'
 import AddReconstruction from './components/admin/avto/reconstruction/AddReconstruction'
@@ -327,7 +338,7 @@ const router = new Router({
 					component:AddAirportexpect,
 				},
 				{
-					path:'airportinfo/:airportinfoId/edit/:airportexpectId',
+					path:'airportinfo/:airportinfoId/airportexpect/edit/:airportexpectId',
 					component:EditAirportexpect,
 				},
 				{
@@ -341,6 +352,30 @@ const router = new Router({
 				{
 					path:'airportname/edit/:airportnameId',
 					component:EditAirportname,
+				},
+				{
+					path:'aviadirection',
+					component:AviaDirection,
+				},
+				{
+					path:'aviadirection/add',
+					component:AddAviaDirection,
+				},
+				{
+					path:'aviadirection/edit/:aviadirectionId',
+					component:EditAviaDirection,
+				},
+				{
+					path:'airwayscompany',
+					component:AirwaysCompany,
+				},
+				{
+					path:'airwayscompany/add',
+					component:AddAirwaysCompany,
+				},
+				{
+					path:'airwayscompany/edit/:airwayscompanyId',
+					component:EditAirwaysCompany,
 				},
 				{
 					path:'reconstruction',

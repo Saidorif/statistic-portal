@@ -15,7 +15,7 @@
 		  	<div class="card-body">
 		  		<form @submit.prevent.enter="saveAirportExpect" >
 					<div class="row">
-					  	<div class="form-group col-md-4">
+					  	<div class="form-group col-md-6">
 						    <label for="type">Кутилиш даври</label>
 						    <date-picker
 				                lang="ru"
@@ -25,7 +25,7 @@
 				                :class="isRequired(form.expect_date) ? 'isRequired' : ''"
 			              	></date-picker>
 					  	</div>
-					  	<div class="form-group col-md-4">
+					  	<div class="form-group col-md-6">
 						    <label for="type">Рейслар йўналиши</label>
 						    <select 
 						    	class="form-control input_style"
@@ -34,18 +34,19 @@
 						    	v-model="form.type"
 						    	:class="isRequired(form.type) ? 'isRequired' : ''"
 						    >
-						    	<option value="" selected diabled>Аэропорт номини танланг!</option>
+						    	<option value="" selected diabled>Рейс йўналишини танланг!</option>
+						    	<option :value="item.key" v-for="(item,index) in $g.getTypeAirports()">{{item.value}}</option>
 						    </select>
 					  	</div>
-					  	<div class="form-group col-md-4">
-						    <label for="type">Рейслар сони (кутилиши)</label>
+					  	<div class="form-group col-md-3">
+						    <label for="reys_qty">Рейслар сони (кутилиши)</label>
 						    <input
 						    	type="text"
 						    	class="form-control input_style"
-						    	id="type"
+						    	id="reys_qty"
 						    	placeholder="Рейслар сони (кутилиши)"
-						    	v-model="form.type"
-						    	:class="isRequired(form.type) ? 'isRequired' : ''"
+						    	v-model="form.reys_qty"
+						    	:class="isRequired(form.reys_qty) ? 'isRequired' : ''"
 					    	>
 					  	</div>
 					  	<div class="form-group col-md-3">
@@ -81,7 +82,7 @@
 						    	:class="isRequired(form.load_capacity) ? 'isRequired' : ''"
 					    	>
 					  	</div>
-					  	<div class="form-group col-lg-3 d-flex justify-content-end align-items-center">
+					  	<div class="form-group col-lg-12 d-flex justify-content-end align-items-center">
 						  	<button type="submit" class="btn btn-primary btn_save_category">
 						  		<i class="fas fa-save"></i>
 							  	Сохранить
@@ -105,13 +106,13 @@
 		data(){
 			return{
 				form:{
-					airport_id:"",
-					expect_date:"",
-					type:"",
-					reys_qty:"",
-					seats_qty:"",
-					passengers_qty:"",
-					load_capacity:"",
+					airport_id:this.$route.params.airportinfoId,
+					expect_date:'',
+					type:'',
+					reys_qty:'',
+					seats_qty:'',
+					passengers_qty:'',
+					load_capacity:'',
 				},
 				requiredInput:false,
 				laoding: true
@@ -129,7 +130,7 @@
 	    		return this.requiredInput && input === '';
 		    },
 			async saveAirportExpect(){
-		    	if (this.form.name != ''){
+		    	if (this.form.expect_date != '' && this.form.type != '' && this.form.reys_qty != '' && this.form.seats_qty != '' && this.form.passengers_qty != '' && this.form.load_capacity != ''){
 					this.laoding = true
 					await this.actionAddAirportexpect(this.form)
 					if (this.getMassage.success) {
@@ -138,7 +139,7 @@
 					    	icon: 'success',
 							title: this.getMassage.message,
 					    })
-						this.$router.push("/crm/airportexpect");
+						this.$router.push(`/crm/airportinfo/${this.$route.params.airportinfoId}/airportexpect`);
 						this.requiredInput = false
 					}
 					this.laoding = false

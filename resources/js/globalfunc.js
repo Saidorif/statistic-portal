@@ -339,4 +339,48 @@ export const g = {
     }
     return name
   },
+  getTypeAirports(){
+    let items = [
+      {key:'international',value:'Xалқаро'},
+      {key:'local',value:'Ички'},
+    ]
+    return items
+  },
+  findTypeAirports(item){
+    let name = ''
+    if(item){
+      let items=[
+        {key:'international',value:'Xалқаро'},
+        {key:'local',value:'Ички'},
+      ];
+      items.forEach((val,index)=>{
+        if(item == val.key){
+          name = val.value
+        }
+      })  
+    }
+    return name
+  },
+  getAviaTypes(){
+    let items = [
+      {key:'cargo',value:'Юк'},
+      {key:'passenger ',value:'Йўловчи'},
+    ]
+    return items
+  },
+  findAviaTypes(item){
+    let name = ''
+    if(item){
+      let items=[
+        {key:'cargo',value:'Юк'},
+        {key:'passenger ',value:'Йўловчи'},
+      ];
+      items.forEach((val,index)=>{
+        if(item == val.key){
+          name = val.value
+        }
+      })  
+    }
+    return name
+  },
 }

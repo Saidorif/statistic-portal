@@ -7,28 +7,141 @@
 			    	<i class="peIcon pe-7s-id"></i>
 				    Изменить План аэропорта 
 				</h4>
-				<router-link class="btn_black" to="/crm/airportexpect"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
+				<router-link class="btn_black" :to='`/crm/airportinfo/${$route.params.airportinfoId}/airportexpect`'>
+					<span class="peIcon fas fa-arrow-left"></span> 
+					Назад
+				</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveRegion" >
+		  		<form @submit.prevent.enter="saveAirportExpect" >
 					<div class="row">
-					  <div class="form-group col-md-9">
-					    <label for="name">Область</label>
-					    <input
-					    	type="text"
-					    	class="form-control input_style"
-					    	id="name"
-					    	placeholder="Область"
-					    	v-model="form.name"
-					    	:class="isRequired(form.name) ? 'isRequired' : ''"
-				    	>
-					  </div>
-					  <div class="form-group col-lg-3 form_btn">
-					  	<button type="submit" class="btn btn-primary btn_save_category">
-					  		<i class="fas fa-save"></i>
-						  	Сохранить
-						</button>
-				  	  </div>
+					  	<div class="form-group col-md-6">
+						    <label for="type">Кутилиш даври</label>
+						    <date-picker
+				                lang="ru"
+				                placeholder="Кутилиш даври"
+				                type="date" format="YYYY-MM-DD" valueType="format"
+				                v-model="form.expect_date"
+				                :class="isRequired(form.expect_date) ? 'isRequired' : ''"
+			              	></date-picker>
+					  	</div>
+					  	<div class="form-group col-md-6">
+						    <label for="type">Рейслар йўналиши</label>
+						    <select 
+						    	class="form-control input_style"
+						    	id="type"
+						    	placeholder="Аэропорт номи"
+						    	v-model="form.type"
+						    	:class="isRequired(form.type) ? 'isRequired' : ''"
+						    >
+						    	<option value="" selected diabled>Рейс йўналишини танланг!</option>
+						    	<option :value="item.key" v-for="(item,index) in $g.getTypeAirports()">{{item.value}}</option>
+						    </select>
+					  	</div>
+					  	<div class="col-md-6">
+					  		<h3>Кутилиши</h3>
+					  		<div class="row">
+					  			<div class="form-group col-md-12">
+								    <label for="reys_qty">Рейслар сони (кутилиши)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="reys_qty"
+								    	placeholder="Рейслар сони (кутилиши)"
+								    	v-model="form.reys_qty"
+								    	:class="isRequired(form.reys_qty) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="seats_qty">Рейслардаги ўриндиқлар сони (кутилиши)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="seats_qty"
+								    	placeholder="Рейслардаги ўриндиқлар сони (кутилиши)"
+								    	v-model="form.seats_qty"
+								    	:class="isRequired(form.seats_qty) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="passengers_qty">Йўловчилар сони (Кутилиши)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="passengers_qty"
+								    	placeholder="Йўловчилар сони (Кутилиши)"
+								    	v-model="form.passengers_qty"
+								    	:class="isRequired(form.passengers_qty) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="load_capacity">Юк ҳажми (Кутилиши)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="load_capacity"
+								    	placeholder="Юк ҳажми (Кутилиши)"
+								    	v-model="form.load_capacity"
+								    	:class="isRequired(form.load_capacity) ? 'isRequired' : ''"
+							    	>
+							  	</div>			
+				  			</div>	
+				  		</div>
+				  		<div class="col-md-6">
+					  		<h3>Факт</h3>
+					  		<div class="row">
+					  			<div class="form-group col-md-12">
+								    <label for="reys_qty">Рейслар сони (Факт)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="reys_qty"
+								    	placeholder="Рейслар сони (Факт)"
+								    	v-model="form.reys_qty_fakt"
+								    	:class="isRequired(form.reys_qty_fakt) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="seats_qty">Рейслардаги ўриндиқлар сони (Факт)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="seats_qty"
+								    	placeholder="Рейслардаги ўриндиқлар сони (Факт)"
+								    	v-model="form.seats_qty_fakt"
+								    	:class="isRequired(form.seats_qty_fakt) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="passengers_qty">Йўловчилар сони (Факт)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="passengers_qty"
+								    	placeholder="Йўловчилар сони (Факт)"
+								    	v-model="form.passengers_qty_fakt"
+								    	:class="isRequired(form.passengers_qty_fakt) ? 'isRequired' : ''"
+							    	>
+							  	</div>
+							  	<div class="form-group col-md-12">
+								    <label for="load_capacity">Юк ҳажми (Факт)</label>
+								    <input
+								    	type="text"
+								    	class="form-control input_style"
+								    	id="load_capacity"
+								    	placeholder="Юк ҳажми (Факт)"
+								    	v-model="form.load_capacity_fakt"
+								    	:class="isRequired(form.load_capacity_fakt) ? 'isRequired' : ''"
+							    	>
+							  	</div>			
+				  			</div>	
+				  		</div>
+					  	<div class="form-group col-lg-12 d-flex justify-content-end align-items-center">
+						  	<button type="submit" class="btn btn-primary btn_save_category">
+						  		<i class="fas fa-save"></i>
+							  	Сохранить
+							</button>
+			  	  		</div>
 					</div>
 				</form>
 		  	</div>
@@ -38,43 +151,55 @@
 <script>
 	import { mapGetters , mapActions } from 'vuex'
 	import Loader from '../../Loader'
+	import DatePicker from "vue2-datepicker";
 	export default{
 		components:{
-			Loader
+			Loader,
+			DatePicker,
 		},
 		data(){
 			return{
 				form:{
-					name:''
+					airport_id:this.$route.params.airportinfoId,
+					expect_date:'',
+					type:'',
+					reys_qty:'',
+					seats_qty:'',
+					passengers_qty:'',
+					load_capacity:'',
+					reys_qty_fakt:'',
+					seats_qty_fakt:'',
+					passengers_qty_fakt:'',
+					load_capacity_fakt:'',
 				},
 				requiredInput:false,
 				laoding: true
 			}
 		},
 		computed:{
-			...mapGetters('region',['getMassage','getRegion'])
+			...mapGetters('airportexpect',['getMassage','getAirportexpect'])
 		},
 		async mounted(){
-			await this.actionEditRegion(this.$route.params.regionId)
+			await this.actionEditAirportexpect(this.$route.params.airportexpectId)
 			this.laoding = false
-			this.form = this.getRegion
+			this.form = this.getAirportexpect
 		},
 		methods:{
-			...mapActions('region',['actionUpdateRegion','actionEditRegion']),
+			...mapActions('airportexpect',['actionUpdateAirportexpect','actionEditAirportexpect']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
-			async saveRegion(){
-		    	if (this.form.name != ''){
+			async saveAirportExpect(){
+		    	if (this.form.expect_date != '' && this.form.type != '' && this.form.reys_qty != '' && this.form.seats_qty != '' && this.form.passengers_qty != '' && this.form.load_capacity != ''){
 					this.laoding = true
-					await this.actionUpdateRegion(this.form)
+					await this.actionUpdateAirportexpect(this.form)
 					if (this.getMassage.success) {
 						toast.fire({
 					    	type: 'success',
 					    	icon: 'success',
 							title: this.getMassage.message,
 					    })
-						this.$router.push("/crm/region");
+						this.$router.push(`/crm/airportinfo/${this.$route.params.airportinfoId}/airportexpect`);
 						this.requiredInput = false
 					}
 					this.laoding = false

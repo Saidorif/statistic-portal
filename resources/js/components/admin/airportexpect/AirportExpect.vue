@@ -24,19 +24,47 @@
 					<thead>
 						<tr>
 							<th scope="col">№</th>
-							<th scope="col">Название</th>
+							<th scope="col">Аэропорт номи</th>
+							<th scope="col">Кутилиш даври</th>
+							<th scope="col">Рейслар йўналиши</th>
+							<th scope="col">Рейслар сони (кутилиши)</th>
+							<th scope="col">Рейслар сони (Факт)</th>
+							<th scope="col">Рейслардаги ўриндиқлар сони (кутилиши)</th>
+							<th scope="col">Рейслардаги ўриндиқлар сони (Факт)</th>
+							<th scope="col">Йўловчилар сони (Кутилиши)</th>
+							<th scope="col">Йўловчилар сони (Факт)</th>
+							<th scope="col">Юк ҳажми (Кутилиши)</th>
+							<th scope="col">Юк ҳажми (Факт)</th>
 							<th scope="col">Действия</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(reg,index) in getAirportexpects.data">
-							<td scope="row">{{reg.id}}</td>
-							<td>{{reg.name}}</td>
+						<tr v-for="(item,index) in getAirportexpects.data">
+							<td scope="row">{{item.id}}</td>
 							<td>
-								<router-link tag="button" class="btn_transparent" :to='`/crm/airportexpect/edit/${reg.id}`'>
+								<template v-if="item.airportinfo">
+									{{item.airportinfo.airport_name ? item.airportinfo.airport_name.name : ''}}
+								</template>
+							</td>
+							<td>{{item.expect_date}}</td>
+							<td>{{$g.findTypeAirports(item.type)}}</td>
+							<td>{{item.reys_qty}}</td>
+							<td>{{item.reys_qty_fakt}}</td>
+							<td>{{item.seats_qty}}</td>
+							<td>{{item.seats_qty_fakt}}</td>
+							<td>{{item.passengers_qty}}</td>
+							<td>{{item.passengers_qty_fakt}}</td>
+							<td>{{item.load_capacity}}</td>
+							<td>{{item.load_capacity_fakt}}</td>
+							<td>
+								<router-link 
+									tag="button" 
+									class="btn_transparent" 
+									:to='`/crm/airportinfo/${$route.params.airportinfoId}/airportexpect/edit/${item.id}`'
+								>
 									<i class="pe_icon pe-7s-edit editColor"></i>
 								</router-link>
-								<button class="btn_transparent" @click="deleteRegion(reg.id)">
+								<button class="btn_transparent" @click="deleteAirportexpect(item.id)">
 									<i class="pe_icon pe-7s-trash trashColor"></i>
 								</button>
 							</td>
@@ -86,7 +114,7 @@
 					toast.fire({
 				    	type: 'success',
 				    	icon: 'success',
-						title: 'Airportexpect удалено!',
+						title: this.getMassage.message,
 				    })
 				}
 			}
