@@ -42,6 +42,7 @@ import {airportexpect} from "./airportexpect.module"
 import {airportname} from "./airportname.module"
 import {aviadirection} from "./aviadirection.module"
 import {airwayscompany} from "./airwayscompany.module"
+import {airwaysinfo} from "./airwaysinfo.module"
 
 import { TokenService } from './../services/storage.service'
 
@@ -90,6 +91,7 @@ const store = new Vuex.Store(
             airportname,
             aviadirection,
             airwayscompany,
+            airwaysinfo,
             statistic,
 		},
 		state:{

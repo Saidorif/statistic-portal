@@ -120,6 +120,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/crm/airwaysinfo">
+              <i class="sidebar_icon fas fa-plane"></i>
+              <p>
+                Информации авиакомпании
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/crm/airportinfo">
               <i class="sidebar_icon fas fa-plane"></i>
               <p>

@@ -5,27 +5,27 @@
 		  	<div class="card-header">
 			    <h4 class="title_user">
 			    	<i class="sidebar_icon fas fa-plane"></i>
-				    Изменить Информации аэропорта
+				    Изменить Информации авиакомпании
 				</h4>
-				<router-link class="btn_black" to="/crm/airportinfo"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
+				<router-link class="btn_black" to="/crm/airwaysinfo"><span class="peIcon fas fa-arrow-left"></span> Назад</router-link>
 		  	</div>
 		  	<div class="card-body">
-		  		<form @submit.prevent.enter="saveAirport" >
+		  		<form @submit.prevent.enter="saveAirways" >
 					<div class="row">
 					  <div class="form-group col-md-4">
-					    <label for="airport_name_id">Аэропорт номи</label>
+					    <label for="airways_company_id">Компания номи</label>
 					    <select 
 					    	class="form-control input_style"
-					    	id="airport_name_id"
-					    	placeholder="Аэропорт номи"
-					    	v-model="form.airport_name_id"
-					    	:class="isRequired(form.airport_name_id) ? 'isRequired' : ''"
+					    	id="airways_company_id"
+					    	placeholder="Компания номи"
+					    	v-model="form.airways_company_id"
+					    	:class="isRequired(form.airways_company_id) ? 'isRequired' : ''"
 				    	>
 					    	<option value="" selected disabled>Выберите аеропорт</option>
-					    	<option :value="name.id" v-for="(name,index) in getAirportnameList">{{name.name}}</option>
+					    	<option :value="name.id" v-for="(name,index) in getAirwaysCompanyList">{{name.name}}</option>
 					    </select>
 					  </div>
-					  <div class="form-group col-md-3 d-flex flex-column">
+					  <div class="form-group col-md-4 d-flex flex-column">
 		              	<label for="year">Очилиш йили</label>
 		              	<date-picker
 			                lang="ru"
@@ -35,7 +35,40 @@
 			                :class="isRequired(form.year) ? 'isRequired' : ''"
 		              	></date-picker>
 		              </div>
-		              <div class="form-group col-md-5">
+					  <div class="form-group col-md-4 d-flex flex-column">
+		              	<label for="fleet_size">Флот ҳажми (кемаларнинг сони)</label>
+		              	<input 
+		              		type="number" 
+		              		class="form-control input_style"
+					    	id="fleet_size"
+					    	placeholder="Флот ҳажми (кемаларнинг сони)"
+					    	v-model="form.fleet_size"
+					    	:class="isRequired(form.fleet_size) ? 'isRequired' : ''"
+		              	>
+		              </div>
+					  <div class="form-group col-md-4 d-flex flex-column">
+		              	<label for="destination_qty">Етиб бориш манзиллар сони</label>
+		              	<input 
+		              		type="number" 
+		              		class="form-control input_style"
+					    	id="destination_qty"
+					    	placeholder="Етиб бориш манзиллар сони"
+					    	v-model="form.destination_qty"
+					    	:class="isRequired(form.destination_qty) ? 'isRequired' : ''"
+		              	>
+		              </div>
+					  <div class="form-group col-md-4 d-flex flex-column">
+		              	<label for="call_name">Чақирув номи (позывной)</label>
+		              	<input 
+		              		type="text" 
+		              		class="form-control input_style"
+					    	id="call_name"
+					    	placeholder="Чақирув номи (позывной)"
+					    	v-model="form.call_name"
+					    	:class="isRequired(form.call_name) ? 'isRequired' : ''"
+		              	>
+		              </div>
+		              <div class="form-group col-md-4">
 					    <label for="address">Манзили</label>
 					    <textarea 
 					    	class="form-control input_style"
@@ -46,33 +79,8 @@
 					    	:class="isRequired(form.address) ? 'isRequired' : ''"
 				    	></textarea>
 					  </div>
-		              <div class="form-group col-md-6">
-					    <label for="flight_mode">Учиш режими</label>
-					    <select 
-					    	v-model="form.flight_mode"
-					    	id="flight_mode"
-					    	class="form-control" 
-					    	:class="isRequired(form.flight_mode) ? 'isRequired' : ''"
-				    	>
-					    	<option value="" selected disabled>Танланг!</option>
-					    	<option :value="item.key" v-for="(item,index) in $g.getFlightModes()">{{item.value}}</option>
-					    </select> 
-					  </div>
-		              <div class="form-group col-md-6">
-					    <label for="freedom_air">Ҳаво эркинлиги</label>
-					    <select 
-					    	v-model="form.freedom_air"
-					    	id="freedom_air"
-					    	class="form-control" 
-					    	:disabled="form.flight_mode != 'clear_sky'"
-					    	:class="isRequired(form.freedom_air) ? 'isRequired' : ''"
-				    	>
-					    	<option value="" selected disabled="">Танланг!</option>
-					    	<option :value="item.key" v-for="(item,index) in $g.getFreedomAirs()">{{item.value}}</option>
-					    </select>
-					  </div>
 					  <hr>
-					  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
+				<!-- 	  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
 					  	<h4>Қабул қиладиган самолёт турлари</h4>
 			  			<button 
 			  				type="button" 
@@ -121,8 +129,8 @@
 					  			</button>
 					  		</div>
 					  	</div>
-					  </div>	
-					  <hr>
+					  </div> -->	
+			<!-- 		  <hr>
 					  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
 					  	<h4>Авиақатновлар амалга ошириладиган шаҳарлар</h4>
 			  			<button 
@@ -173,10 +181,10 @@
 					  			</button>
 					  		</div>
 					  	</div>
-					  </div>	
+					  </div>	-->
 					  <hr>
 					  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
-					  	<h4>Аэропорт кодлари</h4>
+					  	<h4>Авиакомпания кодлари</h4>
 			  			<button 
 			  				type="button" 
 			  				class="btn btn-info mt-41" 
@@ -185,7 +193,7 @@
 			  				<i class="fas fa-plus"></i>
 			  				добавить
 			  			</button>
-					  </div>
+					  </div> 
 					  <div class="form-group col-lg-12">
 					  	<div class="row" v-for="(item,index) in codes">
 					  		<div class="form-group col-lg-4">
@@ -224,7 +232,7 @@
 					  				type="button" 
 					  				class="btn btn-danger mt-41" 
 					  				v-if="item.id"
-					  				@click.prevent="removeAirportCodeFromServer(item.id)"
+					  				@click.prevent="removeAirwaysCodeFromServer(item.id)"
 				  				>
 					  				<i class="fas fa-trash"></i>
 					  				удалить
@@ -241,8 +249,8 @@
 					  		</div>
 					  	</div>
 					  </div>
-					  <hr>
-					  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
+					  <hr> 
+				<!-- 	  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
 					  	<h4>Учиш-қўниш йўлаклари</h4>
 			  			<button 
 			  				type="button" 
@@ -252,8 +260,8 @@
 			  				<i class="fas fa-plus"></i>
 			  				добавить
 			  			</button>
-					  </div>
-					  <div class="form-group col-lg-12">
+					  </div> -->
+					  <!-- <div class="form-group col-lg-12">
 					  	<div class="row" v-for="(item,index) in ways">
 					  		<div class="form-group col-lg-4">
 					  			<label :for="'number'+index">
@@ -336,7 +344,7 @@
 					  				type="button" 
 					  				class="btn btn-danger mt-41" 
 					  				v-if="item.id"
-					  				@click.prevent="removeAirportWayFromServer(item.id)"
+					  				@click.prevent="removeAirwaysWayFromServer(item.id)"
 				  				>
 					  				<i class="fas fa-trash"></i>
 					  				удалить
@@ -352,8 +360,8 @@
 					  			</button>
 					  		</div>
 					  	</div>
-					  </div>	
-					  <hr>
+					  </div> -->	
+					  <!-- <hr>
 					  <div class="form-group col-lg-12 d-flex justify-content-between align-items-center">
 					  	<h4>Реконструкция ва таъмирлаш ишлари</h4>
 			  			<button 
@@ -364,8 +372,8 @@
 			  				<i class="fas fa-plus"></i>
 			  				добавить
 			  			</button>
-					  </div>
-					  <div class="form-group col-lg-12">
+					  </div> -->
+					<!--   <div class="form-group col-lg-12">
 					  	<div class="row" v-for="(item,index) in recons">
 					  		<div class="form-group col-lg-4">
 					  			<label :for="'job_type'+index">
@@ -408,7 +416,7 @@
 					  				type="button" 
 					  				class="btn btn-danger mt-41" 
 					  				v-if="item.id"
-					  				@click.prevent="removeAirportReconFromServer(item.id)"
+					  				@click.prevent="removeAirwaysReconFromServer(item.id)"
 				  				>
 					  				<i class="fas fa-trash"></i>
 					  				удалить
@@ -439,7 +447,7 @@
 					  			></textarea>
 					  		</div>
 					  	</div>
-					  </div>		
+					  </div> -->		
 					  <div class="form-group col-lg-12 d-flex justify-content-end">
 					  	<button type="submit" class="btn btn-primary btn_save_category">
 					  		<i class="fas fa-save"></i>
@@ -464,11 +472,12 @@
 		data(){
 			return{
 				form:{
-					airport_name_id:'',
+					airways_company_id:'',
 					year:'',
 					address:'',
-					flight_mode:'',
-					freedom_air:'',
+					fleet_size:'',
+					call_name:'',
+					destination_qty:'',
 				},
 				planeTypes:[],
 				cities:[],
@@ -480,19 +489,19 @@
 			}
 		},
 		computed:{
-			...mapGetters('airportinfo',['getMassage','getAirport']),
-			...mapGetters('airportname',['getAirportnameList']),
+			...mapGetters('airwaysinfo',['getMassage','getAirways']),
+			...mapGetters('airwayscompany',['getAirwaysCompanyList']),
 		},
 		async mounted(){
-			await this.actionEditAirport(this.$route.params.airportinfoId)
-			await this.actionAirportnameList()
+			await this.actionEditAirways(this.$route.params.airwaysinfoId)
+			await this.actionAirwaysCompanyList()
 			this.laoding = false
-			this.form = this.getAirport
-			this.planeTypes = this.getAirport.plane_type
-			this.cities = this.getAirport.avia_city
-			this.codes = this.getAirport.airport_code
-			this.ways = this.getAirport.airport_way
-			this.recons = this.getAirport.airport_recon
+			this.form = this.getAirways
+			// this.planeTypes = this.getAirways.plane_type
+			// this.cities = this.getAirways.avia_city
+			this.codes = this.getAirways.airways_code
+			// this.ways = this.getAirways.Airways_way
+			// this.recons = this.getAirways.airport_recon
 		},
 		watch:{
 			'form.flight_mode':{
@@ -504,16 +513,16 @@
 			}
 		},
 		methods:{
-			...mapActions('airportinfo',[
-				'actionUpdateAirport',
-				'actionEditAirport',
-				'actionDeletePlaneType',
-				'actionDeleteAviaCity',
-				'actionDeleteAirportcode',
-				'actionDeleteAirportway',
-				'actionDeleteAirportrecon',
+			...mapActions('airwaysinfo',[
+				'actionUpdateAirways',
+				'actionEditAirways',
+				'actionDeleteAirwayscode',
+				// 'actionDeletePlaneType',
+				// 'actionDeleteAviaCity',
+				// 'actionDeleteAirwaysway',
+				// 'actionDeleteAirwaysrecon',
 			]),
-			...mapActions('airportname',['actionAirportnameList']),
+			...mapActions('airwayscompany',['actionAirwaysCompanyList']),
 			isRequired(input){
 	    		return this.requiredInput && input === '';
 		    },
@@ -583,9 +592,9 @@
 					}
 		    	}
 		    },
-		    async removeAirportCodeFromServer(id){
+		    async removeAirwaysCodeFromServer(id){
 		    	if(confirm("Вы действительно хотите удалить?")){
-			    	await this.actionDeleteAirportcode(id)
+			    	await this.actionDeleteAirwayscode(id)
 			    	if (this.getMassage.success){
 						toast.fire({
 					    	type: 'success',
@@ -596,9 +605,9 @@
 					}
 		    	}
 		    },
-		    async removeAirportWayFromServer(id){
+		    async removeAirwaysWayFromServer(id){
 		    	if(confirm("Вы действительно хотите удалить?")){
-			    	await this.actionDeleteAirportway(id)
+			    	await this.actionDeleteAirwaysway(id)
 			    	if (this.getMassage.success){
 						toast.fire({
 					    	type: 'success',
@@ -609,9 +618,9 @@
 					}
 		    	}
 		    },
-		    async removeAirportReconFromServer(id){
+		    async removeAirwaysReconFromServer(id){
 		    	if(confirm("Вы действительно хотите удалить?")){
-			    	await this.actionDeleteAirportrecon(id)
+			    	await this.actionDeleteAirwaysrecon(id)
 			    	if (this.getMassage.success){
 						toast.fire({
 					    	type: 'success',
@@ -623,15 +632,15 @@
 		    	}
 		    },
 		    async defaultValues(){
-				await this.actionEditAirport(this.$route.params.airportinfoId)
-				this.planeTypes = this.getAirport.plane_type
-				this.cities = this.getAirport.avia_city
-				this.codes = this.getAirport.airport_code
-				this.ways = this.getAirport.airport_way
-				this.recons = this.getAirport.airport_recon
+				await this.actionEditAirways(this.$route.params.airwaysinfoId)
+				// this.planeTypes = this.getAirways.plane_type
+				// this.cities = this.getAirways.avia_city
+				this.codes = this.getAirways.airways_code
+				// this.ways = this.getAirways.airport_way
+				// this.recons = this.getAirways.airport_recon
 		    },
-			async saveAirport(){
-		    	if (this.form.airport_name_id != '' && this.form.year != '' && this.form.address != '' && this.form.flight_mode != ''){
+			async saveAirways(){
+		    	if (this.form.airways_company_id != '' && this.form.year != '' && this.form.address != '' && this.form.fleet_size != '' && this.form.call_name != '' && this.form.destination_qty != ''){
 					this.laoding = true
 					// plane_types
 					let plane_types = this.planeTypes.filter((item,index)=>{
@@ -700,17 +709,17 @@
 					this.form['new_recons'] = new_recons
 					Vue.delete(this.form,'plane_type')
 					Vue.delete(this.form,'avia_city')
-					Vue.delete(this.form,'airport_code')
+					Vue.delete(this.form,'airways_code')
 					Vue.delete(this.form,'airport_way')
 					Vue.delete(this.form,'airport_recon')
-					await this.actionUpdateAirport(this.form)
+					await this.actionUpdateAirways(this.form)
 					if (this.getMassage.success) {
 						toast.fire({
 					    	type: 'success',
 					    	icon: 'success',
 							title: this.getMassage.message,
 					    })
-						this.$router.push("/crm/airportinfo");
+						this.$router.push("/crm/airwaysinfo");
 						this.requiredInput = false
 					}
 					this.laoding = false

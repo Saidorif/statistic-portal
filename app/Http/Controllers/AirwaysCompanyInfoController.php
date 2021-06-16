@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AirwaysCompanyInfo;
-
+use App\AirwaysCode;
+use Validator;
 class AirwaysCompanyInfoController extends Controller
 {
     public function index(Request $request)
@@ -22,7 +23,7 @@ class AirwaysCompanyInfoController extends Controller
 
     public function edit($id)
     {
-        $result = AirwaysCompanyInfo::find($id);
+        $result = AirwaysCompanyInfo::with(['airways_code'])->find($id);
         
         if(!$result){
             return response()->json(['error' => true, 'message' => 'Информация не найден']);
@@ -39,6 +40,9 @@ class AirwaysCompanyInfoController extends Controller
             'fleet_size'  => 'required|integer',
             'call_name'  => 'required|string',
             'destination_qty'  => 'required|integer',
+            'codes'  => 'nullable|array',
+            'codes.*.tas_id' => 'required|string',
+            'codes.*.code' => 'required|string',
         ]);
 
         if($validator->fails()){
@@ -51,9 +55,19 @@ class AirwaysCompanyInfoController extends Controller
             'fleet_size',
             'call_name',
             'destination_qty',
+            'codes',
         ]);
         $result = AirwaysCompanyInfo::create($inputs);
-        
+        if($request->codes){
+            foreach ($inputs['codes'] as $key => $value) {
+                $planeType = new AirwaysCode();
+                $planeType->airways_id = $result->id;
+                $planeType->tas_id = $value['tas_id'];
+                $planeType->code = $value['code'];
+                $planeType->save();
+            }
+        }
+
         return response()->json(['success' => true, 'message' => 'Информация успешно создан']);
     }
 
@@ -70,6 +84,9 @@ class AirwaysCompanyInfoController extends Controller
             'fleet_size'  => 'required|integer',
             'call_name'  => 'required|string',
             'destination_qty'  => 'required|integer',
+            'codes'  => 'nullable|array',
+            'codes.*.tas_id' => 'required|string',
+            'codes.*.code' => 'required|string',
         ]);
 
         if($validator->fails()){
@@ -82,8 +99,30 @@ class AirwaysCompanyInfoController extends Controller
             'fleet_size',
             'call_name',
             'destination_qty',
+            'codes',
+            'new_codes',
         ]);
         $result->update($inputs);
+
+        // эски авиакомпания кодлари
+        if($request->codes){
+            foreach ($inputs['codes'] as $key => $value) {
+                $planeType = AirwaysCode::where(['airways_id'=>$id,'id'=>$value['id']])->first();
+                $planeType->tas_id = $value['tas_id'];
+                $planeType->code = $value['code'];
+                $planeType->save();
+            }
+        }
+        // янги авиакомпания кодлари
+        if($request->new_codes){
+            foreach ($inputs['new_codes'] as $key => $value){
+                $planeType = new AirwaysCode();
+                $planeType->airways_id = $id;
+                $planeType->tas_id = $value['tas_id'];
+                $planeType->code = $value['code'];
+                $planeType->save();
+            }
+        }
 
         return response()->json(['success' => true, 'message' => 'Информация успешно обновлен']);
     }
@@ -97,6 +136,17 @@ class AirwaysCompanyInfoController extends Controller
         $result->delete();
 
         return response()->json(['success' => true, 'message' => 'Информация удален']);
+    }
+
+    public function destroyAirwaysCode(Request $request, $id)
+    {
+        $result = AirwaysCode::find($id);
+        if(!$result){
+            return response()->json(['error' => true, 'message' => 'Код не найден']);
+        }
+        $result->delete();
+
+        return response()->json(['success' => true, 'message' => 'Код удален']);
     }
 
 }

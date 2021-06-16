@@ -103,6 +103,11 @@ import Airportexpect from './components/admin/airportexpect/Airportexpect'
 import AddAirportexpect from './components/admin/airportexpect/AddAirportexpect'
 import EditAirportexpect from './components/admin/airportexpect/EditAirportexpect'
 
+// Airwaysinfo
+import Airwaysinfo from './components/admin/airwaysinfo/Airwaysinfo'
+import AddAirwaysinfo from './components/admin/airwaysinfo/AddAirwaysinfo'
+import EditAirwaysinfo from './components/admin/airwaysinfo/EditAirwaysinfo'
+
 // Airportinfo
 import Airportname from './components/admin/airportname/Airportname'
 import AddAirportname from './components/admin/airportname/AddAirportname'
@@ -492,6 +497,18 @@ const router = new Router({
 				{
 					path:'confirmfakt/edit/:confirmfaktId',
 					component:EditConfirmfakt,
+				},
+				{
+					path:'airwaysinfo',
+					component:Airwaysinfo,
+				},
+				{
+					path:'airwaysinfo/add',
+					component:AddAirwaysinfo,
+				},
+				{
+					path:'airwaysinfo/edit/:airwaysinfoId',
+					component:EditAirwaysinfo,
 				},
 				{
 					path:'station',
