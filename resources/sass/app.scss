@@ -22,14 +22,15 @@
   background-color: #0c1427 !important;
   border: 1px solid #0947d9 !important;
 }
-.main-sidebar, .main-sidebar::before {
-    width: 300px;
+.main-sidebar,
+.main-sidebar::before {
+    width: 238px;
 }
 body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
-    margin-left: 300px;
+    margin-left: 238px;
 }
 .sidebar-collapse .main-sidebar, .sidebar-collapse .main-sidebar::before {
-    margin-left: -300px;
+    margin-left: -238px;
 }
 .form_btn{
   display: flex;

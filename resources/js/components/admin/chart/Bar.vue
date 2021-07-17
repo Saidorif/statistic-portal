@@ -55,12 +55,11 @@ export default {
 					backgroundColor: element.backgroundColor,
 					borderWidth: element.borderWidth,
 					borderColor: element.borderColor,
-					data: this.chartBarData[element.data],	
+					data: this.chartBarData[element.data],
 				}
 				this.chartdata.datasets.push(ThisData)
 			});
 			this.renderChart(this.chartdata, this.options)
-			console.log(this.chartBarData)
 		}
 	}
   }

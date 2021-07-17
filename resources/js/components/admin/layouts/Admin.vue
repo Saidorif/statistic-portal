@@ -22,158 +22,97 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar">
     <!-- Brand Logo -->
-    <router-link class="brand-link" to="/crm">
-      <span class="brand-text font-weight-light">
-        <img src="/img/logoRu.png">
-      </span>
+    <router-link  to="/crm">
+      <div class="sidebar_logo">
+        <img src="/img/sidebarlogo.png">
+        <a href="#"><img src="/img/menuhide.png" alt=""></a>
+      </div>
     </router-link>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-
       <!-- Sidebar Menu -->
       <nav>
-        <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu treeview" data-widget="treeview" role="menu" data-accordion="false" >
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-             <!-- v-if="$can('profile', 'UserController')" -->
-            <router-link to="/crm/dashboard" class="nav-link">
-              <i class="sidebar_icon fas fa-desktop"></i>
+        <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu jv_sidebar_ul" data-widget="treeview" role="menu" data-accordion="false" >
+          <li class="nav-item dashbord_link" >
+            <router-link to="/crm/dashboard" class="nav-link" >
+              <img src="/img/home.svg" alt="">
               <p>
                 Админ панель
               </p>
             </router-link>
           </li>
           <li class="nav-item">
-             <!-- v-if="$can('profile', 'UserController')" -->
-            <router-link to="/crm/avto" class="nav-link">
-              <i class="sidebar_icon fas fa-bus"></i>
+            <a href="#" class="nav-link">
+              <img src="/img/bus.svg" alt="">
               <p>
-                Авто
+                Автомобиль транспорти
               </p>
-            </router-link>
+            </a>
+            <ul class="nav inner_menu">
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/role">
+                  <p>
+                    Role
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/conts">
+                  <p>
+                    Controller
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/crm/action">
+                  <p>
+                    Actions
+                  </p>
+                </router-link>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/profile">
-              <i class="sidebar_icon fas fa-user"></i>
+            <a href="#" to="/crm/train" class="nav-link">
+              <img src="/img/train.svg" alt="">
               <p>
-                Мои данные
+                Темир йўл транспорти
               </p>
-            </router-link>
+            </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/country">
-              <i class="sidebar_icon fas fa-city"></i>
+            <a href="#" class="nav-link">
+              <img src="/img/bus.svg" alt="">
               <p>
-                Страны
+                Ҳаво транспорти
               </p>
-            </router-link>
+            </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/employee">
-              <i class="sidebar_icon fas fa-users"></i>
+            <a href="#" class="nav-link">
+              <img src="/img/bus.svg" alt="">
               <p>
-                Пользователи
+                Йўл хўжалиги
               </p>
-            </router-link>
+            </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/position">
-              <i class="sidebar_icon fas fa-star"></i>
+            <a href="#" class="nav-link">
+              <img src="/img/bus.svg" alt="">
               <p>
-                Должность
+                Халқаро юк ташувлари
               </p>
-            </router-link>
+            </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/crm/vedgroup">
-              <i class="sidebar_icon fas fa-file"></i>
+            <a href="#" class="nav-link">
+              <img src="/img/bus.svg" alt="">
               <p>
-                ВЭД группы
+                Халқаро транспорт коридорлари
               </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/aviadirection">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                Авиайўналишлари
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/airportname">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                Названия аэропорта
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/airwayscompany">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                Названия авиакомпании
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/airwaysinfo">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                Информации авиакомпании
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/airportinfo">
-              <i class="sidebar_icon fas fa-plane"></i>
-              <p>
-                Информации аэропорта
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/customs-import-export">
-              <i class="sidebar_icon fas fa-file-excel"></i>
-              <p>
-                Таможня  (Excel)
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/report-by-country">
-              <i class="sidebar_icon fas fa-file-excel"></i>
-              <p>
-                Отчет по странам
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/report-by-product">
-              <i class="sidebar_icon fas fa-file-excel"></i>
-              <p>
-                Отчет по продуктам
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/region">
-              <i class="sidebar_icon fas fa-globe"></i>
-              <p>
-                Области
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/crm/area">
-              <i class="sidebar_icon fas fa-building"></i>
-              <p>
-                Регион
-              </p>
-            </router-link>
+            </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -240,6 +179,7 @@
 </template>
 
 <script>
+
   import { mapActions, mapGetters } from "vuex";
   import {TokenService} from './../../../services/storage.service'
 export default {
@@ -255,6 +195,24 @@ export default {
   },
   async mounted(){
     await this.profileUser()
+    $('.dashbord_link').on('click', function(e) {
+        $('.jv_sidebar_ul').removeClass('show_one');
+        $('.menu_open').removeClass('menu_open');
+    })
+    $('.nav-link').on('click', function(e) {
+        if($(this).parent('.dashbord_link').length){
+
+        }else{
+            if($(this).parents('.inner_menu').length){
+
+            }else{
+                e.preventDefault();
+                $('.menu_open').removeClass('menu_open');
+                $(this).parent('.nav-item').addClass('menu_open');
+                $('.jv_sidebar_ul').addClass('show_one');
+            }
+        }
+    })
   },
   methods: {
     ...mapActions(['logout','profileUser']),
@@ -267,46 +225,77 @@ export default {
 </script>
 
 <style scoped>
-  .brand-link.active{
-    border-bottom: 1px solid #3e6174;
-  }
-  .brand-text img{
-    width: 100%;
-  }
-  .sidebar{
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .sidebar_icon{
-    font-size: 18px;
-    color: #fff;
-    margin-right: 5px;
-  }
-  .content-wrapper{
-    background: #ebf2f6;
-    padding-top: 30px;
-  }
-  .nav-sidebar .nav-item>.nav-link{
-    color: #fff;
-    margin-bottom: 0px;
-    border-bottom: 1px solid #ffffff1f;
-    transition: .5s !important;
-  }
-  .nav-sidebar  .nav-item.menu-open>.nav-link,
-  .nav-sidebar .nav-item>.nav-link:hover,
-  .nav-pills .nav-link.active,
-  .nav-pills .show > .nav-link{
-    background: #727cf561 !important;
-    color: white !important;
-    font-weight: 400;
-    border-color: red;
-    padding-left: 30px;
-  }
-  .nav-pills .nav-link{
-    border-radius: 0px;
-
-  }
-  .nav-item .nav-treeview{
-      padding-left: 20px;
-  }
+    .sidebar_logo{
+        padding: 13px 7px 13px 15px;
+        border-bottom: 0.940711px solid #FFFFFF;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .brand-link.active{
+        border-bottom: 1px solid #3e6174;
+    }
+    .brand-text img{
+        width: 100%;
+    }
+    .sidebar{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .sidebar_icon{
+        font-size: 18px;
+        color: #fff;
+        margin-right: 5px;
+    }
+    .content-wrapper{
+        background: #ebf2f6;
+        padding-top: 30px;
+    }
+    .nav-sidebar .nav-item>.nav-link{
+        color: #fff;
+        margin-bottom: 0px;
+        transition: .5s !important;
+        display: flex;
+        align-items: center;
+    }
+        .nav-sidebar .nav-item>.nav-link img{
+            margin-right: 10px;
+        }
+    .nav-sidebar  .nav-item.menu-open>.nav-link,
+    .nav-sidebar .nav-item>.nav-link:hover,
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link{
+        background: rgba(196, 196, 196, 0.15) !important;
+        color: white !important;
+        font-family: 'Inter-Medium';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13.17px;
+        line-height: 32px;
+        color: #FFFFFF;
+        opacity: 1;
+    }
+    .nav-pills .nav-link{
+        border-radius: 0px;
+        padding-left: 21px;
+    }
+    .nav-pills .nav-link{
+        opacity: 0.6;
+    }
+    .nav-item .nav-treeview{
+        padding-left: 20px;
+    }
+    .inner_menu{
+        display: none;
+    }
+    .show_one > .nav-item{
+        display: none;
+    }
+    .show_one .menu_open{
+        display: block;
+    }
+    .show_one  .menu_open ul{
+        display: block;
+    }
 </style>
